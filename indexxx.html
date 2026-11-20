@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="images/logogdd.png" type="image/png">
+<title>MA ACADEMY</title>
+<meta charset="UTF-8">
+<style>
+.navbar{display: flex;justify-content: space-between;align-items: center;max-width:100%;background-color:blue;position: fixed;margin:0;padding: 0;width: 100%;border-radius: 0px 0px 20px 20px;top: 0;left: 0;z-index: 1000;}
+.logo{width:20%;;margin-right:50px;margin-left: 0 auto;}
+.body{margin: 0;}
+.h11{text-align: center;transform: translateY(10px);font-family:'Montserrat',sans-serif;width:100%;font-size:80px;border: none;outline: none;color: white;}
+.pp{width:100%;font-size: 40px;transform: translateY(100px);text-align: center;font-family: 'Poppins',sans-serif;}
+.div1{width:100%;}
+.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;}
+.button{width:130px;height:72px;border-radius:40px;border: none;transform: translateY(-7px);margin-right:0 auto;margin-left:-80px;font-size: 20px;background-color: red;color: white;}
+.button:hover{background-color: rgb(139, 5, 5);}
+.h111{font-family:'Cairo',sans-serif;font-weight:800;font-size: 100px;width:100%;text-align: center;transform: translateY(150px);}
+.h3{font-family:'Cairo',sans-serif;font-weight: 300;font-size: 70px;width:100%;text-align: center;transform: translateY(150px);}
+.divblue{background-color: blue;}
+.body{background-color:white;}
+.divblue1{background-color: blue;}
+.html{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
+.wave-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background:blue;
+}
+
+.waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 50%;
+}
+
+/* الموجة الأولى */
+
+.wave1 {
+    fill: rgba(255,255,255,0.5);
+    animation: moveWave 10s linear infinite;
+}
+
+/* الموجة الثانية */
+
+.wave2 {
+    fill: white;
+    animation: moveWave 15s linear infinite;
+    border-bottom: none;
+}
+
+/* الحركة المستمرة */
+
+@keyframes moveWave {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+.wave-container{height:700px;width:100%;border: none;outline: none;border-bottom: none;}
+.parent{width: 100%;margin: 0;padding: 0;background: blue;overflow: hidden;}
+.navbar{width:100%;height:180px;background: blue;}
+.wave-container{width:100%;height:600px;background: blue;margin-bottom: -2px;border-bottom: none;}
+.text{text-align: center;}
+.btnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#fd3a04;border-radius:30px;color: white;}
+.btnn:hover{background-color: #af2f0b;}
+
+.html {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.html.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.css {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.css.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.js {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.js.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.py {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.py.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.imgg{display: block;margin-inline: auto;}
+.h22{font-size:50px;}
+.h33{font-size:40px;}
+.h44{font-size:30px;}
+.css{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
+.btnnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#1572B6;border-radius:30px;color: white;}
+.btnnn:hover{background-color:#033d66;}
+.js{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
+.btnnnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#F7DF1E;border-radius:30px;color: white;}
+.btnnnn:hover{background-color:#8a7a07;}
+.btnnnnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#FFD43B
+;border-radius:30px;color:#3776AB;}
+.btnnnnn:hover{background-color:#0b3659;}
+.py{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
+</style>
+
+
+</head>
+<body class="body">
+<div class="parent">
+<div class="divblue1">
+<div class="navbar">
+<div class="div2">
+<input type="text" class="input" placeholder="  search in MA Academy">
+<button class="button">Search</button>
+</div>
+
+<img src="images/اكادمية.png" alt="logo" width="200px" class="logo">
+</div>
+</div>
+<div class="divblue">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+
+
+ <div class="wave-container">
+    <br>
+    <br>
+<h1 class="h11">Welcome To MA Academy</h1>
+    <svg class="waves" viewBox="0 0 1440 320"
+         preserveAspectRatio="none">
+
+        <defs>
+            <path id="wave"
+            d="M0 160
+            C120 100 240 100 360 160
+            C480 220 600 220 720 160
+            C840 100 960 100 1080 160
+            C1200 220 1320 220 1440 160
+            L1440 320 L0 320 Z"/>
+        </defs>
+
+        <g class="wave wave1">
+            <use href="#wave" x="0"/>
+            <use href="#wave" x="1440"/>
+        </g>
+
+        <g class="wave wave2">
+            <use href="#wave" x="0"/>
+            <use href="#wave" x="1440"/>
+        </g>
+
+    </svg>
+
+</div>
+</div>
+</div>
+
+<div>
+<h1 class="h111">لغات الدراسة</h1>
+<h3 class="h3">اللغات المتاحة</h3>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="html">
+<a href=""><img src="images/HTML5_logo_and_wordmark.svg.webp" alt="" width="200px" class="imgg"></a>
+<div class="text">
+<h2 dir="rtl" class="h22">تعلم HTML من الصفر</h3>
+<h4 dir="rtl" class="h44">اكتشف عالم تطوير الويب وتعلّم كيفية إنشاء صفحات المواقع الإلكترونية باستخدام لغة HTML، بدايةً من الأساسيات وصولاً إلى بناء صفحات ويب منظمة واحترافية.
+</h4>
+<h3 dir="rtl" class="h33">ابدأ رحلتك في البرمجة، وحوّل أفكارك إلى مواقع حقيقية!</h3>
+</div>
+<button class="btnn" onclick="clickhtml()">click here</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div class="css">
+<a href=""><img src="images/CSS-Logo-2011.png" alt="" width="400px" class="imgg"></a>
+<div class="text">
+<h2 dir="rtl" class="h22">تعلم CSS من الصفر</h3>
+<h4 dir="rtl" class="h44"> اكتشف عالم تنسيق وتصميم صفحات الويب، وتعلّم كيفية تحويل صفحات HTML البسيطة إلى واجهات جذابة واحترافية، مع إتقان الألوان والخطوط والتخطيطات والتصاميم المتجاوبة.
+</h4>
+<h3 dir="rtl" class="h33">امنح مواقعك هويتها الخاصة واجعل إبداعك يظهر في كل تفصيل.</h3>
+</div>
+<button class="btnnn" onclick="clickcss()">click here</button>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="js">
+<a href=""><img src="images/JavaScript-Logo.png" alt="" width="400px" class="imgg"></a>
+<div class="text">
+<h2 dir="rtl" class="h22">تعلم JS من الصفر</h3>
+<h4 dir="rtl" class="h44">اكتشف عالم البرمجة التفاعلية وتعلّم كيفية جعل مواقع الويب أكثر ذكاءً وحيوية. تعرّف على أساسيات JavaScript، وتحكّم في عناصر الصفحة، وأضف الحركات والتفاعلات والوظائف الديناميكية.
+</h4>
+<h3 dir="rtl" class="h33">حوّل تصاميمك إلى تجارب تفاعلية، واجعل أفكارك تنبض بالحياة!</h3>
+</div>
+<button class="btnnnn" onclick="clickjs()">click here</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="py">
+<a href=""><img src="images/Python-logo-notext.svg.webp" alt="" width="250px" class="imgg"></a>
+<div class="text">
+<h2 dir="rtl" class="h22">تعلم Python من الصفر</h3>
+<h4 dir="rtl" class="h44">اكتشف عالم البرمجة مع Python، وتعلّم كتابة الأكواد وبناء البرامج خطوة بخطوة. ابدأ بالأساسيات، وتعرّف على المتغيرات والشروط والحلقات والدوال، ثم انتقل إلى تطوير مشاريعك الخاصة.
+</h4>
+<h3 dir="rtl" class="h33">ابدأ رحلتك في عالم البرمجة، وحوّل أفكارك إلى حلول ذكية!</h3>
+</div>
+<button class="btnnnnn" onclick="clickpy()">click here</button>
+</div>
+
+
+
+
+
+
+
+
+<script>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".html, .css, .js, .py").forEach(el => {
+    observer.observe(el);
+});
+function clickhtml(){window.location.href = "html.html"}
+function clickcss(){window.location.href = "css.html"}
+function clickpy(){window.location.href = "py.html"}
+function clickjs(){window.location.href = "js.html"}
+
+
+
+
+
+</script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+

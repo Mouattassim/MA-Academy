@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" href="images/logogdd.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<style>
+.buttonn{background-color:rgb(96, 6, 96); color:white;width:300px;height:100px;font-size:35px;border: none;border-radius:45px;box-shadow:0 0 20px rgb(245, 26, 245);display: block;margin:0 auto;position: relative;animation: shadowMove 3s alternate infinite;font-family:'Oswald',sans-serif;;}
+@keyframes shadowMove{
+0%{box-shadow:0 0 5px #8A2BE2;}
+50%{box-shadow:0 0 20px #0c0016;}
+100%{box-shadow:0 0 30px #8A2BE2;}
+}
+.img:hover{transform:scale(1.03);}
+.h1{font-size: 100px;text-align: center;font-family:'Oswald',sans-serif;color:blueviolet;text-shadow: 0 0 15px rgb(96, 6, 96);}
+.h3{font-size: 30px;text-align: center;font-family:'Oswald',sans-serif;top:-70px;position: relative;color:rgb(166, 163, 168);text-shadow:0 0 15px rgb(96, 6, 96);}
+.body{background-color: black;}
+.buttonn:hover{background-color: blueviolet;}
+.strong{color: white;}
+.img{position: relative;top:40px;transition:0.3s ease;right:20px;}
+.img:hover{transform:scale(1.03);}
+.stt{color: white;}
+.sttt{color:rgb(131, 10, 244);}
+.stttt{color:rgb(133, 64, 197);}
+.sttttt{color:rgb(202, 178, 229);}
+.show-on-scroll{opacity: 0;transform: translateY(50px);transform: 0.8s ease;}
+.show-on-scroll.active{opacity:1;transform: translateY(0);}
+.timeline {
+  position: relative;
+  max-width: 500px;
+  margin: 0px auto;
+  padding-left: 45px;color:white;
+width:300px;left:140px;font-family:'Oswald',sans-serif;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  width: 4px;
+  height: 100%;
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.step {
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.number {position: absolute;left: -45px;width: 36px;height: 36px;border-radius: 50%;background: white;border: 3px solid rgb(96, 6, 96);color: rgb(96, 6, 96);display: flex;align-items: center;justify-content: center;font-weight: bold;z-index: 1;}
+.step.active .number {background:rgb(96, 6, 96);color: white;}
+.content h3 {margin-top: 0;}
+.body{margin: 0;padding:0;}
+.h33{font-size:25px;color:white;}
+.h333{position: relative;right: 330px;font-size:30px;}
+.h33333{color: #F7DF1E;position: relative;top:2px;}
+.h333333{color:#E34F26;position: relative;top:2px;}
+.h3333333{position: relative;top:2px;font-size:30px;}
+.h11{color:white;font-size:100px;display: block;margin-left:20px;margin-right: auto;font-family:'Oswald',sans-serif;}
+.div6{color:white;}
+.myimage {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: 0.8s ease;
+}
+
+.myimage.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.myimage{display:block;margin: 0 auto;}
+.sssg{color:#3ea0e5;}
+.h111{font-size:50px;}
+.h1111{font-size:70px;}
+.h11111{font-size:50px;color: #3ea0e5;}
+.button2{width:300px;height:100px;border:none;border-radius:45px;background-color:#3ea0e5;font-family:'Oswald',sans-serif;font-size:35px;animation:shadowmmove 3s alternate infinite;color: white;display: block;margin: 0 auto;margin-top:100px;}
+@keyframes shadowmmove{
+0%{box-shadow:0 0 5px #b3d1e7;}
+50%{box-shadow: 0 0 20px #3f94d1;}
+100%{box-shadow: 0 0 30px #048aeb;}
+}
+.icon{margin:0 auto; width:500px;}
+.iconn{transition: 0.3s ease;}
+.iconn:hover{transform: scale(1.08);}
+.text{text-align: center;}
+.ppp{font-size:30px;}
+.textbold{text-align: center;color: white;font-family:'Montserrat',sans-serif;font-size:40px;transform: translateY(-120px);}
+.hhh{transform: translateY(-5px);color: #8A2BE2;}
+.timeline{width:90%;transform: scale(1.2);transform-origin: center;}
+.csss{color:#1572B6;}
+.button2:hover{background-color:#4fb2f8;}
+</style>
+
+</head>
+
+<body class="body">
+
+<div class="text">
+<h1 class="h1">WELCOME TO <img src="images/ma.png" alt="" width="210px" class="img"><strong class="stt">Academy</strong></h1>
+<h3 class="h3"><strong class="sttt">Your choice.</strong> <strong class="stttt">Your style.</strong> <strong class="sttttt">Your technology</strong></h3>
+<button class="buttonn" onclick="gotoma()">GET STARTED</button>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 class="textbold">Welcome To Mouattassim Bellah Academy</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="timeline">
+<div class="step active">
+<div class="number">1</div>
+<div class="content">
+<h3 class="h33 h3333333 hhh">Why MA Academy?</h3>
+<p class="ppp">MA Academy makes learning web development simple and accessible. Learn to code, develop your skills, and turn your ideas into reality.</p>
+</div>
+</div>
+
+<div class="step">
+<div class="number">2</div>
+<div class="content">
+<h3 class="h33 h333333">Learn HTML From Zero </h3>
+<img src="images/HTML5_logo_and_wordmark.svg.webp" alt="" width="150px">
+<p class="ppp">Here, you will learn HTML step by step, from the basics to building your own websites. Start your journey into web development and turn your ideas into reality!</p>
+</div>
+</div>
+
+<div class="step left">
+<div class="number">3</div>
+<div class="content">
+<h3 class="h33 csss">Learn CSS From Zero</h3>
+<img src="images/CSS-Logo-2011.png" alt="css" width="300px" class="">
+<p class="ppp">Here, you will learn CSS step by step, from styling text and choosing colors to creating stunning layouts, smooth animations, and modern responsive websites. Bring your web designs to life!</p>
+</div>
+</div>
+
+<div class="step">
+<div class="number">4</div>
+<div class="content">
+<h3 class="h33 h33333">Learn JavaScript From Zero</h3>
+<img src="images/JavaScript-Logo.png" alt="js" width="250px">
+<p class="ppp">Here, you will learn JavaScript step by step, from the fundamentals to interactive features, dynamic animations, and advanced web functionality. Make your websites smarter, more powerful, and interactive!</p>
+</div>
+</div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="div6">
+<h1 class="h11 gg">Let’s Build Your <strong class="sssg">Website</strong></h1>
+<h3 class="h11 h111">Turn Your Vision Into Reality.</h3>
+<p class="h11 h1111">We build modern, professional websites <br> that help your business stand out and attract more customers.</p>
+<h4 class="h11 h11111">Your Success Starts With a Website.</h4>
+</div>
+
+
+<div class="div7">
+<img src="images/web.png" alt="" width="800px" class="myimage">
+
+
+<div class="button22">
+<button class="button2". onclick="todev()">GET STARTED</button>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="information">
+<div class="icon">
+<a href=""><img src="images/facebookpng1.png" alt="" width="70px" class="iconn"></a>
+<a href=""><img src="images/discord1.png" alt="" width="70px" class="iconn"></a>
+<a href=""><img src="images/instagram1.png" alt="" width="70px" class="iconn"></a>
+<a href=""><img src="images/tiktok1.png" alt="" width="70px" class="iconn"></a>
+<a href=""><img src="images/youtube1.png" alt="" width="70px" class="iconn"></a>
+<a href=""><img src="images/gmail1.png" alt="" width="70px" class="iconn"></a>
+</div>
+
+
+</div>
+
+
+
+<script>
+function gotoma(){window.location.href = "indexxx.html"}
+const steps = document.querySelectorAll(".step");
+
+window.addEventListener("scroll", function () {
+  steps.forEach(function (step) {
+    const position = step.getBoundingClientRect().top;
+
+    if (position < window.innerHeight * 0.7) {
+      step.classList.add("active");
+    } else {
+      step.classList.remove("active");
+    }
+  });
+});
+
+
+const img = document.querySelector(".myimage");
+
+window.addEventListener("scroll", function () {
+  const position = img.getBoundingClientRect().top;
+
+  if (position < window.innerHeight * 0.8) {
+    img.classList.add("show");
+  }
+});
+function todev(){window.location.href="website.html"}
+</script>
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
