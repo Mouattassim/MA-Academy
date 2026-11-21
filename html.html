@@ -1,274 +1,1094 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<title>MA ACADEMY</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn HTML | Developer</title>
+
 <style>
-.navbar{display: flex;justify-content: space-between;align-items: center;max-width:100%;background-color:blue;position: fixed;margin:0;padding: 0;width: 100%;border-radius: 0px 0px 20px 20px;top: 0;left: 0;z-index: 1000;}
-.logo{width:20%;;margin-right:50px;margin-left: 0 auto;}
-.body{margin: 0;}
-.h11{text-align: center;transform: translateY(10px);font-family:'Montserrat',sans-serif;width:100%;font-size:80px;border: none;outline: none;color: white;}
-.pp{width:100%;font-size: 40px;transform: translateY(100px);text-align: center;font-family: 'Poppins',sans-serif;}
-.div1{width:100%;}
-.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;}
-.button{width:130px;height:72px;border-radius:40px;border: none;transform: translateY(-7px);margin-right:0 auto;margin-left:-80px;font-size: 20px;background-color: red;color: white;}
-.button:hover{background-color: rgb(139, 5, 5);}
-.h111{font-family:'Cairo',sans-serif;font-weight:800;font-size: 100px;width:100%;text-align: center;transform: translateY(150px);}
-.h3{font-family:'Cairo',sans-serif;font-weight: 300;font-size: 70px;width:100%;text-align: center;transform: translateY(150px);}
-.divblue{background-color: blue;}
-.body{background-color:white;}
-.divblue1{background-color: blue;}
-.html{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
-.wave-container {
-    position: relative;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    color: #202333;
+}
+
+nav {
+    background:  #202333;
+    color: white;
+    padding: 22px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    direction: ltr;
+}
+
+.logo span {
+    color: #7957ff;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: #171d2b;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 43px;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #7957ff;
+}
+
+.hero p {
+    color: #b9bfd0;
+    line-height: 2;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title p {
+    color: #777;
+    margin-top: 12px;
+    line-height: 1.8;
+}
+
+.search {
     width: 100%;
-    height: 300px;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto 25px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    font-size: 15px;
+    outline: none;
+}
+
+.search:focus {
+    border-color: #7957ff;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 11px 17px;
+    background: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #7957ff;
+    color: white;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e9e9ef;
+    border-radius: 13px;
     overflow: hidden;
-    background:blue;
+    transition: .3s;
 }
 
-.waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%;
-    height: 50%;
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px #00000015;
 }
 
+/* صورة كل وسم */
 
-.wave1 {
-    fill: rgba(255,255,255,0.5);
-    animation: moveWave 10s linear infinite;
+.tag-image {
+    height: 180px;
+    margin: 15px;
+    background: #171e2b;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    padding: 13px;
+    direction: ltr;
 }
 
-
-.wave2 {
-    fill: white;
-    animation: moveWave 15s linear infinite;
-    border-bottom: none;
+.window-bar {
+    display: flex;
+    gap: 7px;
 }
 
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
 
-@keyframes moveWave {
+.red { background: #ff5555; }
+.yellow { background: #ffc542; }
+.green { background: #35d66b; }
 
-    from {
-        transform: translateX(0);
+.window-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.big-tag {
+    color: #38bdf8;
+    font-family: monospace;
+    font-size: 32px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.window-caption {
+    color: #aab3c5;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.card-content {
+    padding: 5px 20px 20px;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 13px;
+}
+
+.card-top h3 {
+    font-size: 19px;
+    direction: ltr;
+}
+
+.category {
+    background: #eeeaff;
+    color: #7957ff;
+    padding: 6px 9px;
+    font-size: 11px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.9;
+    min-height: 55px;
+}
+
+.example-title {
+    font-size: 13px;
+    margin: 17px 0 9px;
+}
+
+.code-box {
+    background: #171d2b;
+    color: #5ee6a8;
+    padding: 14px;
+    border-radius: 7px;
+    direction: ltr;
+    text-align: left;
+    font-size: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.8;
+    min-height: 65px;
+}
+
+.copy-btn {
+    width: 100%;
+    padding: 11px;
+    margin-top: 12px;
+    background: #7957ff;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #6240e5;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #777;
+}footer {
+    background: #171d2b;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    line-height: 2;
+}
+
+footer span {
+    color: #7957ff;
+}
+
+@media(max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    .cards {
+        grid-template-columns: 1fr;
     }
 
-    to {
-        transform: translateX(-50%);
+    .hero h1 {
+        font-size: 32px;
     }
 
+    nav {
+        padding: 20px;
+    }
 }
-
-.wave-container{height:700px;width:100%;border: none;outline: none;border-bottom: none;}
-.parent{width: 100%;margin: 0;padding: 0;background: blue;overflow: hidden;}
-.navbar{width:100%;height:180px;background: blue;}
-.wave-container{width:100%;height:600px;background: blue;margin-bottom: -2px;border-bottom: none;}
-.text{text-align: center;}
-.btnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#fd3a04;border-radius:30px;color: white;}
-.btnn:hover{background-color: #af2f0b;}
-.h1{text-align: center;font-family:'Montserrat',sans-serif;font-size:100px;color:#fd3a04;}
-.doc{width:100%;display: flex;justify-content: space-between;}
-.imgdoc{margin-left:10px;margin-right: 0 auto;}
-.txtdoc{margin-right:15px;font-family:'Bebas Neue', sans-serif;font-size:50px;margin-left:0 auto;}
-.hhtml{text-align: center;font-weight: 300;font-size:80px;font-family:'Cairo', sans-serif;}
-.pp{font-family: 'Noto Sans Arabic',sans-serif;transform: translateY(-20px);}
-.docc {opacity: 0;transform: translateY(50px);transition: 1.5s ease;}
-.docc.show {opacity: 1;transform: translateY(0);}
-.htmlll {opacity: 0;transform: translateY(50px);transition: 1.5s ease;}
-.htmlll.show {opacity: 1;transform: translateY(0);}
-.head {opacity: 0;transform: translateY(50px);transition: 1.5s ease;}
-.head.show {opacity: 1;transform: translateY(0);}
-.body {opacity: 0;transform: translateY(50px);transition: 1.5s ease;}
-.body.show {opacity: 1;transform: translateY(0);}
 </style>
-
-
 </head>
-<body class="body">
-<div class="parent">
-<div class="divblue1">
-<div class="navbar">
-<div class="div2">
-<input type="text" class="input" placeholder="  search in MA Academy">
-<button class="button">Search</button>
-</div>
 
-<img src="images/اكادمية.png" alt="logo" width="200px" class="logo">
-</div>
-</div>
-<div class="divblue">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-</div>
+<body>
 
+<nav>
+    <div class="logo"><img src="images/اكادمية.png" alt="" width="150px"></div>
+    <a href="index.html">Home</a>
+</nav>
 
+<header class="hero">
+    <h1>Learn <span>HTML</span></h1>
+    <p>
+        Learn HTML from zero to professional level.
+        <br>
+        تعلم أهم وسوم HTML مع الشرح والأمثلة التطبيقية.
+    </p>
+</header>
 
- <div class="wave-container">
-    <br>
-    <br>
-<h1 class="h11">Welcome To MA Academy</h1>
-    <svg class="waves" viewBox="0 0 1440 320"
-         preserveAspectRatio="none">
+<main class="container" id="lessons">
 
-        <defs>
-            <path id="wave"
-            d="M0 160
-            C120 100 240 100 360 160
-            C480 220 600 220 720 160
-            C840 100 960 100 1080 160
-            C1200 220 1320 220 1440 160
-            L1440 320 L0 320 Z"/>
-        </defs>
+    <div class="section-title">
+        <h2>HTML Elements</h2>
+        <p>اكتشف أهم وسوم HTML وتعلم وظيفة كل وسم وطريقة استخدامه.</p>
+    </div>
 
-        <g class="wave wave1">
-            <use href="#wave" x="0"/>
-            <use href="#wave" x="1440"/>
-        </g>
+    <input
+        type="search"
+        class="search"
+        id="search"
+        placeholder="ابحث عن وسم HTML..."
+    >
 
-        <g class="wave wave2">
-            <use href="#wave" x="0"/>
-            <use href="#wave" x="1440"/>
-        </g>
+    <div class="filters" id="filters">
+        <button class="filter-btn active" data-category="all">الكل</button>
+        <button class="filter-btn" data-category="structure">البنية</button>
+        <button class="filter-btn" data-category="text">النصوص</button>
+        <button class="filter-btn" data-category="media">الوسائط</button>
+        <button class="filter-btn" data-category="lists">القوائم</button>
+        <button class="filter-btn" data-category="forms">النماذج</button>
+        <button class="filter-btn" data-category="semantic">HTML5</button>
+        <button class="filter-btn" data-category="tables">الجداول</button>
+    </div>
 
-    </svg>
+    <div class="cards" id="cards"></div>
 
-</div>
-</div>
-</div>
+</main>
 
-
-
-
-
-
-<br>
-<br>
-<br>
-<div>
-<h1 class="h1">LEARN HTML</h1>
-</div>
-<br>
-<br>
-<h1 class="hhtml">تعلم الاساسيات</h1>
-<br>
-<br>
-<br>
-<div class="doc docc">
-<div>
-<img src="images/doc.png" alt="" width="500px" class="imgdoc">
-</div>
-<div>
-<p class="pp" dir="rtl">هو تصريح يُكتب في بداية مستند HTML لإعلام المتصفح بأن الصفحة تستخدم معيار HTML5، لضمان عرضها بشكل صحيح.</p>
-<br>
-
-</div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<div class="doc htmlll">
-<div>
-<img src="images/htmll.png" alt="" width="500px" class="imgdoc">
-</div>
-<div>
-<p class="pp" dir="rtl">هي عناصر تُستخدم لإنشاء وتنظيم محتوى صفحات الويب، وتتكون غالباً من وسم افتتاحي ووسم إغلاق.</p>
-<br>
-
-</div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<div class="doc head">
-<div>
-<img src="images/headd.png" alt="" width="500px" class="imgdoc">
-</div>
-<div>
-<p class="pp" dir="rtl">هو الجزء الذي يحتوي على المعلومات والإعدادات الأساسية لصفحة الويب، مثل العنوان والترميز وربط ملفات CSS.</p>
-<br>
-
-</div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<div class="doc body">
-<div>
-<img src="images/body.png" alt="" width="500px" class="imgdoc">
-</div>
-<div>
-<p class="pp" dir="rtl">هو الجزء الذي يحتوي على جميع العناصر الظاهرة في صفحة الويب، مثل النصوص والصور والعناوين والروابط.</p>
-<br>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
+<footer>
+    <p>Created by <span>L.Mouattassim</span></p>
+    <p>Learn HTML • Build Your Future • MA Academy</p>
+</footer>
 <script>
-    const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-        }
+
+// قاعدة دروس HTML
+
+const lessons = [
+
+{
+tag: "!DOCTYPE html",
+name: "DOCTYPE Declaration",
+category: "structure",
+description: "تصريح يوضع في بداية مستند HTML لإعلام المتصفح باستخدام معيار HTML5.",
+code: "<!DOCTYPE html>"
+},
+{
+tag: "html",
+name: "HTML Element",
+category: "structure",
+description: "العنصر الأساسي الذي يحتوي على جميع عناصر ومحتويات صفحة HTML.",
+code: '<html lang="ar">\\n</html>'
+},
+{
+tag: "head",
+name: "Head Element",
+category: "structure",
+description: "يحتوي على إعدادات ومعلومات الصفحة مثل العنوان والترميز وروابط CSS.",
+code: "<head>\\n</head>"
+},
+{
+tag: "title",
+name: "Title Element",
+category: "structure",
+description: "يحدد عنوان الصفحة الذي يظهر في تبويب المتصفح.",
+code: "<title>My Website</title>"
+},
+{
+tag: "meta",
+name: "Meta Element",
+category: "structure",
+description: "يحدد معلومات إضافية عن الصفحة مثل الترميز ووصف الموقع وإعدادات العرض.",
+code: '<meta charset="UTF-8">'
+},
+{
+tag: "link",
+name: "Link Element",
+category: "structure",
+description: "يربط صفحة HTML بملفات خارجية مثل CSS.",
+code: '<link rel="stylesheet" href="style.css">'
+},
+{
+tag: "script",
+name: "Script Element",
+category: "structure",
+description: "يُستخدم لإضافة أو ربط أكواد JavaScript بالصفحة.",
+code: '<script src="script.js"><\\/script>'
+},
+{
+tag: "body",
+name: "Body Element",
+category: "structure",
+description: "يحتوي على المحتوى المرئي الذي يظهر للمستخدم داخل صفحة الويب.",
+code: "<body>\\n  Hello World\\n</body>"
+},
+
+{
+tag: "h1",
+name: "Heading 1",
+category: "text",
+description: "يُستخدم لإنشاء العنوان الرئيسي والأكثر أهمية في الصفحة.",
+code: "<h1>Welcome</h1>"
+},
+{
+tag: "h2",
+name: "Heading 2",
+category: "text",
+description: "يُستخدم لإنشاء عنوان فرعي من المستوى الثاني.",
+code: "<h2>About Us</h2>"
+},
+{
+tag: "h3",
+name: "Heading 3",
+category: "text",
+description: "يُستخدم للعناوين الفرعية من المستوى الثالث.",
+code: "<h3>Our Services</h3>"
+},
+{
+tag: "h4",
+name: "Heading 4",
+category: "text",description: "يُستخدم لإنشاء عنوان فرعي من المستوى الرابع.",
+code: "<h4>Details</h4>"
+},
+{
+tag: "h5",
+name: "Heading 5",
+category: "text",
+description: "يمثل عنواناً من المستوى الخامس.",
+code: "<h5>Sub Details</h5>"
+},
+{
+tag: "h6",
+name: "Heading 6",
+category: "text",
+description: "يمثل أصغر مستوى من مستويات العناوين الستة.",
+code: "<h6>Small Heading</h6>"
+},
+{
+tag: "p",
+name: "Paragraph",
+category: "text",
+description: "يُستخدم لإنشاء فقرة نصية داخل صفحة الويب.",
+code: "<p>Hello World!</p>"
+},
+{
+tag: "br",
+name: "Line Break",
+category: "text",
+description: "ينقل النص إلى سطر جديد دون إنشاء فقرة جديدة.",
+code: "Hello<br>World"
+},
+{
+tag: "hr",
+name: "Horizontal Rule",
+category: "text",
+description: "يُستخدم لإنشاء فاصل موضوعي يظهر عادة على شكل خط أفقي.",
+code: "<hr>"
+},
+{
+tag: "strong",
+name: "Strong Element",
+category: "text",
+description: "يشير إلى أهمية النص ويظهر عادة بخط عريض.",
+code: "<strong>Important</strong>"
+},
+{
+tag: "b",
+name: "Bold Element",
+category: "text",
+description: "يجعل النص عريضاً دون إضافة دلالة على أهميته.",
+code: "<b>Bold Text</b>"
+},
+{
+tag: "em",
+name: "Emphasis",
+category: "text",
+description: "يضيف تأكيداً دلالياً على النص ويظهر غالباً بخط مائل.",
+code: "<em>Important Text</em>"
+},
+{
+tag: "i",
+name: "Italic",
+category: "text",
+description: "يعرض النص بخط مائل، مثل المصطلحات الأجنبية.",
+code: "<i>Hello</i>"
+},
+{
+tag: "mark",
+name: "Mark Element",
+category: "text",
+description: "يُستخدم لإبراز جزء من النص أو تحديده.",
+code: "<mark>Important Text</mark>"
+},
+{
+tag: "small",
+name: "Small Element",
+category: "text",
+description: "يعرض النص بحجم أصغر من النص المحيط به.",
+code: "<small>Copyright 2026</small>"
+},
+{
+tag: "sub",
+name: "Subscript",
+category: "text",
+description: "يعرض النص منخفضاً قليلاً عن مستوى السطر مثل الصيغ الكيميائية.",
+code: "H<sub>2</sub>O"
+},
+{
+tag: "sup",
+name: "Superscript",
+category: "text",
+description: "يعرض النص مرتفعاً قليلاً عن مستوى السطر مثل الأسس الرياضية.",
+code: "X<sup>2</sup>"
+},
+{
+tag: "del",
+name: "Deleted Text",
+category: "text",
+description: "يشير إلى نص تم حذفه ويظهر عادة مشطوباً.",
+code: "<del>Old Price</del>"
+},
+{
+tag: "ins",
+name: "Inserted Text",
+category: "text",
+description: "يشير إلى نص تمت إضافته إلى المستند.",
+code: "<ins>New Text</ins>"
+},
+{
+tag: "pre",
+name: "Preformatted Text",
+category: "text",
+description: "يعرض النص مع المحافظة على المسافات والأسطر كما كُتبت.",
+code: "<pre>\\n  Hello\\n  World\\n</pre>"
+},
+{
+tag: "code",
+name: "Code Element",
+category: "text",
+description: "يُستخدم لعرض جزء من الشيفرة البرمجية داخل النص.",
+code: "<code>console.log('Hello')</code>"
+},
+{
+tag: "blockquote",
+name: "Blockquote",
+category: "text",
+description: "يُستخدم لعرض اقتباس طويل من مصدر آخر.",
+code: "<blockquote>Learning is important.</blockquote>"
+},
+{
+tag: "div",
+name: "Division",
+category: "text",
+description: "حاوية عامة تُستخدم لتجميع العناصر وتنظيم أقسام الصفحة.",
+code: "<div>Content</div>"
+},
+{
+tag: "span",
+name: "Span",
+category: "text",
+description: "حاوية داخل السطر لتحديد جزء من النص وتنسيقه.",
+code: "<span>Hello</span>"
+},
+
+{
+tag: "a",
+name: "Anchor",
+category: "media",
+description: "يُستخدم لإنشاء روابط للانتقال إلى صفحات أو مواقع أخرى.",
+code: '<a href="https://example.com">Visit</a>'
+},
+{
+tag: "img",
+name: "Image",
+category: "media",
+description: "يُستخدم لإضافة الصور إلى الصفحة باستخدام src وalt.",
+code: '<img src="photo.jpg" alt="Photo">'
+},
+{
+tag: "video",
+name: "Video",
+category: "media",
+description: "يُستخدم لإضافة مقاطع الفيديو إلى صفحة الويب.",
+code: '<video controls src="video.mp4"></video>'
+},
+{
+tag: "audio",
+name: "Audio",
+category: "media",
+description: "يُستخدم لإضافة الملفات الصوتية وتشغيلها.",
+code: '<audio controls src="audio.mp3"></audio>'
+},
+{
+tag: "source",
+name: "Source",
+category: "media",
+description: "يحدد مصدر الوسائط داخل عناصر الصوت والفيديو.",code: '<source src="video.mp4" type="video/mp4">'
+},
+{
+tag: "iframe",
+name: "Inline Frame",
+category: "media",
+description: "يعرض صفحة أو محتوى خارجياً داخل إطار في الصفحة.",
+code: '<iframe src="https://example.com"></iframe>'
+},
+{
+tag: "figure",
+name: "Figure",
+category: "media",
+description: "يجمع محتوى مستقلاً مثل صورة أو رسم توضيحي.",
+code: "<figure>\\n  <img src='photo.jpg' alt='Photo'>\\n</figure>"
+},
+{
+tag: "figcaption",
+name: "Figure Caption",
+category: "media",
+description: "يضيف وصفاً أو عنواناً للصورة أو المحتوى داخل figure.",
+code: "<figcaption>Image description</figcaption>"
+},
+
+{
+tag: "ul",
+name: "Unordered List",
+category: "lists",
+description: "ينشئ قائمة غير مرتبة تظهر عناصرها عادة على شكل نقاط.",
+code: "<ul>\\n  <li>HTML</li>\\n  <li>CSS</li>\\n</ul>"
+},
+{
+tag: "ol",
+name: "Ordered List",
+category: "lists",
+description: "ينشئ قائمة مرتبة بالأرقام أو الحروف.",
+code: "<ol>\\n  <li>First</li>\\n  <li>Second</li>\\n</ol>"
+},
+{
+tag: "li",
+name: "List Item",
+category: "lists",
+description: "يمثل عنصراً واحداً داخل قائمة مرتبة أو غير مرتبة.",
+code: "<li>Learn HTML</li>"
+},
+{
+tag: "dl",
+name: "Description List",
+category: "lists",
+description: "ينشئ قائمة من المصطلحات والأوصاف المرتبطة بها.",
+code: "<dl>\\n  <dt>HTML</dt>\\n  <dd>Markup Language</dd>\\n</dl>"
+},
+{
+tag: "dt",
+name: "Description Term",
+category: "lists",
+description: "يحدد المصطلح داخل قائمة الوصف.",
+code: "<dt>HTML</dt>"
+},
+{
+tag: "dd",
+name: "Description Details",
+category: "lists",
+description: "يحدد وصف المصطلح داخل قائمة الوصف.",
+code: "<dd>Markup Language</dd>"
+},
+
+{
+tag: "form",
+name: "Form",
+category: "forms",
+description: "ينشئ نموذجاً لجمع بيانات المستخدم وإرسالها.",
+code: '<form action="/submit" method="post">\\n</form>'
+},
+{
+tag: "input",
+name: "Input",
+category: "forms",
+description: "ينشئ حقل إدخال بأنواع متعددة مثل text وemail وpassword وnumber وdate وcheckbox وradio.",
+code: '<input type="text" placeholder="Your name">'
+},
+{
+tag: "label",
+name: "Label",
+category: "forms",
+description: "يضيف تسمية توضح وظيفة حقل الإدخال ويرتبط به باستخدام for وid.",
+code: '<label for="name">Name</label>\\n<input id="name">'
+},
+{
+tag: "textarea",
+name: "Textarea",
+category: "forms",
+description: "ينشئ مساحة لإدخال نصوص طويلة ومتعددة الأسطر.",
+code: '<textarea rows="4"></textarea>'
+},
+{
+tag: "button",
+name: "Button",
+category: "forms",
+description: "ينشئ زراً لتنفيذ إجراء أو إرسال نموذج.",
+code: '<button type="button">Click Me</button>'
+},
+{
+tag: "select",
+name: "Select",
+category: "forms",
+description: "ينشئ قائمة منسدلة تسمح باختيار أحد الخيارات.",
+code: "<select>\\n  <option>HTML</option>\\n</select>"
+},
+{
+tag: "option",
+name: "Option",
+category: "forms",
+description: "يمثل خياراً داخل القائمة المنسدلة.",
+code: '<option value="html">HTML</option>'
+},
+{
+tag: "optgroup",
+name: "Option Group",
+category: "forms",
+description: "يجمع الخيارات المتشابهة داخل القائمة المنسدلة.",
+code: '<optgroup label="Languages">\\n  <option>HTML</option>\\n</optgroup>'
+},
+{
+tag: "fieldset",
+name: "Fieldset",
+category: "forms",
+description: "يجمع الحقول المرتبطة داخل إطار واحد في النموذج.",
+code: "<fieldset>\\n  <legend>Account</legend>\\n</fieldset>"
+},
+{
+tag: "legend",
+name: "Legend",
+category: "forms",
+description: "يحدد عنواناً لمجموعة الحقول داخل fieldset.",
+code: "<legend>Personal Info</legend>"
+},
+{
+tag: "datalist",
+name: "Datalist",
+category: "forms",
+description: "يقدم اقتراحات جاهزة للمستخدم أثناء الكتابة في input.",
+code: '<input list="languages">\\n<datalist id="languages">\\n  <option value="HTML">\\n</datalist>'
+},
+{
+tag: "output",
+name: "Output",
+category: "forms",
+description: "يمثل نتيجة عملية حسابية أو إجراء داخل الصفحة.",
+code: "<output>100</output>"
+},
+{
+tag: "progress",
+name: "Progress",
+category: "forms",
+description: "يعرض مستوى تقدم عملية معينة.",
+code: '<progress value="70" max="100"></progress>'
+},
+{
+tag: "meter",
+name: "Meter",
+category: "forms",
+description: "يعرض قيمة ضمن نطاق محدد، مثل مستوى الاستخدام أو التقييم.",
+code: '<meter value="7" min="0" max="10"></meter>'
+},{
+tag: "header",
+name: "Header",
+category: "semantic",
+description: "يمثل مقدمة الصفحة أو القسم وقد يحتوي على الشعار والعنوان.",
+code: "<header>\\n  <h1>Website</h1>\\n</header>"
+},
+{
+tag: "nav",
+name: "Navigation",
+category: "semantic",
+description: "يحتوي على روابط التنقل الرئيسية داخل الموقع.",
+code: '<nav><a href="#">Home</a></nav>'
+},
+{
+tag: "main",
+name: "Main",
+category: "semantic",
+description: "يحدد المحتوى الرئيسي والفريد للصفحة.",
+code: "<main>Main Content</main>"
+},
+{
+tag: "section",
+name: "Section",
+category: "semantic",
+description: "يقسم الصفحة إلى أقسام مستقلة حسب الموضوع.",
+code: "<section>\\n  <h2>About</h2>\\n</section>"
+},
+{
+tag: "article",
+name: "Article",
+category: "semantic",
+description: "يمثل محتوى مستقلاً مثل مقال أو منشور.",
+code: "<article>Article Content</article>"
+},
+{
+tag: "aside",
+name: "Aside",
+category: "semantic",
+description: "يمثل محتوى جانبياً مرتبطاً بالمحتوى الرئيسي.",
+code: "<aside>Related Content</aside>"
+},
+{
+tag: "footer",
+name: "Footer",
+category: "semantic",
+description: "يمثل تذييل الصفحة أو القسم.",
+code: "<footer>Copyright 2026</footer>"
+},
+{
+tag: "details",
+name: "Details",
+category: "semantic",
+description: "ينشئ محتوى يمكن فتحه وإغلاقه لإظهار معلومات إضافية.",
+code: "<details>\\n  <summary>More</summary>\\n  Extra information\\n</details>"
+},
+{
+tag: "summary",
+name: "Summary",
+category: "semantic",
+description: "ينشئ العنوان القابل للنقر داخل عنصر details.",
+code: "<summary>Click here</summary>"
+},
+{
+tag: "time",
+name: "Time",
+category: "semantic",
+description: "يمثل وقتاً أو تاريخاً محدداً بشكل دلالي.",
+code: '<time datetime="2026-11-20">November 20</time>'
+},
+{
+tag: "address",
+name: "Address",
+category: "semantic",
+description: "يمثل معلومات الاتصال الخاصة بالمؤلف أو مالك الصفحة أو المقال.",
+code: "<address>contact@example.com</address>"
+},
+
+{
+tag: "table",
+name: "Table",
+category: "tables",
+description: "ينشئ جدولاً لتنظيم البيانات في صفوف وأعمدة.",
+code: "<table>\\n  <tr><td>HTML</td></tr>\\n</table>"
+},
+{
+tag: "tr",
+name: "Table Row",
+category: "tables",
+description: "ينشئ صفاً داخل الجدول.",
+code: "<tr>\\n  <td>Data</td>\\n</tr>"
+},
+{
+tag: "td",
+name: "Table Data",
+category: "tables",
+description: "ينشئ خلية بيانات داخل صف الجدول.",
+code: "<td>HTML</td>"
+},
+{
+tag: "th",
+name: "Table Header",
+category: "tables",
+description: "ينشئ خلية عنوان داخل الجدول.",
+code: "<th>Name</th>"
+},
+{
+tag: "thead",
+name: "Table Head",
+category: "tables",
+description: "يجمع صفوف عناوين الجدول.",
+code: "<thead>\\n  <tr><th>Name</th></tr>\\n</thead>"
+},
+{
+tag: "tbody",
+name: "Table Body",
+category: "tables",
+description: "يجمع صفوف البيانات الأساسية في الجدول.",
+code: "<tbody>\\n  <tr><td>Ali</td></tr>\\n</tbody>"
+},
+{
+tag: "tfoot",
+name: "Table Footer",
+category: "tables",
+description: "يجمع صفوف التذييل أو الملخص في الجدول.",
+code: "<tfoot>\\n  <tr><td>Total</td></tr>\\n</tfoot>"
+},
+{
+tag: "caption",
+name: "Table Caption",
+category: "tables",
+description: "يضيف عنواناً أو وصفاً للجدول.",
+code: "<caption>Students</caption>"
+},
+{
+tag: "colgroup",
+name: "Column Group",
+category: "tables",
+description: "يجمع أعمدة الجدول لتطبيق خصائص مشتركة عليها.",
+code: "<colgroup>\\n  <col span='2'>\\n</colgroup>"
+},
+{
+tag: "col",
+name: "Column",
+category: "tables",
+description: "يحدد خصائص عمود أو أكثر داخل جدول.",
+code: "<col span='2'>"
+}
+
+];
+
+// أسماء التصنيفات
+
+const categoryNames = {
+    structure: "البنية الأساسية",
+    text: "النصوص",
+    media: "الوسائط",
+    lists: "القوائم",
+    forms: "النماذج",
+    semantic: "HTML5",
+    tables: "الجداول"
+};
+
+const cards = document.getElementById("cards");
+const search = document.getElementById("search");
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+let activeCategory = "all";
+
+// عرض الدروس
+
+function renderLessons() {
+
+    const query = search.value.toLowerCase().trim();
+
+    const filtered = lessons.filter(lesson => {
+
+        const matchesCategory =
+            activeCategory === "all" ||
+            lesson.category === activeCategory;const matchesSearch =
+            lesson.tag.toLowerCase().includes(query) ||
+            lesson.name.toLowerCase().includes(query) ||
+            lesson.description.toLowerCase().includes(query) ||
+            lesson.code.toLowerCase().includes(query);
+
+        return matchesCategory && matchesSearch;
+
     });
+
+    cards.innerHTML = "";
+
+    if (filtered.length === 0) {
+        cards.innerHTML =
+            '<div class="empty">لم يتم العثور على أي وسم.</div>';
+        return;
+    }
+
+    filtered.forEach(lesson => {
+
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const image = document.createElement("div");
+        image.className = "tag-image";
+
+        const bar = document.createElement("div");
+        bar.className = "window-bar";
+
+        ["red", "yellow", "green"].forEach(color => {
+            const dot = document.createElement("span");
+            dot.className = "dot " + color;
+            bar.appendChild(dot);
+        });
+
+        const windowContent = document.createElement("div");
+        windowContent.className = "window-content";
+
+        const bigTag = document.createElement("div");
+        bigTag.className = "big-tag";
+        bigTag.textContent = "<" + lesson.tag + ">";
+
+        const caption = document.createElement("div");
+        caption.className = "window-caption";
+        caption.textContent = "HTML ELEMENT";
+
+        windowContent.append(bigTag, caption);
+        image.append(bar, windowContent);
+
+        const content = document.createElement("div");
+        content.className = "card-content";
+
+        const top = document.createElement("div");
+        top.className = "card-top";
+
+        const heading = document.createElement("h3");
+        heading.textContent = lesson.name;
+
+        const category = document.createElement("span");
+        category.className = "category";
+        category.textContent = categoryNames[lesson.category];
+
+        top.append(heading, category);
+
+        const description = document.createElement("p");
+        description.className = "description";
+        description.textContent = lesson.description;
+
+        const exampleTitle = document.createElement("div");
+        exampleTitle.className = "example-title";
+        exampleTitle.textContent = "Code Example";
+
+        const code = document.createElement("pre");
+        code.className = "code-box";
+        code.textContent = lesson.code;
+
+        const copy = document.createElement("button");
+        copy.className = "copy-btn";
+        copy.textContent = "نسخ الكود";
+
+        copy.addEventListener("click", async () => {
+
+            try {
+                await navigator.clipboard.writeText(lesson.code);
+                copy.textContent = "تم نسخ الكود ✓";
+            } catch {
+                copy.textContent = "تعذر النسخ";
+            }
+
+            setTimeout(() => {
+                copy.textContent = "نسخ الكود";
+            }, 1800);
+
+        });
+
+        content.append(
+            top,
+            description,
+            exampleTitle,
+            code,
+            copy
+        );
+
+        card.append(image, content);
+        cards.appendChild(card);
+
+    });
+
+}
+
+// البحث
+
+search.addEventListener("input", renderLessons);
+
+// تصفية التصنيفات
+
+filterButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        activeCategory = button.dataset.category;
+
+        renderLessons();
+
+    });
+
 });
 
-document.querySelectorAll(".docc, .head, .htmlll, .body").forEach(el => {
-    observer.observe(el);
-});
+// تشغيل الصفحة
+
+renderLessons();
 
 </script>
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
-
-
-

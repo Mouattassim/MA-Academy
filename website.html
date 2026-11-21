@@ -1,73 +1,384 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="images/logogdd.png" type="image/png">
+<title>MA Academy</title>
 <meta charset="UTF-8">
-
 <style>
-.bar{display: flex;align-items: center;justify-content: space-between;}
-.linkk{gap: 20px;display: flex;margin-right: 0 auto;margin-left: 50px;}
+.navbar{display: flex;justify-content: space-between;align-items: center;max-width:100%;background-color:blue;position: fixed;margin:0;padding: 0;width: 100%;border-radius: 0px 0px 20px 20px;top: 0;left: 0;z-index: 1000;}
+.logo{width:20%;;margin-right:50px;margin-left: 0 auto;}
 .body{margin: 0;}
-.link{border: none;background-color:#3ea0e5;border-radius:35px;color:white;padding:20px;text-decoration: none;}
-.dark{border-radius:50%;}
-.logobar{margin-left: 0 auto;margin-right: 30px;}
-.recharche{display: flex;justify-content: center;}
-.input{width:500px;height:60px;border: 1px solid  rgb(6, 84, 219);border-radius:50px;outline: none;}
-.butoonn{width:120px;height: 64px;border: none;border-radius: 40px;background-color: rgb(6, 84, 219);transform: translateX(-70px);color: white;font-size:25px;}
-body{background-color: white;color: black;transition: 0.5s;}
-.dark{background-color: #222;color: white;}
+.h11{text-align: center;transform: translateY(10px);font-family:'Montserrat',sans-serif;width:100%;font-size:80px;border: none;outline: none;color: white;}
+.pp{width:100%;font-size: 40px;transform: translateY(100px);text-align: center;font-family: 'Poppins',sans-serif;}
+.div1{width:100%;}
+.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;}
+.button{width:130px;height:72px;border-radius:40px;border: none;transform: translateY(-7px);margin-right:0 auto;margin-left:-80px;font-size: 20px;background-color: red;color: white;}
+.button:hover{background-color: rgb(139, 5, 5);}
+.h111{font-family:'Cairo',sans-serif;font-weight:800;font-size: 100px;width:100%;text-align: center;transform: translateY(150px);}
+.h3{font-family:'Cairo',sans-serif;font-weight: 300;font-size: 70px;width:100%;text-align: center;transform: translateY(150px);}
+.divblue{background-color: blue;}
+.body{background-color:white;}
+.divblue1{background-color: blue;}
+.html{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
+.wave-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background:blue;
+}
+
+.waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 50%;
+}
+
+
+.wave1 {
+    fill: rgba(255,255,255,0.5);
+    animation: moveWave 10s linear infinite;
+}
+
+
+.wave2 {
+    fill: white;
+    animation: moveWave 15s linear infinite;
+    border-bottom: none;
+}
+
+
+@keyframes moveWave {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+.wave-container{height:700px;width:100%;border: none;outline: none;border-bottom: none;}
+.parent{width: 100%;margin: 0;padding: 0;background: blue;overflow: hidden;}
+.navbar{width:100%;height:180px;background: blue;}
+.wave-container{width:100%;height:600px;background: blue;margin-bottom: -2px;border-bottom: none;}
+.text{text-align: center;}
+.btnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#fd3a04;border-radius:30px;color: white;}
+.btnn:hover{background-color: #af2f0b;}
+
+
+
+
+/* Services Section */
+
+.services {
+    background: #f4f5fa;
+    padding: 60px 35px;
+    border-radius: 35px;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+/* Header */
+
+.services-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.services-header h1 {
+    font-size: 45px;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.services-header p {
+    font-size: 20px;
+    color: #778194;
+}
+
+/* Cards Container */
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+/* Service Card */
+
+.service-card {
+    background: white;
+    padding: 30px;
+    min-height: 190px;
+    border-radius: 28px;
+    position: relative;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(80, 50, 150, 0.12);
+}
+
+.service-icon {
+    display: block;
+    text-align: right;
+    font-size: 35px;
+    color: #7046d8;
+    margin-bottom: 20px;
+}
+
+.service-card h2 {
+    font-size: 27px;
+    color: #111;
+    margin: 0 0 20px;
+}
+
+.service-card p {
+    font-size: 20px;
+    color: #87909f;
+    text-align: right;
+    margin: 0;
+}
+
+/* Project Box */
+
+.project-box {
+    background: linear-gradient(
+        135deg,
+        #ece8ff,
+        #ded5ff
+    );
+
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 35px;
+    border-radius: 30px;
+}
+
+.project-box h2 {
+    color: #292052;
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.project-box p {
+    color: #686080;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.project-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #6540b5;
+    background: #d6c6f7;
+    padding: 13px 25px;
+    border-radius: 30px;
+    font-size: 19px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.project-btn:hover {
+    background: #7046d8;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+
+    .services {
+        padding: 35px 15px;
+        margin: 15px;
+    }
+
+    .services-header h1 {
+        font-size: 32px;
+    }
+
+    .services-header p {
+        font-size: 15px;
+    }
+
+    .services-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .service-card {
+        min-height: 160px;
+    }
+
+    .service-card h2 {
+        font-size: 23px;
+    }
+
+    .project-box h2 {
+        font-size: 27px;
+    }
+
+    .project-box p {
+        font-size: 16px;
+    }
+
+}
+
+
 </style>
+
 
 </head>
 <body class="body">
-
-<div class="bar">
-<div class="linkk">
-<a href="" class="link">Home</a>
-<a href="" class="link">Our Services</a>
-<a href="" class="link">Contact</a>
-<button class="dark link" onclick="togglemode()">Mode</button>
-</div>
-<div class="logobar">
-<img src="images/devloper.png" alt="logo" width="300px">
-</div>
-</div>
-<br>
-<br>
-<br>
-<div class="recharche">
-<input type="text" class="input">
-<button class="butoonn">Search</button>
+<div class="parent">
+<div class="divblue1">
+<div class="navbar">
+<div class="div2">
+<input type="text" class="input" placeholder="  search in MA Academy">
+<button class="button">Search</button>
 </div>
 
+<img src="images/اكادمية.png" alt="logo" width="200px" class="logo">
+</div>
+</div>
+<div class="divblue">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
 
+
+
+ <div class="wave-container">
+    <br>
+    <br>
+<h1 class="h11">Welcome To MA Academy</h1>
+    <svg class="waves" viewBox="0 0 1440 320"
+         preserveAspectRatio="none">
+
+        <defs>
+            <path id="wave"
+            d="M0 160
+            C120 100 240 100 360 160
+            C480 220 600 220 720 160
+            C840 100 960 100 1080 160
+            C1200 220 1320 220 1440 160
+            L1440 320 L0 320 Z"/>
+        </defs>
+
+        <g class="wave wave1">
+            <use href="#wave" x="0"/>
+            <use href="#wave" x="1440"/>
+        </g>
+
+        <g class="wave wave2">
+            <use href="#wave" x="0"/>
+            <use href="#wave" x="1440"/>
+        </g>
+
+    </svg>
+
+</div>
+</div>
+</div>
 <br>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
-<label>
-<input type="checkbox" id="terms"> 
-I Accept All
-</label>
-<br><br>
-<button id="continue" disabled onclick="htmll()">Continue</button>
+<section class="services" id="services">
+
+    <div class="services-header">
+        <h1>Our Services</h1>
+        <p>We create digital experiences for every business.</p>
+    </div>
+
+    <div class="services-container">
+
+        <div class="service-card">
+            <span class="service-icon">🏢</span>
+            <h2>Business Websites</h2>
+            <p>مواقع الشركات</p>
+        </div>
+
+        <div class="service-card">
+            <span class="service-icon">🛒</span>
+            <h2>E-Commerce</h2>
+            <p>متاجر إلكترونية</p>
+        </div>
+
+        <div class="service-card">
+            <span class="service-icon">🎓</span>
+            <h2>Educational</h2>
+            <p>مواقع تعليمية</p>
+        </div>
+
+        <div class="service-card">
+            <span class="service-icon">👤</span>
+            <h2>Portfolio</h2>
+            <p>مواقع شخصية</p>
+        </div>
+
+        <div class="service-card">
+            <span class="service-icon">🧩</span>
+            <h2>Custom Websites</h2>
+            <p>مواقع مخصصة</p>
+        </div>
+
+        <div class="service-card">
+            <span class="service-icon">📰</span>
+            <h2>Blogs & News</h2>
+            <p>مدونات ومواقع إخبارية</p>
+        </div>
+
+    </div>
+
+    <div class="project-box">
+        <h2>Have a Project in Mind?</h2>
+        <p>Let's build something amazing together.</p>
+
+        <a href="#contact" class="project-btn">
+            Start Your Project →
+        </a>
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
 
 <script>
-const terms = document.getElementById("terms");
-const button = document.getElementById("continue")
 
-terms.addEventListener("change",function(){
-button.disabled = !terms.checked;
-}
-)
-function togglemode(){
-document.body.classList.toggle("dark")
-}
-function htmll(){window.location.href ="html.html"}
 </script>
-
 
 </body>
 
@@ -85,7 +396,7 @@ function htmll(){window.location.href ="html.html"}
 
 
 
-
-
-
 </html>
+
+
+

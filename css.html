@@ -1,193 +1,908 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<title>MA Academy</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA Academy | Learn CSS</title>
+
 <style>
-.navbar{display: flex;justify-content: space-between;align-items: center;max-width:100%;background-color:blue;position: fixed;margin:0;padding: 0;width: 100%;border-radius: 0px 0px 20px 20px;top: 0;left: 0;z-index: 1000;}
-.logo{width:20%;;margin-right:50px;margin-left: 0 auto;}
-.body{margin: 0;}
-.h11{text-align: center;transform: translateY(10px);font-family:'Montserrat',sans-serif;width:100%;font-size:80px;border: none;outline: none;color: white;}
-.pp{width:100%;font-size: 40px;transform: translateY(100px);text-align: center;font-family: 'Poppins',sans-serif;}
-.div1{width:100%;}
-.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;}
-.button{width:130px;height:72px;border-radius:40px;border: none;transform: translateY(-7px);margin-right:0 auto;margin-left:-80px;font-size: 20px;background-color: red;color: white;}
-.button:hover{background-color: rgb(139, 5, 5);}
-.h111{font-family:'Cairo',sans-serif;font-weight:800;font-size: 100px;width:100%;text-align: center;transform: translateY(150px);}
-.h3{font-family:'Cairo',sans-serif;font-weight: 300;font-size: 70px;width:100%;text-align: center;transform: translateY(150px);}
-.divblue{background-color: blue;}
-.body{background-color:white;}
-.divblue1{background-color: blue;}
-.html{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
-.wave-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
+:root {
+    --primary: #7652d8;
+    --secondary: #a78bfa;
+    --light: #f5f2ff;
+    --dark: #242039;
+    --text: #29243b;
+    --muted: #77738a;
+    --border: #e8e2f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #ffffff;
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+}
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--dark);
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    direction: ltr;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 480px;
+    padding: 75px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    background:
+    radial-gradient(circle at 10% 30%, #a78bfa25, transparent 35%),
+    #faf9ff;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.tag {
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    margin: 18px 0;
+    line-height: 1.3;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.main-btn:hover {
+    background: #5d3cc0;
+    transform: translateY(-3px);
+}
+
+/* CODE WINDOW */
+
+.hero-code {
+    width: 430px;
+    max-width: 100%;
+    background: #211d32;
+    border: 1px solid #38304f;
+    border-radius: 12px;
     overflow: hidden;
-    background:blue;
+    direction: ltr;
+    box-shadow: 0 15px 40px #33245b20;
 }
 
-.waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%;
-    height: 50%;
+.dots {
+    display: flex;
+    gap: 7px;
+    padding: 15px;
+    border-bottom: 1px solid #403852;
 }
 
-
-.wave1 {
-    fill: rgba(255,255,255,0.5);
-    animation: moveWave 10s linear infinite;
+.dots i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #ff6b6b;
 }
 
-
-.wave2 {
-    fill: white;
-    animation: moveWave 15s linear infinite;
-    border-bottom: none;
+.dots i:nth-child(2) {
+    background: #ffc857;
 }
 
+.dots i:nth-child(3) {
+    background: #69d69b;
+}
 
-@keyframes moveWave {
+.hero-code pre {
+    padding: 25px;
+    color: #c4b5fd;
+    overflow-x: auto;
+    font-size: 14px;
+}
 
-    from {
-        transform: translateX(0);
+/* LESSONS */
+
+.container {
+    padding: 80px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title span {
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.section-title h2 {
+    font-size: 35px;
+    margin: 8px 0;
+}
+
+.section-title p {
+    color: var(--muted);
+}
+
+/* SEARCH */
+
+.tools {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tools input,
+.tools select {
+    padding: 14px;
+    background: #faf9ff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    outline: none;
+}
+
+.tools input {
+    flex: 1;
+}
+
+.tools input:focus,
+.tools select:focus {
+    border-color: var(--primary);
+}
+
+/* LESSON CARDS */
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.lesson-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.lesson-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--secondary);
+    box-shadow: 0 10px 30px #7652d815;
+}
+
+.lesson-image {
+    background: #211d32;
+    padding: 15px;
+    direction: ltr;
+    border-bottom: 1px solid #38304f;
+}
+
+.lesson-image .dots {
+    padding: 0 0 12px;
+    border: none;
+}.lesson-image pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #c4b5fd;
+    font-size: 13px;
+    min-height: 55px;
+}
+
+.lesson-info {
+    padding: 20px;
+}
+
+.lesson-info h3 {
+    color: var(--primary);
+    direction: ltr;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.lesson-info p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.copy-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.copy-btn:hover {
+    background: #5d3cc0;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    padding: 30px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    background: #faf9ff;
+    border-top: 1px solid var(--border);
+}
+
+footer h2 {
+    direction: ltr;
+}
+
+footer span {
+    color: var(--primary);
+}
+
+footer p {
+    color: var(--primary);
+    margin: 5px;
+}
+
+footer small {
+    color: var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 750px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 6%;
     }
 
-    to {
-        transform: translateX(-50%);
+    .hero-code {
+        width: 100%;
     }
 
+    .navbar {
+        padding: 18px 5%;
+    }
+
+    nav {
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .container {
+        padding: 55px 5%;
+    }
+
+    .tools {
+        flex-direction: column;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
 }
-
-.wave-container{height:700px;width:100%;border: none;outline: none;border-bottom: none;}
-.parent{width: 100%;margin: 0;padding: 0;background: blue;overflow: hidden;}
-.navbar{width:100%;height:180px;background: blue;}
-.wave-container{width:100%;height:600px;background: blue;margin-bottom: -2px;border-bottom: none;}
-.text{text-align: center;}
-.btnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#fd3a04;border-radius:30px;color: white;}
-.btnn:hover{background-color: #af2f0b;}
-.h1{text-align: center;font-family:'Montserrat',sans-serif;font-size:100px;color:#3776AB;}
-
-
 </style>
-
-
 </head>
-<body class="body">
-<div class="parent">
-<div class="divblue1">
-<div class="navbar">
-<div class="div2">
-<input type="text" class="input" placeholder="  search in MA Academy">
-<button class="button">Search</button>
-</div>
 
-<img src="images/اكادمية.png" alt="logo" width="200px" class="logo">
-</div>
-</div>
-<div class="divblue">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-</div>
+<body>
 
+<!-- NAVBAR -->
 
+<header class="navbar">
 
- <div class="wave-container">
-    <br>
-    <br>
-<h1 class="h11">Welcome To MA Academy</h1>
-    <svg class="waves" viewBox="0 0 1440 320"
-         preserveAspectRatio="none">
+    <a href="#" class="logo"><img src="images/اكادمية.png" alt="logo" width="150px"></span></a>
 
-        <defs>
-            <path id="wave"
-            d="M0 160
-            C120 100 240 100 360 160
-            C480 220 600 220 720 160
-            C840 100 960 100 1080 160
-            C1200 220 1320 220 1440 160
-            L1440 320 L0 320 Z"/>
-        </defs>
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#lessons">دروس CSS</a>
+    </nav>
 
-        <g class="wave wave1">
-            <use href="#wave" x="0"/>
-            <use href="#wave" x="1440"/>
-        </g>
+</header>
 
-        <g class="wave wave2">
-            <use href="#wave" x="0"/>
-            <use href="#wave" x="1440"/>
-        </g>
+<!-- HERO -->
 
-    </svg>
+<section class="hero" id="home">
 
-</div>
-</div>
-</div>
+    <div class="hero-content">
 
+        <span class="tag">
+            MA ACADEMY • WEB DEVELOPMENT
+        </span>
 
+        <h1>
+            اكتشف عالم
+            <span>CSS</span>
+        </h1>
 
+        <p>
+            تعلم كيفية تنسيق صفحات الويب والتحكم في الألوان
+            والخطوط والأحجام والتخطيطات والحركات باستخدام CSS.
+        </p>
 
+        <a href="#lessons" class="main-btn">
+            ابدأ التعلم
+        </a>
 
+    </div>
 
-<br>
-<br>
-<br>
-<div>
-<h1 class="h1">LEARN CSS</h1>
+    <div class="hero-code">
 
-</div>
+        <div class="dots">
+            <i></i><i></i><i></i>
+        </div>
 
+        <pre><code>body {
+  background: white;
+  color: #29243b;
+  font-family: Arial;
+}
 
+h1 {
+  color: #7652d8;
+  text-align: center;
+}</code></pre>
 
+    </div>
 
+</section>
 
+<!-- LESSONS -->
 
+<main class="container" id="lessons">
 
+    <div class="section-title">
 
+        <span>CSS COURSE</span>
 
+        <h2>أهم خصائص CSS</h2>
+
+        <p>
+            اكتشف أهم خصائص التنسيق مع شرح ومثال لكل خاصية.
+        </p>
+
+    </div>
+
+    <div class="tools">
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="ابحث عن خاصية CSS..."
+        >
+
+        <select id="categoryFilter">
+            <option value="all">جميع التصنيفات</option>
+            <option value="colors">الألوان والخلفيات</option>
+            <option value="text">النصوص والخطوط</option>
+            <option value="box">الأبعاد والصندوق</option>
+            <option value="layout">التخطيط</option>
+            <option value="position">التموضع</option>
+            <option value="effects">التأثيرات والحركة</option>
+        </select>
+
+    </div>
+
+    <div class="lessons-grid" id="lessonsGrid"></div>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>MA <span>Academy</span></h2>
+
+    <p>Learn. Build. Create.</p>
+
+    <small>
+        © 2026 MA Academy - All Rights Reserved
+    </small>
+
+</footer>
 
 <script>
+
+/* CSS LESSONS */
+
+const lessons = [
+
+/* COLORS */
+
+{
+tag: "color",
+category: "colors",
+title: "لون النص",
+description: "تحدد لون النص داخل العنصر.",
+code: "p {\n  color: blue;\n}"
+},
+
+{
+tag: "background-color",
+category: "colors",
+title: "لون الخلفية",
+description: "تحدد لون خلفية العنصر.",
+code: "body {\n  background-color: black;\n}"
+},{
+tag: "background-image",
+category: "colors",
+title: "صورة الخلفية",
+description: "تسمح بإضافة صورة كخلفية للعنصر.",
+code: "div {\n  background-image: url('image.jpg');\n}"
+},
+
+{
+tag: "opacity",
+category: "colors",
+title: "الشفافية",
+description: "تتحكم في درجة شفافية العنصر.",
+code: "div {\n  opacity: 0.5;\n}"
+},
+
+/* TEXT */
+
+{
+tag: "font-size",
+category: "text",
+title: "حجم الخط",
+description: "تحدد حجم النص داخل العنصر.",
+code: "h1 {\n  font-size: 30px;\n}"
+},
+
+{
+tag: "font-family",
+category: "text",
+title: "نوع الخط",
+description: "تحدد نوع الخط المستخدم في النص.",
+code: "body {\n  font-family: Arial, sans-serif;\n}"
+},
+
+{
+tag: "font-weight",
+category: "text",
+title: "سماكة الخط",
+description: "تتحكم في درجة سماكة النص.",
+code: "h1 {\n  font-weight: bold;\n}"
+},
+
+{
+tag: "text-align",
+category: "text",
+title: "محاذاة النص",
+description: "تحدد اتجاه محاذاة النص أفقياً.",
+code: "p {\n  text-align: center;\n}"
+},
+
+{
+tag: "text-decoration",
+category: "text",
+title: "زخرفة النص",
+description: "تضيف خطاً أسفل النص أو فوقه أو تزيله.",
+code: "a {\n  text-decoration: none;\n}"
+},
+
+{
+tag: "text-transform",
+category: "text",
+title: "تغيير حالة الحروف",
+description: "تتحكم في تحويل الحروف إلى كبيرة أو صغيرة.",
+code: "p {\n  text-transform: uppercase;\n}"
+},
+
+{
+tag: "line-height",
+category: "text",
+title: "ارتفاع السطر",
+description: "تحدد المسافة العمودية بين أسطر النص.",
+code: "p {\n  line-height: 1.8;\n}"
+},
+
+{
+tag: "letter-spacing",
+category: "text",
+title: "المسافة بين الحروف",
+description: "تتحكم في المسافة الأفقية بين الأحرف.",
+code: "h1 {\n  letter-spacing: 3px;\n}"
+},
+
+/* BOX MODEL */
+
+{
+tag: "width",
+category: "box",
+title: "العرض",
+description: "تحدد عرض العنصر.",
+code: "div {\n  width: 300px;\n}"
+},
+
+{
+tag: "height",
+category: "box",
+title: "الارتفاع",
+description: "تحدد ارتفاع العنصر.",
+code: "div {\n  height: 200px;\n}"
+},
+
+{
+tag: "margin",
+category: "box",
+title: "الهامش الخارجي",
+description: "تحدد المسافة الخارجية حول العنصر.",
+code: "div {\n  margin: 20px;\n}"
+},
+
+{
+tag: "padding",
+category: "box",
+title: "الهامش الداخلي",
+description: "تحدد المسافة بين المحتوى وحدود العنصر.",
+code: "div {\n  padding: 20px;\n}"
+},
+
+{
+tag: "border",
+category: "box",
+title: "الحدود",
+description: "تضيف حدوداً حول العنصر مع تحديد سمكها ولونها.",
+code: "div {\n  border: 2px solid black;\n}"
+},
+
+{
+tag: "border-radius",
+category: "box",
+title: "استدارة الزوايا",
+description: "تجعل زوايا العنصر مستديرة.",
+code: "div {\n  border-radius: 15px;\n}"
+},
+
+{
+tag: "box-sizing",
+category: "box",
+title: "حساب أبعاد الصندوق",
+description: "تتحكم في طريقة حساب العرض والارتفاع.",
+code: "* {\n  box-sizing: border-box;\n}"
+},
+
+{
+tag: "max-width",
+category: "box",
+title: "أقصى عرض",
+description: "تحدد أكبر عرض يمكن أن يصل إليه العنصر.",
+code: "div {\n  max-width: 1000px;\n}"
+},
+
+/* LAYOUT */
+
+{
+tag: "display",
+category: "layout",
+title: "طريقة العرض",
+description: "تحدد طريقة عرض العنصر مثل block و inline و flex.",
+code: "div {\n  display: flex;\n}"
+},
+
+{
+tag: "flex-direction",
+category: "layout",
+title: "اتجاه العناصر",
+description: "تحدد اتجاه ترتيب العناصر داخل Flexbox.",
+code: "div {\n  display: flex;\n  flex-direction: column;\n}"
+},
+
+{
+tag: "justify-content",
+category: "layout",
+title: "التوزيع الأفقي",
+description: "تتحكم في توزيع العناصر على المحور الرئيسي في Flexbox.",
+code: "div {\n  display: flex;\n  justify-content: center;\n}"
+},
+
+{
+tag: "align-items",
+category: "layout",
+title: "المحاذاة العمودية",
+description: "تتحكم في محاذاة العناصر على المحور المتقاطع في Flexbox.",
+code: "div {\n  display: flex;\n  align-items: center;\n}"
+},
+
+{
+tag: "gap",
+category: "layout",
+title: "المسافة بين العناصر",
+description: "تحدد المسافة الفاصلة بين العناصر داخل Flexbox أو Grid.",
+code: "div {\n  display: flex;\n  gap: 20px;\n}"
+},
+
+{
+tag: "grid-template-columns",
+category: "layout",
+title: "أعمدة Grid",
+description: "تحدد عدد الأعمدة وأحجامها داخل CSS Grid.",
+code: "div {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}"
+},{
+tag: "flex-wrap",
+category: "layout",
+title: "التفاف العناصر",
+description: "تسمح للعناصر بالانتقال إلى سطر جديد عند الحاجة.",
+code: "div {\n  display: flex;\n  flex-wrap: wrap;\n}"
+},
+
+/* POSITION */
+
+{
+tag: "position",
+category: "position",
+title: "التموضع",
+description: "تحدد طريقة تموضع العنصر مثل relative و absolute و fixed.",
+code: "div {\n  position: relative;\n}"
+},
+
+{
+tag: "top",
+category: "position",
+title: "المسافة من الأعلى",
+description: "تحدد إزاحة العنصر من الأعلى عند استخدام التموضع المناسب.",
+code: "div {\n  position: relative;\n  top: 20px;\n}"
+},
+
+{
+tag: "z-index",
+category: "position",
+title: "ترتيب الطبقات",
+description: "تحدد ترتيب ظهور العناصر فوق بعضها عند تداخلها.",
+code: "div {\n  position: relative;\n  z-index: 10;\n}"
+},
+
+{
+tag: "overflow",
+category: "position",
+title: "المحتوى الزائد",
+description: "تتحكم في ظهور المحتوى الذي يتجاوز حدود العنصر.",
+code: "div {\n  overflow: hidden;\n}"
+},
+
+/* EFFECTS */
+
+{
+tag: "box-shadow",
+category: "effects",
+title: "ظل الصندوق",
+description: "تضيف ظلاً حول العنصر لإعطائه مظهراً ثلاثي الأبعاد.",
+code: "div {\n  box-shadow: 0 5px 15px #0003;\n}"
+},
+
+{
+tag: "transition",
+category: "effects",
+title: "الانتقال",
+description: "تجعل تغير الخصائص يحدث بشكل تدريجي وسلس.",
+code: "button {\n  transition: 0.3s;\n}"
+},
+
+{
+tag: "transform",
+category: "effects",
+title: "التحويل",
+description: "تسمح بتحريك العنصر أو تدويره أو تغيير حجمه.",
+code: "div {\n  transform: scale(1.1);\n}"
+},
+
+{
+tag: "animation",
+category: "effects",
+title: "الحركة",
+description: "تسمح بإنشاء حركات متكررة أو محددة باستخدام keyframes.",
+code: "div {\n  animation: move 2s infinite;\n}"
+},
+
+{
+tag: "cursor",
+category: "effects",
+title: "شكل المؤشر",
+description: "تحدد شكل مؤشر الفأرة عند المرور فوق العنصر.",
+code: "button {\n  cursor: pointer;\n}"
+},
+
+{
+tag: "filter",
+category: "effects",
+title: "تأثيرات الصور",
+description: "تضيف تأثيرات بصرية مثل التمويه وتغيير السطوع.",
+code: "img {\n  filter: grayscale(100%);\n}"
+}
+
+];
+
+
+/* SELECT ELEMENTS */
+
+const grid = document.getElementById("lessonsGrid");
+
+const searchInput = document.getElementById("searchInput");
+
+const categoryFilter = document.getElementById("categoryFilter");
+
+
+/* DISPLAY LESSONS */
+
+function renderLessons() {
+
+    const search = searchInput.value.toLowerCase().trim();
+
+    const category = categoryFilter.value;
+
+    const filtered = lessons.filter(lesson => {
+
+        const matchesSearch =
+            lesson.tag.toLowerCase().includes(search) ||
+            lesson.title.toLowerCase().includes(search) ||
+            lesson.description.toLowerCase().includes(search);
+
+        const matchesCategory =
+            category === "all" || lesson.category === category;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    grid.innerHTML = "";
+
+    if (filtered.length === 0) {
+
+        const message = document.createElement("p");
+
+        message.className = "no-results";
+
+        message.textContent = "لم يتم العثور على نتائج.";
+
+        grid.appendChild(message);
+
+        return;
+    }
+
+    filtered.forEach(lesson => {
+
+        const card = document.createElement("article");
+        card.className = "lesson-card";
+
+        const image = document.createElement("div");
+        image.className = "lesson-image";
+
+        const dots = document.createElement("div");
+        dots.className = "dots";
+        dots.innerHTML = "<i></i><i></i><i></i>";
+
+        const pre = document.createElement("pre");
+        pre.textContent = lesson.code;
+
+        image.append(dots, pre);
+
+        const info = document.createElement("div");
+        info.className = "lesson-info";
+
+        const title = document.createElement("h3");
+        title.textContent = lesson.tag;
+
+        const description = document.createElement("p");
+        description.textContent = lesson.description;
+
+        const button = document.createElement("button");
+        button.className = "copy-btn";
+        button.textContent = "نسخ الكود";
+
+        button.addEventListener("click", async () => {try {
+                await navigator.clipboard.writeText(lesson.code);
+
+                button.textContent = "تم النسخ ✓";
+
+                setTimeout(() => {
+                    button.textContent = "نسخ الكود";
+                }, 1500);
+
+            } catch {
+                button.textContent = "تعذر النسخ";
+            }
+
+        });
+
+        info.append(title, description, button);
+
+        card.append(image, info);
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* SEARCH AND FILTER */
+
+searchInput.addEventListener("input", renderLessons);
+
+categoryFilter.addEventListener("change", renderLessons);
+
+
+/* INITIAL DISPLAY */
+
+renderLessons();
 
 </script>
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
-
-
-

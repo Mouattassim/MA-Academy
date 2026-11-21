@@ -1,193 +1,1037 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<title>MA Academy</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA Academy | Learn JavaScript</title>
+
 <style>
-.navbar{display: flex;justify-content: space-between;align-items: center;max-width:100%;background-color:blue;position: fixed;margin:0;padding: 0;width: 100%;border-radius: 0px 0px 20px 20px;top: 0;left: 0;z-index: 1000;}
-.logo{width:20%;;margin-right:50px;margin-left: 0 auto;}
-.body{margin: 0;}
-.h11{text-align: center;transform: translateY(10px);font-family:'Montserrat',sans-serif;width:100%;font-size:80px;border: none;outline: none;color: white;}
-.pp{width:100%;font-size: 40px;transform: translateY(100px);text-align: center;font-family: 'Poppins',sans-serif;}
-.div1{width:100%;}
-.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;}
-.button{width:130px;height:72px;border-radius:40px;border: none;transform: translateY(-7px);margin-right:0 auto;margin-left:-80px;font-size: 20px;background-color: red;color: white;}
-.button:hover{background-color: rgb(139, 5, 5);}
-.h111{font-family:'Cairo',sans-serif;font-weight:800;font-size: 100px;width:100%;text-align: center;transform: translateY(150px);}
-.h3{font-family:'Cairo',sans-serif;font-weight: 300;font-size: 70px;width:100%;text-align: center;transform: translateY(150px);}
-.divblue{background-color: blue;}
-.body{background-color:white;}
-.divblue1{background-color: blue;}
-.html{width:700px;border: 1px solid #e0e0e0;padding:20px 10px 50px 10px;border-radius: 40px;background-color:#e0e0e0;justify-content: center;margin: 0 auto;}
-.wave-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
+:root {
+    --primary: #7652d8;
+    --secondary: #a78bfa;
+    --light: #f5f2ff;
+    --dark: #242039;
+    --text: #29243b;
+    --muted: #77738a;
+    --border: #e8e2f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #ffffff;
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+}
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--dark);
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    direction: ltr;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 480px;
+    padding: 75px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    background:
+    radial-gradient(circle at 10% 30%, #a78bfa25, transparent 35%),
+    #faf9ff;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.tag {
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    margin: 18px 0;
+    line-height: 1.3;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.main-btn:hover {
+    background: #5d3cc0;
+    transform: translateY(-3px);
+}
+
+/* CODE WINDOW */
+
+.hero-code {
+    width: 430px;
+    max-width: 100%;
+    background: #211d32;
+    border: 1px solid #38304f;
+    border-radius: 12px;
     overflow: hidden;
-    background:blue;
+    direction: ltr;
+    box-shadow: 0 15px 40px #33245b20;
 }
 
-.waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%;
-    height: 50%;
+.dots {
+    display: flex;
+    gap: 7px;
+    padding: 15px;
+    border-bottom: 1px solid #403852;
 }
 
-
-.wave1 {
-    fill: rgba(255,255,255,0.5);
-    animation: moveWave 10s linear infinite;
+.dots i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #ff6b6b;
 }
 
-
-.wave2 {
-    fill: white;
-    animation: moveWave 15s linear infinite;
-    border-bottom: none;
+.dots i:nth-child(2) {
+    background: #ffc857;
 }
 
+.dots i:nth-child(3) {
+    background: #69d69b;
+}
 
-@keyframes moveWave {
+.hero-code pre {
+    padding: 25px;
+    color: #c4b5fd;
+    overflow-x: auto;
+    font-size: 14px;
+}
 
-    from {
-        transform: translateX(0);
+/* LESSONS */
+
+.container {
+    padding: 80px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title span {
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.section-title h2 {
+    font-size: 35px;
+    margin: 8px 0;
+}
+
+.section-title p {
+    color: var(--muted);
+}
+
+/* SEARCH */
+
+.tools {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tools input,
+.tools select {
+    padding: 14px;
+    background: #faf9ff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    outline: none;
+}
+
+.tools input {
+    flex: 1;
+}
+
+.tools input:focus,
+.tools select:focus {
+    border-color: var(--primary);
+}
+
+/* CARDS */
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.lesson-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.lesson-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--secondary);
+    box-shadow: 0 10px 30px #7652d815;
+}
+
+.lesson-image {
+    background: #211d32;
+    padding: 15px;
+    direction: ltr;
+    border-bottom: 1px solid #38304f;
+}
+
+.lesson-image .dots {
+    padding: 0 0 12px;
+    border: none;
+}.lesson-image pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #c4b5fd;
+    font-size: 13px;
+    min-height: 55px;
+}
+
+.lesson-info {
+    padding: 20px;
+}
+
+.lesson-info h3 {
+    color: var(--primary);
+    direction: ltr;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.lesson-info p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.copy-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.copy-btn:hover {
+    background: #5d3cc0;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    padding: 30px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    background: #faf9ff;
+    border-top: 1px solid var(--border);
+}
+
+footer h2 {
+    direction: ltr;
+}
+
+footer span {
+    color: var(--primary);
+}
+
+footer p {
+    color: var(--primary);
+    margin: 5px;
+}
+
+footer small {
+    color: var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 750px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 6%;
     }
 
-    to {
-        transform: translateX(-50%);
+    .hero-code {
+        width: 100%;
     }
 
+    .navbar {
+        padding: 18px 5%;
+    }
+
+    nav {
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .container {
+        padding: 55px 5%;
+    }
+
+    .tools {
+        flex-direction: column;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
 }
-
-.wave-container{height:700px;width:100%;border: none;outline: none;border-bottom: none;}
-.parent{width: 100%;margin: 0;padding: 0;background: blue;overflow: hidden;}
-.navbar{width:100%;height:180px;background: blue;}
-.wave-container{width:100%;height:600px;background: blue;margin-bottom: -2px;border-bottom: none;}
-.text{text-align: center;}
-.btnn{display:block;margin-left: auto;margin-right: auto;height:70px;width:180px;font-size:40px;font-family:'Oswald',sans-serif;border: none;background-color:#fd3a04;border-radius:30px;color: white;}
-.btnn:hover{background-color: #af2f0b;}
-.h1{text-align: center;font-family:'Montserrat',sans-serif;font-size:100px;color:#F7DF1E;}
-
-
 </style>
-
-
 </head>
-<body class="body">
-<div class="parent">
-<div class="divblue1">
-<div class="navbar">
-<div class="div2">
-<input type="text" class="input" placeholder="  search in MA Academy">
-<button class="button">Search</button>
-</div>
 
-<img src="images/اكادمية.png" alt="logo" width="200px" class="logo">
-</div>
-</div>
-<div class="divblue">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-</div>
+<body>
 
+<!-- NAVBAR -->
 
+<header class="navbar">
 
- <div class="wave-container">
-    <br>
-    <br>
-<h1 class="h11">Welcome To MA Academy</h1>
-    <svg class="waves" viewBox="0 0 1440 320"
-         preserveAspectRatio="none">
+    <a href="#" class="logo">MA <span>Academy</span></a>
 
-        <defs>
-            <path id="wave"
-            d="M0 160
-            C120 100 240 100 360 160
-            C480 220 600 220 720 160
-            C840 100 960 100 1080 160
-            C1200 220 1320 220 1440 160
-            L1440 320 L0 320 Z"/>
-        </defs>
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#lessons">دروس JavaScript</a>
+    </nav>
 
-        <g class="wave wave1">
-            <use href="#wave" x="0"/>
-            <use href="#wave" x="1440"/>
-        </g>
+</header>
 
-        <g class="wave wave2">
-            <use href="#wave" x="0"/>
-            <use href="#wave" x="1440"/>
-        </g>
+<!-- HERO -->
 
-    </svg>
+<section class="hero" id="home">
 
-</div>
-</div>
-</div>
+    <div class="hero-content">
 
+        <span class="tag">
+            MA ACADEMY • WEB DEVELOPMENT
+        </span>
 
+        <h1>
+            اكتشف عالم
+            <span>JavaScript</span>
+        </h1>
 
+        <p>
+            تعلم البرمجة التفاعلية واكتشف كيفية التحكم في عناصر
+            صفحات الويب وإنشاء وظائف وتطبيقات باستخدام JavaScript.
+        </p>
 
+        <a href="#lessons" class="main-btn">
+            ابدأ التعلم
+        </a>
 
+    </div>
 
-<br>
-<br>
-<br>
-<div>
-<h1 class="h1">LEARN Java Script</h1>
+    <div class="hero-code">
 
-</div>
+        <div class="dots">
+            <i></i><i></i><i></i>
+        </div>
 
+        <pre><code>const academy = "MA Academy";
 
+function welcome() {
+  console.log("Hello World");
+}
 
+welcome();</code></pre>
 
+    </div>
 
+</section>
 
+<!-- LESSONS -->
 
+<main class="container" id="lessons">
 
+    <div class="section-title">
 
+        <span>JAVASCRIPT COURSE</span>
+
+        <h2>أهم مفاهيم JavaScript</h2>
+
+        <p>
+            اكتشف أهم أوامر ومفاهيم JavaScript مع شرح ومثال لكل مفهوم.
+        </p>
+
+    </div>
+
+    <div class="tools">
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="ابحث عن أمر JavaScript..."
+        >
+
+        <select id="categoryFilter">
+            <option value="all">جميع التصنيفات</option>
+            <option value="variables">المتغيرات</option>
+            <option value="data">أنواع البيانات</option>
+            <option value="conditions">الشروط</option>
+            <option value="loops">الحلقات</option>
+            <option value="functions">الدوال</option>
+            <option value="arrays">المصفوفات</option>
+            <option value="objects">الكائنات</option>
+            <option value="dom">DOM والأحداث</option>
+            <option value="other">أوامر أخرى</option>
+        </select>
+
+    </div>
+
+    <div class="lessons-grid" id="lessonsGrid"></div>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>MA <span>Academy</span></h2>
+
+    <p>Learn. Build. Create.</p>
+
+    <small>
+        © 2026 MA Academy - All Rights Reserved
+    </small>
+
+</footer>
 
 <script>
+
+/* JAVASCRIPT LESSONS */
+
+const lessons = [
+
+/* VARIABLES */
+
+{
+tag: "let",
+category: "variables",
+title: "متغير قابل للتغيير",
+description: "يُستخدم لتعريف متغير يمكن تغيير قيمته لاحقاً.",
+code: "let name = 'Ahmed';\nname = 'Ali';"
+},{
+tag: "const",
+category: "variables",
+title: "متغير ثابت",
+description: "يُستخدم لتعريف متغير لا يمكن إعادة إسناد قيمة جديدة إليه.",
+code: "const country = 'Algeria';"
+},
+
+{
+tag: "var",
+category: "variables",
+title: "تعريف متغير",
+description: "طريقة قديمة لتعريف المتغيرات في JavaScript.",
+code: "var age = 20;"
+},
+
+/* DATA TYPES */
+
+{
+tag: "String",
+category: "data",
+title: "النصوص",
+description: "نوع بيانات يُستخدم لتخزين النصوص والكلمات.",
+code: "let name = 'MA Academy';"
+},
+
+{
+tag: "Number",
+category: "data",
+title: "الأرقام",
+description: "نوع بيانات يُستخدم لتخزين الأعداد الصحيحة والعشرية.",
+code: "let age = 18;\nlet price = 19.5;"
+},
+
+{
+tag: "Boolean",
+category: "data",
+title: "القيم المنطقية",
+description: "يحتوي على قيمتين فقط: true أو false.",
+code: "let isStudent = true;"
+},
+
+{
+tag: "typeof",
+category: "data",
+title: "معرفة نوع البيانات",
+description: "يُستخدم لمعرفة نوع القيمة أو المتغير.",
+code: "let age = 20;\nconsole.log(typeof age);"
+},
+
+{
+tag: "null",
+category: "data",
+title: "قيمة فارغة مقصودة",
+description: "تمثل غياب قيمة بشكل مقصود.",
+code: "let user = null;"
+},
+
+{
+tag: "undefined",
+category: "data",
+title: "قيمة غير محددة",
+description: "تظهر عادة عندما يكون المتغير معرّفاً دون إسناد قيمة.",
+code: "let result;\nconsole.log(result);"
+},
+
+/* CONDITIONS */
+
+{
+tag: "if",
+category: "conditions",
+title: "الشرط",
+description: "ينفذ كوداً معيناً عندما يتحقق الشرط.",
+code: "if (age >= 18) {\n  console.log('Adult');\n}"
+},
+
+{
+tag: "else",
+category: "conditions",
+title: "الشرط البديل",
+description: "ينفذ عندما لا يتحقق شرط if.",
+code: "if (age >= 18) {\n  console.log('Adult');\n} else {\n  console.log('Minor');\n}"
+},
+
+{
+tag: "else if",
+category: "conditions",
+title: "شرط إضافي",
+description: "يسمح باختبار شرط آخر عند عدم تحقق الشرط السابق.",
+code: "if (score >= 90) {\n  console.log('Excellent');\n} else if (score >= 50) {\n  console.log('Pass');\n}"
+},
+
+{
+tag: "switch",
+category: "conditions",
+title: "اختيار متعدد",
+description: "يسمح بتنفيذ حالة مختلفة حسب قيمة متغير.",
+code: "switch (day) {\n  case 1:\n    console.log('Sunday');\n    break;\n  default:\n    console.log('Other');\n}"
+},
+
+{
+tag: "ternary",
+category: "conditions",
+title: "الشرط المختصر",
+description: "طريقة مختصرة لكتابة شرط if و else.",
+code: "let result = age >= 18 ? 'Adult' : 'Minor';"
+},
+
+/* LOOPS */
+
+{
+tag: "for",
+category: "loops",
+title: "حلقة for",
+description: "تُستخدم لتكرار تنفيذ مجموعة من التعليمات عدد مرات محدد.",
+code: "for (let i = 0; i < 5; i++) {\n  console.log(i);\n}"
+},
+
+{
+tag: "while",
+category: "loops",
+title: "حلقة while",
+description: "تكرر تنفيذ التعليمات ما دام الشرط صحيحاً.",
+code: "let i = 0;\nwhile (i < 5) {\n  console.log(i);\n  i++;\n}"
+},
+
+{
+tag: "do while",
+category: "loops",
+title: "حلقة do while",
+description: "تنفذ الكود مرة واحدة على الأقل قبل اختبار الشرط.",
+code: "let i = 0;\ndo {\n  console.log(i);\n  i++;\n} while (i < 5);"
+},
+
+{
+tag: "for...of",
+category: "loops",
+title: "التكرار على القيم",
+description: "يُستخدم للمرور على قيم المصفوفات والعناصر القابلة للتكرار.",
+code: "const names = ['Ali', 'Sara'];\nfor (const name of names) {\n  console.log(name);\n}"
+},
+
+{
+tag: "forEach",
+category: "loops",
+title: "التكرار باستخدام forEach",
+description: "تنفذ دالة مرة لكل عنصر داخل المصفوفة.",
+code: "const numbers = [1, 2, 3];\nnumbers.forEach(number => {\n  console.log(number);\n});"
+},
+
+{
+tag: "break",
+category: "loops",
+title: "إيقاف الحلقة",
+description: "يوقف تنفيذ الحلقة مباشرة.",
+code: "for (let i = 0; i < 10; i++) {\n  if (i === 5) break;\n}"
+},
+
+{
+tag: "continue",
+category: "loops",
+title: "تجاوز دورة",
+description: "يتجاوز الدورة الحالية وينتقل إلى الدورة التالية.",
+code: "for (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}"
+},
+
+/* FUNCTIONS */
+
+{
+tag: "function",
+category: "functions",
+title: "الدوال",
+description: "تجمع مجموعة من التعليمات داخل وظيفة يمكن استدعاؤها.",
+code: "function welcome() {\n  console.log('Welcome');\n}\n\nwelcome();"
+},{
+tag: "return",
+category: "functions",
+title: "إرجاع قيمة",
+description: "تعيد نتيجة من الدالة إلى المكان الذي استدعاها.",
+code: "function sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3));"
+},
+
+{
+tag: "arrow function",
+category: "functions",
+title: "الدالة السهمية",
+description: "طريقة مختصرة لكتابة الدوال في JavaScript.",
+code: "const greet = () => {\n  console.log('Hello');\n};\n\ngreet();"
+},
+
+{
+tag: "parameters",
+category: "functions",
+title: "المعاملات",
+description: "قيم تستقبلها الدالة لتستخدمها أثناء تنفيذها.",
+code: "function greet(name) {\n  console.log('Hello ' + name);\n}\n\ngreet('Ali');"
+},
+
+/* ARRAYS */
+
+{
+tag: "Array",
+category: "arrays",
+title: "المصفوفات",
+description: "تسمح بتخزين مجموعة من القيم داخل متغير واحد.",
+code: "const fruits = ['Apple', 'Banana', 'Orange'];"
+},
+
+{
+tag: "push",
+category: "arrays",
+title: "إضافة عنصر",
+description: "تضيف عنصراً جديداً إلى نهاية المصفوفة.",
+code: "let fruits = ['Apple', 'Banana'];\nfruits.push('Orange');"
+},
+
+{
+tag: "pop",
+category: "arrays",
+title: "حذف آخر عنصر",
+description: "تحذف آخر عنصر من المصفوفة.",
+code: "let fruits = ['Apple', 'Banana'];\nfruits.pop();"
+},
+
+{
+tag: "shift",
+category: "arrays",
+title: "حذف أول عنصر",
+description: "تحذف أول عنصر من المصفوفة.",
+code: "let numbers = [1, 2, 3];\nnumbers.shift();"
+},
+
+{
+tag: "unshift",
+category: "arrays",
+title: "إضافة عنصر في البداية",
+description: "تضيف عنصراً جديداً في بداية المصفوفة.",
+code: "let numbers = [2, 3];\nnumbers.unshift(1);"
+},
+
+{
+tag: "map",
+category: "arrays",
+title: "إنشاء مصفوفة جديدة",
+description: "تنشئ مصفوفة جديدة من نتائج تطبيق دالة على كل عنصر.",
+code: "const numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);"
+},
+
+{
+tag: "filter",
+category: "arrays",
+title: "تصفية العناصر",
+description: "تنشئ مصفوفة جديدة تحتوي على العناصر التي تحقق شرطاً.",
+code: "const numbers = [1, 2, 3, 4];\nconst even = numbers.filter(n => n % 2 === 0);"
+},
+
+{
+tag: "find",
+category: "arrays",
+title: "البحث عن عنصر",
+description: "تعيد أول عنصر يحقق الشرط المحدد.",
+code: "const numbers = [10, 20, 30];\nconst result = numbers.find(n => n > 15);"
+},
+
+{
+tag: "includes",
+category: "arrays",
+title: "التحقق من وجود عنصر",
+description: "تتحقق مما إذا كانت المصفوفة تحتوي على قيمة معينة.",
+code: "const fruits = ['Apple', 'Banana'];\nconsole.log(fruits.includes('Apple'));"
+},
+
+/* OBJECTS */
+
+{
+tag: "Object",
+category: "objects",
+title: "الكائنات",
+description: "تسمح بتجميع البيانات على شكل خصائص وقيم.",
+code: "const user = {\n  name: 'Ali',\n  age: 20\n};"
+},
+
+{
+tag: "Object.keys",
+category: "objects",
+title: "مفاتيح الكائن",
+description: "تعيد مصفوفة تحتوي على أسماء خصائص الكائن.",
+code: "const user = { name: 'Ali', age: 20 };\nconsole.log(Object.keys(user));"
+},
+
+{
+tag: "Object.values",
+category: "objects",
+title: "قيم الكائن",
+description: "تعيد مصفوفة تحتوي على قيم خصائص الكائن.",
+code: "const user = { name: 'Ali', age: 20 };\nconsole.log(Object.values(user));"
+},
+
+/* DOM AND EVENTS */
+
+{
+tag: "getElementById",
+category: "dom",
+title: "اختيار عنصر بالمعرف",
+description: "يختار عنصراً من HTML اعتماداً على قيمة id.",
+code: "const title = document.getElementById('title');"
+},
+
+{
+tag: "querySelector",
+category: "dom",
+title: "اختيار عنصر CSS",
+description: "يختار أول عنصر يطابق محدد CSS معيناً.",
+code: "const box = document.querySelector('.box');"
+},
+
+{
+tag: "innerHTML",
+category: "dom",
+title: "تغيير محتوى HTML",
+description: "تسمح بقراءة أو تغيير محتوى HTML داخل العنصر.",
+code: "document.querySelector('#title').innerHTML = 'Hello';"
+},
+
+{
+tag: "textContent",
+category: "dom",
+title: "تغيير النص",
+description: "تقرأ أو تغير النص الموجود داخل عنصر دون تفسيره كـ HTML.",
+code: "document.querySelector('#title').textContent = 'Hello';"
+},
+
+{
+tag: "addEventListener",
+category: "dom",
+title: "مستمع الأحداث",
+description: "يربط حدثاً مثل النقر أو الكتابة بدالة تنفذ عند وقوعه.",
+code: "button.addEventListener('click', () => {\n  console.log('Clicked');\n});"
+},{
+tag: "classList",
+category: "dom",
+title: "التحكم في الأصناف",
+description: "تسمح بإضافة أو حذف أو تبديل أصناف CSS لعنصر.",
+code: "element.classList.add('active');\nelement.classList.remove('active');"
+},
+
+{
+tag: "createElement",
+category: "dom",
+title: "إنشاء عنصر",
+description: "تنشئ عنصراً جديداً من عناصر HTML باستخدام JavaScript.",
+code: "const div = document.createElement('div');"
+},
+
+{
+tag: "appendChild",
+category: "dom",
+title: "إضافة عنصر",
+description: "تضيف عنصراً داخل عنصر أب في نهاية محتواه.",
+code: "const p = document.createElement('p');\ndocument.body.appendChild(p);"
+},
+
+/* OTHER */
+
+{
+tag: "console.log",
+category: "other",
+title: "عرض النتائج",
+description: "تُستخدم لعرض القيم والرسائل في وحدة التحكم Console.",
+code: "console.log('Hello World');"
+},
+
+{
+tag: "alert",
+category: "other",
+title: "نافذة تنبيه",
+description: "تعرض رسالة تنبيه للمستخدم في نافذة منبثقة.",
+code: "alert('Welcome to MA Academy');"
+},
+
+{
+tag: "prompt",
+category: "other",
+title: "إدخال البيانات",
+description: "تعرض نافذة تطلب من المستخدم إدخال قيمة.",
+code: "const name = prompt('Enter your name');"
+},
+
+{
+tag: "parseInt",
+category: "other",
+title: "تحويل إلى عدد صحيح",
+description: "تحول النص إلى عدد صحيح عند إمكانية التحويل.",
+code: "const number = parseInt('25');"
+},
+
+{
+tag: "setTimeout",
+category: "other",
+title: "تنفيذ بعد مدة",
+description: "تنفذ دالة مرة واحدة بعد مرور مدة زمنية محددة.",
+code: "setTimeout(() => {\n  console.log('Hello');\n}, 2000);"
+},
+
+{
+tag: "setInterval",
+category: "other",
+title: "التنفيذ المتكرر",
+description: "تنفذ دالة بشكل متكرر وفق فترة زمنية محددة.",
+code: "setInterval(() => {\n  console.log('Hello');\n}, 1000);"
+},
+
+{
+tag: "JSON.stringify",
+category: "other",
+title: "تحويل إلى JSON",
+description: "تحول كائن JavaScript إلى نص بصيغة JSON.",
+code: "const user = { name: 'Ali' };\nconst text = JSON.stringify(user);"
+},
+
+{
+tag: "JSON.parse",
+category: "other",
+title: "تحويل JSON إلى كائن",
+description: "تحول نص JSON صالحاً إلى قيمة JavaScript.",
+code: "const text = '{\"name\":\"Ali\"}';\nconst user = JSON.parse(text);"
+}
+
+];
+
+
+/* SELECT ELEMENTS */
+
+const grid = document.getElementById("lessonsGrid");
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+
+
+/* DISPLAY LESSONS */
+
+function renderLessons() {
+
+    const search = searchInput.value.toLowerCase().trim();
+    const category = categoryFilter.value;
+
+    const filtered = lessons.filter(lesson => {
+
+        const matchesSearch =
+            lesson.tag.toLowerCase().includes(search) ||
+            lesson.title.toLowerCase().includes(search) ||
+            lesson.description.toLowerCase().includes(search);
+
+        const matchesCategory =
+            category === "all" || lesson.category === category;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    grid.innerHTML = "";
+
+    if (filtered.length === 0) {
+
+        const message = document.createElement("p");
+        message.className = "no-results";
+        message.textContent = "لم يتم العثور على نتائج.";
+
+        grid.appendChild(message);
+        return;
+    }
+
+    filtered.forEach(lesson => {
+
+        const card = document.createElement("article");
+        card.className = "lesson-card";
+
+        const image = document.createElement("div");
+        image.className = "lesson-image";
+
+        const dots = document.createElement("div");
+        dots.className = "dots";
+        dots.innerHTML = "<i></i><i></i><i></i>";
+
+        const pre = document.createElement("pre");
+        pre.textContent = lesson.code;
+
+        image.append(dots, pre);
+
+        const info = document.createElement("div");
+        info.className = "lesson-info";
+
+        const title = document.createElement("h3");
+        title.textContent = lesson.tag;
+
+        const description = document.createElement("p");
+        description.textContent = lesson.description;
+
+        const button = document.createElement("button");
+        button.className = "copy-btn";
+        button.textContent = "نسخ الكود";button.addEventListener("click", async () => {
+
+            try {
+
+                await navigator.clipboard.writeText(lesson.code);
+
+                button.textContent = "تم النسخ ✓";
+
+                setTimeout(() => {
+                    button.textContent = "نسخ الكود";
+                }, 1500);
+
+            } catch {
+
+                button.textContent = "تعذر النسخ";
+
+            }
+
+        });
+
+        info.append(title, description, button);
+
+        card.append(image, info);
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* SEARCH AND FILTER */
+
+searchInput.addEventListener("input", renderLessons);
+
+categoryFilter.addEventListener("change", renderLessons);
+
+
+/* INITIAL DISPLAY */
+
+renderLessons();
 
 </script>
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
-
-
-
