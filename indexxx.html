@@ -15,7 +15,7 @@
 .h11{text-align: center;transform: translateY(10px);font-family:'Montserrat',sans-serif;width:100%;font-size:80px;border: none;outline: none;color: white;}
 .pp{width:100%;font-size: 40px;transform: translateY(100px);text-align: center;font-family: 'Poppins',sans-serif;}
 .div1{width:100%;}
-.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;}
+.input{width:300px;height:70px;border-radius: 40px;border: none;margin-right: 0 auto;margin-left:80px;transform: translateY(-7px);background-color: rgb(255, 255, 255);color: rgb(0, 0, 0);outline: none;font-size:20px;padding-left: 20px;}
 .button{width:130px;height:72px;border-radius:40px;border: none;transform: translateY(-7px);margin-right:0 auto;margin-left:-80px;font-size: 20px;background-color: red;color: white;}
 .button:hover{background-color: rgb(139, 5, 5);}
 .h111{font-family:'Cairo',sans-serif;font-weight:800;font-size: 100px;width:100%;text-align: center;transform: translateY(150px);}
@@ -141,8 +141,8 @@
 <div class="divblue1">
 <div class="navbar">
 <div class="div2">
-<input type="text" class="input" placeholder="  search in MA Academy">
-<button class="button">Search</button>
+<input type="text" class="input" placeholder="  search in MA Academy" id="inputt">
+<button class="button" id="buttonnn">Search</button>
 </div>
 
 <img src="images/اكادمية.png" alt="logo" width="200px" class="logo">
@@ -308,8 +308,91 @@ function clickpy(){window.location.href = "py.html"}
 function clickjs(){window.location.href = "js.html"}
 
 
+let input = document.getElementById("inputt");
+let button = document.getElementById("buttonnn");
+
+button.addEventListener("click", function() {
+
+    let value = input.value.trim().toLowerCase();
+
+    if (value === "") {
+        alert("اكتب ما تريد البحث عنه!");
+        return;
+    }
+
+    let pages = {
+        "html": "html.html",
+        "css": "css.html",
+        "javascript": "js.html",
+        "js": "js.html",
+        "python": "py.html",
+        "py": "py.html"
+    };
+
+    if (pages[value]) {
+        window.location.href = pages[value];
+    } else {
+
+    let cssProperties = [
+        "color",
+        "background",
+        "background-color",
+        "margin",
+        "padding",
+        "border",
+        "border-radius",
+        "width",
+        "height",
+        "display",
+        "flex",
+        "grid",
+        "font-size",
+        "font-family",
+        "text-align",
+        "position",
+        "top",
+        "left",
+        "opacity",
+        "box-shadow"
+    ];
+
+    if (cssProperties.includes(value)) {
+
+        window.location.href =
+        "css.html?search=" + encodeURIComponent(value);
+
+    } else {
+
+        window.location.href =
+        "html.html?search=" + encodeURIComponent(value);
+
+    }
+}
+
+});
 
 
+
+
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+
+const params = new URLSearchParams(window.location.search);
+const searchQuery = params.get("search");
+
+if (searchQuery) {
+    searchInput.value = searchQuery;
+}
+
+function searchLessons() {
+    renderLessons();
+}
+
+searchInput.addEventListener("input", searchLessons);
+
+categoryFilter.addEventListener("change", searchLessons);
+
+renderLessons();
 
 </script>
 

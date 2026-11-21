@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Course | MA Academy</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fc;
+    color: #1b2940;
+    line-height: 1.8;
+}
+
+header {
+    background: #071b3d;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #55aaff;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: linear-gradient(135deg,#071b3d,#0757a8);
+    color: white;
+    padding: 65px 20px;
+    text-align: center;
+}
+
+.hero .icon {
+    font-size: 65px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin: 10px 0;
+}
+
+.hero p {
+    color: #d9eaff;
+}
+
+.container {
+    width: 88%;
+    max-width: 1100px;
+    margin: 45px auto;
+}
+
+.intro {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px #0000000b;
+}
+
+.section-title {
+    color: #0757a8;
+    border-right: 5px solid #1685e8;
+    padding-right: 12px;
+    margin: 45px 0 22px;
+    font-size: 25px;
+}
+
+.lesson {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+    border: 1px solid #e0e8f3;
+    transition: .3s;
+}
+
+.lesson:hover {
+    border-color: #1685e8;
+    box-shadow: 0 5px 18px #0757a81a;
+}
+
+.lesson h3 {
+    color: #0757a8;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.lesson p {
+    margin-bottom: 12px;
+}
+
+.tag {
+    display: inline-block;
+    background: #e4f1ff;
+    color: #0757a8;
+    padding: 3px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+pre {
+    direction: ltr;
+    text-align: left;
+    background: #081b35;
+    color: #8dd0ff;
+    padding: 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+.note {
+    background: #e8f3ff;
+    border-right: 4px solid #1685e8;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+footer {
+    background: #071b3d;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+footer span {
+    color: #55aaff;
+}
+
+@media(max-width:600px) {
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    pre {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MA Academy</div>
+    <a href="index.html">الرئيسية</a>
+</header>
+
+<section class="hero">
+    <div class="icon">🌐</div>
+    <h1>تعلم HTML</h1>
+    <p>
+        تعلم لغة HTML واكتشف كيفية بناء صفحات الويب
+        وتنظيم المحتوى باستخدام أهم الوسوم والعناصر.
+    </p>
+</section>
+
+<main class="container">
+
+<div class="intro">
+    <h2>ما هي HTML؟</h2>
+    <p>
+        HTML هي لغة ترميز النص التشعبي (HyperText Markup Language)،
+        وتُستخدم لإنشاء هيكل صفحات الويب وتنظيم محتواها،
+        مثل العناوين والفقرات والصور والروابط والجداول والنماذج.
+    </p>
+</div>
+
+<!-- 01 -->
+
+<h2 class="section-title">01 - الهيكل الأساسي</h2>
+
+<div class="lesson">
+<span class="tag">DOCTYPE</span>
+<h3>1. تصريح DOCTYPE</h3>
+<p>
+يُكتب في بداية مستند HTML لإعلام المتصفح بأن الصفحة
+تستخدم معيار HTML5.
+</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<span class="tag">html</span>
+<h3>2. وسم HTML</h3>
+<p>
+يمثل العنصر الجذر للمستند، ويحتوي على جميع عناصر الصفحة.
+</p>
+<pre>
+&lt;html lang="ar"&gt;
+
+&lt;/html&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<span class="tag">head</span>
+<h3>3. وسم HEAD</h3>
+<p>
+يحتوي على المعلومات الوصفية للصفحة، مثل العنوان
+وربط ملفات CSS وتحديد الترميز.
+</p>
+<pre>
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+</pre>
+</div><div class="lesson">
+<span class="tag">body</span>
+<h3>4. وسم BODY</h3>
+<p>
+يحتوي على جميع العناصر والمحتويات التي تظهر للمستخدم
+داخل صفحة الويب.
+</p>
+<pre>
+&lt;body&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;
+    &lt;p&gt;Hello World&lt;/p&gt;
+&lt;/body&gt;
+</pre>
+</div>
+
+<!-- 02 -->
+
+<h2 class="section-title">02 - النصوص والعناوين</h2>
+
+<div class="lesson">
+<h3>5. العناوين Headings</h3>
+<p>
+تُستخدم العناوين لتنظيم محتوى الصفحة، وتتدرج من h1
+وهو العنوان الأكثر أهمية إلى h6.
+</p>
+<pre>
+&lt;h1&gt;Main Title&lt;/h1&gt;
+&lt;h2&gt;Second Title&lt;/h2&gt;
+&lt;h3&gt;Third Title&lt;/h3&gt;
+&lt;h4&gt;Title 4&lt;/h4&gt;
+&lt;h5&gt;Title 5&lt;/h5&gt;
+&lt;h6&gt;Title 6&lt;/h6&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>6. الفقرات Paragraphs</h3>
+<p>يُستخدم وسم p لإنشاء فقرة نصية.</p>
+<pre>
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>7. كسر السطر br</h3>
+<p>يُستخدم للانتقال إلى سطر جديد داخل النص.</p>
+<pre>
+Hello&lt;br&gt;
+World
+</pre>
+</div>
+
+<div class="lesson">
+<h3>8. الخط الأفقي hr</h3>
+<p>يُستخدم لإنشاء فاصل موضوعي أفقي بين المحتويات.</p>
+<pre>
+&lt;p&gt;First section&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Second section&lt;/p&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>9. التنسيق النصي</h3>
+<p>تُستخدم هذه الوسوم لإعطاء النص دلالات أو تنسيقات مختلفة.</p>
+<pre>
+&lt;b&gt;Bold text&lt;/b&gt;
+
+&lt;strong&gt;Important text&lt;/strong&gt;
+
+&lt;i&gt;Italic text&lt;/i&gt;
+
+&lt;em&gt;Emphasized text&lt;/em&gt;
+
+&lt;u&gt;Underlined text&lt;/u&gt;
+
+&lt;mark&gt;Highlighted text&lt;/mark&gt;
+
+&lt;del&gt;Deleted text&lt;/del&gt;
+
+&lt;small&gt;Small text&lt;/small&gt;
+
+&lt;sub&gt;Subscript&lt;/sub&gt;
+
+&lt;sup&gt;Superscript&lt;/sup&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>10. التعليقات Comments</h3>
+<p>تُستخدم لكتابة ملاحظات داخل الكود لا تظهر في المتصفح.</p>
+<pre>
+&lt;!-- This is a comment --&gt;
+</pre>
+</div>
+
+<!-- 03 -->
+
+<h2 class="section-title">03 - الروابط والصور والوسائط</h2>
+
+<div class="lesson">
+<h3>11. الروابط Links</h3>
+<p>
+يُستخدم وسم a لإنشاء رابط ينقل المستخدم إلى صفحة
+أو موقع آخر، وتحدد الخاصية href وجهة الرابط.
+</p>
+<pre>
+&lt;a href="https://google.com"&gt;
+    Visit Google
+&lt;/a&gt;
+
+&lt;a href="about.html"&gt;
+    About Us
+&lt;/a&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>12. الصور Images</h3>
+<p>
+يُستخدم img لإضافة صورة، وتحدد src مسار الصورة،
+بينما توفر alt وصفاً بديلاً لها.
+</p>
+<pre>
+&lt;img src="image.jpg"
+     alt="Description"
+     width="300"&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>13. الفيديو Video</h3>
+<p>يُستخدم لإضافة مقطع فيديو داخل الصفحة.</p>
+<pre>
+&lt;video controls width="400"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    Your browser does not support video.
+&lt;/video&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>14. الصوت Audio</h3>
+<p>يُستخدم لإضافة ملف صوتي إلى الصفحة.</p>
+<pre>
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>15. iframe</h3>
+<p>
+يسمح بعرض صفحة ويب أو محتوى خارجي داخل إطار ضمن الصفحة.
+</p>
+<pre>
+&lt;iframe
+    src="https://example.com"
+    width="400"
+    height="250"
+    title="Example"&gt;
+&lt;/iframe&gt;
+</pre>
+</div>
+
+<!-- 04 -->
+
+<h2 class="section-title">04 - القوائم Lists</h2>
+
+<div class="lesson">
+<h3>16. القائمة غير المرتبة ul</h3>
+<p>تنشئ قائمة بعناصر تظهر عادة على شكل نقاط.</p>
+<pre>
+&lt;ul&gt;
+    &lt;li&gt;HTML&lt;/li&gt;
+    &lt;li&gt;CSS&lt;/li&gt;
+    &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>17. القائمة المرتبة ol</h3>
+<p>تنشئ قائمة مرقمة حسب ترتيب العناصر.</p>
+<pre>
+&lt;ol&gt;
+    &lt;li&gt;First&lt;/li&gt;
+    &lt;li&gt;Second&lt;/li&gt;
+    &lt;li&gt;Third&lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>18. القوائم الوصفية dl</h3>
+<p>تُستخدم لعرض مصطلح مع وصفه.</p>
+<pre>
+&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;Markup Language&lt;/dd&gt;
+
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Style Language&lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+</div>
+
+<!-- 05 -->
+
+<h2 class="section-title">05 - الجداول Tables</h2><div class="lesson">
+<h3>19. إنشاء جدول table</h3>
+<p>يُستخدم لإنشاء جدول يحتوي على صفوف وأعمدة.</p>
+<pre>
+&lt;table border="1"&gt;
+
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;Ahmed&lt;/td&gt;
+        &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+
+&lt;/table&gt;
+</pre>
+<div class="note">
+table: الجدول - tr: الصف - th: خلية عنوان - td: خلية بيانات.
+</div>
+</div>
+
+<div class="lesson">
+<h3>20. دمج الخلايا colspan و rowspan</h3>
+<p>تسمح بدمج الخلايا أفقياً أو عمودياً.</p>
+<pre>
+&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th colspan="2"&gt;Students&lt;/th&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td rowspan="2"&gt;Ali&lt;/td&gt;
+        &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;21&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+</div>
+
+<!-- 06 -->
+
+<h2 class="section-title">06 - النماذج Forms</h2>
+
+<div class="lesson">
+<h3>21. وسم form</h3>
+<p>يُستخدم لإنشاء نموذج يسمح للمستخدم بإدخال البيانات وإرسالها.</p>
+<pre>
+&lt;form action="submit.php" method="post"&gt;
+
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+
+    &lt;input type="text" id="name" name="name"&gt;
+
+    &lt;button type="submit"&gt;Send&lt;/button&gt;
+
+&lt;/form&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>22. وسم input</h3>
+<p>يُستخدم لإنشاء حقول إدخال مختلفة حسب قيمة الخاصية type.</p>
+<pre>
+&lt;input type="text"&gt;
+&lt;input type="password"&gt;
+&lt;input type="email"&gt;
+&lt;input type="number"&gt;
+&lt;input type="date"&gt;
+&lt;input type="time"&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+&lt;input type="file"&gt;
+&lt;input type="color"&gt;
+&lt;input type="range"&gt;
+&lt;input type="submit"&gt;
+&lt;input type="reset"&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>23. وسم label</h3>
+<p>يُستخدم لإضافة تسمية توضح وظيفة حقل الإدخال.</p>
+<pre>
+&lt;label for="email"&gt;Email:&lt;/label&gt;
+
+&lt;input type="email" id="email"&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>24. وسم textarea</h3>
+<p>يُستخدم لإنشاء مساحة لإدخال نصوص طويلة.</p>
+<pre>
+&lt;textarea rows="5" cols="30"&gt;
+Write here...
+&lt;/textarea&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>25. وسم select و option</h3>
+<p>يُستخدم لإنشاء قائمة منسدلة تحتوي على عدة خيارات.</p>
+<pre>
+&lt;select&gt;
+    &lt;option&gt;HTML&lt;/option&gt;
+    &lt;option&gt;CSS&lt;/option&gt;
+    &lt;option&gt;JavaScript&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>26. وسم button</h3>
+<p>يُستخدم لإنشاء زر قابل للتفاعل.</p>
+<pre>
+&lt;button type="button"&gt;
+    Click Me
+&lt;/button&gt;
+</pre>
+</div>
+
+<!-- 07 -->
+
+<h2 class="section-title">07 - تنظيم الصفحة Semantic HTML</h2>
+
+<div class="lesson">
+<h3>27. وسم header</h3>
+<p>يمثل مقدمة الصفحة أو مقدمة قسم معين.</p>
+<pre>
+&lt;header&gt;
+    &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/header&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>28. وسم nav</h3>
+<p>يحتوي على روابط التنقل الرئيسية.</p>
+<pre>
+&lt;nav&gt;
+    &lt;a href="index.html"&gt;Home&lt;/a&gt;
+    &lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;/nav&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>29. وسم main</h3>
+<p>يمثل المحتوى الرئيسي والفريد للصفحة.</p>
+<pre>
+&lt;main&gt;
+    &lt;h1&gt;Main Content&lt;/h1&gt;
+&lt;/main&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>30. وسم section</h3>
+<p>يُستخدم لتقسيم الصفحة إلى أقسام موضوعية.</p>
+<pre>
+&lt;section&gt;
+    &lt;h2&gt;About Us&lt;/h2&gt;
+    &lt;p&gt;Our information&lt;/p&gt;
+&lt;/section&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>31. وسم article</h3>
+<p>يمثل محتوى مستقلاً مثل مقال أو منشور.</p>
+<pre>
+&lt;article&gt;
+    &lt;h2&gt;Article Title&lt;/h2&gt;
+    &lt;p&gt;Article content&lt;/p&gt;
+&lt;/article&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>32. وسم aside</h3>
+<p>يمثل محتوى جانبياً مرتبطاً بالمحتوى الرئيسي.</p>
+<pre>
+&lt;aside&gt;
+    Related Information
+&lt;/aside&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>33. وسم footer</h3>
+<p>يمثل تذييل الصفحة أو القسم، ويحتوي غالباً على معلومات الحقوق والتواصل.</p>
+<pre>
+&lt;footer&gt;
+    &lt;p&gt;Copyright 2026&lt;/p&gt;
+&lt;/footer&gt;
+</pre>
+</div>
+
+<!-- 08 --><div class="lesson">
+<h3>19. إنشاء جدول table</h3>
+<p>يُستخدم لإنشاء جدول يحتوي على صفوف وأعمدة.</p>
+<pre>
+&lt;table border="1"&gt;
+
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;Ahmed&lt;/td&gt;
+        &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+
+&lt;/table&gt;
+</pre>
+<div class="note">
+table: الجدول - tr: الصف - th: خلية عنوان - td: خلية بيانات.
+</div>
+</div>
+
+<div class="lesson">
+<h3>20. دمج الخلايا colspan و rowspan</h3>
+<p>تسمح بدمج الخلايا أفقياً أو عمودياً.</p>
+<pre>
+&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th colspan="2"&gt;Students&lt;/th&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td rowspan="2"&gt;Ali&lt;/td&gt;
+        &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;21&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+</div>
+
+<!-- 06 -->
+
+<h2 class="section-title">06 - النماذج Forms</h2>
+
+<div class="lesson">
+<h3>21. وسم form</h3>
+<p>يُستخدم لإنشاء نموذج يسمح للمستخدم بإدخال البيانات وإرسالها.</p>
+<pre>
+&lt;form action="submit.php" method="post"&gt;
+
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+
+    &lt;input type="text" id="name" name="name"&gt;
+
+    &lt;button type="submit"&gt;Send&lt;/button&gt;
+
+&lt;/form&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>22. وسم input</h3>
+<p>يُستخدم لإنشاء حقول إدخال مختلفة حسب قيمة الخاصية type.</p>
+<pre>
+&lt;input type="text"&gt;
+&lt;input type="password"&gt;
+&lt;input type="email"&gt;
+&lt;input type="number"&gt;
+&lt;input type="date"&gt;
+&lt;input type="time"&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+&lt;input type="file"&gt;
+&lt;input type="color"&gt;
+&lt;input type="range"&gt;
+&lt;input type="submit"&gt;
+&lt;input type="reset"&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>23. وسم label</h3>
+<p>يُستخدم لإضافة تسمية توضح وظيفة حقل الإدخال.</p>
+<pre>
+&lt;label for="email"&gt;Email:&lt;/label&gt;
+
+&lt;input type="email" id="email"&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>24. وسم textarea</h3>
+<p>يُستخدم لإنشاء مساحة لإدخال نصوص طويلة.</p>
+<pre>
+&lt;textarea rows="5" cols="30"&gt;
+Write here...
+&lt;/textarea&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>25. وسم select و option</h3>
+<p>يُستخدم لإنشاء قائمة منسدلة تحتوي على عدة خيارات.</p>
+<pre>
+&lt;select&gt;
+    &lt;option&gt;HTML&lt;/option&gt;
+    &lt;option&gt;CSS&lt;/option&gt;
+    &lt;option&gt;JavaScript&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>26. وسم button</h3>
+<p>يُستخدم لإنشاء زر قابل للتفاعل.</p>
+<pre>
+&lt;button type="button"&gt;
+    Click Me
+&lt;/button&gt;
+</pre>
+</div>
+
+<!-- 07 -->
+
+<h2 class="section-title">07 - تنظيم الصفحة Semantic HTML</h2>
+
+<div class="lesson">
+<h3>27. وسم header</h3>
+<p>يمثل مقدمة الصفحة أو مقدمة قسم معين.</p>
+<pre>
+&lt;header&gt;
+    &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/header&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>28. وسم nav</h3>
+<p>يحتوي على روابط التنقل الرئيسية.</p>
+<pre>
+&lt;nav&gt;
+    &lt;a href="index.html"&gt;Home&lt;/a&gt;
+    &lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;/nav&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>29. وسم main</h3>
+<p>يمثل المحتوى الرئيسي والفريد للصفحة.</p>
+<pre>
+&lt;main&gt;
+    &lt;h1&gt;Main Content&lt;/h1&gt;
+&lt;/main&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>30. وسم section</h3>
+<p>يُستخدم لتقسيم الصفحة إلى أقسام موضوعية.</p>
+<pre>
+&lt;section&gt;
+    &lt;h2&gt;About Us&lt;/h2&gt;
+    &lt;p&gt;Our information&lt;/p&gt;
+&lt;/section&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>31. وسم article</h3>
+<p>يمثل محتوى مستقلاً مثل مقال أو منشور.</p>
+<pre>
+&lt;article&gt;
+    &lt;h2&gt;Article Title&lt;/h2&gt;
+    &lt;p&gt;Article content&lt;/p&gt;
+&lt;/article&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>32. وسم aside</h3>
+<p>يمثل محتوى جانبياً مرتبطاً بالمحتوى الرئيسي.</p>
+<pre>
+&lt;aside&gt;
+    Related Information
+&lt;/aside&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>33. وسم footer</h3>
+<p>يمثل تذييل الصفحة أو القسم، ويحتوي غالباً على معلومات الحقوق والتواصل.</p>
+<pre>
+&lt;footer&gt;
+    &lt;p&gt;Copyright 2026&lt;/p&gt;
+&lt;/footer&gt;
+</pre>
+</div>
+
+<!-- 08 --><h2 class="section-title">08 - العناصر العامة</h2>
+
+<div class="lesson">
+<h3>34. وسم div</h3>
+<p>عنصر عام يُستخدم لتجميع وتنظيم مجموعة من العناصر.</p>
+<pre>
+&lt;div class="container"&gt;
+    &lt;h2&gt;Title&lt;/h2&gt;
+    &lt;p&gt;Description&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>35. وسم span</h3>
+<p>عنصر عام داخل السطر يُستخدم لتحديد جزء صغير من النص.</p>
+<pre>
+&lt;p&gt;
+    Learn &lt;span&gt;HTML&lt;/span&gt; today.
+&lt;/p&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>36. وسم details و summary</h3>
+<p>يُستخدم لإنشاء محتوى يمكن فتحه وإغلاقه دون JavaScript.</p>
+<pre>
+&lt;details&gt;
+    &lt;summary&gt;What is HTML?&lt;/summary&gt;
+    &lt;p&gt;HTML is a markup language.&lt;/p&gt;
+&lt;/details&gt;
+</pre>
+</div>
+
+<!-- 09 -->
+
+<h2 class="section-title">09 - أهم خصائص HTML Attributes</h2>
+
+<div class="lesson">
+<h3>37. خاصية id</h3>
+<p>تعطي العنصر معرفاً فريداً يمكن استخدامه في CSS وJavaScript.</p>
+<pre>
+&lt;h1 id="title"&gt;Hello&lt;/h1&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>38. خاصية class</h3>
+<p>تُستخدم لتجميع العناصر التي تشترك في نفس التنسيق أو السلوك.</p>
+<pre>
+&lt;p class="description"&gt;
+    Welcome
+&lt;/p&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>39. خاصية style</h3>
+<p>تسمح بإضافة تنسيقات CSS مباشرة إلى العنصر.</p>
+<pre>
+&lt;p style="color: blue;"&gt;
+    Blue Text
+&lt;/p&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>40. خصائص عامة أخرى</h3>
+<p>تُستخدم للتحكم في سلوك العناصر أو توفير معلومات إضافية.</p>
+<pre>
+&lt;input required&gt;
+
+&lt;input disabled&gt;
+
+&lt;input readonly&gt;
+
+&lt;input placeholder="Enter name"&gt;
+
+&lt;input value="Ahmed"&gt;
+
+&lt;button title="Click here"&gt;Click&lt;/button&gt;
+
+&lt;p hidden&gt;Hidden content&lt;/p&gt;
+</pre>
+</div>
+
+<!-- 10 -->
+
+<h2 class="section-title">10 - ربط HTML مع CSS و JavaScript</h2>
+
+<div class="lesson">
+<h3>41. ربط ملف CSS</h3>
+<p>تُستخدم link لربط صفحة HTML بملف CSS خارجي.</p>
+<pre>
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+</pre>
+</div>
+
+<div class="lesson">
+<h3>42. ربط ملف JavaScript</h3>
+<p>يُستخدم script لربط ملف JavaScript بالصفحة.</p>
+<pre>
+&lt;body&gt;
+
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+</pre>
+</div>
+
+<div class="intro">
+    <h2>الخلاصة</h2>
+    <p>
+        HTML هي الأساس في بناء صفحات الويب. تعلم هذه الوسوم
+        والخصائص جيداً، ثم انتقل إلى CSS لتنسيق الصفحات
+        وJavaScript لإضافة التفاعلية والوظائف.
+    </p>
+</div>
+
+</main>
+
+<footer>
+<p>© 2026 <span>MA Academy</span> - جميع الحقوق محفوظة</p>
+</footer>
+
+</body>
+</html>

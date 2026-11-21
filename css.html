@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<link rel="icon" href="images/logogdd.png" type="image/png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MA Academy | Learn CSS</title>
@@ -900,6 +901,16 @@ categoryFilter.addEventListener("change", renderLessons);
 
 /* INITIAL DISPLAY */
 
+// استقبال كلمة البحث من الصفحة الرئيسية
+const params = new URLSearchParams(window.location.search);
+const searchQuery = params.get("search");
+
+// وضع كلمة البحث داخل خانة البحث
+if (searchQuery) {
+    searchInput.value = searchQuery;
+}
+
+// عرض الدروس حسب كلمة البحث
 renderLessons();
 
 </script>

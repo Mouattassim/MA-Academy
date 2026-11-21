@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<link rel="icon" href="images/logogdd.png" type="image/png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learn HTML | Developer</title>
@@ -1086,8 +1087,14 @@ filterButtons.forEach(button => {
 
 // تشغيل الصفحة
 
-renderLessons();
+const params = new URLSearchParams(window.location.search);
+const searchQuery = params.get("search");
 
+if (searchQuery) {
+    search.value = searchQuery;
+}
+
+renderLessons();
 </script>
 
 </body>
