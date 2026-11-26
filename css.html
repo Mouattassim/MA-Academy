@@ -1,919 +1,2042 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Learn CSS | MA Academy</title>
 
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="تعلم تطوير الويب والبرمجة مع أكاديمية MA" name="description"/>
+<title>MA Academy | CSS Course</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <style>
+
+/* ================= COLORS ================= */
+
 :root {
-    --primary: #7652d8;
-    --secondary: #a78bfa;
-    --light: #f5f2ff;
-    --dark: #242039;
-    --text: #29243b;
-    --muted: #77738a;
-    --border: #e8e2f5;
+    color-scheme: dark;
+    --bg: #050505;
+    --card: #101010;
+    --card2: #171717;
+    --text: #ffffff;
+    --muted: #a1a1aa;
+    --primary: #008cff;
+    --secondary: #00b4ff;
+    --border: rgba(255,255,255,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.3);
 }
+
+body.light-mode {
+    color-scheme: light;
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --card2: #eeeeF5;
+    --text: #171717;
+    --muted: #626273;
+    --border: rgba(0,0,0,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.08);
+}
+
+/* ================= GLOBAL ================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 body {
-    background: #ffffff;
+    background: var(--bg);
     color: var(--text);
-    font-family: Arial, sans-serif;
-    line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+    transition: background .3s, color .3s;
+    overflow-x: hidden;
 }
 
-/* NAVBAR */
+html[lang="ar"] body {
+    font-family: 'Cairo', sans-serif;
+}
 
-.navbar {
+html[lang="en"] body,
+html[lang="fr"] body {
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, select {
+    font: inherit;
+}
+
+/* ================= PAGE PROGRESS ================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    z-index: 9999;
+    box-shadow: 0 0 12px #008cff;
+}
+
+/* ================= HEADER ================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px 7%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px 8%;
-    background: white;
+    justify-content: space-between;
+    gap: 15px;
+    background: color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    color: var(--dark);
-    font-size: 25px;
-    font-weight: bold;
-    text-decoration: none;
-    direction: ltr;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.logo span {
-    color: var(--primary);
+.ma-static {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
 }
 
-nav {
+.header-controls {
     display: flex;
-    gap: 25px;
+    align-items: center;
+    gap: 10px;
 }
 
-nav a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: .3s;
+.header-controls select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-nav a:hover {
+/* HEADER BUTTONS */
+
+.theme-btn,
+.menu-btn {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,rgba(0,140,255,.18),rgba(0,180,255,.18));
     color: var(--primary);
+    border: 1px solid rgba(0,140,255,.35);
+    border-radius: 14px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .35s;
 }
 
-/* HERO */
+.theme-btn:hover,
+.menu-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.35);
+}
 
-.hero {
-    min-height: 480px;
-    padding: 75px 8%;
+/* ================= SIDEBAR ================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(440px,88%);
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 2001;
+    padding: 45px 35px;
+    overflow-y: auto;
+    transform: translateX(105%);
+    transition: transform .4s ease;
+    border-left: 1px solid var(--border);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 50px;
-    background:
-    radial-gradient(circle at 10% 30%, #a78bfa25, transparent 35%),
-    #faf9ff;
+    margin-bottom: 55px;
+    gap: 15px;
+}
+
+.sidebar-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.close-menu {
+    width: 55px;
+    height: 55px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.close-menu:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    transition: .3s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+    color: var(--primary);
+    padding-right: 22px;
+}
+
+.sidebar-links a.active {
+    border-bottom-color: rgba(0,140,255,.5);
+}
+
+.sidebar-footer {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: .85rem;
+    text-align: center;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 88vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #008cff;
+    filter: blur(180px);
+    opacity: .22;
+    top: 10%;
+    left: 10%;
+    pointer-events: none;
 }
 
 .hero-content {
-    max-width: 550px;
+    max-width: 850px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
-.tag {
+.welcome {
     color: var(--primary);
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: bold;
+    font-family: 'Poppins',sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
 }
 
-.hero h1 {
-    font-size: clamp(30px, 5vw, 52px);
-    margin: 18px 0;
-    line-height: 1.3;
+.hero-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-family: 'Poppins',sans-serif;
+    font-size: clamp(2.5rem,8vw,5.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 15px;
 }
 
-.hero h1 span {
+.hero-title > span:last-child {
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-motion {
+    display: inline-block;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: maMove 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes maMove {
+    from { transform: translateX(-15px); }
+    to { transform: translateX(15px); }
+}
+
+.hero h2 {
+    font-size: clamp(1.3rem,4vw,2rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.fixed-name {
+    display: inline-block;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 700;
     color: var(--primary);
 }
 
 .hero p {
     color: var(--muted);
-    margin-bottom: 30px;
+    max-width: 650px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+    line-height: 2;
+    font-weight: 500;
 }
 
 .main-btn {
     display: inline-block;
-    padding: 12px 28px;
-    background: var(--primary);
+    padding: 13px 30px;
+    background: linear-gradient(90deg,#0077ee,#00b4ff);
     color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: .3s;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: transform .3s,box-shadow .3s;
 }
 
 .main-btn:hover {
-    background: #5d3cc0;
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,140,255,.35);
 }
 
-/* CODE WINDOW */
+/* ================= SECTIONS ================= */
 
-.hero-code {
-    width: 430px;
-    max-width: 100%;
-    background: #211d32;
-    border: 1px solid #38304f;
-    border-radius: 12px;
-    overflow: hidden;
-    direction: ltr;
-    box-shadow: 0 15px 40px #33245b20;
-}
-
-.dots {
-    display: flex;
-    gap: 7px;
-    padding: 15px;
-    border-bottom: 1px solid #403852;
-}
-
-.dots i {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: #ff6b6b;
-}
-
-.dots i:nth-child(2) {
-    background: #ffc857;
-}
-
-.dots i:nth-child(3) {
-    background: #69d69b;
-}
-
-.hero-code pre {
-    padding: 25px;
-    color: #c4b5fd;
-    overflow-x: auto;
-    font-size: 14px;
-}
-
-/* LESSONS */
-
-.container {
-    padding: 80px 8%;
+section {
+    padding: 90px 8%;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 35px;
-}
-
-.section-title span {
-    color: var(--primary);
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: bold;
-}
-
-.section-title h2 {
-    font-size: 35px;
-    margin: 8px 0;
-}
-
-.section-title p {
-    color: var(--muted);
-}
-
-/* SEARCH */
-
-.tools {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.tools input,
-.tools select {
-    padding: 14px;
-    background: #faf9ff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    outline: none;
-}
-
-.tools input {
-    flex: 1;
-}
-
-.tools input:focus,
-.tools select:focus {
-    border-color: var(--primary);
-}
-
-/* LESSON CARDS */
-
-.lessons-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
-}
-
-.lesson-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: .3s;
-}
-
-.lesson-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--secondary);
-    box-shadow: 0 10px 30px #7652d815;
-}
-
-.lesson-image {
-    background: #211d32;
-    padding: 15px;
-    direction: ltr;
-    border-bottom: 1px solid #38304f;
-}
-
-.lesson-image .dots {
-    padding: 0 0 12px;
-    border: none;
-}.lesson-image pre {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    color: #c4b5fd;
-    font-size: 13px;
-    min-height: 55px;
-}
-
-.lesson-info {
-    padding: 20px;
-}
-
-.lesson-info h3 {
-    color: var(--primary);
-    direction: ltr;
-    text-align: right;
-    margin-bottom: 8px;
-}
-
-.lesson-info p {
-    color: var(--muted);
-    font-size: 14px;
+    font-size: clamp(1.8rem,5vw,2.6rem);
+    font-weight: 900;
     margin-bottom: 15px;
 }
 
-.copy-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 9px 15px;
-    border-radius: 6px;
-    cursor: pointer;
+.section-description {
+    text-align: center;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 650px;
+    margin: 0 auto 55px;
+    font-weight: 500;
+}
+
+/* ================= TIMELINE ================= */
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+}
+
+.timeline-progress {
+    position: absolute;
+    right: 27px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timeline-progress::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--timeline-progress,0%);
+    background: linear-gradient(to bottom,#008cff,#00b4ff,#38bdf8);
+    transition: height .15s;
+}
+
+.lesson {
+    position: relative;
+    margin-bottom: 35px;
+    margin-right: 65px;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    opacity: .55;
+    transform: translateY(25px);
+    transition: .5s ease;
+}
+
+.lesson.active {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: var(--primary);
+}
+
+.lesson-number {
+    position: absolute;
+    right: -65px;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card2);
+    border: 2px solid var(--border);
+    font-family: 'Poppins',sans-serif;
+    font-weight: 800;
     transition: .3s;
 }
 
-.copy-btn:hover {
-    background: #5d3cc0;
+.lesson.active .lesson-number {
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.4);
 }
 
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
+.lesson h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.lesson p {
     color: var(--muted);
-    padding: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 2;
 }
 
-/* FOOTER */
+.tech-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: .35s ease;
+}
+
+.lesson:hover .tech-icon {
+    transform: translateY(-6px) scale(1.1);
+}
+
+.html-icon { color: #e34f26; }
+.css-icon { color: #1572b6; }
+.js-icon { color: #f7df1e; }
+.python-icon { color: #3776ab; }
+
+.ma-icon {
+    font-family: 'Poppins',sans-serif;
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+html[lang="en"] .timeline .lesson h3,
+html[lang="fr"] .timeline .lesson h3,
+html[lang="en"] .timeline .lesson p,
+html[lang="fr"] .timeline .lesson p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= DEVELOPER ================= */
+
+.services {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.services-content {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.services-image {
+    width: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.services h2 {
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.services p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+html[lang="en"] .services p,
+html[lang="fr"] .services p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= FOOTER ================= */
 
 footer {
+    padding: 45px 20px;
     text-align: center;
-    padding: 35px 15px;
-    background: #faf9ff;
-    border-top: 1px solid var(--border);
 }
 
-footer h2 {
-    direction: ltr;
-}
-
-footer span {
+.footer-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
     color: var(--primary);
+    margin-bottom: 12px;
 }
 
 footer p {
-    color: var(--primary);
-    margin: 5px;
-}
-
-footer small {
     color: var(--muted);
+    line-height: 2;
+    font-weight: 500;
 }
 
-/* RESPONSIVE */
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 30px 0;
+}
 
-@media (max-width: 750px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 60px 6%;
+.social {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    font-size: 23px;
+    transition: .35s ease;
+}
+
+.social.instagram { color: #e1306c; }
+.social.github { color: var(--text); }
+.social.whatsapp { color: #25d366; }
+.social.gmail { color: #ea4335; }
+
+.social:hover {
+    transform: translateY(-7px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,140,255,.2);
+    border-color: var(--primary);
+    background: var(--card);
+}
+
+.copyright {
+    font-size: .85rem;
+    margin-top: 20px;
+}
+
+/* ================= CURSOR SQUARES ================= */
+
+.cursor-square {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: squareFade .7s ease-out forwards;
+}
+
+@keyframes squareFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0) rotate(180deg);
+    }
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 13px 4%;
     }
 
-    .hero-code {
+    section {
+        padding: 75px 5%;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem,9vw,4.5rem);
+    }
+
+    .services-content {
+        gap: 25px;
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    html {
+        scroll-padding-top: 75px;
+    }
+
+    body {
+        overflow-x: hidden;
         width: 100%;
     }
 
-    .navbar {
-        padding: 18px 5%;
+    /* HEADER */
+
+    .topbar {
+        width: 100%;
+        padding: 10px 12px;
+        gap: 8px;
     }
 
-    nav {
+    .logo {
+        font-size: 1rem;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .ma-static {
+        width: 35px;
+        height: 35px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+    .header-controls {
+        gap: 6px;
+    }
+
+    .header-controls select {
+        max-width: 112px;
+        padding: 8px 5px;
+        font-size: 12px;
+        border-radius: 9px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: min(88%,390px);
+        padding: 25px 22px;
+    }
+
+    .sidebar-top {
+        margin-bottom: 35px;
+    }
+
+    .sidebar-logo {
+        font-size: 1.2rem;
+    }
+
+    .close-menu {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+        border-radius: 8px;
+    }
+
+    .sidebar-links a {
+        font-size: 1.05rem;
+        padding: 19px 10px;
+    }
+
+    .sidebar-footer {
+        margin-top: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 75vh;
+        min-height: 75svh;
+        padding: 75px 18px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .welcome {
+        font-size: .75rem;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem,9vw,3.5rem);
+        gap: 9px;
+        line-height: 1.3;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-top: 12px;
+    }
+
+    .fixed-name {
+        font-size: 1rem;
+    }
+
+    .hero p {
+        font-size: .95rem;
+        line-height: 2;
+        padding: 0 5px;
+        margin-bottom: 25px;
+    }
+
+    .main-btn {
+        padding: 12px 25px;
+        font-size: .95rem;
+    }
+
+    /* SECTIONS */
+
+    section {
+        padding: 65px 18px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.6;
+    }
+
+    .section-description {
+        font-size: .92rem;
+        line-height: 2;
+        margin-bottom: 40px;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+        width: 100%;
+    }
+
+    .timeline-progress {
+        right: 19px;
+    }
+
+    .lesson {
+        margin-right: 47px;
+        margin-bottom: 25px;
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    .lesson-number {
+        right: -47px;
+        top: 18px;
+        width: 38px;
+        height: 38px;
+        font-size: .8rem;
+    }
+
+    .lesson h3 {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .lesson p {
+        font-size: .88rem;
+        line-height: 2;
+    }
+
+    .tech-icon {
+        font-size: 43px;
+        margin-bottom: 10px;
+    }
+
+    .ma-icon {
+        font-size: 1.9rem;
+    }
+
+    /* SERVICES / DEVELOPER */
+
+    .services-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .services-image {
+        width: 100%;
+        min-height: 190px;
+        max-height: 240px;
+        border-radius: 15px;
+    }
+
+    .services h2 {
+        font-size: 1.45rem;
+        line-height: 1.7;
+    }
+
+    .services p {
+        font-size: .93rem;
+        line-height: 2;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 40px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+
+    footer p {
+        font-size: .9rem;
+    }
+
+    .social-links {
         gap: 12px;
+        margin: 25px 0;
+    }
+
+    .social {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+
+    .copyright {
+        font-size: .78rem;
+    }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+    .topbar {
+        padding: 9px 8px;
+        gap: 5px;
+    }
+
+    .logo {
+        font-size: .85rem;
+        gap: 5px;
+    }
+
+    .ma-static {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .header-controls {
+        gap: 4px;
+    }
+
+    .header-controls select {
+        max-width: 91px;
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
         font-size: 13px;
     }
 
-    .container {
-        padding: 55px 5%;
+    .hero-title {
+        font-size: 2rem;
+        gap: 7px;
     }
 
-    .tools {
-        flex-direction: column;
+    .hero h2 {
+        font-size: 1.05rem;
     }
 
-    .section-title h2 {
-        font-size: 28px;
+    .lesson {
+        margin-right: 43px;
+        padding: 14px;
     }
+
+    .lesson-number {
+        right: -43px;
+        width: 35px;
+        height: 35px;
+    }
+
 }
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+
+/* ================= HTML LEARNING PAGE ================= */
+.html-learning { max-width: 1120px; margin: auto; }
+.html-intro { max-width: 850px; margin: 0 auto 35px; text-align: center; }
+.html-intro .html-badge { display:inline-flex; align-items:center; gap:9px; color:var(--primary); background:rgba(0,140,255,.1); border:1px solid rgba(0,140,255,.28); border-radius:30px; padding:9px 16px; font-weight:800; margin-bottom:18px; }
+.html-intro h2 { font-size:clamp(1.8rem,5vw,2.7rem); font-weight:900; margin-bottom:14px; }
+.html-intro h2 span { color:var(--primary); }
+.html-intro p { color:var(--muted); line-height:2; }
+.html-search-wrap { max-width:720px; margin:30px auto 42px; position:relative; }
+.html-search-wrap i { position:absolute; right:20px; top:50%; transform:translateY(-50%); color:var(--primary); }
+html[dir="ltr"] .html-search-wrap i { right:auto; left:20px; }
+.html-search { width:100%; padding:17px 52px 17px 18px; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:15px; outline:none; font:inherit; box-shadow:var(--shadow); }
+html[dir="ltr"] .html-search { padding:17px 18px 17px 52px; }
+.html-search:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(0,140,255,.12); }
+.html-lessons-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.html-topic { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:25px; box-shadow:var(--shadow); transition:.3s; min-width:0; }
+.html-topic:hover { transform:translateY(-5px); border-color:rgba(0,140,255,.65); }
+.html-topic-head { display:flex; align-items:center; gap:13px; margin-bottom:15px; }
+.html-topic-num { width:42px; height:42px; flex:0 0 42px; display:grid; place-items:center; border-radius:12px; color:#fff; font-weight:900; background:linear-gradient(135deg,#0077ee,#00b4ff); }
+.html-topic h3 { font-size:1.15rem; font-weight:900; }
+.html-topic p,.html-topic li { color:var(--muted); line-height:2; font-size:.96rem; }
+.html-topic ul { padding-inline-start:22px; margin:10px 0 15px; }
+.code-box { direction:ltr; text-align:left; position:relative; margin-top:17px; background:#080d16; border:1px solid rgba(0,140,255,.22); border-radius:13px; overflow:hidden; }
+.code-top { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 13px; color:#aab8cc; background:#111b2a; font:600 .78rem 'Inter',sans-serif; }
+.copy-code { border:1px solid rgba(0,180,255,.35); border-radius:8px; padding:7px 10px; color:#7dd3fc; background:rgba(0,140,255,.12); cursor:pointer; font:700 .78rem 'Inter',sans-serif; transition:.2s; }
+.copy-code:hover { background:#0077ee; color:white; }
+.code-box pre { margin:0; padding:17px; overflow-x:auto; color:#e2e8f0; font: .88rem/1.85 'Inter',monospace; white-space:pre; }
+.code-box code { font-family:inherit; }
+.html-tip { margin-top:15px; padding:13px 15px; border-right:3px solid var(--primary); background:rgba(0,140,255,.08); border-radius:8px; color:var(--muted); line-height:1.9; font-size:.9rem; }
+html[dir="ltr"] .html-tip { border-right:0; border-left:3px solid var(--primary); }
+.html-no-results { display:none; text-align:center; color:var(--muted); padding:35px; background:var(--card); border:1px solid var(--border); border-radius:15px; margin-top:20px; }
+.html-project { margin-top:35px; background:linear-gradient(135deg,rgba(0,119,238,.14),rgba(0,180,255,.06)); border:1px solid rgba(0,140,255,.28); border-radius:18px; padding:27px; }
+.html-project h3 { font-size:1.3rem; margin-bottom:12px; }
+.html-project p { color:var(--muted); line-height:2; }
+@media(max-width:700px) { .html-lessons-grid { grid-template-columns:1fr; gap:16px; } .html-topic { padding:19px; } .html-topic h3 { font-size:1.05rem; } .html-topic p,.html-topic li { font-size:.9rem; } .code-box pre { font-size:.78rem; padding:13px; } }
+
 </style>
 </head>
-
 <body>
-
-<!-- NAVBAR -->
-
-<header class="navbar">
-
-    <a href="#" class="logo"><img src="images/اكادمية.png" alt="logo" width="150px"></span></a>
-
-    <nav>
-        <a href="indexxx.html">الرئيسية</a>
-        <a href="#lessons">دروس CSS</a>
-    </nav>
-
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- HEADER -->
+<header class="topbar">
+<a class="logo" href="index.html">
+<img alt="logo" src="images/logogdd.png" width="200px"/>
+</a>
+<div class="header-controls">
+<select aria-label="Language" id="languageSelect">
+<option value="ar">🇩🇿 العربية</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+</select>
+<button aria-label="Change theme" class="theme-btn" id="themeBtn">
+<i class="fa-solid fa-moon"></i>
+</button>
+<button aria-label="Open menu" class="menu-btn" id="menuBtn">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
 </header>
-
-<!-- HERO -->
-
-<section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <span class="tag">
-            MA ACADEMY • WEB DEVELOPMENT
-        </span>
-
-        <h1>
-            اكتشف عالم
-            <span>CSS</span>
-        </h1>
-
-        <p>
-            تعلم كيفية تنسيق صفحات الويب والتحكم في الألوان
-            والخطوط والأحجام والتخطيطات والحركات باستخدام CSS.
-        </p>
-
-        <a href="#lessons" class="main-btn">
-            ابدأ التعلم
-        </a>
-
+<!-- SIDEBAR -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-top">
+<div class="sidebar-logo"><img alt="logo" src="images/logogdd.png" width="300px"/></div>
+<button aria-label="Close menu" class="close-menu" id="closeMenu">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="sidebar-links">
+<a class="active" data-i18n="navHome" href="index.html">ACCUEIL</a>
+<a data-i18n="navHTML" href="html.html">HTML</a>
+<a data-i18n="navCSS" href="css.html">CSS</a>
+<a data-i18n="navJS" href="js.html">JAVASCRIPT</a>
+<a data-i18n="navPython" href="py.html">PYTHON</a>
+<a data-i18n="navDeveloper" href="#developer">DEVELOPER</a>
+<a data-i18n="navContact" href="#contact">CONTACT ME</a>
+</div>
+<div class="sidebar-footer">
+        © MA Academy
     </div>
-
-    <div class="hero-code">
-
-        <div class="dots">
-            <i></i><i></i><i></i>
+</nav>
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="welcome" data-i18n="welcome">
+            WELCOME TO
         </div>
+<h1 class="hero-title">
+<img alt="logo" src="images/logogdd.png" width="400px"/>
+</h1>
+<h2>
+<span data-i18n="academy">أكاديمية</span>
+<span class="fixed-name">Mouattassim Bellah</span>
+</h2>
+<p data-i18n="heroDescription">
+            تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.
+        </p>
+<a class="main-btn" data-i18n="start" href="#courses">
+            ابدأ الآن
+        </a>
+</div>
+</section>
+<!-- HTML COURSE: FROM ZERO -->
+<section id="courses">
+<div class="html-learning" id="html-lessons">
+<div class="html-intro">
+<div class="html-badge"><i class="fa-brands fa-css3-alt"></i> CSS • COMPLETE COURSE</div>
+<h2>تعلم <span>CSS</span> من الصفر</h2>
+<p>تعلم تنسيق صفحات الويب خطوة بخطوة، من أساسيات الألوان والخطوط إلى Flexbox وGrid والتصميم المتجاوب والحركات.</p>
+</div>
+<div class="html-search-wrap">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="ابحث في دروس CSS" class="html-search" id="lessonSearch" placeholder="ابحث عن درس... مثل: الألوان، Flexbox، Grid، Responsive" type="search"/>
+</div>
+<div class="html-lessons-grid" id="htmlLessonsGrid"><article class="html-topic" data-search="ما هي CSS؟ CSS تنسيق تصميم ما هي css؟"><div class="html-topic-head"><span class="html-topic-num">01</span><h3>ما هي CSS؟</h3></div><p>CSS اختصار لـ Cascading Style Sheets، وهي اللغة المسؤولة عن تنسيق صفحات HTML والتحكم في الألوان والخطوط والمسافات والتخطيط.</p><div class="html-tip">معلومة: HTML تبني هيكل الصفحة، وCSS تمنحها الشكل والتصميم.</div></article><article class="html-topic" data-search="طرق إضافة CSS CSS تنسيق تصميم طرق إضافة css"><div class="html-topic-head"><span class="html-topic-num">02</span><h3>طرق إضافة CSS</h3></div><p>يمكن إضافة CSS بثلاث طرق: ملف خارجي، أو وسم style داخل head، أو خاصية style داخل العنصر. يُفضّل استخدام الملف الخارجي لتنظيم المشروع.</p><div class="code-box"><div class="code-top"><span>styles.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>/* داخل ملف styles.css */
+h1 {
+  color: blue;
+}
 
-        <pre><code>body {
-  background: white;
-  color: #29243b;
-  font-family: Arial;
+/* أو داخل head:
+&lt;style&gt;
+  h1 { color: blue; }
+&lt;/style&gt;
+*/
+
+/* أو داخل العنصر:
+&lt;h1 style="color: blue;"&gt;مرحبا&lt;/h1&gt;
+*/</code></pre></div><div class="html-tip">الطريقة الخارجية تجعل التنسيق قابلًا لإعادة الاستخدام في صفحات متعددة.</div></article><article class="html-topic" data-search="ربط ملف CSS بصفحة HTML CSS تنسيق تصميم ربط ملف css بصفحة html"><div class="html-topic-head"><span class="html-topic-num">03</span><h3>ربط ملف CSS بصفحة HTML</h3></div><p>أنشئ ملفًا باسم style.css بجانب ملف HTML، ثم اربطه داخل عنصر head باستخدام link.</p><div class="code-box"><div class="code-top"><span>index.html + style.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ar" dir="rtl"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;صفحتي&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;أهلاً بك&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div><div class="html-tip">تأكد من كتابة المسار الصحيح لملف CSS.</div></article><article class="html-topic" data-search="بنية قاعدة CSS CSS تنسيق تصميم بنية قاعدة css"><div class="html-topic-head"><span class="html-topic-num">04</span><h3>بنية قاعدة CSS</h3></div><p>تتكوّن قاعدة CSS من محدد selector، ثم أقواس تحتوي على خصائص properties وقيم values.</p><div class="code-box"><div class="code-top"><span>style.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>h1 {
+  color: blue;
+  font-size: 32px;
+}</code></pre></div><div class="html-tip">كل تصريح ينتهي بفاصلة منقوطة ;</div></article><article class="html-topic" data-search="المحددات Selectors CSS تنسيق تصميم المحددات selectors"><div class="html-topic-head"><span class="html-topic-num">05</span><h3>المحددات Selectors</h3></div><p>تحدد المحددات عناصر HTML التي نريد تنسيقها. يمكن اختيار العنصر باسمه أو class أو id.</p><div class="code-box"><div class="code-top"><span>style.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>/* محدد العنصر */
+p {
+  color: #444;
+}
+
+/* محدد class */
+.card {
+  padding: 20px;
+}
+
+/* محدد id */
+#header {
+  background: navy;
+}</code></pre></div><div class="html-tip">استخدم class عندما تريد تطبيق نفس التنسيق على عدة عناصر.</div></article><article class="html-topic" data-search="محددات متعددة ومتداخلة CSS تنسيق تصميم محددات متعددة ومتداخلة"><div class="html-topic-head"><span class="html-topic-num">06</span><h3>محددات متعددة ومتداخلة</h3></div><p>يمكن تنسيق عدة محددات معًا بالفاصلة، كما يمكن استهداف عنصر داخل عنصر آخر بترك مسافة بين المحددات.</p><div class="code-box"><div class="code-top"><span>selectors.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>h1, h2, h3 {
+  font-family: Arial, sans-serif;
+}
+
+.card p {
+  color: #555;
+}</code></pre></div><div class="html-tip">الفاصلة تعني نفس التنسيق لكل المحددات، والمسافة تعني عنصرًا داخل عنصر.</div></article><article class="html-topic" data-search="الألوان Color CSS تنسيق تصميم الألوان color"><div class="html-topic-head"><span class="html-topic-num">07</span><h3>الألوان Color</h3></div><p>تقبل CSS أسماء الألوان، وHex، وRGB، وRGBA، وHSL. اختر صيغة تناسب نظام ألوان مشروعك.</p><div class="code-box"><div class="code-top"><span>colors.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>h1 {
+  color: #0066ff;
+}
+
+.box {
+  background-color: rgb(20, 80, 180);
+  border-color: rgba(0, 0, 0, 0.2);
+}</code></pre></div><div class="html-tip">RGBA تسمح بتحديد درجة الشفافية.</div></article><article class="html-topic" data-search="الخلفيات Backgrounds CSS تنسيق تصميم الخلفيات backgrounds"><div class="html-topic-head"><span class="html-topic-num">08</span><h3>الخلفيات Backgrounds</h3></div><p>تستطيع التحكم في لون الخلفية أو وضع صورة وتحديد طريقة تكرارها وحجمها وموقعها.</p><div class="code-box"><div class="code-top"><span>background.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>body {
+  background-color: #f4f7ff;
+}
+
+.hero {
+  background-image: url("images/cover.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}</code></pre></div><div class="html-tip">استخدم cover عندما تريد أن تغطي الصورة مساحة العنصر كاملة.</div></article><article class="html-topic" data-search="الخطوط Font Family CSS تنسيق تصميم الخطوط font family"><div class="html-topic-head"><span class="html-topic-num">09</span><h3>الخطوط Font Family</h3></div><p>تحدد font-family نوع الخط. اكتب أكثر من خيار احتياطي، حتى ينتقل المتصفح إلى الخط التالي إذا لم يتوفر الأول.</p><div class="code-box"><div class="code-top"><span>fonts.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-  color: #7652d8;
+  font-family: Georgia, serif;
+}</code></pre></div><div class="html-tip">ضع نوعًا عامًا مثل sans-serif في نهاية القائمة.</div></article><article class="html-topic" data-search="حجم ووزن النص CSS تنسيق تصميم حجم ووزن النص"><div class="html-topic-head"><span class="html-topic-num">10</span><h3>حجم ووزن النص</h3></div><p>تتحكم font-size في حجم النص، وfont-weight في سماكته، وfont-style في نمطه.</p><div class="code-box"><div class="code-top"><span>text.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>h1 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+p {
+  font-size: 16px;
+  font-style: normal;
+}</code></pre></div><div class="html-tip">يمكن استعمال قيم مثل 400 للعادي و700 للعريض.</div></article><article class="html-topic" data-search="محاذاة النص وارتفاع السطر CSS تنسيق تصميم محاذاة النص وارتفاع السطر"><div class="html-topic-head"><span class="html-topic-num">11</span><h3>محاذاة النص وارتفاع السطر</h3></div><p>تستخدم text-align للمحاذاة، وline-height للمسافة الرأسية بين الأسطر، وletter-spacing للمسافة بين الحروف.</p><div class="code-box"><div class="code-top"><span>text-align.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>p {
+  text-align: right;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+.center {
   text-align: center;
-}</code></pre>
+}</code></pre></div><div class="html-tip">للقراءة المريحة، لا تجعل ارتفاع السطر ضيقًا جدًا.</div></article><article class="html-topic" data-search="الوحدات Units CSS تنسيق تصميم الوحدات units"><div class="html-topic-head"><span class="html-topic-num">12</span><h3>الوحدات Units</h3></div><p>من الوحدات الشائعة px و% وem وrem وvw وvh. بعضها ثابت وبعضها نسبي لحجم الخط أو الشاشة أو العنصر الأب.</p><div class="code-box"><div class="code-top"><span>units.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>html {
+  font-size: 16px;
+}
 
-    </div>
+.box {
+  width: 80%;
+  padding: 1rem;
+  min-height: 50vh;
+}</code></pre></div><div class="html-tip">rem يعتمد على حجم الخط الأساسي في الصفحة، وغالبًا يسهل توحيد المقاسات به.</div></article><article class="html-topic" data-search="العرض والارتفاع CSS تنسيق تصميم العرض والارتفاع"><div class="html-topic-head"><span class="html-topic-num">13</span><h3>العرض والارتفاع</h3></div><p>تحدد width وheight أبعاد العنصر، ويمكن استخدام min-width وmax-width وmin-height وmax-height لوضع حدود مرنة.</p><div class="code-box"><div class="code-top"><span>sizing.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.container {
+  width: 90%;
+  max-width: 1100px;
+  min-height: 300px;
+  margin: auto;
+}</code></pre></div><div class="html-tip">max-width مفيد لمنع المحتوى من التمدد أكثر من اللازم.</div></article><article class="html-topic" data-search="نموذج الصندوق Box Model CSS تنسيق تصميم نموذج الصندوق box model"><div class="html-topic-head"><span class="html-topic-num">14</span><h3>نموذج الصندوق Box Model</h3></div><p>كل عنصر يتكون من content ثم padding ثم border ثم margin. فهم هذه الطبقات ضروري للتحكم في المسافات والأبعاد.</p><div class="code-box"><div class="code-top"><span>box-model.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>* {
+  box-sizing: border-box;
+}
 
+.card {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  margin: 16px;
+}</code></pre></div><div class="html-tip">استخدم box-sizing: border-box لتصبح حسابات العرض أسهل.</div></article><article class="html-topic" data-search="الهوامش Margin CSS تنسيق تصميم الهوامش margin"><div class="html-topic-head"><span class="html-topic-num">15</span><h3>الهوامش Margin</h3></div><p>تضيف margin مساحة خارج حدود العنصر، ويمكن تحديدها لكل جهة أو استخدام قيمة auto لتوسيط عنصر ذي عرض محدد.</p><div class="code-box"><div class="code-top"><span>margin.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.card {
+  margin-top: 20px;
+  margin-bottom: 12px;
+}</code></pre></div><div class="html-tip">margin لا تضيف مساحة داخل العنصر؛ هذه وظيفة padding.</div></article><article class="html-topic" data-search="الحشو Padding CSS تنسيق تصميم الحشو padding"><div class="html-topic-head"><span class="html-topic-num">16</span><h3>الحشو Padding</h3></div><p>تضيف padding مساحة بين المحتوى وحدود العنصر. يمكن ضبط الجهات الأربع بقيمة واحدة أو بقيم منفصلة.</p><div class="code-box"><div class="code-top"><span>padding.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.button {
+  padding: 12px 24px;
+}
+
+.card {
+  padding-top: 20px;
+  padding-right: 16px;
+  padding-bottom: 20px;
+  padding-left: 16px;
+}</code></pre></div><div class="html-tip">زيادة padding تجعل المساحة الداخلية أكبر.</div></article><article class="html-topic" data-search="الحدود Border CSS تنسيق تصميم الحدود border"><div class="html-topic-head"><span class="html-topic-num">17</span><h3>الحدود Border</h3></div><p>تتحكم border في سمك الحد ونمطه ولونه، ويمكن تخصيص كل جهة على حدة.</p><div class="code-box"><div class="code-top"><span>border.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.card {
+  border: 1px solid #dbe3f0;
+  border-top: 4px solid #087cff;
+}</code></pre></div><div class="html-tip">من الأنماط الشائعة solid وdashed وdotted وnone.</div></article><article class="html-topic" data-search="الزوايا الدائرية Border Radius CSS تنسيق تصميم الزوايا الدائرية border radius"><div class="html-topic-head"><span class="html-topic-num">18</span><h3>الزوايا الدائرية Border Radius</h3></div><p>تستخدم border-radius لتدوير زوايا العناصر. يمكن تطبيقها على جميع الزوايا أو تخصيص كل زاوية.</p><div class="code-box"><div class="code-top"><span>radius.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>button {
+  border-radius: 12px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}</code></pre></div><div class="html-tip">القيمة 50% تجعل العنصر مربعًا دائريًا إذا تساوى العرض والارتفاع.</div></article><article class="html-topic" data-search="الظلال Box Shadow CSS تنسيق تصميم الظلال box shadow"><div class="html-topic-head"><span class="html-topic-num">19</span><h3>الظلال Box Shadow</h3></div><p>تضيف box-shadow ظلًا حول العنصر، وتحدد الإزاحة الأفقية والرأسية والتمويه والانتشار واللون.</p><div class="code-box"><div class="code-top"><span>shadow.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.card {
+  box-shadow: 0 8px 24px rgba(0, 40, 100, 0.12);
+}</code></pre></div><div class="html-tip">اجعل الظل خفيفًا حتى لا يشتت الانتباه عن المحتوى.</div></article><article class="html-topic" data-search="الشفافية Opacity CSS تنسيق تصميم الشفافية opacity"><div class="html-topic-head"><span class="html-topic-num">20</span><h3>الشفافية Opacity</h3></div><p>تحدد opacity شفافية العنصر كاملًا، من 0 غير مرئي إلى 1 معتم بالكامل.</p><div class="code-box"><div class="code-top"><span>opacity.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .muted {
+  opacity: 0.6;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.45);
+}</code></pre></div><div class="html-tip">إذا أردت شفافية الخلفية فقط دون النص، استخدم لونًا بصيغة rgba.</div></article><article class="html-topic" data-search="العرض inline وblock CSS تنسيق تصميم العرض inline وblock"><div class="html-topic-head"><span class="html-topic-num">21</span><h3>العرض inline وblock</h3></div><p>العنصر block يبدأ عادة بسطر جديد ويأخذ العرض المتاح، بينما inline يبقى ضمن السطر. inline-block يجمع بعض خصائص الاثنين.</p><div class="code-box"><div class="code-top"><span>display.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-box {
+  display: inline-block;
+}</code></pre></div><div class="html-tip">يمكن تغيير سلوك العرض باستخدام display.</div></article><article class="html-topic" data-search="إخفاء العناصر CSS تنسيق تصميم إخفاء العناصر"><div class="html-topic-head"><span class="html-topic-num">22</span><h3>إخفاء العناصر</h3></div><p>يمكن إخفاء عنصر باستخدام display: none أو visibility: hidden. الأول يزيل مكانه من التخطيط، والثاني يخفيه مع بقاء المساحة.</p><div class="code-box"><div class="code-top"><span>visibility.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.hidden-completely {
+  display: none;
+}
+
+.hidden-but-space-remains {
+  visibility: hidden;
+}</code></pre></div><div class="html-tip">اختر الطريقة حسب ما إذا كنت تريد الاحتفاظ بمكان العنصر أم لا.</div></article><article class="html-topic" data-search="التموضع Position CSS تنسيق تصميم التموضع position"><div class="html-topic-head"><span class="html-topic-num">23</span><h3>التموضع Position</h3></div><p>تحدد position طريقة تموضع العنصر: static أو relative أو absolute أو fixed أو sticky. ويمكن تحريكه باستخدام top وright وbottom وleft.</p><div class="code-box"><div class="code-top"><span>position.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .parent {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+}</code></pre></div><div class="html-tip">absolute يتموضع نسبةً إلى أقرب سلف له position غير static.</div></article><article class="html-topic" data-search="ترتيب الطبقات z-index CSS تنسيق تصميم ترتيب الطبقات z-index"><div class="html-topic-head"><span class="html-topic-num">24</span><h3>ترتيب الطبقات z-index</h3></div><p>تتحكم z-index في ترتيب العناصر المتداخلة؛ القيمة الأعلى تظهر عادة فوق القيمة الأقل ضمن سياق التكديس نفسه.</p><div class="code-box"><div class="code-top"><span>z-index.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .menu {
+  position: relative;
+  z-index: 10;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+}</code></pre></div><div class="html-tip">z-index لا يعمل كما تتوقع دون فهم position وسياقات التكديس.</div></article><article class="html-topic" data-search="Flexbox: البداية CSS تنسيق تصميم flexbox: البداية"><div class="html-topic-head"><span class="html-topic-num">25</span><h3>Flexbox: البداية</h3></div><p>Flexbox نظام تخطيط أحادي البعد لترتيب العناصر في صف أو عمود. فعّل display: flex على العنصر الأب.</p><div class="code-box"><div class="code-top"><span>flex.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}</code></pre></div><div class="html-tip">العنصر الذي يحمل display:flex يسمى flex container.</div></article><article class="html-topic" data-search="Flexbox: المحاذاة والتوزيع CSS تنسيق تصميم flexbox: المحاذاة والتوزيع"><div class="html-topic-head"><span class="html-topic-num">26</span><h3>Flexbox: المحاذاة والتوزيع</h3></div><p>تستخدم justify-content لتوزيع العناصر على المحور الرئيسي، وalign-items لمحاذاتها على المحور العرضي.</p><div class="code-box"><div class="code-top"><span>flex-align.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 200px;
+}</code></pre></div><div class="html-tip">غيّر flex-direction لتعرف كيف يتغير المحور الرئيسي.</div></article><article class="html-topic" data-search="Flexbox: الالتفاف والنمو CSS تنسيق تصميم flexbox: الالتفاف والنمو"><div class="html-topic-head"><span class="html-topic-num">27</span><h3>Flexbox: الالتفاف والنمو</h3></div><p>تسمح flex-wrap بانتقال العناصر إلى سطر جديد، وتتحكم flex-grow وflex-shrink وflex-basis في أحجام العناصر المرنة.</p><div class="code-box"><div class="code-top"><span>flex-wrap.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.item {
+  flex: 1 1 220px;
+}</code></pre></div><div class="html-tip">gap يضيف مسافة منتظمة بين العناصر دون الحاجة إلى margins.</div></article><article class="html-topic" data-search="CSS Grid: البداية CSS تنسيق تصميم css grid: البداية"><div class="html-topic-head"><span class="html-topic-num">28</span><h3>CSS Grid: البداية</h3></div><p>CSS Grid نظام تخطيط ثنائي الأبعاد يتيح التحكم في الصفوف والأعمدة معًا. فعّل display: grid على الحاوية.</p><div class="code-box"><div class="code-top"><span>grid.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}</code></pre></div><div class="html-tip">Grid مناسب لتخطيطات البطاقات والأقسام متعددة الأعمدة.</div></article><article class="html-topic" data-search="Grid: أعمدة مرنة CSS تنسيق تصميم grid: أعمدة مرنة"><div class="html-topic-head"><span class="html-topic-num">29</span><h3>Grid: أعمدة مرنة</h3></div><p>يمكن استخدام repeat وminmax لإنشاء أعمدة تتكيف مع المساحة المتاحة بدل تثبيت عدد الأعمدة يدويًا.</p><div class="code-box"><div class="code-top"><span>grid-responsive.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .cards {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}</code></pre></div><div class="html-tip">auto-fit مع minmax مفيد لشبكات البطاقات المتجاوبة.</div></article><article class="html-topic" data-search="التصميم المتجاوب Responsive Design CSS تنسيق تصميم التصميم المتجاوب responsive design"><div class="html-topic-head"><span class="html-topic-num">30</span><h3>التصميم المتجاوب Responsive Design</h3></div><p>يجعل التصميم المتجاوب الصفحة مناسبة للهواتف والأجهزة اللوحية والشاشات الكبيرة باستخدام وحدات مرنة وصور مناسبة وMedia Queries.</p><div class="code-box"><div class="code-top"><span>responsive.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(92%, 1100px);
+  margin-inline: auto;
+}</code></pre></div><div class="html-tip">ابدأ بتصميم بسيط للشاشات الصغيرة ثم وسّعه للشاشات الأكبر عند الحاجة.</div></article><article class="html-topic" data-search="Media Queries CSS تنسيق تصميم media queries"><div class="html-topic-head"><span class="html-topic-num">31</span><h3>Media Queries</h3></div><p>تسمح @media بتطبيق قواعد CSS عند تحقق شرط مثل عرض الشاشة. تُستخدم كثيرًا لتغيير الأعمدة وحجم الخط والقوائم.</p><div class="code-box"><div class="code-top"><span>media.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>/* على الشاشات الصغيرة */
+@media (max-width: 700px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+}</code></pre></div><div class="html-tip">نقطة التوقف ليست رقمًا سحريًا؛ اخترها عندما يحتاج التصميم إلى التغيير.</div></article><article class="html-topic" data-search="الحالات Hover وFocus وActive CSS تنسيق تصميم الحالات hover وfocus وactive"><div class="html-topic-head"><span class="html-topic-num">32</span><h3>الحالات Hover وFocus وActive</h3></div><p>تسمح pseudo-classes بتنسيق العنصر حسب حالته، مثل hover عند مرور المؤشر وfocus عند التركيز وactive أثناء الضغط.</p><div class="code-box"><div class="code-top"><span>states.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>button:hover {
+  background: #005bd1;
+}
+
+input:focus {
+  outline: 2px solid #087cff;
+}
+
+button:active {
+  transform: scale(0.98);
+}</code></pre></div><div class="html-tip">لا تعتمد على hover وحده؛ يجب أن تكون الواجهة قابلة للاستخدام بلوحة المفاتيح أيضًا.</div></article><article class="html-topic" data-search="العناصر الزائفة Before وAfter CSS تنسيق تصميم العناصر الزائفة before وafter"><div class="html-topic-head"><span class="html-topic-num">33</span><h3>العناصر الزائفة Before وAfter</h3></div><p>تضيف ::before و::after محتوى زخرفيًا قبل محتوى العنصر أو بعده. غالبًا تحتاج إلى خاصية content.</p><div class="code-box"><div class="code-top"><span>pseudo-elements.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>.title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin-top: 8px;
+  background: #087cff;
+}</code></pre></div><div class="html-tip">استخدمها للزخرفة والمؤشرات، وليس للمعلومات الأساسية التي يجب أن يقرأها الجميع.</div></article><article class="html-topic" data-search="الانتقالات Transitions CSS تنسيق تصميم الانتقالات transitions"><div class="html-topic-head"><span class="html-topic-num">34</span><h3>الانتقالات Transitions</h3></div><p>تجعل transition تغيرات الخصائص أكثر سلاسة، مثل تغير اللون أو الحجم عند hover.</p><div class="code-box"><div class="code-top"><span>transition.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>button {
+  background: #087cff;
+  transition: background 0.25s ease,
+              transform 0.25s ease;
+}
+
+button:hover {
+  background: #005bd1;
+  transform: translateY(-2px);
+}</code></pre></div><div class="html-tip">حدد الخصائص التي تريد انتقالها بدل استخدام all دون حاجة.</div></article><article class="html-topic" data-search="التحويلات Transforms CSS تنسيق تصميم التحويلات transforms"><div class="html-topic-head"><span class="html-topic-num">35</span><h3>التحويلات Transforms</h3></div><p>تسمح transform بتحريك العنصر أو تدويره أو تكبيره أو إمالته دون تغيير تدفق الصفحة.</p><div class="code-box"><div class="code-top"><span>transform.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.icon {
+  transform: rotate(15deg);
+}</code></pre></div><div class="html-tip">يمكن جمع أكثر من تحويل في الخاصية نفسها.</div></article><article class="html-topic" data-search="Animations و Keyframes CSS تنسيق تصميم animations و keyframes"><div class="html-topic-head"><span class="html-topic-num">36</span><h3>Animations و Keyframes</h3></div><p>تستخدم @keyframes لتعريف مراحل الحركة، ثم animation لتشغيلها وتحديد مدتها وتكرارها.</p><div class="code-box"><div class="code-top"><span>animation.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: appear 0.6s ease both;
+}</code></pre></div><div class="html-tip">استعمل الحركة باعتدال، وراعِ إعداد prefers-reduced-motion للمستخدمين الذين يفضلون تقليل الحركة.</div></article><article class="html-topic" data-search="المتغيرات CSS Variables CSS تنسيق تصميم المتغيرات css variables"><div class="html-topic-head"><span class="html-topic-num">37</span><h3>المتغيرات CSS Variables</h3></div><p>تُعرّف المتغيرات باستخدام --name وتُستدعى عبر var(). غالبًا توضع في :root لتكون متاحة على مستوى الصفحة.</p><div class="code-box"><div class="code-top"><span>variables.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> :root {
+  --primary: #087cff;
+  --text: #172033;
+  --radius: 14px;
+}
+
+button {
+  background: var(--primary);
+  border-radius: var(--radius);
+}</code></pre></div><div class="html-tip">المتغيرات تسهّل تغيير ألوان الموقع وأحجامه من مكان واحد.</div></article><article class="html-topic" data-search="الدوال calc و min و max و clamp CSS تنسيق تصميم الدوال calc و min و max و clamp"><div class="html-topic-head"><span class="html-topic-num">38</span><h3>الدوال calc و min و max و clamp</h3></div><p>تساعد دوال CSS على حساب الأحجام بمرونة. calc تنفذ عملية حسابية، وmin وmax تختاران قيمة، وclamp تحدد حدًا أدنى ومرنًا وأقصى.</p><div class="code-box"><div class="code-top"><span>functions.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .container {
+  width: min(92%, 1200px);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.panel {
+  width: calc(100% - 32px);
+}</code></pre></div><div class="html-tip">clamp ممتازة لحجم الخط المتجاوب دون عدد كبير من Media Queries.</div></article><article class="html-topic" data-search="القوائم والجداول CSS تنسيق تصميم القوائم والجداول"><div class="html-topic-head"><span class="html-topic-num">39</span><h3>القوائم والجداول</h3></div><p>يمكن تنسيق القوائم باستخدام list-style، والجداول باستخدام border-collapse وpadding وحدود الخلايا.</p><div class="code-box"><div class="code-top"><span>lists-tables.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>ul {
+  list-style: square;
+  padding-inline-start: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}</code></pre></div><div class="html-tip">احرص على وضوح تباين النص والخلفية في الجداول.</div></article><article class="html-topic" data-search="تنسيق الصور والفيديو CSS تنسيق تصميم تنسيق الصور والفيديو"><div class="html-topic-head"><span class="html-topic-num">40</span><h3>تنسيق الصور والفيديو</h3></div><p>استخدم object-fit للتحكم في كيفية ملء الصورة أو الفيديو للمساحة، وobject-position لتحديد الجزء الظاهر.</p><div class="code-box"><div class="code-top"><span>media-elements.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .thumbnail {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+}</code></pre></div><div class="html-tip">cover يملأ المساحة وقد يقص جزءًا من الصورة، بينما contain يعرض الصورة كاملة.</div></article><article class="html-topic" data-search="تنسيق النماذج Forms CSS تنسيق تصميم تنسيق النماذج forms"><div class="html-topic-head"><span class="html-topic-num">41</span><h3>تنسيق النماذج Forms</h3></div><p>يمكن تنسيق input وtextarea وselect وbutton مثل بقية العناصر، مع الاهتمام بحالة focus وحجم مساحة اللمس.</p><div class="code-box"><div class="code-top"><span>forms.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccd5e2;
+  border-radius: 8px;
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid #087cff;
+}</code></pre></div><div class="html-tip">لا تحذف outline دون توفير مؤشر تركيز بديل واضح.</div></article><article class="html-topic" data-search="الطبقات الشفافة والتدرجات CSS تنسيق تصميم الطبقات الشفافة والتدرجات"><div class="html-topic-head"><span class="html-topic-num">42</span><h3>الطبقات الشفافة والتدرجات</h3></div><p>تسمح linear-gradient وradial-gradient بإنشاء خلفيات متدرجة، ويمكن دمج التدرج مع صورة خلفية لصنع طبقة لونية.</p><div class="code-box"><div class="code-top"><span>gradients.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code> .hero {
+  background:
+    linear-gradient(120deg,
+      rgba(0, 60, 180, 0.9),
+      rgba(0, 160, 255, 0.55)),
+    url("cover.jpg") center/cover;
+}</code></pre></div><div class="html-tip">يمكن استخدام التدرج بدل صورة خلفية بسيطة في كثير من الواجهات.</div></article><article class="html-topic" data-search="تنظيم CSS وأفضل الممارسات CSS تنسيق تصميم تنظيم css وأفضل الممارسات"><div class="html-topic-head"><span class="html-topic-num">43</span><h3>تنظيم CSS وأفضل الممارسات</h3></div><p>قسّم التنسيقات إلى أقسام واضحة، واستخدم أسماء classes مفهومة، وتجنب تكرار القواعد ورفع specificity دون حاجة.</p><div class="code-box"><div class="code-top"><span>organized.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>/* 1. إعدادات عامة */
+* {
+  box-sizing: border-box;
+}
+
+/* 2. عناصر الصفحة */
+body {
+  margin: 0;
+}
+
+/* 3. المكونات */
+.card {
+  padding: 1rem;
+}
+
+/* 4. الاستجابة */
+@media (max-width: 700px) {
+  .card {
+    padding: 0.75rem;
+  }
+}</code></pre></div><div class="html-tip">التنسيق الجيد يسهل صيانة المشروع وتطويره لاحقًا.</div></article><article class="html-topic" data-search="Specificity وأولوية القواعد CSS تنسيق تصميم specificity وأولوية القواعد"><div class="html-topic-head"><span class="html-topic-num">44</span><h3>Specificity وأولوية القواعد</h3></div><p>عند تعارض القواعد، تؤثر أولوية المحددات ومصدر القاعدة وترتيبها و!important. تجنب استعمال !important كحل دائم.</p><div class="code-box"><div class="code-top"><span>specificity.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>p {
+  color: gray;
+}
+
+.note {
+  color: blue;
+}
+
+#warning {
+  color: red;
+}
+
+/* تجنب الإكثار من !important */</code></pre></div><div class="html-tip">المحدد id أعلى specificity من class، ومحدد العنصر أقل منهما.</div></article><article class="html-topic" data-search="الوراثة والقيم الافتراضية CSS تنسيق تصميم الوراثة والقيم الافتراضية"><div class="html-topic-head"><span class="html-topic-num">45</span><h3>الوراثة والقيم الافتراضية</h3></div><p>بعض خصائص CSS مثل color وfont-family تُورّث غالبًا من العنصر الأب، بينما خصائص مثل margin لا تُورّث عادة.</p><div class="code-box"><div class="code-top"><span>inheritance.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>body {
+  color: #202938;
+  font-family: Arial, sans-serif;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}</code></pre></div><div class="html-tip">يمكن استعمال inherit أو initial أو unset للتحكم في قيمة الخاصية.</div></article><article class="html-topic" data-search="الطباعة Print Styles CSS تنسيق تصميم الطباعة print styles"><div class="html-topic-head"><span class="html-topic-num">46</span><h3>الطباعة Print Styles</h3></div><p>تتيح @media print تجهيز الصفحة للطباعة، مثل إخفاء الأزرار والقوائم وتغيير الألوان والخلفيات.</p><div class="code-box"><div class="code-top"><span>print.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>@media print {
+  nav, button, .no-print {
+    display: none;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+}</code></pre></div><div class="html-tip">اختبر معاينة الطباعة للتأكد من أن المحتوى المهم ظاهر.</div></article><article class="html-topic" data-search="إتاحة الوصول وتقليل الحركة CSS تنسيق تصميم إتاحة الوصول وتقليل الحركة"><div class="html-topic-head"><span class="html-topic-num">47</span><h3>إتاحة الوصول وتقليل الحركة</h3></div><p>اجعل التباين واضحًا، وأظهر مؤشر التركيز، ولا تستخدم اللون وحده لنقل المعنى. احترم تفضيل تقليل الحركة.</p><div class="code-box"><div class="code-top"><span>accessibility.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>:focus-visible {
+  outline: 3px solid #087cff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}</code></pre></div><div class="html-tip">التصميم الجيد يجب أن يكون مفهومًا وقابلًا للاستخدام بطرق مختلفة.</div></article><article class="html-topic" data-search="مشروع تطبيقي: بطاقة شخصية CSS تنسيق تصميم مشروع تطبيقي: بطاقة شخصية"><div class="html-topic-head"><span class="html-topic-num">48</span><h3>مشروع تطبيقي: بطاقة شخصية</h3></div><p>اجمع ما تعلمته لإنشاء بطاقة شخصية تحتوي على صورة واسم ووصف وزر. ابدأ ببنية HTML ثم اربط ملف CSS.</p><div class="code-box"><div class="code-top"><span>profile-card.css</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #eef4ff;
+  font-family: Arial, sans-serif;
+}
+
+.profile {
+  width: min(90%, 320px);
+  padding: 24px;
+  text-align: center;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px #163b7020;
+}
+
+.profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile button {
+  padding: 10px 20px;
+  color: white;
+  background: #087cff;
+  border: 0;
+  border-radius: 8px;
+}</code></pre></div><div class="html-tip">جرّب تغيير الألوان والمسافات والزوايا بنفسك.</div></article></div>
+<div class="html-no-results" id="noLessons">لا توجد دروس مطابقة لبحثك.</div>
+<div class="html-project">
+<h3><i class="fa-solid fa-laptop-code"></i> مشروعك الأول</h3>
+<p>بعد إنهاء الدروس، جرّب إنشاء صفحة تعريفية بسيطة تحتوي على عنوان رئيسي، وفقرة عنك، وصورة، ورابط، وقائمة بالمهارات التي تتعلمها. لا تنتقل إلى CSS قبل أن تفهم هيكل HTML جيدًا.</p>
+</div>
+</div>
 </section>
-
-<!-- LESSONS -->
-
-<main class="container" id="lessons">
-
-    <div class="section-title">
-
-        <span>CSS COURSE</span>
-
-        <h2>أهم خصائص CSS</h2>
-
-        <p>
-            اكتشف أهم خصائص التنسيق مع شرح ومثال لكل خاصية.
-        </p>
-
-    </div>
-
-    <div class="tools">
-
-        <input
-            type="search"
-            id="searchInput"
-            placeholder="ابحث عن خاصية CSS..."
-        >
-
-        <select id="categoryFilter">
-            <option value="all">جميع التصنيفات</option>
-            <option value="colors">الألوان والخلفيات</option>
-            <option value="text">النصوص والخطوط</option>
-            <option value="box">الأبعاد والصندوق</option>
-            <option value="layout">التخطيط</option>
-            <option value="position">التموضع</option>
-            <option value="effects">التأثيرات والحركة</option>
-        </select>
-
-    </div>
-
-    <div class="lessons-grid" id="lessonsGrid"></div>
-
 </main>
-
-<!-- FOOTER -->
-
-<footer>
-
-    <h2>MA <span>Academy</span></h2>
-
-    <p>Learn. Build. Create.</p>
-
-    <small>
-        © 2026 MA Academy - All Rights Reserved
-    </small>
-
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+<div class="footer-logo"><img alt="logo" src="images/logogdd.png" width="250px"/></div>
+<p data-i18n="footerDescription">
+        طريقك نحو التميز في عالم البرمجة.
+    </p>
+<div class="social-links">
+<a aria-label="Instagram" class="social instagram" href="https://www.instagram.com/el__mouattassim?hvrq=NnNyMHE4N3Nydnl" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-instagram"></i>
+</a>
+<a aria-label="GitHub" class="social github" href="https://github.com/Mouattassim" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+<a aria-label="WhatsApp" class="social whatsapp" href="https://wa.me/+213553613038" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+<a aria-label="Gmail" class="social gmail" href="mailto:lazregassoumi12@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+</a>
+</div>
+<p class="copyright">
+        © <span id="year"></span> MA Academy.
+        <span data-i18n="rights">جميع الحقوق محفوظة.</span>
+</p>
 </footer>
-
 <script>
 
-/* CSS LESSONS */
+/* ================= TRANSLATIONS ================= */
 
-const lessons = [
+const translations = {
 
-/* COLORS */
+ar: {
 
-{
-tag: "color",
-category: "colors",
-title: "لون النص",
-description: "تحدد لون النص داخل العنصر.",
-code: "p {\n  color: blue;\n}"
+welcome: "WELCOME TO",
+academy: "أكاديمية",
+heroDescription: "تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.",
+start: "ابدأ الآن",
+
+navHome: "الرئيسية",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "المطور",
+navContact: "تواصل معي",
+
+coursesTitle: "رحلتك في عالم البرمجة",
+coursesDescription: "تعلم أساسيات تطوير الويب والبرمجة خطوة بخطوة، وابدأ ببناء مشاريعك الخاصة.",
+
+lesson1Title: "لماذا MA Academy؟",
+lesson1Description: "هدفنا هو مساعدتك على تعلم البرمجة بطريقة سهلة ومنظمة. ستتعلم المهارات الأساسية وتنتقل تدريجيًا إلى إنشاء مشاريع حقيقية.",
+
+lesson2Title: "تعلم HTML",
+lesson2Description: "HTML هي لغة بناء صفحات الويب. ستتعلم كيفية إضافة العناوين والفقرات والصور والروابط وتنظيم محتوى الصفحة.",
+
+lesson3Title: "تعلم CSS",
+lesson3Description: "CSS تمنح موقعك مظهره الجميل. ستتعلم الألوان والخطوط والتنسيقات والتصميم المتجاوب مع مختلف الشاشات.",
+
+lesson4Title: "تعلم JavaScript",
+lesson4Description: "JavaScript تضيف التفاعل إلى موقعك. ستتعلم التعامل مع الأزرار والقوائم والأحداث وإنشاء تجارب تفاعلية للمستخدم.",
+
+lesson5Title: "تعلم Python",
+lesson5Description: "تعلم أساسيات Python والمتغيرات والشروط والحلقات والدوال، وابدأ بكتابة برامجك الخاصة.",
+
+servicesTitle: "ماذا نقدم لك؟",
+servicesIntro: "نوفر لك بداية منظمة في عالم تطوير الويب.",
+servicesHeading: "تعلم وابدأ مشروعك",
+servicesDescription: "اكتسب المعرفة خطوة بخطوة، وطبق ما تتعلمه في مشاريع عملية تساعدك على تطوير مهاراتك في تصميم وبرمجة المواقع.",
+contact: "تواصل معنا",
+
+footerDescription: "طريقك نحو التميز في عالم البرمجة.",
+rights: "جميع الحقوق محفوظة."
+
 },
 
-{
-tag: "background-color",
-category: "colors",
-title: "لون الخلفية",
-description: "تحدد لون خلفية العنصر.",
-code: "body {\n  background-color: black;\n}"
-},{
-tag: "background-image",
-category: "colors",
-title: "صورة الخلفية",
-description: "تسمح بإضافة صورة كخلفية للعنصر.",
-code: "div {\n  background-image: url('image.jpg');\n}"
+en: {
+
+welcome: "WELCOME TO MA",
+academy: "Academy",
+heroDescription: "Learn web development and start your coding journey from beginner to advanced.",
+start: "Get Started",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DEVELOPER",
+navContact: "CONTACT ME",
+
+coursesTitle: "Your Coding Journey",
+coursesDescription: "Learn the fundamentals of web development step by step and start building your own projects.",
+
+lesson1Title: "Why MA Academy?",
+lesson1Description: "Our goal is to help you learn programming in a simple and organized way. You will learn essential skills and gradually build real projects.",
+
+lesson2Title: "Learn HTML",
+lesson2Description: "HTML is the language used to structure web pages. Learn how to add headings, paragraphs, images, links and organize page content.",
+
+lesson3Title: "Learn CSS",
+lesson3Description: "CSS gives your website its appearance. Learn colors, fonts, layouts and responsive design for different screens.",
+
+lesson4Title: "Learn JavaScript",
+lesson4Description: "JavaScript adds interaction to your website. Learn buttons, menus, events and how to create interactive user experiences.",
+
+lesson5Title: "Learn Python",
+lesson5Description: "Learn Python basics, variables, conditions, loops and functions, and start writing your own programs.",
+
+servicesTitle: "What Do We Offer?",
+servicesIntro: "We provide an organized starting point in web development.",
+servicesHeading: "Learn and Build Your Project",
+servicesDescription: "Gain knowledge step by step and apply what you learn through practical projects that help develop your web design and programming skills.",
+contact: "Contact Us",
+
+footerDescription: "Your path to excellence in programming.",
+rights: "All rights reserved."
+
 },
 
-{
-tag: "opacity",
-category: "colors",
-title: "الشفافية",
-description: "تتحكم في درجة شفافية العنصر.",
-code: "div {\n  opacity: 0.5;\n}"
-},
+fr: {
 
-/* TEXT */
+welcome: "WELCOME TO MA",
+academy: "Académie",
+heroDescription: "Apprenez le développement web et commencez votre parcours dans la programmation, du débutant au niveau avancé.",
+start: "Commencer",
 
-{
-tag: "font-size",
-category: "text",
-title: "حجم الخط",
-description: "تحدد حجم النص داخل العنصر.",
-code: "h1 {\n  font-size: 30px;\n}"
-},
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DÉVELOPPEUR",
+navContact: "CONTACTEZ-MOI",
 
-{
-tag: "font-family",
-category: "text",
-title: "نوع الخط",
-description: "تحدد نوع الخط المستخدم في النص.",
-code: "body {\n  font-family: Arial, sans-serif;\n}"
-},
+coursesTitle: "Votre parcours en programmation",
+coursesDescription: "Apprenez les bases du développement web étape par étape et commencez à créer vos propres projets.",
 
-{
-tag: "font-weight",
-category: "text",
-title: "سماكة الخط",
-description: "تتحكم في درجة سماكة النص.",
-code: "h1 {\n  font-weight: bold;\n}"
-},
+lesson1Title: "Pourquoi MA Academy ?",
+lesson1Description: "Notre objectif est de vous aider à apprendre la programmation de manière simple et organisée. Vous apprendrez les compétences essentielles et créerez progressivement de vrais projets.",
 
-{
-tag: "text-align",
-category: "text",
-title: "محاذاة النص",
-description: "تحدد اتجاه محاذاة النص أفقياً.",
-code: "p {\n  text-align: center;\n}"
-},
+lesson2Title: "Apprendre HTML",
+lesson2Description: "HTML est le langage utilisé pour structurer les pages web. Apprenez à ajouter des titres, des paragraphes, des images, des liens et à organiser le contenu.",
 
-{
-tag: "text-decoration",
-category: "text",
-title: "زخرفة النص",
-description: "تضيف خطاً أسفل النص أو فوقه أو تزيله.",
-code: "a {\n  text-decoration: none;\n}"
-},
+lesson3Title: "Apprendre CSS",
+lesson3Description: "CSS donne à votre site son apparence. Apprenez les couleurs, les polices, les mises en page et le design adaptatif.",
 
-{
-tag: "text-transform",
-category: "text",
-title: "تغيير حالة الحروف",
-description: "تتحكم في تحويل الحروف إلى كبيرة أو صغيرة.",
-code: "p {\n  text-transform: uppercase;\n}"
-},
+lesson4Title: "Apprendre JavaScript",
+lesson4Description: "JavaScript ajoute de l'interactivité à votre site. Apprenez à utiliser les boutons, les menus et les événements.",
 
-{
-tag: "line-height",
-category: "text",
-title: "ارتفاع السطر",
-description: "تحدد المسافة العمودية بين أسطر النص.",
-code: "p {\n  line-height: 1.8;\n}"
-},
+lesson5Title: "Apprendre Python",
+lesson5Description: "Apprenez les bases de Python, les variables, les conditions, les boucles et les fonctions pour créer vos propres programmes.",
 
-{
-tag: "letter-spacing",
-category: "text",
-title: "المسافة بين الحروف",
-description: "تتحكم في المسافة الأفقية بين الأحرف.",
-code: "h1 {\n  letter-spacing: 3px;\n}"
-},
+servicesTitle: "Que proposons-nous ?",
+servicesIntro: "Nous vous proposons un début organisé dans le développement web.",
+servicesHeading: "Apprenez et créez votre projet",
+servicesDescription: "Acquérez des connaissances étape par étape et appliquez-les dans des projets pratiques pour développer vos compétences en conception et programmation web.",
+contact: "Contactez-nous",
 
-/* BOX MODEL */
+footerDescription: "Votre chemin vers l'excellence en programmation.",
+rights: "Tous droits réservés."
 
-{
-tag: "width",
-category: "box",
-title: "العرض",
-description: "تحدد عرض العنصر.",
-code: "div {\n  width: 300px;\n}"
-},
-
-{
-tag: "height",
-category: "box",
-title: "الارتفاع",
-description: "تحدد ارتفاع العنصر.",
-code: "div {\n  height: 200px;\n}"
-},
-
-{
-tag: "margin",
-category: "box",
-title: "الهامش الخارجي",
-description: "تحدد المسافة الخارجية حول العنصر.",
-code: "div {\n  margin: 20px;\n}"
-},
-
-{
-tag: "padding",
-category: "box",
-title: "الهامش الداخلي",
-description: "تحدد المسافة بين المحتوى وحدود العنصر.",
-code: "div {\n  padding: 20px;\n}"
-},
-
-{
-tag: "border",
-category: "box",
-title: "الحدود",
-description: "تضيف حدوداً حول العنصر مع تحديد سمكها ولونها.",
-code: "div {\n  border: 2px solid black;\n}"
-},
-
-{
-tag: "border-radius",
-category: "box",
-title: "استدارة الزوايا",
-description: "تجعل زوايا العنصر مستديرة.",
-code: "div {\n  border-radius: 15px;\n}"
-},
-
-{
-tag: "box-sizing",
-category: "box",
-title: "حساب أبعاد الصندوق",
-description: "تتحكم في طريقة حساب العرض والارتفاع.",
-code: "* {\n  box-sizing: border-box;\n}"
-},
-
-{
-tag: "max-width",
-category: "box",
-title: "أقصى عرض",
-description: "تحدد أكبر عرض يمكن أن يصل إليه العنصر.",
-code: "div {\n  max-width: 1000px;\n}"
-},
-
-/* LAYOUT */
-
-{
-tag: "display",
-category: "layout",
-title: "طريقة العرض",
-description: "تحدد طريقة عرض العنصر مثل block و inline و flex.",
-code: "div {\n  display: flex;\n}"
-},
-
-{
-tag: "flex-direction",
-category: "layout",
-title: "اتجاه العناصر",
-description: "تحدد اتجاه ترتيب العناصر داخل Flexbox.",
-code: "div {\n  display: flex;\n  flex-direction: column;\n}"
-},
-
-{
-tag: "justify-content",
-category: "layout",
-title: "التوزيع الأفقي",
-description: "تتحكم في توزيع العناصر على المحور الرئيسي في Flexbox.",
-code: "div {\n  display: flex;\n  justify-content: center;\n}"
-},
-
-{
-tag: "align-items",
-category: "layout",
-title: "المحاذاة العمودية",
-description: "تتحكم في محاذاة العناصر على المحور المتقاطع في Flexbox.",
-code: "div {\n  display: flex;\n  align-items: center;\n}"
-},
-
-{
-tag: "gap",
-category: "layout",
-title: "المسافة بين العناصر",
-description: "تحدد المسافة الفاصلة بين العناصر داخل Flexbox أو Grid.",
-code: "div {\n  display: flex;\n  gap: 20px;\n}"
-},
-
-{
-tag: "grid-template-columns",
-category: "layout",
-title: "أعمدة Grid",
-description: "تحدد عدد الأعمدة وأحجامها داخل CSS Grid.",
-code: "div {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}"
-},{
-tag: "flex-wrap",
-category: "layout",
-title: "التفاف العناصر",
-description: "تسمح للعناصر بالانتقال إلى سطر جديد عند الحاجة.",
-code: "div {\n  display: flex;\n  flex-wrap: wrap;\n}"
-},
-
-/* POSITION */
-
-{
-tag: "position",
-category: "position",
-title: "التموضع",
-description: "تحدد طريقة تموضع العنصر مثل relative و absolute و fixed.",
-code: "div {\n  position: relative;\n}"
-},
-
-{
-tag: "top",
-category: "position",
-title: "المسافة من الأعلى",
-description: "تحدد إزاحة العنصر من الأعلى عند استخدام التموضع المناسب.",
-code: "div {\n  position: relative;\n  top: 20px;\n}"
-},
-
-{
-tag: "z-index",
-category: "position",
-title: "ترتيب الطبقات",
-description: "تحدد ترتيب ظهور العناصر فوق بعضها عند تداخلها.",
-code: "div {\n  position: relative;\n  z-index: 10;\n}"
-},
-
-{
-tag: "overflow",
-category: "position",
-title: "المحتوى الزائد",
-description: "تتحكم في ظهور المحتوى الذي يتجاوز حدود العنصر.",
-code: "div {\n  overflow: hidden;\n}"
-},
-
-/* EFFECTS */
-
-{
-tag: "box-shadow",
-category: "effects",
-title: "ظل الصندوق",
-description: "تضيف ظلاً حول العنصر لإعطائه مظهراً ثلاثي الأبعاد.",
-code: "div {\n  box-shadow: 0 5px 15px #0003;\n}"
-},
-
-{
-tag: "transition",
-category: "effects",
-title: "الانتقال",
-description: "تجعل تغير الخصائص يحدث بشكل تدريجي وسلس.",
-code: "button {\n  transition: 0.3s;\n}"
-},
-
-{
-tag: "transform",
-category: "effects",
-title: "التحويل",
-description: "تسمح بتحريك العنصر أو تدويره أو تغيير حجمه.",
-code: "div {\n  transform: scale(1.1);\n}"
-},
-
-{
-tag: "animation",
-category: "effects",
-title: "الحركة",
-description: "تسمح بإنشاء حركات متكررة أو محددة باستخدام keyframes.",
-code: "div {\n  animation: move 2s infinite;\n}"
-},
-
-{
-tag: "cursor",
-category: "effects",
-title: "شكل المؤشر",
-description: "تحدد شكل مؤشر الفأرة عند المرور فوق العنصر.",
-code: "button {\n  cursor: pointer;\n}"
-},
-
-{
-tag: "filter",
-category: "effects",
-title: "تأثيرات الصور",
-description: "تضيف تأثيرات بصرية مثل التمويه وتغيير السطوع.",
-code: "img {\n  filter: grayscale(100%);\n}"
 }
 
-];
+};
 
+/* ================= LANGUAGE ================= */
 
-/* SELECT ELEMENTS */
+const languageSelect = document.getElementById("languageSelect");
 
-const grid = document.getElementById("lessonsGrid");
+function setLanguage(language) {
 
-const searchInput = document.getElementById("searchInput");
+    const selected = translations[language] ? language : "ar";
 
-const categoryFilter = document.getElementById("categoryFilter");
+    document.documentElement.lang = selected;
 
+    document.documentElement.dir =
+        selected === "ar" ? "rtl" : "ltr";
 
-/* DISPLAY LESSONS */
+    document.querySelectorAll("[data-i18n]").forEach(element => {
 
-function renderLessons() {
+        const key = element.dataset.i18n;
 
-    const search = searchInput.value.toLowerCase().trim();
-
-    const category = categoryFilter.value;
-
-    const filtered = lessons.filter(lesson => {
-
-        const matchesSearch =
-            lesson.tag.toLowerCase().includes(search) ||
-            lesson.title.toLowerCase().includes(search) ||
-            lesson.description.toLowerCase().includes(search);
-
-        const matchesCategory =
-            category === "all" || lesson.category === category;
-
-        return matchesSearch && matchesCategory;
+        if (translations[selected][key] !== undefined) {
+            element.textContent = translations[selected][key];
+        }
 
     });
 
-    grid.innerHTML = "";
+    languageSelect.value = selected;
 
-    if (filtered.length === 0) {
+    try {
+        localStorage.setItem("ma-language",selected);
+    } catch(error) {}
 
-        const message = document.createElement("p");
+}
 
-        message.className = "no-results";
+languageSelect.addEventListener("change",event => {
+    setLanguage(event.target.value);
+});
 
-        message.textContent = "لم يتم العثور على نتائج.";
+/* ================= THEME ================= */
 
-        grid.appendChild(message);
+const themeBtn = document.getElementById("themeBtn");
 
-        return;
-    }
+function setTheme(isLight) {
 
-    filtered.forEach(lesson => {
+    document.body.classList.toggle("light-mode",isLight);
 
-        const card = document.createElement("article");
-        card.className = "lesson-card";
+    themeBtn.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
 
-        const image = document.createElement("div");
-        image.className = "lesson-image";
+    themeBtn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+    );
 
-        const dots = document.createElement("div");
-        dots.className = "dots";
-        dots.innerHTML = "<i></i><i></i><i></i>";
+    try {
+        localStorage.setItem(
+            "ma-theme",
+            isLight ? "light" : "dark"
+        );
+    } catch(error) {}
 
-        const pre = document.createElement("pre");
-        pre.textContent = lesson.code;
+}
 
-        image.append(dots, pre);
+themeBtn.addEventListener("click",() => {
 
-        const info = document.createElement("div");
-        info.className = "lesson-info";
+    const isLight =
+        document.body.classList.contains("light-mode");
 
-        const title = document.createElement("h3");
-        title.textContent = lesson.tag;
+    setTheme(!isLight);
 
-        const description = document.createElement("p");
-        description.textContent = lesson.description;
+});
 
-        const button = document.createElement("button");
-        button.className = "copy-btn";
-        button.textContent = "نسخ الكود";
+/* ================= SIDEBAR MENU ================= */
 
-        button.addEventListener("click", async () => {try {
-                await navigator.clipboard.writeText(lesson.code);
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sidebar = document.getElementById("sidebar");
+const menuOverlay = document.getElementById("menuOverlay");
 
-                button.textContent = "تم النسخ ✓";
+const menuLinks = document.querySelectorAll(".sidebar-links a");
 
-                setTimeout(() => {
-                    button.textContent = "نسخ الكود";
-                }, 1500);
+function openSidebar() {
 
-            } catch {
-                button.textContent = "تعذر النسخ";
-            }
+    sidebar.classList.add("open");
+    menuOverlay.classList.add("show");
 
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeSidebar() {
+
+    sidebar.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
+
+menuBtn.addEventListener("click",openSidebar);
+
+closeMenu.addEventListener("click",closeSidebar);
+
+menuOverlay.addEventListener("click",closeSidebar);
+
+/* ACTIVE MENU LINK */
+
+menuLinks.forEach(link => {
+
+    link.addEventListener("click",() => {
+
+        menuLinks.forEach(item => {
+            item.classList.remove("active");
         });
 
-        info.append(title, description, button);
+        link.classList.add("active");
 
-        card.append(image, info);
+        closeSidebar();
 
-        grid.appendChild(card);
+    });
+
+});
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown",event => {
+
+    if(event.key === "Escape") {
+        closeSidebar();
+    }
+
+});
+
+/* ================= SCROLL PROGRESS ================= */
+
+const scrollProgress = document.getElementById("scrollProgress");
+
+const timeline = document.getElementById("timeline");
+
+const timelineProgress = document.getElementById("timelineProgress");
+
+const lessons = document.querySelectorAll(".lesson");
+
+function updateScroll() {
+
+    const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const pageProgress = scrollable > 0
+        ? (window.scrollY / scrollable) * 100
+        : 0;
+
+    scrollProgress.style.width = pageProgress + "%";
+
+    if (timeline && timelineProgress) {
+        const timelineRect = timeline.getBoundingClientRect();
+        const timelineTop = window.scrollY + timelineRect.top;
+        const timelineHeight = timeline.offsetHeight;
+        const current = window.scrollY + window.innerHeight * 0.65;
+        const progress = Math.max(0, Math.min(100,
+            ((current - timelineTop) / timelineHeight) * 100
+        ));
+        timelineProgress.style.setProperty("--timeline-progress", progress + "%");
+    }
+
+    lessons.forEach(lesson => {
+
+        const rect = lesson.getBoundingClientRect();
+
+        if (
+            rect.top < window.innerHeight * 0.75 &&
+            rect.bottom > window.innerHeight * 0.2
+        ) {
+            lesson.classList.add("active");
+        } else {
+            lesson.classList.remove("active");
+        }
 
     });
 
 }
 
+window.addEventListener("scroll",updateScroll,{
+    passive: true
+});
 
-/* SEARCH AND FILTER */
+window.addEventListener("resize",updateScroll);
 
-searchInput.addEventListener("input", renderLessons);
+updateScroll();
 
-categoryFilter.addEventListener("change", renderLessons);
+/* ================= COLORFUL CURSOR ================= */
 
+const colors = [
+    "#008cff",
+    "#00b4ff",
+    "#38bdf8",
+    "#06b6d4",
+    "#22c55e",
+    "#f97316",
+    "#eab308"
+];
 
-/* INITIAL DISPLAY */
+let lastSquareTime = 0;
 
-// استقبال كلمة البحث من الصفحة الرئيسية
-const params = new URLSearchParams(window.location.search);
-const searchQuery = params.get("search");
+function createSquare(x,y) {
 
-// وضع كلمة البحث داخل خانة البحث
-if (searchQuery) {
-    searchInput.value = searchQuery;
+    const now = performance.now();
+
+    if(now - lastSquareTime < 35) return;
+
+    lastSquareTime = now;
+
+    const square = document.createElement("span");
+
+    square.className = "cursor-square";
+
+    square.style.left = x + "px";
+    square.style.top = y + "px";
+
+    square.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(square);
+
+    square.addEventListener("animationend",() => {
+        square.remove();
+    },{once:true});
+
 }
 
-// عرض الدروس حسب كلمة البحث
-renderLessons();
+/* MOUSE */
+
+window.addEventListener("mousemove",event => {
+
+    createSquare(event.clientX,event.clientY);
+
+},{passive:true});
+
+/* TOUCH */
+
+window.addEventListener("touchmove",event => {
+
+    const touch = event.touches[0];
+
+    if(touch) {
+        createSquare(touch.clientX,touch.clientY);
+    }
+
+},{passive:true});
+
+/* ================= HTML COURSE SEARCH ================= */
+const lessonSearch = document.getElementById("lessonSearch");
+const lessonCards = [...document.querySelectorAll(".html-topic")];
+const noLessons = document.getElementById("noLessons");
+if (lessonSearch) {
+    lessonSearch.addEventListener("input", () => {
+        const query = lessonSearch.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        lessonCards.forEach(card => {
+            const content = (card.innerText + " " + (card.dataset.search || "")).toLocaleLowerCase();
+            const match = content.includes(query);
+            card.style.display = match ? "" : "none";
+            if (match) visible++;
+        });
+        noLessons.style.display = visible ? "none" : "block";
+    });
+}
+
+document.querySelectorAll(".copy-code").forEach(button => {
+    button.addEventListener("click", async () => {
+        const code = button.closest(".code-box").querySelector("code").innerText;
+        const original = button.innerHTML;
+        try {
+            await navigator.clipboard.writeText(code);
+            button.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ';
+        } catch (error) {
+            const area = document.createElement("textarea");
+            area.value = code;
+            area.style.position = "fixed";
+            area.style.opacity = "0";
+            document.body.appendChild(area);
+            area.select();
+            const copied = document.execCommand("copy");
+            area.remove();
+            button.innerHTML = copied ? '<i class="fa-solid fa-check"></i> تم النسخ' : 'انسخ يدويًا';
+        }
+        setTimeout(() => button.innerHTML = original, 1600);
+    });
+});
+
+/* ================= INITIAL SETTINGS ================= */
+
+let savedLanguage = "ar";
+let savedTheme = "dark";
+
+try {
+
+    savedLanguage =
+        localStorage.getItem("ma-language") || "ar";
+
+    savedTheme =
+        localStorage.getItem("ma-theme") || "dark";
+
+} catch(error) {}
+
+setLanguage(savedLanguage);
+
+setTheme(savedTheme === "light");
+
+/* FOOTER YEAR */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
 </script>
-
 </body>
 </html>

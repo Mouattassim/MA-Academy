@@ -1,747 +1,2014 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python Course | MA Academy</title>
 
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="تعلم تطوير الويب والبرمجة مع أكاديمية MA" name="description"/>
+<title>MA Academy | Python Course</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <style>
+
+/* ================= COLORS ================= */
+
+:root {
+    color-scheme: dark;
+    --bg: #050505;
+    --card: #101010;
+    --card2: #171717;
+    --text: #ffffff;
+    --muted: #a1a1aa;
+    --primary: #008cff;
+    --secondary: #00b4ff;
+    --border: rgba(255,255,255,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.3);
+}
+
+body.light-mode {
+    color-scheme: light;
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --card2: #eeeeF5;
+    --text: #171717;
+    --muted: #626273;
+    --border: rgba(0,0,0,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.08);
+}
+
+/* ================= GLOBAL ================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f7fc;
-    color: #1b2940;
-    line-height: 1.8;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    transition: background .3s, color .3s;
+    overflow-x: hidden;
 }
 
-header {
-    background: #071b3d;
-    color: white;
-    padding: 18px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+html[lang="ar"] body {
+    font-family: 'Cairo', sans-serif;
 }
 
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: #55aaff;
+html[lang="en"] body,
+html[lang="fr"] body {
+    font-family: 'Inter', sans-serif;
 }
 
-header a {
-    color: white;
+a {
+    color: inherit;
     text-decoration: none;
 }
 
-.hero {
-    background: linear-gradient(135deg,#071b3d,#0757a8);
+button, select {
+    font: inherit;
+}
+
+/* ================= PAGE PROGRESS ================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    z-index: 9999;
+    box-shadow: 0 0 12px #008cff;
+}
+
+/* ================= HEADER ================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-static {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
     color: white;
-    padding: 65px 20px;
-    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
 }
 
-.hero h1 {
-    font-size: 38px;
-    margin-bottom: 10px;
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.hero p {
-    color: #d9eaff;
+.header-controls select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-.hero .icon {
-    font-size: 65px;
+/* HEADER BUTTONS */
+
+.theme-btn,
+.menu-btn {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,rgba(0,140,255,.18),rgba(0,180,255,.18));
+    color: var(--primary);
+    border: 1px solid rgba(0,140,255,.35);
+    border-radius: 14px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .35s;
 }
 
-.container {
-    width: 88%;
-    max-width: 1100px;
-    margin: 45px auto;
+.theme-btn:hover,
+.menu-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.35);
 }
 
-.section-title {
-    color: #0757a8;
-    border-right: 5px solid #1685e8;
-    padding-right: 12px;
-    margin: 45px 0 22px;
+/* ================= SIDEBAR ================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(440px,88%);
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 2001;
+    padding: 45px 35px;
+    overflow-y: auto;
+    transform: translateX(105%);
+    transition: transform .4s ease;
+    border-left: 1px solid var(--border);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 55px;
+    gap: 15px;
+}
+
+.sidebar-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.close-menu {
+    width: 55px;
+    height: 55px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
     font-size: 25px;
-}
-
-.intro {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 3px 15px #0000000b;
-}
-
-.lesson {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    margin-bottom: 22px;
-    border: 1px solid #e0e8f3;
+    cursor: pointer;
     transition: .3s;
 }
 
-.lesson:hover {
-    border-color: #1685e8;
-    box-shadow: 0 5px 18px #0757a81a;
+.close-menu:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    transition: .3s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+    color: var(--primary);
+    padding-right: 22px;
+}
+
+.sidebar-links a.active {
+    border-bottom-color: rgba(0,140,255,.5);
+}
+
+.sidebar-footer {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: .85rem;
+    text-align: center;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 88vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #008cff;
+    filter: blur(180px);
+    opacity: .22;
+    top: 10%;
+    left: 10%;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 850px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome {
+    color: var(--primary);
+    font-family: 'Poppins',sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-family: 'Poppins',sans-serif;
+    font-size: clamp(2.5rem,8vw,5.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.hero-title > span:last-child {
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-motion {
+    display: inline-block;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: maMove 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes maMove {
+    from { transform: translateX(-15px); }
+    to { transform: translateX(15px); }
+}
+
+.hero h2 {
+    font-size: clamp(1.3rem,4vw,2rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.fixed-name {
+    display: inline-block;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+    line-height: 2;
+    font-weight: 500;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 13px 30px;
+    background: linear-gradient(90deg,#0077ee,#00b4ff);
+    color: white;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: transform .3s,box-shadow .3s;
+}
+
+.main-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,140,255,.35);
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 90px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(1.8rem,5vw,2.6rem);
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    text-align: center;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 650px;
+    margin: 0 auto 55px;
+    font-weight: 500;
+}
+
+/* ================= TIMELINE ================= */
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+}
+
+.timeline-progress {
+    position: absolute;
+    right: 27px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timeline-progress::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--timeline-progress,0%);
+    background: linear-gradient(to bottom,#008cff,#00b4ff,#38bdf8);
+    transition: height .15s;
+}
+
+.lesson {
+    position: relative;
+    margin-bottom: 35px;
+    margin-right: 65px;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    opacity: .55;
+    transform: translateY(25px);
+    transition: .5s ease;
+}
+
+.lesson.active {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: var(--primary);
+}
+
+.lesson-number {
+    position: absolute;
+    right: -65px;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card2);
+    border: 2px solid var(--border);
+    font-family: 'Poppins',sans-serif;
+    font-weight: 800;
+    transition: .3s;
+}
+
+.lesson.active .lesson-number {
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.4);
 }
 
 .lesson h3 {
-    color: #0757a8;
-    margin-bottom: 8px;
-    font-size: 20px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.8;
 }
 
 .lesson p {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 2;
+}
+
+.tech-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: .35s ease;
+}
+
+.lesson:hover .tech-icon {
+    transform: translateY(-6px) scale(1.1);
+}
+
+.html-icon { color: #e34f26; }
+.css-icon { color: #1572b6; }
+.js-icon { color: #f7df1e; }
+.python-icon { color: #3776ab; }
+
+.ma-icon {
+    font-family: 'Poppins',sans-serif;
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+html[lang="en"] .timeline .lesson h3,
+html[lang="fr"] .timeline .lesson h3,
+html[lang="en"] .timeline .lesson p,
+html[lang="fr"] .timeline .lesson p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= DEVELOPER ================= */
+
+.services {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.services-content {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.services-image {
+    width: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.services h2 {
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.services p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+html[lang="en"] .services p,
+html[lang="fr"] .services p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 45px 20px;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary);
     margin-bottom: 12px;
 }
 
-pre {
-    direction: ltr;
-    text-align: left;
-    background: #081b35;
-    color: #8dd0ff;
-    padding: 18px;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-size: 14px;
-    line-height: 1.7;
-    margin-top: 12px;
+footer p {
+    color: var(--muted);
+    line-height: 2;
+    font-weight: 500;
 }
 
-.note {
-    background: #e8f3ff;
-    border-right: 4px solid #1685e8;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 5px;
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 30px 0;
 }
 
-.tag {
-    display: inline-block;
-    background: #e4f1ff;
-    color: #0757a8;
-    padding: 3px 12px;
-    border-radius: 5px;
-    font-size: 13px;
-    margin-bottom: 10px;
+.social {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    font-size: 23px;
+    transition: .35s ease;
 }
 
-footer {
-    background: #071b3d;
-    color: white;
-    text-align: center;
-    padding: 25px;
-    margin-top: 60px;
+.social.instagram { color: #e1306c; }
+.social.github { color: var(--text); }
+.social.whatsapp { color: #25d366; }
+.social.gmail { color: #ea4335; }
+
+.social:hover {
+    transform: translateY(-7px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,140,255,.2);
+    border-color: var(--primary);
+    background: var(--card);
 }
 
-footer span {
-    color: #55aaff;
+.copyright {
+    font-size: .85rem;
+    margin-top: 20px;
 }
 
-@media(max-width:600px) {
-    .hero h1 {
-        font-size: 29px;
+/* ================= CURSOR SQUARES ================= */
+
+.cursor-square {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: squareFade .7s ease-out forwards;
+}
+
+@keyframes squareFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0) rotate(180deg);
+    }
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 13px 4%;
     }
 
-    .container {
-        width: 92%;
+    section {
+        padding: 75px 5%;
     }
 
-    pre {
+    .hero-title {
+        font-size: clamp(2.5rem,9vw,4.5rem);
+    }
+
+    .services-content {
+        gap: 25px;
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    html {
+        scroll-padding-top: 75px;
+    }
+
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* HEADER */
+
+    .topbar {
+        width: 100%;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1rem;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .ma-static {
+        width: 35px;
+        height: 35px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+    .header-controls {
+        gap: 6px;
+    }
+
+    .header-controls select {
+        max-width: 112px;
+        padding: 8px 5px;
+        font-size: 12px;
+        border-radius: 9px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: min(88%,390px);
+        padding: 25px 22px;
+    }
+
+    .sidebar-top {
+        margin-bottom: 35px;
+    }
+
+    .sidebar-logo {
+        font-size: 1.2rem;
+    }
+
+    .close-menu {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+        border-radius: 8px;
+    }
+
+    .sidebar-links a {
+        font-size: 1.05rem;
+        padding: 19px 10px;
+    }
+
+    .sidebar-footer {
+        margin-top: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 75vh;
+        min-height: 75svh;
+        padding: 75px 18px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .welcome {
+        font-size: .75rem;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem,9vw,3.5rem);
+        gap: 9px;
+        line-height: 1.3;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-top: 12px;
+    }
+
+    .fixed-name {
+        font-size: 1rem;
+    }
+
+    .hero p {
+        font-size: .95rem;
+        line-height: 2;
+        padding: 0 5px;
+        margin-bottom: 25px;
+    }
+
+    .main-btn {
+        padding: 12px 25px;
+        font-size: .95rem;
+    }
+
+    /* SECTIONS */
+
+    section {
+        padding: 65px 18px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.6;
+    }
+
+    .section-description {
+        font-size: .92rem;
+        line-height: 2;
+        margin-bottom: 40px;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+        width: 100%;
+    }
+
+    .timeline-progress {
+        right: 19px;
+    }
+
+    .lesson {
+        margin-right: 47px;
+        margin-bottom: 25px;
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    .lesson-number {
+        right: -47px;
+        top: 18px;
+        width: 38px;
+        height: 38px;
+        font-size: .8rem;
+    }
+
+    .lesson h3 {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .lesson p {
+        font-size: .88rem;
+        line-height: 2;
+    }
+
+    .tech-icon {
+        font-size: 43px;
+        margin-bottom: 10px;
+    }
+
+    .ma-icon {
+        font-size: 1.9rem;
+    }
+
+    /* SERVICES / DEVELOPER */
+
+    .services-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .services-image {
+        width: 100%;
+        min-height: 190px;
+        max-height: 240px;
+        border-radius: 15px;
+    }
+
+    .services h2 {
+        font-size: 1.45rem;
+        line-height: 1.7;
+    }
+
+    .services p {
+        font-size: .93rem;
+        line-height: 2;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 40px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+
+    footer p {
+        font-size: .9rem;
+    }
+
+    .social-links {
+        gap: 12px;
+        margin: 25px 0;
+    }
+
+    .social {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+
+    .copyright {
+        font-size: .78rem;
+    }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+    .topbar {
+        padding: 9px 8px;
+        gap: 5px;
+    }
+
+    .logo {
+        font-size: .85rem;
+        gap: 5px;
+    }
+
+    .ma-static {
+        width: 32px;
+        height: 32px;
         font-size: 12px;
     }
+
+    .header-controls {
+        gap: 4px;
+    }
+
+    .header-controls select {
+        max-width: 91px;
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
+        font-size: 13px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        gap: 7px;
+    }
+
+    .hero h2 {
+        font-size: 1.05rem;
+    }
+
+    .lesson {
+        margin-right: 43px;
+        padding: 14px;
+    }
+
+    .lesson-number {
+        right: -43px;
+        width: 35px;
+        height: 35px;
+    }
+
 }
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+
+/* ================= HTML LEARNING PAGE ================= */
+.html-learning { max-width: 1120px; margin: auto; }
+.html-intro { max-width: 850px; margin: 0 auto 35px; text-align: center; }
+.html-intro .html-badge { display:inline-flex; align-items:center; gap:9px; color:var(--primary); background:rgba(0,140,255,.1); border:1px solid rgba(0,140,255,.28); border-radius:30px; padding:9px 16px; font-weight:800; margin-bottom:18px; }
+.html-intro h2 { font-size:clamp(1.8rem,5vw,2.7rem); font-weight:900; margin-bottom:14px; }
+.html-intro h2 span { color:var(--primary); }
+.html-intro p { color:var(--muted); line-height:2; }
+.html-search-wrap { max-width:720px; margin:30px auto 42px; position:relative; }
+.html-search-wrap i { position:absolute; right:20px; top:50%; transform:translateY(-50%); color:var(--primary); }
+html[dir="ltr"] .html-search-wrap i { right:auto; left:20px; }
+.html-search { width:100%; padding:17px 52px 17px 18px; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:15px; outline:none; font:inherit; box-shadow:var(--shadow); }
+html[dir="ltr"] .html-search { padding:17px 18px 17px 52px; }
+.html-search:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(0,140,255,.12); }
+.html-lessons-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.html-topic { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:25px; box-shadow:var(--shadow); transition:.3s; min-width:0; }
+.html-topic:hover { transform:translateY(-5px); border-color:rgba(0,140,255,.65); }
+.html-topic-head { display:flex; align-items:center; gap:13px; margin-bottom:15px; }
+.html-topic-num { width:42px; height:42px; flex:0 0 42px; display:grid; place-items:center; border-radius:12px; color:#fff; font-weight:900; background:linear-gradient(135deg,#0077ee,#00b4ff); }
+.html-topic h3 { font-size:1.15rem; font-weight:900; }
+.html-topic p,.html-topic li { color:var(--muted); line-height:2; font-size:.96rem; }
+.html-topic ul { padding-inline-start:22px; margin:10px 0 15px; }
+.code-box { direction:ltr; text-align:left; position:relative; margin-top:17px; background:#080d16; border:1px solid rgba(0,140,255,.22); border-radius:13px; overflow:hidden; }
+.code-top { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 13px; color:#aab8cc; background:#111b2a; font:600 .78rem 'Inter',sans-serif; }
+.copy-code { border:1px solid rgba(0,180,255,.35); border-radius:8px; padding:7px 10px; color:#7dd3fc; background:rgba(0,140,255,.12); cursor:pointer; font:700 .78rem 'Inter',sans-serif; transition:.2s; }
+.copy-code:hover { background:#0077ee; color:white; }
+.code-box pre { margin:0; padding:17px; overflow-x:auto; color:#e2e8f0; font: .88rem/1.85 'Inter',monospace; white-space:pre; }
+.code-box code { font-family:inherit; }
+.html-tip { margin-top:15px; padding:13px 15px; border-right:3px solid var(--primary); background:rgba(0,140,255,.08); border-radius:8px; color:var(--muted); line-height:1.9; font-size:.9rem; }
+html[dir="ltr"] .html-tip { border-right:0; border-left:3px solid var(--primary); }
+.html-no-results { display:none; text-align:center; color:var(--muted); padding:35px; background:var(--card); border:1px solid var(--border); border-radius:15px; margin-top:20px; }
+.html-project { margin-top:35px; background:linear-gradient(135deg,rgba(0,119,238,.14),rgba(0,180,255,.06)); border:1px solid rgba(0,140,255,.28); border-radius:18px; padding:27px; }
+.html-project h3 { font-size:1.3rem; margin-bottom:12px; }
+.html-project p { color:var(--muted); line-height:2; }
+@media(max-width:700px) { .html-lessons-grid { grid-template-columns:1fr; gap:16px; } .html-topic { padding:19px; } .html-topic h3 { font-size:1.05rem; } .html-topic p,.html-topic li { font-size:.9rem; } .code-box pre { font-size:.78rem; padding:13px; } }
+
 </style>
 </head>
-
 <body>
-
-<header>
-    <div class="logo"><img src="images/اكادمية.png" alt="" width="150px"></div>
-    <a href="indexxx.html">الرئيسية</a>
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- HEADER -->
+<header class="topbar">
+<a class="logo" href="index.html">
+<img alt="logo" src="images/logogdd.png" width="200px"/>
+</a>
+<div class="header-controls">
+<select aria-label="Language" id="languageSelect">
+<option value="ar">🇩🇿 العربية</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+</select>
+<button aria-label="Change theme" class="theme-btn" id="themeBtn">
+<i class="fa-solid fa-moon"></i>
+</button>
+<button aria-label="Open menu" class="menu-btn" id="menuBtn">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
 </header>
-
-<section class="hero">
-    <div class="icon">🐍</div>
-    <h1>تعلم لغة Python</h1>
-    <p>دليلك الشامل لتعلم أساسيات لغة Python من الصفر إلى الاحتراف.</p>
+<!-- SIDEBAR -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-top">
+<div class="sidebar-logo"><img alt="logo" src="images/logogdd.png" width="300px"/></div>
+<button aria-label="Close menu" class="close-menu" id="closeMenu">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="sidebar-links">
+<a data-i18n="navHome" href="index.html">ACCUEIL</a>
+<a data-i18n="navHTML" href="html.html">HTML</a>
+<a data-i18n="navCSS" href="css.html">CSS</a>
+<a data-i18n="navJS" href="js.html">JAVASCRIPT</a>
+<a class="active" data-i18n="navPython" href="py.html">PYTHON</a>
+<a data-i18n="navDeveloper" href="#developer">DEVELOPER</a>
+<a data-i18n="navContact" href="#contact">CONTACT ME</a>
+</div>
+<div class="sidebar-footer">
+        © MA Academy
+    </div>
+</nav>
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="welcome" data-i18n="welcome">
+            WELCOME TO
+        </div>
+<h1 class="hero-title">
+<img alt="logo" src="images/logogdd.png" width="400px"/>
+</h1>
+<h2>
+<span data-i18n="academy">أكاديمية</span>
+<span class="fixed-name">Mouattassim Bellah</span>
+</h2>
+<p data-i18n="heroDescription">
+            تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.
+        </p>
+<a class="main-btn" data-i18n="start" href="#courses">
+            ابدأ الآن
+        </a>
+</div>
 </section>
-
-<main class="container">
-
-<div class="intro">
-    <h2>مقدمة عن Python</h2>
-    <p>
-        Python هي لغة برمجة عالية المستوى وسهلة التعلم،
-        تُستخدم في تطوير التطبيقات والمواقع وتحليل البيانات
-        والذكاء الاصطناعي والتعلم الآلي.
-        تتميز ببساطة قواعد كتابتها وقوة مكتباتها.
-    </p>
+<!-- HTML COURSE: FROM ZERO -->
+<section id="courses">
+<div class="html-learning" id="html-lessons">
+<div class="html-intro">
+<div class="html-badge"><i class="fa-brands fa-python"></i> PYTHON • COMPLETE COURSE</div>
+<h2>تعلم <span>Python</span> من الصفر</h2>
+<p>تعلم Python خطوة بخطوة، من المتغيرات وأنواع البيانات والشروط والحلقات إلى القوائم والقواميس والدوال والبرمجة كائنية التوجه وتحليل البيانات وبناء المشاريع.</p>
 </div>
-
-<!-- 01 -->
-
-<h2 class="section-title">01 - أساسيات اللغة</h2>
-
-<div class="lesson">
-<span class="tag">Print</span>
-<h3>1. أمر الطباعة print()</h3>
-<p>
-يُستخدم الأمر print() لعرض النصوص أو القيم أو نتائج العمليات
-على شاشة الإخراج.
-</p>
-<pre>
-print("Hello World")
-print(25)
-print(10 + 5)
-</pre>
-<div class="note">النتيجة: Hello World ثم 25 ثم 15.</div>
+<div class="html-search-wrap">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="ابحث في دروس Python" class="html-search" id="lessonSearch" placeholder="ابحث عن درس... مثل: المتغيرات، الشروط، الحلقات، القوائم، الدوال، NumPy" type="search"/>
 </div>
+<div class="html-lessons-grid" id="htmlLessonsGrid"><article class="html-topic" data-search="ما هي Python؟ Python برمجة ما هي python؟"><div class="html-topic-head"><span class="html-topic-num">01</span><h3>ما هي Python؟</h3></div><p>Python لغة برمجة عالية المستوى، سهلة القراءة وتُستخدم في تطوير الويب وتحليل البيانات والذكاء الاصطناعي والأتمتة وغيرها.</p><div class="html-tip">تتميز Python ببساطة صياغتها وتوفر مكتبات كثيرة.</div></article><article class="html-topic" data-search="تثبيت Python وتجهيز بيئة العمل Python برمجة تثبيت python وتجهيز بيئة العمل"><div class="html-topic-head"><span class="html-topic-num">02</span><h3>تثبيت Python وتجهيز بيئة العمل</h3></div><p>يمكن تثبيت Python من الموقع الرسمي، ثم كتابة البرامج في محرر مثل VS Code أو تشغيلها من الطرفية Terminal.</p><div class="code-box"><div class="code-top"><span>terminal.txt</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>python --version
+# أو في بعض الأنظمة:
+python3 --version</code></pre></div><div class="html-tip">تأكد من تثبيت Python وإضافة المسار PATH عند الحاجة.</div></article><article class="html-topic" data-search="أول برنامج في Python Python برمجة أول برنامج في python"><div class="html-topic-head"><span class="html-topic-num">03</span><h3>أول برنامج في Python</h3></div><p>يبدأ تعلم Python عادة ببرنامج بسيط يعرض رسالة باستخدام الدالة print().</p><div class="code-box"><div class="code-top"><span>hello.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>print(&quot;Hello, Mouattassim!&quot;)
+print(&quot;Welcome to MA Academy&quot;)</code></pre></div><div class="html-tip">النصوص توضع بين علامات اقتباس مفردة أو مزدوجة.</div></article><article class="html-topic" data-search="التعليقات Comments Python برمجة التعليقات comments"><div class="html-topic-head"><span class="html-topic-num">04</span><h3>التعليقات Comments</h3></div><p>التعليقات تشرح الكود ولا ينفذها المفسر. يبدأ التعليق أحادي السطر بالرمز #.</p><div class="code-box"><div class="code-top"><span>comments.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code># This is a comment
+print(&quot;Mouattassim is learning Python&quot;)
 
-<div class="lesson">
-<span class="tag">Variables</span>
-<h3>2. المتغيرات Variables</h3>
-<p>
-المتغير هو اسم نستخدمه لتخزين قيمة معينة داخل الذاكرة،
-ويمكن تغيير قيمته أثناء تنفيذ البرنامج.
-</p>
-<pre>
-name = "Ahmed"
-age = 20
-price = 15.5
+# يمكن استخدام التعليقات لتنظيم الكود</code></pre></div><div class="html-tip">اكتب تعليقات مختصرة تشرح الفكرة أو سبب اختيار طريقة معينة.</div></article><article class="html-topic" data-search="المتغيرات Variables Python برمجة المتغيرات variables"><div class="html-topic-head"><span class="html-topic-num">05</span><h3>المتغيرات Variables</h3></div><p>المتغير اسم يشير إلى قيمة في الذاكرة. لا تحتاج Python إلى كتابة نوع المتغير عند تعريفه.</p><div class="code-box"><div class="code-top"><span>variables.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>student_name = &quot;Mouattassim&quot;
+age = 18
+score = 17.5
 
-print(name)
+print(student_name)
 print(age)
-</pre>
-</div>
+print(score)</code></pre></div><div class="html-tip">اختر أسماء واضحة مثل student_name بدل أسماء غامضة.</div></article><article class="html-topic" data-search="قواعد تسمية المتغيرات Python برمجة قواعد تسمية المتغيرات"><div class="html-topic-head"><span class="html-topic-num">06</span><h3>قواعد تسمية المتغيرات</h3></div><p>يمكن أن تحتوي أسماء المتغيرات على الحروف والأرقام والشرطة السفلية، ولا يجوز أن تبدأ برقم أو تكون كلمة محجوزة.</p><div class="code-box"><div class="code-top"><span>naming.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>first_name = &quot;Mouattassim&quot;
+student_age = 18
+total_score = 95
 
-<div class="lesson">
-<span class="tag">Data Types</span>
-<h3>3. أنواع البيانات Data Types</h3>
-<p>تحدد نوع القيمة التي يتعامل معها البرنامج.</p>
-<pre>
-name = "Python"   # str
-age = 20          # int
-price = 12.5      # float
-is_active = True  # boolprint(type(name))
+# غير صحيح:
+# 2name = &quot;Ali&quot;</code></pre></div><div class="html-tip">Python حساسة لحالة الأحرف؛ name وName متغيران مختلفان.</div></article><article class="html-topic" data-search="أنواع البيانات Data Types Python برمجة أنواع البيانات data types"><div class="html-topic-head"><span class="html-topic-num">07</span><h3>أنواع البيانات Data Types</h3></div><p>من الأنواع الأساسية str للنصوص وint للأعداد الصحيحة وfloat للأعداد العشرية وbool للقيم المنطقية.</p><div class="code-box"><div class="code-top"><span>types.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = &quot;Mouattassim&quot;
+age = 18
+average = 16.75
+is_student = True
+
+print(type(name))
 print(type(age))
-print(type(price))
-</pre>
-<div class="note">
-str: نصوص - int: أعداد صحيحة - float: أعداد عشرية - bool: قيم منطقية.
-</div>
-</div>
+print(type(average))
+print(type(is_student))</code></pre></div><div class="html-tip">استخدم type() لمعرفة نوع قيمة.</div></article><article class="html-topic" data-search="الأعداد والعمليات الحسابية Python برمجة الأعداد والعمليات الحسابية"><div class="html-topic-head"><span class="html-topic-num">08</span><h3>الأعداد والعمليات الحسابية</h3></div><p>تدعم Python الجمع والطرح والضرب والقسمة والقسمة الصحيحة وباقي القسمة والأس باستخدام + و- و* و/ و// و% و**.</p><div class="code-box"><div class="code-top"><span>math.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>a = 15
+b = 4
 
-<div class="lesson">
-<span class="tag">Input</span>
-<h3>4. إدخال البيانات input()</h3>
-<p>
-يُستخدم input() لاستقبال البيانات من المستخدم أثناء تشغيل البرنامج.
-وتكون القيمة المستقبلة نصاً افتراضياً.
-</p>
-<pre>
-name = input("Enter your name: ")
-print("Welcome", name)
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a // b)
+print(a % b)
+print(a ** 2)</code></pre></div><div class="html-tip">انتبه إلى الفرق بين / و//؛ الأولى قسمة عادية والثانية قسمة صحيحة.</div></article><article class="html-topic" data-search="النصوص Strings Python برمجة النصوص strings"><div class="html-topic-head"><span class="html-topic-num">09</span><h3>النصوص Strings</h3></div><p>النصوص سلاسل من الأحرف يمكن كتابتها بين اقتباسين مفردين أو مزدوجين أو ثلاثية الاقتباس للنصوص متعددة الأسطر.</p><div class="code-box"><div class="code-top"><span>strings.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = &quot;Mouattassim&quot;
+message = &quot;Welcome to Python&quot;
 
-age = int(input("Enter your age: "))
-print(age)
-</pre>
-</div>
+print(len(name))
+print(message)
+print(name[0])
+print(name[-1])</code></pre></div><div class="html-tip">يمكن استخدام len() لمعرفة طول النص.</div></article><article class="html-topic" data-search="دمج النصوص و f-Strings Python برمجة دمج النصوص و f-strings"><div class="html-topic-head"><span class="html-topic-num">10</span><h3>دمج النصوص و f-Strings</h3></div><p>يمكن دمج النصوص باستخدام +، أو استخدام f-string لإدراج المتغيرات والتعبيرات داخل النص بطريقة سهلة القراءة.</p><div class="code-box"><div class="code-top"><span>fstrings.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = &quot;Mouattassim&quot;
+age = 18
 
-<div class="lesson">
-<span class="tag">Comments</span>
-<h3>5. التعليقات Comments</h3>
-<p>
-تُستخدم التعليقات لكتابة ملاحظات توضيحية داخل الكود،
-ولا ينفذها المفسر.
-</p>
-<pre>
-# This is a comment
+message = f&quot;My name is {name} and I am {age}.&quot;
+print(message)</code></pre></div><div class="html-tip">ضع الحرف f قبل علامات الاقتباس واكتب المتغير داخل الأقواس المعقوفة.</div></article><article class="html-topic" data-search="دوال النصوص String Methods Python برمجة دوال النصوص string methods"><div class="html-topic-head"><span class="html-topic-num">11</span><h3>دوال النصوص String Methods</h3></div><p>توفر النصوص دوالًا مثل upper() وlower() وstrip() وreplace() وsplit() لمعالجة النص.</p><div class="code-box"><div class="code-top"><span>string-methods.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = &quot;  Mouattassim  &quot;
 
-print("Hello")
-</pre>
-</div>
+print(name.strip())
+print(name.upper())
+print(name.lower())
+print(name.replace(&quot;M&quot;, &quot;m&quot;))
+print(&quot;HTML CSS JS&quot;.split())</code></pre></div><div class="html-tip">معظم دوال النصوص تعيد نصًا جديدًا ولا تغيّر النص الأصلي.</div></article><article class="html-topic" data-search="الفهرسة والتقطيع Slicing Python برمجة الفهرسة والتقطيع slicing"><div class="html-topic-head"><span class="html-topic-num">12</span><h3>الفهرسة والتقطيع Slicing</h3></div><p>يمكن الوصول إلى حرف بفهرس يبدأ من 0، واستخراج جزء من النص باستخدام الصيغة [start:stop:step].</p><div class="code-box"><div class="code-top"><span>slicing.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = &quot;Mouattassim&quot;
 
-<!-- 02 -->
+print(name[0])
+print(name[0:4])
+print(name[4:])
+print(name[::-1])</code></pre></div><div class="html-tip">حد النهاية في slicing غير مشمول في النتيجة.</div></article><article class="html-topic" data-search="تحويل أنواع البيانات Type Casting Python برمجة تحويل أنواع البيانات type casting"><div class="html-topic-head"><span class="html-topic-num">13</span><h3>تحويل أنواع البيانات Type Casting</h3></div><p>يمكن تحويل القيم باستخدام int() وfloat() وstr() وbool() عند توافق القيمة مع النوع المطلوب.</p><div class="code-box"><div class="code-top"><span>casting.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>age_text = &quot;18&quot;
+age = int(age_text)
 
-<h2 class="section-title">02 - العمليات Operators</h2>
+price = 12
+price_text = str(price)
 
-<div class="lesson">
-<h3>6. العمليات الحسابية Arithmetic Operators</h3>
-<p>تُستخدم لتنفيذ العمليات الرياضية.</p>
-<pre>
-a = 10
-b = 3
+print(age + 2)
+print(price_text)</code></pre></div><div class="html-tip">تحويل نص لا يمثل رقمًا إلى int يؤدي إلى ValueError.</div></article><article class="html-topic" data-search="إدخال البيانات input Python برمجة إدخال البيانات input"><div class="html-topic-head"><span class="html-topic-num">14</span><h3>إدخال البيانات input</h3></div><p>تستخدم input() لاستقبال إدخال المستخدم، وتعيد دائمًا قيمة نصية يمكن تحويلها عند الحاجة.</p><div class="code-box"><div class="code-top"><span>input.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = input(&quot;What is your name? &quot;)
+age = int(input(&quot;How old are you? &quot;))
 
-print(a + b)  # Addition
-print(a - b)  # Subtraction
-print(a * b)  # Multiplication
-print(a / b)  # Division
-print(a // b) # Floor division
-print(a % b)  # Modulo
-print(a ** b) # Power
-</pre>
-</div>
+print(f&quot;Hello {name}&quot;)
+print(f&quot;Next year you will be {age + 1}&quot;)</code></pre></div><div class="html-tip">حوّل الإدخال إلى int أو float إذا كنت تريد إجراء عمليات حسابية.</div></article><article class="html-topic" data-search="المعاملات المنطقية Python برمجة المعاملات المنطقية"><div class="html-topic-head"><span class="html-topic-num">15</span><h3>المعاملات المنطقية</h3></div><p>تستخدم and وor وnot لدمج الشروط أو عكس قيمتها المنطقية.</p><div class="code-box"><div class="code-top"><span>logical.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>age = 18
+has_id = True
 
-<div class="lesson">
-<h3>7. عمليات المقارنة Comparison Operators</h3>
-<p>تُستخدم لمقارنة قيمتين وتُرجع True أو False.</p>
-<pre>
-a = 10
-b = 5
+print(age &gt;= 18 and has_id)
+print(age &lt; 18 or has_id)
+print(not has_id)</code></pre></div><div class="html-tip">تُستخدم هذه المعاملات كثيرًا مع if وwhile.</div></article><article class="html-topic" data-search="المقارنات Comparison Operators Python برمجة المقارنات comparison operators"><div class="html-topic-head"><span class="html-topic-num">16</span><h3>المقارنات Comparison Operators</h3></div><p>تُستخدم == و!= و&gt; و&lt; و&gt;= و&lt;= لمقارنة القيم، وتكون النتيجة عادة True أو False.</p><div class="code-box"><div class="code-top"><span>comparison.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>score = 16
 
-print(a == b)
-print(a != b)
-print(a > b)
-print(a < b)
-print(a >= b)
-print(a <= b)
-</pre>
-</div>
+print(score == 16)
+print(score != 10)
+print(score &gt; 12)
+print(score &lt;= 20)</code></pre></div><div class="html-tip">لا تخلط بين = للإسناد و== للمقارنة.</div></article><article class="html-topic" data-search="الشروط if و elif و else Python برمجة الشروط if و elif و else"><div class="html-topic-head"><span class="html-topic-num">17</span><h3>الشروط if و elif و else</h3></div><p>تسمح الشروط بتنفيذ تعليمات مختلفة حسب تحقق شرط معين. تستخدم elif لاختبار حالات إضافية وelse للحالة المتبقية.</p><div class="code-box"><div class="code-top"><span>conditions.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>score = 15
 
-<div class="lesson">
-<h3>8. العمليات المنطقية Logical Operators</h3>
-<p>تُستخدم لربط الشروط والتحقق منها.</p>
-<pre>
-age = 20
-
-print(age > 18 and age < 30)
-print(age < 18 or age > 60)
-print(not age > 18)
-</pre>
-<div class="note">
-and: يجب تحقق الشرطين - or: يكفي تحقق أحدهما - not: عكس النتيجة.
-</div>
-</div>
-
-<!-- 03 -->
-
-<h2 class="section-title">03 - الشروط Conditions</h2>
-
-<div class="lesson">
-<h3>9. شرط if</h3>
-<p>يُستخدم لتنفيذ مجموعة أوامر عندما يكون الشرط صحيحاً.</p>
-<pre>
-age = 20
-
-if age >= 18:
-    print("Adult")
-</pre>
-</div>
-
-<div class="lesson">
-<h3>10. الشرطان elif و else</h3>
-<p>
-elif يُستخدم لاختبار شرط إضافي، بينما else يُنفذ
-عندما لا يتحقق أي شرط سابق.
-</p>
-<pre>
-mark = 15
-
-if mark >= 16:
-    print("Excellent")
-
-elif mark >= 10:
-    print("Passed")
-
+if score &gt;= 16:
+    print(&quot;Excellent, Mouattassim!&quot;)
+elif score &gt;= 10:
+    print(&quot;Passed&quot;)
 else:
-    print("Failed")
-</pre>
-</div>
+    print(&quot;Try again&quot;)</code></pre></div><div class="html-tip">المسافات البادئة Indentation جزء أساسي من بناء كود Python.</div></article><article class="html-topic" data-search="الشروط المتداخلة Nested if Python برمجة الشروط المتداخلة nested if"><div class="html-topic-head"><span class="html-topic-num">18</span><h3>الشروط المتداخلة Nested if</h3></div><p>يمكن وضع if داخل if عندما يعتمد قرار على تحقق شرط سابق، لكن ينبغي تجنب التداخل العميق الذي يصعّب القراءة.</p><div class="code-box"><div class="code-top"><span>nested-if.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>age = 19
+has_account = True
 
-<div class="lesson">
-<h3>11. Match Case</h3>
-<p>يُستخدم لمقارنة قيمة مع عدة حالات محتملة.</p>
-<pre>
-day = 2
+if age &gt;= 18:
+    if has_account:
+        print(&quot;Access granted&quot;)
+    else:
+        print(&quot;Create an account&quot;)
+else:
+    print(&quot;Access denied&quot;)</code></pre></div><div class="html-tip">استخدم and أو or إذا كان بالإمكان تبسيط شروط متعددة.</div></article><article class="html-topic" data-search="حلقة for Python برمجة حلقة for"><div class="html-topic-head"><span class="html-topic-num">19</span><h3>حلقة for</h3></div><p>تكرر for تنفيذ كتلة من التعليمات على عناصر تسلسل مثل قائمة أو نص أو range.</p><div class="code-box"><div class="code-top"><span>for-loop.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>for number in range(1, 6):
+    print(number)
 
-match day:
-    case 1:
-        print("Sunday")
-    case 2:
-        print("Monday")
-    case _:
-        print("Unknown day")
-</pre>
-<div class="note">يتوفر match/case ابتداءً من Python 3.10.</div>
-</div>
+for letter in &quot;Python&quot;:
+    print(letter)</code></pre></div><div class="html-tip">تُستخدم range() كثيرًا لإنشاء تسلسل من الأعداد.</div></article><article class="html-topic" data-search="الدالة range Python برمجة الدالة range"><div class="html-topic-head"><span class="html-topic-num">20</span><h3>الدالة range</h3></div><p>تنشئ range تسلسلًا من الأعداد، ويمكن تحديد البداية والنهاية والخطوة. لا تشمل قيمة النهاية.</p><div class="code-box"><div class="code-top"><span>range.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>print(list(range(5)))
+print(list(range(2, 7)))
+print(list(range(0, 10, 2)))
+print(list(range(5, 0, -1)))</code></pre></div><div class="html-tip">range(5) تعطي الأعداد من 0 إلى 4.</div></article><article class="html-topic" data-search="حلقة while Python برمجة حلقة while"><div class="html-topic-head"><span class="html-topic-num">21</span><h3>حلقة while</h3></div><p>تكرر while تنفيذ التعليمات ما دام الشرط صحيحًا. يجب تحديث المتغير أو الحالة لتجنب حلقة لا نهائية.</p><div class="code-box"><div class="code-top"><span>while-loop.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>count = 1
 
-<!-- 04 -->
-
-<h2 class="section-title">04 - الحلقات التكرارية Loops</h2>
-
-<div class="lesson">
-<h3>12. حلقة for</h3>
-<p>تُستخدم لتكرار الأوامر على عناصر مجموعة أو ضمن نطاق محدد.</p>
-<pre>
-for i in range(5):
-    print(i)
-</pre>
-<div class="note">النتيجة: 0 1 2 3 4</div>
-</div>
-
-<div class="lesson">
-<h3>13. حلقة while</h3>
-<p>تكرر الأوامر ما دام الشرط صحيحاً.</p>
-<pre>
-i = 1
-
-while i <= 5:
-    print(i)
-    i += 1
-</pre>
-</div>
-
-<div class="lesson">
-<h3>14. أمر break</h3>
-<p>يوقف الحلقة التكرارية مباشرة.</p>
-<pre>
-for i in range(10):
-    if i == 5:
-        break
-    print(i)
-</pre>
-</div>
-
-<div class="lesson">
-<h3>15. أمر continue</h3>
-<p>يتجاوز التكرار الحالي وينتقل إلى التكرار التالي.</p>
-<pre>
-for i in range(5):
-    if i == 2:
+while count &lt;= 5:
+    print(count)
+    count += 1</code></pre></div><div class="html-tip">استخدم while عندما يعتمد عدد مرات التكرار على شرط.</div></article><article class="html-topic" data-search="break وcontinue وpass Python برمجة break وcontinue وpass"><div class="html-topic-head"><span class="html-topic-num">22</span><h3>break وcontinue وpass</h3></div><p>توقف break الحلقة، وتتجاوز continue الدورة الحالية، أما pass فهي تعليمة فارغة تستخدم كعنصر نائب.</p><div class="code-box"><div class="code-top"><span>loop-control.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>for number in range(1, 6):
+    if number == 2:
         continue
-    print(i)
-</pre>
-</div>
+    if number == 5:
+        break
+    print(number)
 
-<div class="lesson">
-<h3>16. أمر pass</h3>
-<p>يُستخدم كتعليمة فارغة عندما نحتاج إلى ترك مكان للكود لاحقاً.</p>
-<pre>
-for i in range(5):
-    if i == 2:
-        pass
-    print(i)
-</pre>
-</div>
-
-<!-- 05 -->
-
-<h2 class="section-title">05 - هياكل البيانات Data Structures</h2>
-
-<div class="lesson">
-<h3>17. القوائم Lists</h3>
-<p>
-تُستخدم لتخزين عدة عناصر في متغير واحد،
-ويمكن تعديل عناصرها وإضافة عناصر جديدة.
-</p>
-<pre>
-students = ["Ali", "Sara", "Omar"]
+if True:
+    pass</code></pre></div><div class="html-tip">جرّب كل تعليمة في مثال منفصل لتفهم سلوكها.</div></article><article class="html-topic" data-search="الحلقات المتداخلة Nested Loops Python برمجة الحلقات المتداخلة nested loops"><div class="html-topic-head"><span class="html-topic-num">23</span><h3>الحلقات المتداخلة Nested Loops</h3></div><p>يمكن وضع حلقة داخل حلقة أخرى لإنشاء أنماط أو المرور على صفوف وأعمدة.</p><div class="code-box"><div class="code-top"><span>nested-loops.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>for row in range(1, 4):
+    for column in range(1, 4):
+        print(row, column)</code></pre></div><div class="html-tip">عدد مرات التنفيذ قد يزداد بسرعة عند استخدام حلقات متداخلة.</div></article><article class="html-topic" data-search="القوائم Lists Python برمجة القوائم lists"><div class="html-topic-head"><span class="html-topic-num">24</span><h3>القوائم Lists</h3></div><p>القائمة تخزن مجموعة عناصر مرتبة وقابلة للتعديل، ويمكن أن تحتوي أنواع بيانات مختلفة.</p><div class="code-box"><div class="code-top"><span>lists.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>students = [&quot;Mouattassim&quot;, &quot;Sara&quot;, &quot;Ali&quot;]
 
 print(students[0])
+print(students[-1])
+print(len(students))</code></pre></div><div class="html-tip">الفهرسة تبدأ من الصفر، ويمكن للقائمة أن تحتوي قوائم أخرى.</div></article><article class="html-topic" data-search="إضافة وحذف عناصر القائمة Python برمجة إضافة وحذف عناصر القائمة"><div class="html-topic-head"><span class="html-topic-num">25</span><h3>إضافة وحذف عناصر القائمة</h3></div><p>توفر القوائم append() وinsert() للإضافة، وremove() وpop() للحذف.</p><div class="code-box"><div class="code-top"><span>list-methods.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>students = [&quot;Mouattassim&quot;, &quot;Sara&quot;]
 
-students.append("Ahmed")
-students.remove("Sara")
+students.append(&quot;Ali&quot;)
+students.insert(1, &quot;Lina&quot;)
+students.remove(&quot;Sara&quot;)
+last_student = students.pop()
 
 print(students)
-</pre>
-</div>
+print(last_student)</code></pre></div><div class="html-tip">append يضيف في النهاية، بينما insert يحدد موضع الإضافة.</div></article><article class="html-topic" data-search="تعديل القوائم وترتيبها Python برمجة تعديل القوائم وترتيبها"><div class="html-topic-head"><span class="html-topic-num">26</span><h3>تعديل القوائم وترتيبها</h3></div><p>يمكن تعديل عنصر بإسناد قيمة إلى فهرسه، واستخدام sort() أو reverse() لترتيب القائمة أو عكسها.</p><div class="code-box"><div class="code-top"><span>list-sort.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>scores = [12, 18, 9, 15]
 
-<div class="lesson">
-<h3>18. الصفوف Tuples</h3>
-<p>
-تشبه القوائم لكنها غير قابلة للتعديل بعد إنشائها.
-</p>
-<pre>
-numbers = (10, 20, 30)
+scores[0] = 14
+scores.sort()
+print(scores)
 
-print(numbers[0])
-print(len(numbers))
-</pre>
-</div><div class="lesson">
-<h3>19. المجموعات Sets</h3>
-<p>
-تُستخدم لتخزين عناصر غير مكررة، ولا تعتمد على ترتيب ثابت للعناصر.
-</p>
-<pre>
-numbers = {1, 2, 3, 3, 4}
+scores.reverse()
+print(scores)</code></pre></div><div class="html-tip">sort() تعدّل القائمة الأصلية؛ sorted() تعيد قائمة مرتبة جديدة.</div></article><article class="html-topic" data-search="Tuples Python برمجة tuples"><div class="html-topic-head"><span class="html-topic-num">27</span><h3>Tuples</h3></div><p>Tuple مجموعة مرتبة غير قابلة للتعديل بعد إنشائها. تُكتب غالبًا بين قوسين دائريين.</p><div class="code-box"><div class="code-top"><span>tuples.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>student = (&quot;Mouattassim&quot;, 18, &quot;Python&quot;)
 
+print(student[0])
+print(student[1])
+print(len(student))</code></pre></div><div class="html-tip">استخدم tuple عندما تريد مجموعة قيم ثابتة نسبيًا.</div></article><article class="html-topic" data-search="Sets Python برمجة sets"><div class="html-topic-head"><span class="html-topic-num">28</span><h3>Sets</h3></div><p>Set مجموعة غير مرتبة لا تسمح بتكرار العناصر. يمكن استخدامها لإزالة التكرارات وإجراء عمليات المجموعات.</p><div class="code-box"><div class="code-top"><span>sets.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>numbers = {1, 2, 2, 3, 4}
 numbers.add(5)
-numbers.remove(2)
+numbers.discard(2)
 
 print(numbers)
-</pre>
-</div>
-
-<div class="lesson">
-<h3>20. القواميس Dictionaries</h3>
-<p>
-تخزن البيانات على شكل مفتاح وقيمة Key : Value.
-</p>
-<pre>
-student = {
-    "name": "Ali",
-    "age": 20,
-    "grade": 15
+print({1, 2, 3} | {3, 4, 5})
+print({1, 2, 3} &amp; {2, 3, 4})</code></pre></div><div class="html-tip">لا تعتمد على ترتيب عناصر set عند عرضها.</div></article><article class="html-topic" data-search="Dictionaries Python برمجة dictionaries"><div class="html-topic-head"><span class="html-topic-num">29</span><h3>Dictionaries</h3></div><p>القاموس يخزن البيانات على شكل أزواج مفتاح وقيمة، ويمكن الوصول إلى القيمة باستخدام المفتاح.</p><div class="code-box"><div class="code-top"><span>dictionaries.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>student = {
+    &quot;name&quot;: &quot;Mouattassim&quot;,
+    &quot;age&quot;: 18,
+    &quot;course&quot;: &quot;Python&quot;
 }
 
-print(student["name"])
+print(student[&quot;name&quot;])
+print(student[&quot;age&quot;])</code></pre></div><div class="html-tip">تكون المفاتيح فريدة وقابلة للاستخدام كمفاتيح قاموس.</div></article><article class="html-topic" data-search="إضافة وتعديل وحذف القاموس Python برمجة إضافة وتعديل وحذف القاموس"><div class="html-topic-head"><span class="html-topic-num">30</span><h3>إضافة وتعديل وحذف القاموس</h3></div><p>يمكن إضافة مفتاح جديد أو تعديل قيمة موجودة، واستخدام pop() أو del لحذف عنصر.</p><div class="code-box"><div class="code-top"><span>dict-methods.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>student = {&quot;name&quot;: &quot;Mouattassim&quot;, &quot;age&quot;: 18}
 
-student["age"] = 21
-student["city"] = "Algeria"
-</pre>
-</div>
+student[&quot;city&quot;] = &quot;Batna&quot;
+student[&quot;age&quot;] = 19
 
-<!-- 06 -->
+course = student.get(&quot;course&quot;, &quot;Not set&quot;)
+student.pop(&quot;city&quot;)
 
-<h2 class="section-title">06 - الدوال Functions</h2>
+print(student)
+print(course)</code></pre></div><div class="html-tip">استخدم get() للوصول إلى مفتاح مع قيمة افتراضية إذا لم يكن موجودًا.</div></article><article class="html-topic" data-search="التكرار على القواميس Python برمجة التكرار على القواميس"><div class="html-topic-head"><span class="html-topic-num">31</span><h3>التكرار على القواميس</h3></div><p>يمكن المرور على المفاتيح باستخدام keys()، وعلى القيم باستخدام values()، وعلى الأزواج باستخدام items().</p><div class="code-box"><div class="code-top"><span>dict-loops.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>student = {
+    &quot;name&quot;: &quot;Mouattassim&quot;,
+    &quot;age&quot;: 18,
+    &quot;grade&quot;: 17
+}
 
-<div class="lesson">
-<h3>21. إنشاء الدوال def</h3>
-<p>
-تُستخدم def لتعريف دالة تحتوي على مجموعة من الأوامر
-يمكن استدعاؤها عدة مرات.
-</p>
-<pre>
-def greet():
-    print("Welcome to Python")
+for key, value in student.items():
+    print(key, value)</code></pre></div><div class="html-tip">items() مفيدة عندما تحتاج المفتاح والقيمة معًا.</div></article><article class="html-topic" data-search="List Comprehension Python برمجة list comprehension"><div class="html-topic-head"><span class="html-topic-num">32</span><h3>List Comprehension</h3></div><p>تسمح List Comprehension بإنشاء قائمة جديدة من تسلسل باستخدام تعبير مختصر، ويمكن إضافة شرط للتصفية.</p><div class="code-box"><div class="code-top"><span>comprehension.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>numbers = [1, 2, 3, 4, 5]
 
-greet()
-</pre>
-</div>
+squares = [n ** 2 for n in numbers]
+evens = [n for n in numbers if n % 2 == 0]
 
-<div class="lesson">
-<h3>22. Parameters و Arguments</h3>
-<p>
-Parameters هي المتغيرات التي تستقبلها الدالة،
-وArguments هي القيم التي نمررها عند استدعائها.
-</p>
-<pre>
-def greet(name):
-    print("Hello", name)
+print(squares)
+print(evens)</code></pre></div><div class="html-tip">استخدمها عندما تجعل الكود أوضح، وليس لمجرد اختصار كل شيء.</div></article><article class="html-topic" data-search="الدوال Functions Python برمجة الدوال functions"><div class="html-topic-head"><span class="html-topic-num">33</span><h3>الدوال Functions</h3></div><p>الدالة كتلة من التعليمات قابلة لإعادة الاستخدام، وتُعرّف باستخدام def ويمكنها استقبال معاملات وإرجاع قيمة.</p><div class="code-box"><div class="code-top"><span>functions.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>def greet(name):
+    return f&quot;Hello, {name}!&quot;
 
-greet("Ahmed")
-</pre>
-</div>
+message = greet(&quot;Mouattassim&quot;)
+print(message)</code></pre></div><div class="html-tip">قسّم البرنامج إلى دوال صغيرة ذات أسماء واضحة.</div></article><article class="html-topic" data-search="المعاملات والقيم الافتراضية Python برمجة المعاملات والقيم الافتراضية"><div class="html-topic-head"><span class="html-topic-num">34</span><h3>المعاملات والقيم الافتراضية</h3></div><p>تستقبل الدالة معاملات، ويمكن تحديد قيمة افتراضية تستخدم عند عدم تمرير قيمة للمعامل.</p><div class="code-box"><div class="code-top"><span>parameters.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>def welcome(name=&quot;Mouattassim&quot;):
+    print(f&quot;Welcome {name}&quot;)
 
-<div class="lesson">
-<h3>23. return</h3>
-<p>تُستخدم لإرجاع نتيجة من الدالة إلى المكان الذي استدعاها.</p>
-<pre>
-def add(a, b):
+welcome()
+welcome(&quot;Sara&quot;)</code></pre></div><div class="html-tip">رتّب المعاملات المطلوبة قبل المعاملات ذات القيم الافتراضية.</div></article><article class="html-topic" data-search="return مقابل print Python برمجة return مقابل print"><div class="html-topic-head"><span class="html-topic-num">35</span><h3>return مقابل print</h3></div><p>تعرض print قيمة على الشاشة، بينما تعيد return نتيجة من الدالة إلى المكان الذي استدعاها.</p><div class="code-box"><div class="code-top"><span>return.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>def add(a, b):
     return a + b
 
-result = add(10, 5)
+result = add(5, 7)
+print(result)</code></pre></div><div class="html-tip">يمكن تخزين القيمة المعادة في متغير واستخدامها في عمليات أخرى.</div></article><article class="html-topic" data-search="نطاق المتغيرات Scope Python برمجة نطاق المتغيرات scope"><div class="html-topic-head"><span class="html-topic-num">36</span><h3>نطاق المتغيرات Scope</h3></div><p>يحدد النطاق مكان إمكانية الوصول إلى المتغير. المتغير المحلي يُعرّف داخل الدالة، والعالمي خارجها.</p><div class="code-box"><div class="code-top"><span>scope.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>academy = &quot;MA Academy&quot;
 
-print(result)
-</pre>
-</div>
+def show_course():
+    course = &quot;Python&quot;
+    print(academy)
+    print(course)
 
-<div class="lesson">
-<h3>24. Lambda</h3>
-<p>
-تُستخدم لإنشاء دوال صغيرة ومختصرة دون الحاجة إلى كتابة def.
-</p>
-<pre>
-square = lambda x: x * x
+show_course()</code></pre></div><div class="html-tip">تجنب استخدام global إلا عند وجود حاجة واضحة؛ تمرير القيم وإرجاعها غالبًا أوضح.</div></article><article class="html-topic" data-search="lambda Functions Python برمجة lambda functions"><div class="html-topic-head"><span class="html-topic-num">37</span><h3>lambda Functions</h3></div><p>دالة lambda دالة صغيرة مجهولة الاسم تتكون من تعبير واحد. يمكن استخدامها مع sorted وmap وfilter.</p><div class="code-box"><div class="code-top"><span>lambda.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>double = lambda number: number * 2
 
-print(square(5))
-</pre>
-</div>
+print(double(5))
 
-<!-- 07 -->
+students = [&quot;Sara&quot;, &quot;Mouattassim&quot;, &quot;Ali&quot;]
+print(sorted(students, key=lambda name: len(name)))</code></pre></div><div class="html-tip">لا تستبدل الدوال العادية بـ lambda عندما يكون المنطق طويلًا أو معقدًا.</div></article><article class="html-topic" data-search="المعاملات *args و **kwargs Python برمجة المعاملات *args و **kwargs"><div class="html-topic-head"><span class="html-topic-num">38</span><h3>المعاملات *args و **kwargs</h3></div><p>يسمح *args باستقبال عدد متغير من المعاملات الموضعية، بينما **kwargs يستقبل معاملات مسماة في قاموس.</p><div class="code-box"><div class="code-top"><span>args-kwargs.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>def show_names(*names):
+    for name in names:
+        print(name)
 
-<h2 class="section-title">07 - التعامل مع النصوص Strings</h2>
+def show_profile(**details):
+    print(details)
 
-<div class="lesson">
-<h3>25. خصائص النصوص</h3>
-<p>تحتوي Python على دوال عديدة لمعالجة النصوص.</p>
-<pre>
-text = "hello python"
+show_names(&quot;Mouattassim&quot;, &quot;Sara&quot;, &quot;Ali&quot;)
+show_profile(age=18, course=&quot;Python&quot;)</code></pre></div><div class="html-tip">يمكن استعمال أسماء أخرى، لكن الاسمين args وkwargs شائعان اصطلاحًا.</div></article><article class="html-topic" data-search="الموديولات Modules Python برمجة الموديولات modules"><div class="html-topic-head"><span class="html-topic-num">39</span><h3>الموديولات Modules</h3></div><p>الموديول ملف Python يحتوي على دوال أو متغيرات أو أصناف يمكن استيرادها باستخدام import.</p><div class="code-box"><div class="code-top"><span>modules.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>import math
 
-print(text.upper())
-print(text.lower())
-print(text.capitalize())
-print(text.title())
-print(len(text))
-</pre>
-</div>
+print(math.sqrt(81))
+print(math.pi)
 
-<div class="lesson">
-<h3>26. تقسيم واستبدال النصوص</h3>
-<pre>
-text = "I love Python"
+from random import randint
+print(randint(1, 10))</code></pre></div><div class="html-tip">قسّم البرامج الكبيرة إلى ملفات صغيرة منظمة.</div></article><article class="html-topic" data-search="إنشاء موديول خاص Python برمجة إنشاء موديول خاص"><div class="html-topic-head"><span class="html-topic-num">40</span><h3>إنشاء موديول خاص</h3></div><p>يمكن إنشاء ملف Python خاص بك ثم استيراد الدوال أو المتغيرات منه في ملف آخر.</p><div class="code-box"><div class="code-top"><span>greetings.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code># greetings.py
+def greet(name):
+    return f&quot;Hello {name}&quot;
 
-print(text.replace("Python", "Programming"))
+# main.py
+from greetings import greet
 
-words = text.split()
-print(words)
-</pre>
-</div>
+print(greet(&quot;Mouattassim&quot;))</code></pre></div><div class="html-tip">احفظ الملفين في المجلد نفسه في البداية لتسهيل التجربة.</div></article><article class="html-topic" data-search="المكتبات القياسية Python برمجة المكتبات القياسية"><div class="html-topic-head"><span class="html-topic-num">41</span><h3>المكتبات القياسية</h3></div><p>تأتي Python مع مكتبات قياسية مثل math وrandom وdatetime وos وpathlib لتوفير وظائف جاهزة.</p><div class="code-box"><div class="code-top"><span>standard-library.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>import random
+from datetime import date
 
-<div class="lesson">
-<h3>27. تنسيق النصوص f-string</h3>
-<p>تسمح بإدخال قيم المتغيرات داخل النصوص بطريقة سهلة.</p>
-<pre>
-name = "Ahmed"
-age = 20
-
-print(f"My name is {name} and I am {age}")
-</pre>
-</div>
-
-<!-- 08 -->
-
-<h2 class="section-title">08 - الملفات والأخطاء</h2>
-
-<div class="lesson">
-<h3>28. التعامل مع الملفات open()</h3>
-<p>تُستخدم لفتح الملفات وقراءتها أو الكتابة فيها.</p>
-<pre>
-# Writing
-with open("test.txt", "w") as file:
-    file.write("Hello Python")
-
-# Reading
-with open("test.txt", "r") as file:
+print(random.randint(1, 100))
+print(date.today())</code></pre></div><div class="html-tip">اقرأ توثيق المكتبة قبل استخدامها لتعرف الدوال والمعاملات المتاحة.</div></article><article class="html-topic" data-search="التعامل مع الملفات: القراءة Python برمجة التعامل مع الملفات: القراءة"><div class="html-topic-head"><span class="html-topic-num">42</span><h3>التعامل مع الملفات: القراءة</h3></div><p>يمكن فتح ملف باستخدام open() وقراءة محتواه عبر read() أو readline() أو readlines().</p><div class="code-box"><div class="code-top"><span>read-file.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>with open(&quot;notes.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
     content = file.read()
 
-print(content)
-</pre>
-<div class="note">
-r: القراءة - w: الكتابة مع استبدال المحتوى - a: الإضافة.
-</div>
-</div>
+print(content)</code></pre></div><div class="html-tip">استخدام with يضمن إغلاق الملف بعد الانتهاء حتى عند حدوث خطأ.</div></article><article class="html-topic" data-search="التعامل مع الملفات: الكتابة Python برمجة التعامل مع الملفات: الكتابة"><div class="html-topic-head"><span class="html-topic-num">43</span><h3>التعامل مع الملفات: الكتابة</h3></div><p>يمكن الكتابة باستخدام الوضع w، والإضافة إلى نهاية الملف باستخدام a. الوضع w ينشئ الملف أو يستبدل محتواه.</p><div class="code-box"><div class="code-top"><span>write-file.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>with open(&quot;notes.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+    file.write(&quot;Mouattassim is learning Python\n&quot;)
 
-<div class="lesson">
-<h3>29. معالجة الأخطاء try و except</h3>
-<p>تسمح بالتعامل مع الأخطاء دون إيقاف البرنامج بشكل غير متحكم فيه.</p>
-<pre>
-try:
-    number = int(input("Enter a number: "))
-    print(10 / number)
-
+with open(&quot;notes.txt&quot;, &quot;a&quot;, encoding=&quot;utf-8&quot;) as file:
+    file.write(&quot;MA Academy&quot;)</code></pre></div><div class="html-tip">انتبه إلى اختيار وضع الفتح الصحيح حتى لا تفقد محتوى موجودًا.</div></article><article class="html-topic" data-search="معالجة الأخطاء try وexcept Python برمجة معالجة الأخطاء try وexcept"><div class="html-topic-head"><span class="html-topic-num">44</span><h3>معالجة الأخطاء try وexcept</h3></div><p>تستخدم try وexcept للتعامل مع أخطاء متوقعة أثناء التنفيذ، ويمكن إضافة else وfinally عند الحاجة.</p><div class="code-box"><div class="code-top"><span>exceptions.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>try:
+    age = int(input(&quot;Enter your age: &quot;))
+    print(age)
 except ValueError:
-    print("Invalid number")
+    print(&quot;Please enter a valid number&quot;)
+finally:
+    print(&quot;Program finished&quot;)</code></pre></div><div class="html-tip">التقط أنواع الأخطاء المتوقعة بدل استخدام except عام دون سبب.</div></article><article class="html-topic" data-search="رفع الأخطاء raise Python برمجة رفع الأخطاء raise"><div class="html-topic-head"><span class="html-topic-num">45</span><h3>رفع الأخطاء raise</h3></div><p>تسمح raise بإطلاق استثناء عند اكتشاف حالة غير مقبولة، ويمكن تعريف رسائل واضحة للمستخدم أو للمطور.</p><div class="code-box"><div class="code-top"><span>raise.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>def set_age(age):
+    if age &lt; 0:
+        raise ValueError(&quot;Age cannot be negative&quot;)
+    return age
 
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-</pre>
-</div>
-
-<!-- 09 -->
-
-<h2 class="section-title">09 - البرمجة الكائنية OOP</h2>
-
-<div class="lesson">
-<h3>30. Classes و Objects</h3>
-<p>
-Class هو قالب لإنشاء الكائنات، أما Object فهو نسخة
-من هذا القالب تحتوي على بيانات وسلوكيات.
-</p>
-<pre>
-class Student:
-
-    def init(self, name, age):
+print(set_age(18))</code></pre></div><div class="html-tip">استخدم الاستثناءات للتعبير عن خطأ حقيقي، لا للتحكم العادي في مسار البرنامج.</div></article><article class="html-topic" data-search="البرمجة كائنية التوجه OOP Python برمجة البرمجة كائنية التوجه oop"><div class="html-topic-head"><span class="html-topic-num">46</span><h3>البرمجة كائنية التوجه OOP</h3></div><p>تجمع البرمجة كائنية التوجه البيانات والسلوك داخل كائنات. الصنف class قالب لإنشاء كائنات instances.</p><div class="code-box"><div class="code-top"><span>class.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>class Student:
+    def __init__(self, name, age):
         self.name = name
         self.age = age
 
     def introduce(self):
-        print(self.name, self.age)
+        print(f&quot;My name is {self.name}&quot;)
 
-student1 = Student("Ali", 20)
+student = Student(&quot;Mouattassim&quot;, 18)
+student.introduce()</code></pre></div><div class="html-tip">افهم الفرق بين class بوصفه قالبًا وobject بوصفه نسخة منه.</div></article><article class="html-topic" data-search="الخاصية self و __init__ Python برمجة الخاصية self و __init__"><div class="html-topic-head"><span class="html-topic-num">47</span><h3>الخاصية self و __init__</h3></div><p>تستقبل __init__ معاملات تهيئة الكائن، وتشير self إلى النسخة الحالية من الكائن داخل دواله.</p><div class="code-box"><div class="code-top"><span>init-self.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>class Course:
+    def __init__(self, title):
+        self.title = title
 
-student1.introduce()
-</pre>
-</div>
+    def show(self):
+        print(self.title)
 
-<!-- 10 -->
+python_course = Course(&quot;Python&quot;)
+python_course.show()</code></pre></div><div class="html-tip">اسم self اصطلاح شائع ويجب كتابته كأول معامل في دوال النسخة.</div></article><article class="html-topic" data-search="الوراثة Inheritance Python برمجة الوراثة inheritance"><div class="html-topic-head"><span class="html-topic-num">48</span><h3>الوراثة Inheritance</h3></div><p>تسمح الوراثة بإنشاء صنف جديد يعتمد على صنف موجود، فيرث خصائصه ودواله ويمكنه إضافة سلوك جديد.</p><div class="code-box"><div class="code-top"><span>inheritance.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>class Person:
+    def __init__(self, name):
+        self.name = name
 
-<h2 class="section-title">10 - أهم المكتبات Libraries</h2>
+class Student(Person):
+    def learn(self):
+        print(f&quot;{self.name} is learning Python&quot;)
 
-<div class="lesson">
-<h3>31. NumPy</h3>
-<p>
-مكتبة تُستخدم في العمليات الحسابية والعلمية والتعامل مع
-المصفوفات متعددة الأبعاد.
-</p>
-<pre>
+student = Student(&quot;Mouattassim&quot;)
+student.learn()</code></pre></div><div class="html-tip">استخدم الوراثة عندما توجد علاقة منطقية بين الصنفين.</div></article><article class="html-topic" data-search="تعدد الأشكال Polymorphism Python برمجة تعدد الأشكال polymorphism"><div class="html-topic-head"><span class="html-topic-num">49</span><h3>تعدد الأشكال Polymorphism</h3></div><p>يسمح تعدد الأشكال باستخدام واجهة أو اسم دالة مشترك مع سلوك مختلف حسب الكائن.</p><div class="code-box"><div class="code-top"><span>polymorphism.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>class PythonCourse:
+    def info(self):
+        print(&quot;Learn Python&quot;)
+
+class CSSCourse:
+    def info(self):
+        print(&quot;Learn CSS&quot;)
+
+for course in [PythonCourse(), CSSCourse()]:
+    course.info()</code></pre></div><div class="html-tip">يمكن أن تطبق أصناف مختلفة دالة بالاسم نفسه بطرق مختلفة.</div></article><article class="html-topic" data-search="مقدمة إلى NumPy Python برمجة مقدمة إلى numpy"><div class="html-topic-head"><span class="html-topic-num">50</span><h3>مقدمة إلى NumPy</h3></div><p>NumPy مكتبة مهمة للحسابات العددية والمصفوفات متعددة الأبعاد. ثبّتها أولًا باستخدام pip عند عدم توفرها.</p><div class="code-box"><div class="code-top"><span>numpy.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code># تثبيت المكتبة في Terminal:
+# python -m pip install numpy
+
 import numpy as np
 
-numbers = np.array([10, 20, 30, 40])
+numbers = np.array([10, 20, 30, 50])
 
 print(np.max(numbers))
-print(np.min(numbers))
 print(np.mean(numbers))
-print(np.sum(numbers))
-</pre>
-</div>
+print(numbers * 2)</code></pre></div><div class="html-tip">تُستخدم NumPy كثيرًا في تحليل البيانات والعلوم والهندسة.</div></article><article class="html-topic" data-search="مقدمة إلى Pandas Python برمجة مقدمة إلى pandas"><div class="html-topic-head"><span class="html-topic-num">51</span><h3>مقدمة إلى Pandas</h3></div><p>Pandas مكتبة لمعالجة البيانات وتحليلها، وتوفر هياكل مثل Series وDataFrame.</p><div class="code-box"><div class="code-top"><span>pandas.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code># python -m pip install pandas
 
-<div class="lesson">
-<h3>32. Pandas</h3>
-<p>
-مكتبة قوية لمعالجة البيانات وتنظيمها وتحليلها باستخدام
-الجداول DataFrames.
-</p>
-<pre>
 import pandas as pd
 
 data = {
-    "Name": ["Ali", "Sara", "Omar"],
-    "Age": [20, 21, 22]
+    &quot;name&quot;: [&quot;Mouattassim&quot;, &quot;Sara&quot;, &quot;Ali&quot;],
+    &quot;age&quot;: [18, 20, 19]
 }
 
 df = pd.DataFrame(data)
-
 print(df)
+print(df[&quot;age&quot;].mean())</code></pre></div><div class="html-tip">DataFrame يشبه جدولًا يتكون من صفوف وأعمدة.</div></article><article class="html-topic" data-search="قراءة ملفات CSV باستخدام Pandas Python برمجة قراءة ملفات csv باستخدام pandas"><div class="html-topic-head"><span class="html-topic-num">52</span><h3>قراءة ملفات CSV باستخدام Pandas</h3></div><p>يمكن قراءة ملف CSV باستخدام read_csv ثم استكشاف البيانات عبر head وinfo وdescribe.</p><div class="code-box"><div class="code-top"><span>csv.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>import pandas as pd
+
+df = pd.read_csv(&quot;students.csv&quot;)
+
 print(df.head())
-print(df.describe())
-</pre>
-</div><div class="lesson">
-<h3>33. Matplotlib</h3>
-<p>
-مكتبة تُستخدم لإنشاء الرسوم البيانية وتمثيل البيانات بصرياً.
-</p>
-<pre>
+print(df.info())
+print(df.describe())</code></pre></div><div class="html-tip">تحقق من مسار الملف وأسماء الأعمدة قبل إجراء التحليل.</div></article><article class="html-topic" data-search="الرسم البياني باستخدام Matplotlib Python برمجة الرسم البياني باستخدام matplotlib"><div class="html-topic-head"><span class="html-topic-num">53</span><h3>الرسم البياني باستخدام Matplotlib</h3></div><p>تتيح Matplotlib إنشاء رسوم بيانية مثل الخطوط والأعمدة والمخططات النقطية لعرض البيانات.</p><div class="code-box"><div class="code-top"><span>matplotlib.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code># python -m pip install matplotlib
+
 import matplotlib.pyplot as plt
 
-x = [1, 2, 3, 4]
-y = [10, 20, 15, 30]
+names = [&quot;Mouattassim&quot;, &quot;Sara&quot;, &quot;Ali&quot;]
+scores = [17, 19, 15]
 
-plt.plot(x, y)
+plt.bar(names, scores)
+plt.title(&quot;Students Scores&quot;)
+plt.xlabel(&quot;Student&quot;)
+plt.ylabel(&quot;Score&quot;)
+plt.show()</code></pre></div><div class="html-tip">أضف عنوانًا وتسميات للمحاور حتى يكون الرسم مفهومًا.</div></article><article class="html-topic" data-search="التواريخ والوقت datetime Python برمجة التواريخ والوقت datetime"><div class="html-topic-head"><span class="html-topic-num">54</span><h3>التواريخ والوقت datetime</h3></div><p>توفر datetime أدوات لإنشاء التواريخ والأوقات ومقارنتها وتنسيقها.</p><div class="code-box"><div class="code-top"><span>datetime.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>from datetime import datetime
 
-plt.title("My First Graph")
-plt.xlabel("X")
-plt.ylabel("Y")
+now = datetime.now()
 
-plt.show()
-</pre>
+print(now)
+print(now.year)
+print(now.strftime(&quot;%d/%m/%Y&quot;))</code></pre></div><div class="html-tip">تذكر أن بعض عمليات التاريخ والوقت تتأثر بالمنطقة الزمنية.</div></article><article class="html-topic" data-search="المولدات Generators Python برمجة المولدات generators"><div class="html-topic-head"><span class="html-topic-num">55</span><h3>المولدات Generators</h3></div><p>تنتج generator القيم عند الحاجة باستخدام yield بدل إنشاء كل النتائج دفعة واحدة في الذاكرة.</p><div class="code-box"><div class="code-top"><span>generators.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>def count_up_to(limit):
+    number = 1
+    while number &lt;= limit:
+        yield number
+        number += 1
+
+for value in count_up_to(3):
+    print(value)</code></pre></div><div class="html-tip">المولدات مفيدة عند التعامل مع تسلسلات كبيرة أو تدفق بيانات.</div></article><article class="html-topic" data-search="التكرار Iterators Python برمجة التكرار iterators"><div class="html-topic-head"><span class="html-topic-num">56</span><h3>التكرار Iterators</h3></div><p>المكرر كائن يتيح المرور على عناصر تسلسل باستخدام iter() وnext(). تنتهي العناصر المتاحة باستثناء StopIteration.</p><div class="code-box"><div class="code-top"><span>iterators.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>names = [&quot;Mouattassim&quot;, &quot;Sara&quot;]
+
+iterator = iter(names)
+
+print(next(iterator))
+print(next(iterator))</code></pre></div><div class="html-tip">حلقة for تتولى إدارة المكرر تلقائيًا في الاستخدام المعتاد.</div></article><article class="html-topic" data-search="التعبيرات النمطية Regular Expressions Python برمجة التعبيرات النمطية regular expressions"><div class="html-topic-head"><span class="html-topic-num">57</span><h3>التعبيرات النمطية Regular Expressions</h3></div><p>توفر مكتبة re البحث عن أنماط نصية واستخراجها واستبدالها، مثل التحقق الأولي من شكل نص أو رقم.</p><div class="code-box"><div class="code-top"><span>regex.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>import re
+
+text = &quot;Mouattassim is learning Python&quot;
+match = re.search(r&quot;Python&quot;, text)
+
+if match:
+    print(&quot;Found:&quot;, match.group())</code></pre></div><div class="html-tip">التعبيرات النمطية أداة مطابقة للأنماط وليست بديلًا عن التحقق الشامل من البيانات.</div></article><article class="html-topic" data-search="JSON في Python Python برمجة json في python"><div class="html-topic-head"><span class="html-topic-num">58</span><h3>JSON في Python</h3></div><p>تتيح مكتبة json تحويل القواميس والقوائم إلى نص JSON والعكس باستخدام dumps وloads، أو قراءة وكتابة الملفات.</p><div class="code-box"><div class="code-top"><span>json.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>import json
+
+student = {
+    &quot;name&quot;: &quot;Mouattassim&quot;,
+    &quot;age&quot;: 18
+}
+
+text = json.dumps(student, ensure_ascii=False)
+data = json.loads(text)
+
+print(text)
+print(data[&quot;name&quot;])</code></pre></div><div class="html-tip">JSON شائع لتبادل البيانات بين التطبيقات وواجهات API.</div></article><article class="html-topic" data-search="البيئة الافتراضية Virtual Environment Python برمجة البيئة الافتراضية virtual environment"><div class="html-topic-head"><span class="html-topic-num">59</span><h3>البيئة الافتراضية Virtual Environment</h3></div><p>تسمح البيئة الافتراضية بعزل مكتبات كل مشروع عن المشاريع الأخرى. أنشئها باستخدام venv ثم فعّلها.</p><div class="code-box"><div class="code-top"><span>venv.txt</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code># إنشاء البيئة:
+python -m venv .venv
+
+# تفعيلها على Windows:
+.venv\Scripts\activate
+
+# تفعيلها على macOS / Linux:
+source .venv/bin/activate</code></pre></div><div class="html-tip">من أفضل الممارسات إنشاء بيئة افتراضية لكل مشروع Python.</div></article><article class="html-topic" data-search="إدارة الحزم باستخدام pip Python برمجة إدارة الحزم باستخدام pip"><div class="html-topic-head"><span class="html-topic-num">60</span><h3>إدارة الحزم باستخدام pip</h3></div><p>تستخدم pip لتثبيت الحزم وتحديثها وإزالتها، مثل numpy وpandas وmatplotlib.</p><div class="code-box"><div class="code-top"><span>pip.txt</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>python -m pip install requests
+python -m pip list
+python -m pip show requests
+python -m pip uninstall requests</code></pre></div><div class="html-tip">استخدم python -m pip لتتأكد من تشغيل pip المرتبط بنسخة Python المقصودة.</div></article><article class="html-topic" data-search="اختبار الكود Debugging Python برمجة اختبار الكود debugging"><div class="html-topic-head"><span class="html-topic-num">61</span><h3>اختبار الكود Debugging</h3></div><p>يمكن اكتشاف الأخطاء باستخدام رسائل الطباعة ونقاط التوقف ومصحح VS Code. اقرأ رسالة الخطأ وحدد السطر الذي وقع فيه.</p><div class="code-box"><div class="code-top"><span>debugging.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>name = &quot;Mouattassim&quot;
+scores = [15, 18, 17]
+
+print(name)
+print(scores)
+
+# جرّب وضع نقطة توقف في VS Code
+# وافحص القيم أثناء التنفيذ</code></pre></div><div class="html-tip">تعلم قراءة Traceback مهارة أساسية في تطوير Python.</div></article><article class="html-topic" data-search="مشروع تطبيقي: آلة حاسبة Python برمجة مشروع تطبيقي: آلة حاسبة"><div class="html-topic-head"><span class="html-topic-num">62</span><h3>مشروع تطبيقي: آلة حاسبة</h3></div><p>اجمع ما تعلمته لإنشاء آلة حاسبة تستقبل رقمين وعملية حسابية، ثم تعرض النتيجة المناسبة.</p><div class="code-box"><div class="code-top"><span>calculator.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>num1 = float(input(&quot;First number: &quot;))
+operator = input(&quot;Choose +, -, *, /: &quot;)
+num2 = float(input(&quot;Second number: &quot;))
+
+if operator == &quot;+&quot;:
+    result = num1 + num2
+elif operator == &quot;-&quot;:
+    result = num1 - num2
+elif operator == &quot;*&quot;:
+    result = num1 * num2
+elif operator == &quot;/&quot; and num2 != 0:
+    result = num1 / num2
+else:
+    result = &quot;Invalid operation&quot;
+
+print(&quot;Result:&quot;, result)</code></pre></div><div class="html-tip">أضف معالجة للأخطاء عند إدخال نص بدل رقم أو اختيار عملية غير معروفة.</div></article><article class="html-topic" data-search="مشروع تطبيقي: إدارة درجات الطلاب Python برمجة مشروع تطبيقي: إدارة درجات الطلاب"><div class="html-topic-head"><span class="html-topic-num">63</span><h3>مشروع تطبيقي: إدارة درجات الطلاب</h3></div><p>أنشئ قاموسًا يحفظ أسماء الطلاب ودرجاتهم، ثم احسب المتوسط واعرض أعلى درجة.</p><div class="code-box"><div class="code-top"><span>student-grades.py</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>students = {
+    &quot;Mouattassim&quot;: 18,
+    &quot;Sara&quot;: 19,
+    &quot;Ali&quot;: 15
+}
+
+average = sum(students.values()) / len(students)
+top_student = max(students, key=students.get)
+
+print(&quot;Average:&quot;, average)
+print(&quot;Top student:&quot;, top_student)
+print(&quot;Grade:&quot;, students[top_student])</code></pre></div><div class="html-tip">استخدم اسم Mouattassim ضمن بيانات التدريب، ثم جرّب إضافة طلاب آخرين.</div></article></div>
+<div class="html-no-results" id="noLessons">لا توجد دروس مطابقة لبحثك.</div>
+<div class="html-project">
+<h3><i class="fa-solid fa-laptop-code"></i> مشروعك الأول</h3>
+<p>بعد إنهاء الدروس، جرّب إنشاء صفحة تعريفية بسيطة تحتوي على عنوان رئيسي، وفقرة عنك، وصورة، ورابط، وقائمة بالمهارات التي تتعلمها. لا تنتقل إلى CSS قبل أن تفهم هيكل HTML جيدًا.</p>
 </div>
-
-<div class="intro">
-<h2>نصيحة من MA Academy</h2>
-<p>
-لا تكتفِ بقراءة الأكواد فقط، بل حاول كتابتها بنفسك
-وتغيير القيم وتجربة النتائج. الممارسة المستمرة هي
-الطريق الأفضل لتعلم البرمجة.
-</p>
 </div>
-
+</section>
 </main>
-
-<footer>
-<p>© 2026 <span>MA Academy</span> - جميع الحقوق محفوظة</p>
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+<div class="footer-logo"><img alt="logo" src="images/logogdd.png" width="250px"/></div>
+<p data-i18n="footerDescription">
+        طريقك نحو التميز في عالم البرمجة.
+    </p>
+<div class="social-links">
+<a aria-label="Instagram" class="social instagram" href="https://www.instagram.com/el__mouattassim?hvrq=NnNyMHE4N3Nydnl" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-instagram"></i>
+</a>
+<a aria-label="GitHub" class="social github" href="https://github.com/Mouattassim" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+<a aria-label="WhatsApp" class="social whatsapp" href="https://wa.me/+213553613038" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+<a aria-label="Gmail" class="social gmail" href="mailto:lazregassoumi12@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+</a>
+</div>
+<p class="copyright">
+        © <span id="year"></span> MA Academy.
+        <span data-i18n="rights">جميع الحقوق محفوظة.</span>
+</p>
 </footer>
+<script>
 
+/* ================= TRANSLATIONS ================= */
+
+const translations = {
+
+ar: {
+
+welcome: "WELCOME TO",
+academy: "أكاديمية",
+heroDescription: "تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.",
+start: "ابدأ الآن",
+
+navHome: "الرئيسية",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "المطور",
+navContact: "تواصل معي",
+
+coursesTitle: "رحلتك في عالم البرمجة",
+coursesDescription: "تعلم أساسيات تطوير الويب والبرمجة خطوة بخطوة، وابدأ ببناء مشاريعك الخاصة.",
+
+lesson1Title: "لماذا MA Academy؟",
+lesson1Description: "هدفنا هو مساعدتك على تعلم البرمجة بطريقة سهلة ومنظمة. ستتعلم المهارات الأساسية وتنتقل تدريجيًا إلى إنشاء مشاريع حقيقية.",
+
+lesson2Title: "تعلم HTML",
+lesson2Description: "HTML هي لغة بناء صفحات الويب. ستتعلم كيفية إضافة العناوين والفقرات والصور والروابط وتنظيم محتوى الصفحة.",
+
+lesson3Title: "تعلم CSS",
+lesson3Description: "CSS تمنح موقعك مظهره الجميل. ستتعلم الألوان والخطوط والتنسيقات والتصميم المتجاوب مع مختلف الشاشات.",
+
+lesson4Title: "تعلم JavaScript",
+lesson4Description: "JavaScript تضيف التفاعل إلى موقعك. ستتعلم التعامل مع الأزرار والقوائم والأحداث وإنشاء تجارب تفاعلية للمستخدم.",
+
+lesson5Title: "تعلم Python",
+lesson5Description: "تعلم أساسيات Python والمتغيرات والشروط والحلقات والدوال، وابدأ بكتابة برامجك الخاصة.",
+
+servicesTitle: "ماذا نقدم لك؟",
+servicesIntro: "نوفر لك بداية منظمة في عالم تطوير الويب.",
+servicesHeading: "تعلم وابدأ مشروعك",
+servicesDescription: "اكتسب المعرفة خطوة بخطوة، وطبق ما تتعلمه في مشاريع عملية تساعدك على تطوير مهاراتك في تصميم وبرمجة المواقع.",
+contact: "تواصل معنا",
+
+footerDescription: "طريقك نحو التميز في عالم البرمجة.",
+rights: "جميع الحقوق محفوظة."
+
+},
+
+en: {
+
+welcome: "WELCOME TO MA",
+academy: "Academy",
+heroDescription: "Learn web development and start your coding journey from beginner to advanced.",
+start: "Get Started",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DEVELOPER",
+navContact: "CONTACT ME",
+
+coursesTitle: "Your Coding Journey",
+coursesDescription: "Learn the fundamentals of web development step by step and start building your own projects.",
+
+lesson1Title: "Why MA Academy?",
+lesson1Description: "Our goal is to help you learn programming in a simple and organized way. You will learn essential skills and gradually build real projects.",
+
+lesson2Title: "Learn HTML",
+lesson2Description: "HTML is the language used to structure web pages. Learn how to add headings, paragraphs, images, links and organize page content.",
+
+lesson3Title: "Learn CSS",
+lesson3Description: "CSS gives your website its appearance. Learn colors, fonts, layouts and responsive design for different screens.",
+
+lesson4Title: "Learn JavaScript",
+lesson4Description: "JavaScript adds interaction to your website. Learn buttons, menus, events and how to create interactive user experiences.",
+
+lesson5Title: "Learn Python",
+lesson5Description: "Learn Python basics, variables, conditions, loops and functions, and start writing your own programs.",
+
+servicesTitle: "What Do We Offer?",
+servicesIntro: "We provide an organized starting point in web development.",
+servicesHeading: "Learn and Build Your Project",
+servicesDescription: "Gain knowledge step by step and apply what you learn through practical projects that help develop your web design and programming skills.",
+contact: "Contact Us",
+
+footerDescription: "Your path to excellence in programming.",
+rights: "All rights reserved."
+
+},
+
+fr: {
+
+welcome: "WELCOME TO MA",
+academy: "Académie",
+heroDescription: "Apprenez le développement web et commencez votre parcours dans la programmation, du débutant au niveau avancé.",
+start: "Commencer",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DÉVELOPPEUR",
+navContact: "CONTACTEZ-MOI",
+
+coursesTitle: "Votre parcours en programmation",
+coursesDescription: "Apprenez les bases du développement web étape par étape et commencez à créer vos propres projets.",
+
+lesson1Title: "Pourquoi MA Academy ?",
+lesson1Description: "Notre objectif est de vous aider à apprendre la programmation de manière simple et organisée. Vous apprendrez les compétences essentielles et créerez progressivement de vrais projets.",
+
+lesson2Title: "Apprendre HTML",
+lesson2Description: "HTML est le langage utilisé pour structurer les pages web. Apprenez à ajouter des titres, des paragraphes, des images, des liens et à organiser le contenu.",
+
+lesson3Title: "Apprendre CSS",
+lesson3Description: "CSS donne à votre site son apparence. Apprenez les couleurs, les polices, les mises en page et le design adaptatif.",
+
+lesson4Title: "Apprendre JavaScript",
+lesson4Description: "JavaScript ajoute de l'interactivité à votre site. Apprenez à utiliser les boutons, les menus et les événements.",
+
+lesson5Title: "Apprendre Python",
+lesson5Description: "Apprenez les bases de Python, les variables, les conditions, les boucles et les fonctions pour créer vos propres programmes.",
+
+servicesTitle: "Que proposons-nous ?",
+servicesIntro: "Nous vous proposons un début organisé dans le développement web.",
+servicesHeading: "Apprenez et créez votre projet",
+servicesDescription: "Acquérez des connaissances étape par étape et appliquez-les dans des projets pratiques pour développer vos compétences en conception et programmation web.",
+contact: "Contactez-nous",
+
+footerDescription: "Votre chemin vers l'excellence en programmation.",
+rights: "Tous droits réservés."
+
+}
+
+};
+
+/* ================= LANGUAGE ================= */
+
+const languageSelect = document.getElementById("languageSelect");
+
+function setLanguage(language) {
+
+    const selected = translations[language] ? language : "ar";
+
+    document.documentElement.lang = selected;
+
+    document.documentElement.dir =
+        selected === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+
+        const key = element.dataset.i18n;
+
+        if (translations[selected][key] !== undefined) {
+            element.textContent = translations[selected][key];
+        }
+
+    });
+
+    languageSelect.value = selected;
+
+    try {
+        localStorage.setItem("ma-language",selected);
+    } catch(error) {}
+
+}
+
+languageSelect.addEventListener("change",event => {
+    setLanguage(event.target.value);
+});
+
+/* ================= THEME ================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+function setTheme(isLight) {
+
+    document.body.classList.toggle("light-mode",isLight);
+
+    themeBtn.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+
+    themeBtn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+    );
+
+    try {
+        localStorage.setItem(
+            "ma-theme",
+            isLight ? "light" : "dark"
+        );
+    } catch(error) {}
+
+}
+
+themeBtn.addEventListener("click",() => {
+
+    const isLight =
+        document.body.classList.contains("light-mode");
+
+    setTheme(!isLight);
+
+});
+
+/* ================= SIDEBAR MENU ================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sidebar = document.getElementById("sidebar");
+const menuOverlay = document.getElementById("menuOverlay");
+
+const menuLinks = document.querySelectorAll(".sidebar-links a");
+
+function openSidebar() {
+
+    sidebar.classList.add("open");
+    menuOverlay.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeSidebar() {
+
+    sidebar.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
+
+menuBtn.addEventListener("click",openSidebar);
+
+closeMenu.addEventListener("click",closeSidebar);
+
+menuOverlay.addEventListener("click",closeSidebar);
+
+/* ACTIVE MENU LINK */
+
+menuLinks.forEach(link => {
+
+    link.addEventListener("click",() => {
+
+        menuLinks.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        link.classList.add("active");
+
+        closeSidebar();
+
+    });
+
+});
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown",event => {
+
+    if(event.key === "Escape") {
+        closeSidebar();
+    }
+
+});
+
+/* ================= SCROLL PROGRESS ================= */
+
+const scrollProgress = document.getElementById("scrollProgress");
+
+const timeline = document.getElementById("timeline");
+
+const timelineProgress = document.getElementById("timelineProgress");
+
+const lessons = document.querySelectorAll(".lesson");
+
+function updateScroll() {
+
+    const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const pageProgress = scrollable > 0
+        ? (window.scrollY / scrollable) * 100
+        : 0;
+
+    scrollProgress.style.width = pageProgress + "%";
+
+    if (timeline && timelineProgress) {
+        const timelineRect = timeline.getBoundingClientRect();
+        const timelineTop = window.scrollY + timelineRect.top;
+        const timelineHeight = timeline.offsetHeight;
+        const current = window.scrollY + window.innerHeight * 0.65;
+        const progress = Math.max(0, Math.min(100,
+            ((current - timelineTop) / timelineHeight) * 100
+        ));
+        timelineProgress.style.setProperty("--timeline-progress", progress + "%");
+    }
+
+    lessons.forEach(lesson => {
+
+        const rect = lesson.getBoundingClientRect();
+
+        if (
+            rect.top < window.innerHeight * 0.75 &&
+            rect.bottom > window.innerHeight * 0.2
+        ) {
+            lesson.classList.add("active");
+        } else {
+            lesson.classList.remove("active");
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll",updateScroll,{
+    passive: true
+});
+
+window.addEventListener("resize",updateScroll);
+
+updateScroll();
+
+/* ================= COLORFUL CURSOR ================= */
+
+const colors = [
+    "#008cff",
+    "#00b4ff",
+    "#38bdf8",
+    "#06b6d4",
+    "#22c55e",
+    "#f97316",
+    "#eab308"
+];
+
+let lastSquareTime = 0;
+
+function createSquare(x,y) {
+
+    const now = performance.now();
+
+    if(now - lastSquareTime < 35) return;
+
+    lastSquareTime = now;
+
+    const square = document.createElement("span");
+
+    square.className = "cursor-square";
+
+    square.style.left = x + "px";
+    square.style.top = y + "px";
+
+    square.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(square);
+
+    square.addEventListener("animationend",() => {
+        square.remove();
+    },{once:true});
+
+}
+
+/* MOUSE */
+
+window.addEventListener("mousemove",event => {
+
+    createSquare(event.clientX,event.clientY);
+
+},{passive:true});
+
+/* TOUCH */
+
+window.addEventListener("touchmove",event => {
+
+    const touch = event.touches[0];
+
+    if(touch) {
+        createSquare(touch.clientX,touch.clientY);
+    }
+
+},{passive:true});
+
+/* ================= HTML COURSE SEARCH ================= */
+const lessonSearch = document.getElementById("lessonSearch");
+const lessonCards = [...document.querySelectorAll(".html-topic")];
+const noLessons = document.getElementById("noLessons");
+if (lessonSearch) {
+    lessonSearch.addEventListener("input", () => {
+        const query = lessonSearch.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        lessonCards.forEach(card => {
+            const content = (card.innerText + " " + (card.dataset.search || "")).toLocaleLowerCase();
+            const match = content.includes(query);
+            card.style.display = match ? "" : "none";
+            if (match) visible++;
+        });
+        noLessons.style.display = visible ? "none" : "block";
+    });
+}
+
+document.querySelectorAll(".copy-code").forEach(button => {
+    button.addEventListener("click", async () => {
+        const code = button.closest(".code-box").querySelector("code").innerText;
+        const original = button.innerHTML;
+        try {
+            await navigator.clipboard.writeText(code);
+            button.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ';
+        } catch (error) {
+            const area = document.createElement("textarea");
+            area.value = code;
+            area.style.position = "fixed";
+            area.style.opacity = "0";
+            document.body.appendChild(area);
+            area.select();
+            const copied = document.execCommand("copy");
+            area.remove();
+            button.innerHTML = copied ? '<i class="fa-solid fa-check"></i> تم النسخ' : 'انسخ يدويًا';
+        }
+        setTimeout(() => button.innerHTML = original, 1600);
+    });
+});
+
+/* ================= INITIAL SETTINGS ================= */
+
+let savedLanguage = "ar";
+let savedTheme = "dark";
+
+try {
+
+    savedLanguage =
+        localStorage.getItem("ma-language") || "ar";
+
+    savedTheme =
+        localStorage.getItem("ma-theme") || "dark";
+
+} catch(error) {}
+
+setLanguage(savedLanguage);
+
+setTheme(savedTheme === "light");
+
+/* FOOTER YEAR */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+</script>
 </body>
 </html>

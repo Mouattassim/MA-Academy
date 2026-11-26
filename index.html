@@ -1,270 +1,1747 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
+
 <head>
-<title>MA Academy</title>
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="تعلم تطوير الويب والبرمجة مع أكاديمية MA">
+<title>MA Academy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <style>
-.buttonn{background-color:rgb(96, 6, 96); color:white;width:300px;height:100px;font-size:35px;border: none;border-radius:45px;box-shadow:0 0 20px rgb(245, 26, 245);display: block;margin:0 auto;position: relative;animation: shadowMove 3s alternate infinite;font-family:'Oswald',sans-serif;;}
-@keyframes shadowMove{
-0%{box-shadow:0 0 5px #8A2BE2;}
-50%{box-shadow:0 0 20px #0c0016;}
-100%{box-shadow:0 0 30px #8A2BE2;}
+
+/* ================= COLORS ================= */
+
+:root {
+    color-scheme: dark;
+    --bg: #050505;
+    --card: #101010;
+    --card2: #171717;
+    --text: #ffffff;
+    --muted: #a1a1aa;
+    --primary: #008cff;
+    --secondary: #00b4ff;
+    --border: rgba(255,255,255,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.3);
 }
-.img:hover{transform:scale(1.03);}
-.h1{font-size: 100px;text-align: center;font-family:'Oswald',sans-serif;color:blueviolet;text-shadow: 0 0 15px rgb(96, 6, 96);}
-.h3{font-size: 30px;text-align: center;font-family:'Oswald',sans-serif;top:-70px;position: relative;color:rgb(166, 163, 168);text-shadow:0 0 15px rgb(96, 6, 96);}
-.body{background-color: black;}
-.buttonn:hover{background-color: blueviolet;}
-.strong{color: white;}
-.img{position: relative;top:40px;transition:0.3s ease;right:20px;}
-.img:hover{transform:scale(1.03);}
-.stt{color: white;}
-.sttt{color:rgb(131, 10, 244);}
-.stttt{color:rgb(133, 64, 197);}
-.sttttt{color:rgb(202, 178, 229);}
-.show-on-scroll{opacity: 0;transform: translateY(50px);transform: 0.8s ease;}
-.show-on-scroll.active{opacity:1;transform: translateY(0);}
+
+body.light-mode {
+    color-scheme: light;
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --card2: #eeeeF5;
+    --text: #171717;
+    --muted: #626273;
+    --border: rgba(0,0,0,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.08);
+}
+
+/* ================= GLOBAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    transition: background .3s, color .3s;
+    overflow-x: hidden;
+}
+
+html[lang="ar"] body {
+    font-family: 'Cairo', sans-serif;
+}
+
+html[lang="en"] body,
+html[lang="fr"] body {
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, select {
+    font: inherit;
+}
+
+/* ================= PAGE PROGRESS ================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    z-index: 9999;
+    box-shadow: 0 0 12px #008cff;
+}
+
+/* ================= HEADER ================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-static {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-controls select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* HEADER BUTTONS */
+
+.theme-btn,
+.menu-btn {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,rgba(0,140,255,.18),rgba(0,180,255,.18));
+    color: var(--primary);
+    border: 1px solid rgba(0,140,255,.35);
+    border-radius: 14px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .35s;
+}
+
+.theme-btn:hover,
+.menu-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.35);
+}
+
+/* ================= SIDEBAR ================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(440px,88%);
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 2001;
+    padding: 45px 35px;
+    overflow-y: auto;
+    transform: translateX(105%);
+    transition: transform .4s ease;
+    border-left: 1px solid var(--border);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 55px;
+    gap: 15px;
+}
+
+.sidebar-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.close-menu {
+    width: 55px;
+    height: 55px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.close-menu:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    transition: .3s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+    color: var(--primary);
+    padding-right: 22px;
+}
+
+.sidebar-links a.active {
+    border-bottom-color: rgba(0,140,255,.5);
+}
+
+.sidebar-footer {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: .85rem;
+    text-align: center;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 88vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #008cff;
+    filter: blur(180px);
+    opacity: .22;
+    top: 10%;
+    left: 10%;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 850px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome {
+    color: var(--primary);
+    font-family: 'Poppins',sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-family: 'Poppins',sans-serif;
+    font-size: clamp(2.5rem,8vw,5.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.hero-title > span:last-child {
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-motion {
+    display: inline-block;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: maMove 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes maMove {
+    from { transform: translateX(-15px); }
+    to { transform: translateX(15px); }
+}
+
+.hero h2 {
+    font-size: clamp(1.3rem,4vw,2rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.fixed-name {
+    display: inline-block;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+    line-height: 2;
+    font-weight: 500;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 13px 30px;
+    background: linear-gradient(90deg,#0077ee,#00b4ff);
+    color: white;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: transform .3s,box-shadow .3s;
+}
+
+.main-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,140,255,.35);
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 90px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(1.8rem,5vw,2.6rem);
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    text-align: center;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 650px;
+    margin: 0 auto 55px;
+    font-weight: 500;
+}
+
+/* ================= TIMELINE ================= */
+
 .timeline {
-  position: relative;
-  max-width: 500px;
-  margin: 0px auto;
-  padding-left: 45px;color:white;
-width:300px;left:140px;font-family:'Oswald',sans-serif;
+    position: relative;
+    max-width: 900px;
+    margin: auto;
 }
 
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 16px;
-  top: 10px;
-  width: 4px;
-  height: 100%;
-  background: #ddd;
-  border-radius: 10px;
+.timeline-progress {
+    position: absolute;
+    right: 27px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.step {
-  position: relative;
-  margin-bottom: 80px;
+.timeline-progress::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--timeline-progress,0%);
+    background: linear-gradient(to bottom,#008cff,#00b4ff,#38bdf8);
+    transition: height .15s;
 }
 
-.number {position: absolute;left: -45px;width: 36px;height: 36px;border-radius: 50%;background: white;border: 3px solid rgb(96, 6, 96);color: rgb(96, 6, 96);display: flex;align-items: center;justify-content: center;font-weight: bold;z-index: 1;}
-.step.active .number {background:rgb(96, 6, 96);color: white;}
-.content h3 {margin-top: 0;}
-.body{margin: 0;padding:0;}
-.h33{font-size:25px;color:white;}
-.h333{position: relative;right: 330px;font-size:30px;}
-.h33333{color: #F7DF1E;position: relative;top:2px;}
-.h333333{color:#E34F26;position: relative;top:2px;}
-.h3333333{position: relative;top:2px;font-size:30px;}
-.h11{color:white;font-size:100px;display: block;margin-left:20px;margin-right: auto;font-family:'Oswald',sans-serif;}
-.div6{color:white;}
-.myimage {
-  opacity: 0;
-  transform: translateY(80px);
-  transition: 0.8s ease;
+.lesson {
+    position: relative;
+    margin-bottom: 35px;
+    margin-right: 65px;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    opacity: .55;
+    transform: translateY(25px);
+    transition: .5s ease;
 }
 
-.myimage.show {
-  opacity: 1;
-  transform: translateY(0);
+.lesson.active {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: var(--primary);
 }
-.myimage{display:block;margin: 0 auto;}
-.sssg{color:#3ea0e5;}
-.h111{font-size:50px;}
-.h1111{font-size:70px;}
-.h11111{font-size:50px;color: #3ea0e5;}
-.button2{width:300px;height:100px;border:none;border-radius:45px;background-color:#3ea0e5;font-family:'Oswald',sans-serif;font-size:35px;animation:shadowmmove 3s alternate infinite;color: white;display: block;margin: 0 auto;margin-top:100px;}
-@keyframes shadowmmove{
-0%{box-shadow:0 0 5px #b3d1e7;}
-50%{box-shadow: 0 0 20px #3f94d1;}
-100%{box-shadow: 0 0 30px #048aeb;}
+
+.lesson-number {
+    position: absolute;
+    right: -65px;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card2);
+    border: 2px solid var(--border);
+    font-family: 'Poppins',sans-serif;
+    font-weight: 800;
+    transition: .3s;
 }
-.icon{margin:0 auto; width:300px;}
-.iconn{transition: 0.3s ease;}
-.iconn:hover{transform: scale(1.08);}
-.text{text-align: center;}
-.ppp{font-size:30px;}
-.textbold{text-align: center;color: white;font-family:'Montserrat',sans-serif;font-size:40px;transform: translateY(-120px);}
-.hhh{transform: translateY(-5px);color: #8A2BE2;}
-.timeline{width:90%;transform: scale(1.2);transform-origin: center;}
-.csss{color:#1572B6;}
-.button2:hover{background-color:#4fb2f8;}
+
+.lesson.active .lesson-number {
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.4);
+}
+
+.lesson h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.lesson p {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 2;
+}
+
+.tech-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: .35s ease;
+}
+
+.lesson:hover .tech-icon {
+    transform: translateY(-6px) scale(1.1);
+}
+
+.html-icon { color: #e34f26; }
+.css-icon { color: #1572b6; }
+.js-icon { color: #f7df1e; }
+.python-icon { color: #3776ab; }
+
+.ma-icon {
+    font-family: 'Poppins',sans-serif;
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+html[lang="en"] .timeline .lesson h3,
+html[lang="fr"] .timeline .lesson h3,
+html[lang="en"] .timeline .lesson p,
+html[lang="fr"] .timeline .lesson p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= DEVELOPER ================= */
+
+.services {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.services-content {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.services-image {
+    width: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.services h2 {
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.services p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+html[lang="en"] .services p,
+html[lang="fr"] .services p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 45px 20px;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+footer p {
+    color: var(--muted);
+    line-height: 2;
+    font-weight: 500;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 30px 0;
+}
+
+.social {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    font-size: 23px;
+    transition: .35s ease;
+}
+
+.social.instagram { color: #e1306c; }
+.social.github { color: var(--text); }
+.social.whatsapp { color: #25d366; }
+.social.gmail { color: #ea4335; }
+
+.social:hover {
+    transform: translateY(-7px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,140,255,.2);
+    border-color: var(--primary);
+    background: var(--card);
+}
+
+.copyright {
+    font-size: .85rem;
+    margin-top: 20px;
+}
+
+/* ================= CURSOR SQUARES ================= */
+
+.cursor-square {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: squareFade .7s ease-out forwards;
+}
+
+@keyframes squareFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0) rotate(180deg);
+    }
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 13px 4%;
+    }
+
+    section {
+        padding: 75px 5%;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem,9vw,4.5rem);
+    }
+
+    .services-content {
+        gap: 25px;
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    html {
+        scroll-padding-top: 75px;
+    }
+
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* HEADER */
+
+    .topbar {
+        width: 100%;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1rem;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .ma-static {
+        width: 35px;
+        height: 35px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+    .header-controls {
+        gap: 6px;
+    }
+
+    .header-controls select {
+        max-width: 112px;
+        padding: 8px 5px;
+        font-size: 12px;
+        border-radius: 9px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: min(88%,390px);
+        padding: 25px 22px;
+    }
+
+    .sidebar-top {
+        margin-bottom: 35px;
+    }
+
+    .sidebar-logo {
+        font-size: 1.2rem;
+    }
+
+    .close-menu {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+        border-radius: 8px;
+    }
+
+    .sidebar-links a {
+        font-size: 1.05rem;
+        padding: 19px 10px;
+    }
+
+    .sidebar-footer {
+        margin-top: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 75vh;
+        min-height: 75svh;
+        padding: 75px 18px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .welcome {
+        font-size: .75rem;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem,9vw,3.5rem);
+        gap: 9px;
+        line-height: 1.3;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-top: 12px;
+    }
+
+    .fixed-name {
+        font-size: 1rem;
+    }
+
+    .hero p {
+        font-size: .95rem;
+        line-height: 2;
+        padding: 0 5px;
+        margin-bottom: 25px;
+    }
+
+    .main-btn {
+        padding: 12px 25px;
+        font-size: .95rem;
+    }
+
+    /* SECTIONS */
+
+    section {
+        padding: 65px 18px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.6;
+    }
+
+    .section-description {
+        font-size: .92rem;
+        line-height: 2;
+        margin-bottom: 40px;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+        width: 100%;
+    }
+
+    .timeline-progress {
+        right: 19px;
+    }
+
+    .lesson {
+        margin-right: 47px;
+        margin-bottom: 25px;
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    .lesson-number {
+        right: -47px;
+        top: 18px;
+        width: 38px;
+        height: 38px;
+        font-size: .8rem;
+    }
+
+    .lesson h3 {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .lesson p {
+        font-size: .88rem;
+        line-height: 2;
+    }
+
+    .tech-icon {
+        font-size: 43px;
+        margin-bottom: 10px;
+    }
+
+    .ma-icon {
+        font-size: 1.9rem;
+    }
+
+    /* SERVICES / DEVELOPER */
+
+    .services-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .services-image {
+        width: 100%;
+        min-height: 190px;
+        max-height: 240px;
+        border-radius: 15px;
+    }
+
+    .services h2 {
+        font-size: 1.45rem;
+        line-height: 1.7;
+    }
+
+    .services p {
+        font-size: .93rem;
+        line-height: 2;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 40px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+
+    footer p {
+        font-size: .9rem;
+    }
+
+    .social-links {
+        gap: 12px;
+        margin: 25px 0;
+    }
+
+    .social {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+
+    .copyright {
+        font-size: .78rem;
+    }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+    .topbar {
+        padding: 9px 8px;
+        gap: 5px;
+    }
+
+    .logo {
+        font-size: .85rem;
+        gap: 5px;
+    }
+
+    .ma-static {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .header-controls {
+        gap: 4px;
+    }
+
+    .header-controls select {
+        max-width: 91px;
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
+        font-size: 13px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        gap: 7px;
+    }
+
+    .hero h2 {
+        font-size: 1.05rem;
+    }
+
+    .lesson {
+        margin-right: 43px;
+        padding: 14px;
+    }
+
+    .lesson-number {
+        right: -43px;
+        width: 35px;
+        height: 35px;
+    }
+
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
 </style>
-
 </head>
 
-<body class="body">
+<body>
 
-<div class="text">
-<h1 class="h1">WELCOME TO <img src="images/ma.png" alt="" width="210px" class="img"><strong class="stt">Academy</strong></h1>
-<h3 class="h3"><strong class="sttt">Your choice.</strong> <strong class="stttt">Your style.</strong> <strong class="sttttt">Your technology</strong></h3>
-<button class="buttonn" onclick="gotoma()">GET STARTED</button>
+<!-- SCROLL PROGRESS -->
 
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h1 class="textbold">Welcome To Mouattassim Bellah Academy</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="timeline">
-<div class="step active">
-<div class="number">1</div>
-<div class="content">
-<h3 class="h33 h3333333 hhh">Why MA Academy?</h3>
-<p class="ppp">MA Academy makes learning web development simple and accessible. Learn to code, develop your skills, and turn your ideas into reality.</p>
-</div>
-</div>
+<div class="scroll-progress" id="scrollProgress"></div>
 
-<div class="step">
-<div class="number">2</div>
-<div class="content">
-<h3 class="h33 h333333">Learn HTML From Zero </h3>
-<img src="images/HTML5_logo_and_wordmark.svg.webp" alt="" width="150px">
-<p class="ppp">Here, you will learn HTML step by step, from the basics to building your own websites. Start your journey into web development and turn your ideas into reality!</p>
-</div>
-</div>
+<!-- HEADER -->
 
-<div class="step left">
-<div class="number">3</div>
-<div class="content">
-<h3 class="h33 csss">Learn CSS From Zero</h3>
-<img src="images/CSS-Logo-2011.png" alt="css" width="300px" class="">
-<p class="ppp">Here, you will learn CSS step by step, from styling text and choosing colors to creating stunning layouts, smooth animations, and modern responsive websites. Bring your web designs to life!</p>
-</div>
-</div>
+<header class="topbar">
 
-<div class="step">
-<div class="number">4</div>
-<div class="content">
-<h3 class="h33 h33333">Learn JavaScript From Zero</h3>
-<img src="images/JavaScript-Logo.png" alt="js" width="250px">
-<p class="ppp">Here, you will learn JavaScript step by step, from the fundamentals to interactive features, dynamic animations, and advanced web functionality. Make your websites smarter, more powerful, and interactive!</p>
-</div>
-</div>
+    <a href="#home" class="logo">
+<img src="images/logogdd.png" alt="logo" width="200px">
+    </a>
 
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="div6">
-<h1 class="h11 gg">Let’s Build Your <strong class="sssg">Website</strong></h1>
-<h3 class="h11 h111">Turn Your Vision Into Reality.</h3>
-<p class="h11 h1111">We build modern, professional websites <br> that help your business stand out and attract more customers.</p>
-<h4 class="h11 h11111">Your Success Starts With a Website.</h4>
-</div>
+    <div class="header-controls">
 
+        <select id="languageSelect" aria-label="Language">
+            <option value="ar">🇩🇿 العربية</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
 
-<div class="div7">
-<img src="images/web.png" alt="" width="800px" class="myimage">
+        <button class="theme-btn" id="themeBtn" aria-label="Change theme">
+            <i class="fa-solid fa-moon"></i>
+        </button>
 
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-<div class="button22">
-<button class="button2". onclick="todev()">GET STARTED</button>
-</div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    </div>
 
+</header>
 
-<div class="information">
-<div class="icon">
-<a href="https://www.instagram.com/el__mouattassim?hvrq=NnNyMHE4N3Nydnl"><img src="images/instagram1.png" alt="" width="70px" class="iconn"></a>
-<a href="https://github.com/Mouattassim"><img src="images/github.png" alt="" width="70px" class="iconn"></a>
-<a href="https://wa.me/+213553613038"><img src="images/wat.png" alt="" width="70px" class="iconn"></a>
-<a href="mailto:lazregassoumi12@gmail.com"><img src="images/gmail1.png" alt="" width="70px" class="iconn"></a>
-</div>
+<!-- SIDEBAR -->
 
+<div class="menu-overlay" id="menuOverlay"></div>
 
-</div>
+<nav class="sidebar" id="sidebar">
 
+    <div class="sidebar-top">
 
+        <div class="sidebar-logo"><img src="images/logogdd.png" alt="logo" width="300px"></div>
+
+        <button class="close-menu" id="closeMenu" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+    <div class="sidebar-links">
+
+        <a href="index.html" class="active" data-i18n="navHome">ACCUEIL</a>
+        <a href="html.html" data-i18n="navHTML">HTML</a>
+        <a href="css.html" data-i18n="navCSS">CSS</a>
+        <a href="js.html" data-i18n="navJS">JAVASCRIPT</a>
+        <a href="py.html" data-i18n="navPython">PYTHON</a>
+        <a href="#developer" data-i18n="navDeveloper">DEVELOPER</a>
+        <a href="#contact" data-i18n="navContact">CONTACT ME</a>
+
+    </div>
+
+    <div class="sidebar-footer">
+        © MA Academy
+    </div>
+
+</nav>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="welcome" data-i18n="welcome">
+            WELCOME TO
+        </div>
+
+        <h1 class="hero-title">
+            <img src="images/logogdd.png" alt="logo" width="400px">
+      </h1>
+
+        <h2>
+            <span data-i18n="academy">أكاديمية</span>
+            <span class="fixed-name">Mouattassim Bellah</span>
+        </h2>
+
+        <p data-i18n="heroDescription">
+            تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.
+        </p>
+
+        <a href="#courses" class="main-btn" data-i18n="start">
+            ابدأ الآن
+        </a>
+
+    </div>
+
+</section>
+
+<!-- COURSES -->
+
+<section id="courses">
+
+    <h2 class="section-title" data-i18n="coursesTitle">
+        رحلتك في عالم البرمجة
+    </h2>
+
+    <p class="section-description" data-i18n="coursesDescription">
+        تعلم أساسيات تطوير الويب والبرمجة خطوة بخطوة.
+    </p>
+
+    <div class="timeline" id="timeline">
+
+        <div class="timeline-progress" id="timelineProgress"></div>
+
+        <!-- MA ACADEMY -->
+
+        <article class="lesson">
+
+            <div class="lesson-number">01</div>
+
+            <div class="tech-icon ma-icon"><img src="images/logogdd.png" alt="logo&" width="150px"></div>
+
+            <h3 data-i18n="lesson1Title">
+                لماذا MA Academy؟
+            </h3>
+
+            <p data-i18n="lesson1Description">
+                هدفنا هو مساعدتك على تعلم البرمجة بطريقة سهلة ومنظمة.
+            </p>
+
+        </article>
+
+        <!-- HTML -->
+
+        <article class="lesson" id="html">
+
+            <div class="lesson-number">02</div>
+
+            <div class="tech-icon html-icon">
+                <i class="fa-brands fa-html5"></i>
+            </div>
+
+            <h3 data-i18n="lesson2Title">تعلم HTML</h3>
+
+            <p data-i18n="lesson2Description">
+                تعلم بناء صفحات الويب وإضافة العناوين والفقرات والصور والروابط.
+            </p>
+
+        </article>
+
+        <!-- CSS -->
+
+        <article class="lesson" id="css">
+
+            <div class="lesson-number">03</div>
+
+            <div class="tech-icon css-icon">
+                <i class="fa-brands fa-css3-alt"></i>
+            </div>
+
+            <h3 data-i18n="lesson3Title">تعلم CSS</h3>
+
+            <p data-i18n="lesson3Description">
+                تعلم الألوان والخطوط والتنسيقات والتصميم المتجاوب.
+            </p>
+
+        </article>
+
+        <!-- JAVASCRIPT -->
+
+        <article class="lesson" id="javascript">
+
+            <div class="lesson-number">04</div>
+
+            <div class="tech-icon js-icon">
+                <i class="fa-brands fa-js"></i>
+            </div>
+
+            <h3 data-i18n="lesson4Title">تعلم JavaScript</h3>
+
+            <p data-i18n="lesson4Description">
+                تعلم إضافة التفاعل إلى موقعك والتعامل مع الأزرار والأحداث.
+            </p>
+
+        </article>
+
+        <!-- PYTHON -->
+
+        <article class="lesson" id="python">
+
+            <div class="lesson-number">05</div>
+
+            <div class="tech-icon python-icon">
+                <i class="fa-brands fa-python"></i>
+            </div>
+
+            <h3 data-i18n="lesson5Title">تعلم Python</h3>
+
+            <p data-i18n="lesson5Description">
+                تعلم أساسيات Python والمتغيرات والشروط والحلقات والدوال.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- DEVELOPER -->
+
+<section class="services" id="developer">
+
+    <h2 class="section-title" data-i18n="servicesTitle">
+        ماذا نقدم لك؟
+    </h2>
+
+    <p class="section-description" data-i18n="servicesIntro">
+        نوفر لك بداية منظمة في عالم تطوير الويب.
+    </p>
+
+    <div class="services-content">
+
+        <img
+            class="services-image"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
+            alt="Web development workspace"
+            loading="lazy"
+        >
+
+        <div>
+
+            <h2 data-i18n="servicesHeading">
+                تعلم وابدأ مشروعك
+            </h2>
+
+            <p data-i18n="servicesDescription">
+                اكتسب المعرفة خطوة بخطوة، وطبق ما تتعلمه في مشاريع عملية تساعدك على تطوير مهاراتك في تصميم وبرمجة المواقع.
+            </p>
+
+            <a class="main-btn" href="#contact" data-i18n="contact">
+                تواصل معنا
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- CONTACT / FOOTER -->
+
+<footer id="contact">
+
+    <div class="footer-logo"><img src="images/logogdd.png" alt="logo" width="250px"></div>
+
+    <p data-i18n="footerDescription">
+        طريقك نحو التميز في عالم البرمجة.
+    </p>
+
+    <div class="social-links">
+
+        <a href="https://www.instagram.com/el__mouattassim?hvrq=NnNyMHE4N3Nydnl" target="_blank" rel="noopener noreferrer" class="social instagram" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://github.com/Mouattassim" target="_blank" rel="noopener noreferrer" class="social github" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+        </a>
+
+        <a href="https://wa.me/+213553613038" target="_blank" rel="noopener noreferrer" class="social whatsapp" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <a href="mailto:lazregassoumi12@gmail.com" class="social gmail" aria-label="Gmail">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+
+    </div>
+
+    <p class="copyright">
+        © <span id="year"></span> MA Academy.
+        <span data-i18n="rights">جميع الحقوق محفوظة.</span>
+    </p>
+
+</footer>
 
 <script>
-function gotoma(){window.location.href = "indexxx.html"}
-const steps = document.querySelectorAll(".step");
 
-window.addEventListener("scroll", function () {
-  steps.forEach(function (step) {
-    const position = step.getBoundingClientRect().top;
+/* ================= TRANSLATIONS ================= */
 
-    if (position < window.innerHeight * 0.7) {
-      step.classList.add("active");
-    } else {
-      step.classList.remove("active");
+const translations = {
+
+ar: {
+
+welcome: "WELCOME TO",
+academy: "أكاديمية",
+heroDescription: "تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.",
+start: "ابدأ الآن",
+
+navHome: "الرئيسية",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "المطور",
+navContact: "تواصل معي",
+
+coursesTitle: "رحلتك في عالم البرمجة",
+coursesDescription: "تعلم أساسيات تطوير الويب والبرمجة خطوة بخطوة، وابدأ ببناء مشاريعك الخاصة.",
+
+lesson1Title: "لماذا MA Academy؟",
+lesson1Description: "هدفنا هو مساعدتك على تعلم البرمجة بطريقة سهلة ومنظمة. ستتعلم المهارات الأساسية وتنتقل تدريجيًا إلى إنشاء مشاريع حقيقية.",
+
+lesson2Title: "تعلم HTML",
+lesson2Description: "HTML هي لغة بناء صفحات الويب. ستتعلم كيفية إضافة العناوين والفقرات والصور والروابط وتنظيم محتوى الصفحة.",
+
+lesson3Title: "تعلم CSS",
+lesson3Description: "CSS تمنح موقعك مظهره الجميل. ستتعلم الألوان والخطوط والتنسيقات والتصميم المتجاوب مع مختلف الشاشات.",
+
+lesson4Title: "تعلم JavaScript",
+lesson4Description: "JavaScript تضيف التفاعل إلى موقعك. ستتعلم التعامل مع الأزرار والقوائم والأحداث وإنشاء تجارب تفاعلية للمستخدم.",
+
+lesson5Title: "تعلم Python",
+lesson5Description: "تعلم أساسيات Python والمتغيرات والشروط والحلقات والدوال، وابدأ بكتابة برامجك الخاصة.",
+
+servicesTitle: "ماذا نقدم لك؟",
+servicesIntro: "نوفر لك بداية منظمة في عالم تطوير الويب.",
+servicesHeading: "تعلم وابدأ مشروعك",
+servicesDescription: "اكتسب المعرفة خطوة بخطوة، وطبق ما تتعلمه في مشاريع عملية تساعدك على تطوير مهاراتك في تصميم وبرمجة المواقع.",
+contact: "تواصل معنا",
+
+footerDescription: "طريقك نحو التميز في عالم البرمجة.",
+rights: "جميع الحقوق محفوظة."
+
+},
+
+en: {
+
+welcome: "WELCOME TO MA",
+academy: "Academy",
+heroDescription: "Learn web development and start your coding journey from beginner to advanced.",
+start: "Get Started",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DEVELOPER",
+navContact: "CONTACT ME",
+
+coursesTitle: "Your Coding Journey",
+coursesDescription: "Learn the fundamentals of web development step by step and start building your own projects.",
+
+lesson1Title: "Why MA Academy?",
+lesson1Description: "Our goal is to help you learn programming in a simple and organized way. You will learn essential skills and gradually build real projects.",
+
+lesson2Title: "Learn HTML",
+lesson2Description: "HTML is the language used to structure web pages. Learn how to add headings, paragraphs, images, links and organize page content.",
+
+lesson3Title: "Learn CSS",
+lesson3Description: "CSS gives your website its appearance. Learn colors, fonts, layouts and responsive design for different screens.",
+
+lesson4Title: "Learn JavaScript",
+lesson4Description: "JavaScript adds interaction to your website. Learn buttons, menus, events and how to create interactive user experiences.",
+
+lesson5Title: "Learn Python",
+lesson5Description: "Learn Python basics, variables, conditions, loops and functions, and start writing your own programs.",
+
+servicesTitle: "What Do We Offer?",
+servicesIntro: "We provide an organized starting point in web development.",
+servicesHeading: "Learn and Build Your Project",
+servicesDescription: "Gain knowledge step by step and apply what you learn through practical projects that help develop your web design and programming skills.",
+contact: "Contact Us",
+
+footerDescription: "Your path to excellence in programming.",
+rights: "All rights reserved."
+
+},
+
+fr: {
+
+welcome: "WELCOME TO MA",
+academy: "Académie",
+heroDescription: "Apprenez le développement web et commencez votre parcours dans la programmation, du débutant au niveau avancé.",
+start: "Commencer",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DÉVELOPPEUR",
+navContact: "CONTACTEZ-MOI",
+
+coursesTitle: "Votre parcours en programmation",
+coursesDescription: "Apprenez les bases du développement web étape par étape et commencez à créer vos propres projets.",
+
+lesson1Title: "Pourquoi MA Academy ?",
+lesson1Description: "Notre objectif est de vous aider à apprendre la programmation de manière simple et organisée. Vous apprendrez les compétences essentielles et créerez progressivement de vrais projets.",
+
+lesson2Title: "Apprendre HTML",
+lesson2Description: "HTML est le langage utilisé pour structurer les pages web. Apprenez à ajouter des titres, des paragraphes, des images, des liens et à organiser le contenu.",
+
+lesson3Title: "Apprendre CSS",
+lesson3Description: "CSS donne à votre site son apparence. Apprenez les couleurs, les polices, les mises en page et le design adaptatif.",
+
+lesson4Title: "Apprendre JavaScript",
+lesson4Description: "JavaScript ajoute de l'interactivité à votre site. Apprenez à utiliser les boutons, les menus et les événements.",
+
+lesson5Title: "Apprendre Python",
+lesson5Description: "Apprenez les bases de Python, les variables, les conditions, les boucles et les fonctions pour créer vos propres programmes.",
+
+servicesTitle: "Que proposons-nous ?",
+servicesIntro: "Nous vous proposons un début organisé dans le développement web.",
+servicesHeading: "Apprenez et créez votre projet",
+servicesDescription: "Acquérez des connaissances étape par étape et appliquez-les dans des projets pratiques pour développer vos compétences en conception et programmation web.",
+contact: "Contactez-nous",
+
+footerDescription: "Votre chemin vers l'excellence en programmation.",
+rights: "Tous droits réservés."
+
+}
+
+};
+
+/* ================= LANGUAGE ================= */
+
+const languageSelect = document.getElementById("languageSelect");
+
+function setLanguage(language) {
+
+    const selected = translations[language] ? language : "ar";
+
+    document.documentElement.lang = selected;
+
+    document.documentElement.dir =
+        selected === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+
+        const key = element.dataset.i18n;
+
+        if (translations[selected][key] !== undefined) {
+            element.textContent = translations[selected][key];
+        }
+
+    });
+
+    languageSelect.value = selected;
+
+    try {
+        localStorage.setItem("ma-language",selected);
+    } catch(error) {}
+
+}
+
+languageSelect.addEventListener("change",event => {
+    setLanguage(event.target.value);
+});
+
+/* ================= THEME ================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+function setTheme(isLight) {
+
+    document.body.classList.toggle("light-mode",isLight);
+
+    themeBtn.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+
+    themeBtn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+    );
+
+    try {
+        localStorage.setItem(
+            "ma-theme",
+            isLight ? "light" : "dark"
+        );
+    } catch(error) {}
+
+}
+
+themeBtn.addEventListener("click",() => {
+
+    const isLight =
+        document.body.classList.contains("light-mode");
+
+    setTheme(!isLight);
+
+});
+
+/* ================= SIDEBAR MENU ================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sidebar = document.getElementById("sidebar");
+const menuOverlay = document.getElementById("menuOverlay");
+
+const menuLinks = document.querySelectorAll(".sidebar-links a");
+
+function openSidebar() {
+
+    sidebar.classList.add("open");
+    menuOverlay.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeSidebar() {
+
+    sidebar.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
+
+menuBtn.addEventListener("click",openSidebar);
+
+closeMenu.addEventListener("click",closeSidebar);
+
+menuOverlay.addEventListener("click",closeSidebar);
+
+/* ACTIVE MENU LINK */
+
+menuLinks.forEach(link => {
+
+    link.addEventListener("click", function() {
+
+        const href = this.getAttribute("href");
+
+        // الروابط الداخلية فقط
+        if (href.startsWith("#")) {
+            closeSidebar();
+            return;
+        }
+
+        // روابط الصفحات
+        window.location.href = href;
+
+    });
+
+});
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown",event => {
+
+    if(event.key === "Escape") {
+        closeSidebar();
     }
-  });
+
 });
 
+/* ================= SCROLL PROGRESS ================= */
 
-const img = document.querySelector(".myimage");
+const scrollProgress = document.getElementById("scrollProgress");
 
-window.addEventListener("scroll", function () {
-  const position = img.getBoundingClientRect().top;
+const timeline = document.getElementById("timeline");
 
-  if (position < window.innerHeight * 0.8) {
-    img.classList.add("show");
-  }
+const timelineProgress = document.getElementById("timelineProgress");
+
+const lessons = document.querySelectorAll(".lesson");
+
+function updateScroll() {
+
+    const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const pageProgress = scrollable > 0
+        ? (window.scrollY / scrollable) * 100
+        : 0;
+
+    scrollProgress.style.width = pageProgress + "%";
+
+    const timelineRect = timeline.getBoundingClientRect();
+
+    const timelineTop = window.scrollY + timelineRect.top;
+
+    const timelineHeight = timeline.offsetHeight;
+
+    const current = window.scrollY + window.innerHeight * 0.65;
+
+    const progress = Math.max(
+        0,
+        Math.min(
+            100,
+            ((current - timelineTop) / timelineHeight) * 100
+        )
+    );
+
+    timelineProgress.style.setProperty(
+        "--timeline-progress",
+        progress + "%"
+    );
+
+    lessons.forEach(lesson => {
+
+        const rect = lesson.getBoundingClientRect();
+
+        if (
+            rect.top < window.innerHeight * 0.75 &&
+            rect.bottom > window.innerHeight * 0.2
+        ) {
+            lesson.classList.add("active");
+        } else {
+            lesson.classList.remove("active");
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll",updateScroll,{
+    passive: true
 });
-function todev(){window.location.href="website.html"}
+
+window.addEventListener("resize",updateScroll);
+
+updateScroll();
+
+/* ================= COLORFUL CURSOR ================= */
+
+const colors = [
+    "#008cff",
+    "#00b4ff",
+    "#38bdf8",
+    "#06b6d4",
+    "#22c55e",
+    "#f97316",
+    "#eab308"
+];
+
+let lastSquareTime = 0;
+
+function createSquare(x,y) {
+
+    const now = performance.now();
+
+    if(now - lastSquareTime < 35) return;
+
+    lastSquareTime = now;
+
+    const square = document.createElement("span");
+
+    square.className = "cursor-square";
+
+    square.style.left = x + "px";
+    square.style.top = y + "px";
+
+    square.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(square);
+
+    square.addEventListener("animationend",() => {
+        square.remove();
+    },{once:true});
+
+}
+
+/* MOUSE */
+
+window.addEventListener("mousemove",event => {
+
+    createSquare(event.clientX,event.clientY);
+
+},{passive:true});
+
+/* TOUCH */
+
+window.addEventListener("touchmove",event => {
+
+    const touch = event.touches[0];
+
+    if(touch) {
+        createSquare(touch.clientX,touch.clientY);
+    }
+
+},{passive:true});
+
+/* ================= INITIAL SETTINGS ================= */
+
+let savedLanguage = "ar";
+let savedTheme = "dark";
+
+try {
+
+    savedLanguage =
+        localStorage.getItem("ma-language") || "ar";
+
+    savedTheme =
+        localStorage.getItem("ma-theme") || "dark";
+
+} catch(error) {}
+
+setLanguage(savedLanguage);
+
+setTheme(savedTheme === "light");
+
+/* FOOTER YEAR */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
 </script>
 
-
-
-
 </body>
-
-
-
-
-
-
-
-
-
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-

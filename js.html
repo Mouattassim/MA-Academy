@@ -1,1047 +1,2046 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<link rel="icon" href="images/logogdd.png" type="image/png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Learn JavaScript | MA Academy</title>
 
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="تعلم تطوير الويب والبرمجة مع أكاديمية MA" name="description"/>
+<title>MA Academy | JavaScript Course</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <style>
+
+/* ================= COLORS ================= */
+
 :root {
-    --primary: #7652d8;
-    --secondary: #a78bfa;
-    --light: #f5f2ff;
-    --dark: #242039;
-    --text: #29243b;
-    --muted: #77738a;
-    --border: #e8e2f5;
+    color-scheme: dark;
+    --bg: #050505;
+    --card: #101010;
+    --card2: #171717;
+    --text: #ffffff;
+    --muted: #a1a1aa;
+    --primary: #008cff;
+    --secondary: #00b4ff;
+    --border: rgba(255,255,255,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.3);
 }
+
+body.light-mode {
+    color-scheme: light;
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --card2: #eeeeF5;
+    --text: #171717;
+    --muted: #626273;
+    --border: rgba(0,0,0,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.08);
+}
+
+/* ================= GLOBAL ================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 body {
-    background: #ffffff;
+    background: var(--bg);
     color: var(--text);
-    font-family: Arial, sans-serif;
-    line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+    transition: background .3s, color .3s;
+    overflow-x: hidden;
 }
 
-/* NAVBAR */
+html[lang="ar"] body {
+    font-family: 'Cairo', sans-serif;
+}
 
-.navbar {
+html[lang="en"] body,
+html[lang="fr"] body {
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, select {
+    font: inherit;
+}
+
+/* ================= PAGE PROGRESS ================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    z-index: 9999;
+    box-shadow: 0 0 12px #008cff;
+}
+
+/* ================= HEADER ================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px 7%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px 8%;
-    background: white;
+    justify-content: space-between;
+    gap: 15px;
+    background: color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    color: var(--dark);
-    font-size: 25px;
-    font-weight: bold;
-    text-decoration: none;
-    direction: ltr;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.logo span {
-    color: var(--primary);
+.ma-static {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
 }
 
-nav {
+.header-controls {
     display: flex;
-    gap: 25px;
+    align-items: center;
+    gap: 10px;
 }
 
-nav a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: .3s;
+.header-controls select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-nav a:hover {
+/* HEADER BUTTONS */
+
+.theme-btn,
+.menu-btn {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,rgba(0,140,255,.18),rgba(0,180,255,.18));
     color: var(--primary);
+    border: 1px solid rgba(0,140,255,.35);
+    border-radius: 14px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .35s;
 }
 
-/* HERO */
+.theme-btn:hover,
+.menu-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.35);
+}
 
-.hero {
-    min-height: 480px;
-    padding: 75px 8%;
+/* ================= SIDEBAR ================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(440px,88%);
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 2001;
+    padding: 45px 35px;
+    overflow-y: auto;
+    transform: translateX(105%);
+    transition: transform .4s ease;
+    border-left: 1px solid var(--border);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 50px;
-    background:
-    radial-gradient(circle at 10% 30%, #a78bfa25, transparent 35%),
-    #faf9ff;
+    margin-bottom: 55px;
+    gap: 15px;
+}
+
+.sidebar-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.close-menu {
+    width: 55px;
+    height: 55px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.close-menu:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    transition: .3s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+    color: var(--primary);
+    padding-right: 22px;
+}
+
+.sidebar-links a.active {
+    border-bottom-color: rgba(0,140,255,.5);
+}
+
+.sidebar-footer {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: .85rem;
+    text-align: center;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 88vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #008cff;
+    filter: blur(180px);
+    opacity: .22;
+    top: 10%;
+    left: 10%;
+    pointer-events: none;
 }
 
 .hero-content {
-    max-width: 550px;
+    max-width: 850px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
-.tag {
+.welcome {
     color: var(--primary);
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: bold;
+    font-family: 'Poppins',sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
 }
 
-.hero h1 {
-    font-size: clamp(30px, 5vw, 52px);
-    margin: 18px 0;
-    line-height: 1.3;
+.hero-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-family: 'Poppins',sans-serif;
+    font-size: clamp(2.5rem,8vw,5.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 15px;
 }
 
-.hero h1 span {
+.hero-title > span:last-child {
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-motion {
+    display: inline-block;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: maMove 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes maMove {
+    from { transform: translateX(-15px); }
+    to { transform: translateX(15px); }
+}
+
+.hero h2 {
+    font-size: clamp(1.3rem,4vw,2rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.fixed-name {
+    display: inline-block;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 700;
     color: var(--primary);
 }
 
 .hero p {
     color: var(--muted);
-    margin-bottom: 30px;
+    max-width: 650px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+    line-height: 2;
+    font-weight: 500;
 }
 
 .main-btn {
     display: inline-block;
-    padding: 12px 28px;
-    background: var(--primary);
+    padding: 13px 30px;
+    background: linear-gradient(90deg,#0077ee,#00b4ff);
     color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: .3s;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: transform .3s,box-shadow .3s;
 }
 
 .main-btn:hover {
-    background: #5d3cc0;
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,140,255,.35);
 }
 
-/* CODE WINDOW */
+/* ================= SECTIONS ================= */
 
-.hero-code {
-    width: 430px;
-    max-width: 100%;
-    background: #211d32;
-    border: 1px solid #38304f;
-    border-radius: 12px;
-    overflow: hidden;
-    direction: ltr;
-    box-shadow: 0 15px 40px #33245b20;
-}
-
-.dots {
-    display: flex;
-    gap: 7px;
-    padding: 15px;
-    border-bottom: 1px solid #403852;
-}
-
-.dots i {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: #ff6b6b;
-}
-
-.dots i:nth-child(2) {
-    background: #ffc857;
-}
-
-.dots i:nth-child(3) {
-    background: #69d69b;
-}
-
-.hero-code pre {
-    padding: 25px;
-    color: #c4b5fd;
-    overflow-x: auto;
-    font-size: 14px;
-}
-
-/* LESSONS */
-
-.container {
-    padding: 80px 8%;
+section {
+    padding: 90px 8%;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 35px;
-}
-
-.section-title span {
-    color: var(--primary);
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: bold;
-}
-
-.section-title h2 {
-    font-size: 35px;
-    margin: 8px 0;
-}
-
-.section-title p {
-    color: var(--muted);
-}
-
-/* SEARCH */
-
-.tools {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.tools input,
-.tools select {
-    padding: 14px;
-    background: #faf9ff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    outline: none;
-}
-
-.tools input {
-    flex: 1;
-}
-
-.tools input:focus,
-.tools select:focus {
-    border-color: var(--primary);
-}
-
-/* CARDS */
-
-.lessons-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
-}
-
-.lesson-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: .3s;
-}
-
-.lesson-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--secondary);
-    box-shadow: 0 10px 30px #7652d815;
-}
-
-.lesson-image {
-    background: #211d32;
-    padding: 15px;
-    direction: ltr;
-    border-bottom: 1px solid #38304f;
-}
-
-.lesson-image .dots {
-    padding: 0 0 12px;
-    border: none;
-}.lesson-image pre {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    color: #c4b5fd;
-    font-size: 13px;
-    min-height: 55px;
-}
-
-.lesson-info {
-    padding: 20px;
-}
-
-.lesson-info h3 {
-    color: var(--primary);
-    direction: ltr;
-    text-align: right;
-    margin-bottom: 8px;
-}
-
-.lesson-info p {
-    color: var(--muted);
-    font-size: 14px;
+    font-size: clamp(1.8rem,5vw,2.6rem);
+    font-weight: 900;
     margin-bottom: 15px;
 }
 
-.copy-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 9px 15px;
-    border-radius: 6px;
-    cursor: pointer;
+.section-description {
+    text-align: center;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 650px;
+    margin: 0 auto 55px;
+    font-weight: 500;
+}
+
+/* ================= TIMELINE ================= */
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+}
+
+.timeline-progress {
+    position: absolute;
+    right: 27px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timeline-progress::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--timeline-progress,0%);
+    background: linear-gradient(to bottom,#008cff,#00b4ff,#38bdf8);
+    transition: height .15s;
+}
+
+.lesson {
+    position: relative;
+    margin-bottom: 35px;
+    margin-right: 65px;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    opacity: .55;
+    transform: translateY(25px);
+    transition: .5s ease;
+}
+
+.lesson.active {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: var(--primary);
+}
+
+.lesson-number {
+    position: absolute;
+    right: -65px;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card2);
+    border: 2px solid var(--border);
+    font-family: 'Poppins',sans-serif;
+    font-weight: 800;
     transition: .3s;
 }
 
-.copy-btn:hover {
-    background: #5d3cc0;
+.lesson.active .lesson-number {
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.4);
 }
 
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
+.lesson h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.lesson p {
     color: var(--muted);
-    padding: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 2;
 }
 
-/* FOOTER */
+.tech-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: .35s ease;
+}
+
+.lesson:hover .tech-icon {
+    transform: translateY(-6px) scale(1.1);
+}
+
+.html-icon { color: #e34f26; }
+.css-icon { color: #1572b6; }
+.js-icon { color: #f7df1e; }
+.python-icon { color: #3776ab; }
+
+.ma-icon {
+    font-family: 'Poppins',sans-serif;
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+html[lang="en"] .timeline .lesson h3,
+html[lang="fr"] .timeline .lesson h3,
+html[lang="en"] .timeline .lesson p,
+html[lang="fr"] .timeline .lesson p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= DEVELOPER ================= */
+
+.services {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.services-content {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.services-image {
+    width: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.services h2 {
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.services p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+html[lang="en"] .services p,
+html[lang="fr"] .services p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= FOOTER ================= */
 
 footer {
+    padding: 45px 20px;
     text-align: center;
-    padding: 35px 15px;
-    background: #faf9ff;
-    border-top: 1px solid var(--border);
 }
 
-footer h2 {
-    direction: ltr;
-}
-
-footer span {
+.footer-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
     color: var(--primary);
+    margin-bottom: 12px;
 }
 
 footer p {
-    color: var(--primary);
-    margin: 5px;
-}
-
-footer small {
     color: var(--muted);
+    line-height: 2;
+    font-weight: 500;
 }
 
-/* RESPONSIVE */
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 30px 0;
+}
 
-@media (max-width: 750px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 60px 6%;
+.social {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    font-size: 23px;
+    transition: .35s ease;
+}
+
+.social.instagram { color: #e1306c; }
+.social.github { color: var(--text); }
+.social.whatsapp { color: #25d366; }
+.social.gmail { color: #ea4335; }
+
+.social:hover {
+    transform: translateY(-7px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,140,255,.2);
+    border-color: var(--primary);
+    background: var(--card);
+}
+
+.copyright {
+    font-size: .85rem;
+    margin-top: 20px;
+}
+
+/* ================= CURSOR SQUARES ================= */
+
+.cursor-square {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: squareFade .7s ease-out forwards;
+}
+
+@keyframes squareFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0) rotate(180deg);
+    }
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 13px 4%;
     }
 
-    .hero-code {
+    section {
+        padding: 75px 5%;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem,9vw,4.5rem);
+    }
+
+    .services-content {
+        gap: 25px;
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    html {
+        scroll-padding-top: 75px;
+    }
+
+    body {
+        overflow-x: hidden;
         width: 100%;
     }
 
-    .navbar {
-        padding: 18px 5%;
+    /* HEADER */
+
+    .topbar {
+        width: 100%;
+        padding: 10px 12px;
+        gap: 8px;
     }
 
-    nav {
+    .logo {
+        font-size: 1rem;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .ma-static {
+        width: 35px;
+        height: 35px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+    .header-controls {
+        gap: 6px;
+    }
+
+    .header-controls select {
+        max-width: 112px;
+        padding: 8px 5px;
+        font-size: 12px;
+        border-radius: 9px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: min(88%,390px);
+        padding: 25px 22px;
+    }
+
+    .sidebar-top {
+        margin-bottom: 35px;
+    }
+
+    .sidebar-logo {
+        font-size: 1.2rem;
+    }
+
+    .close-menu {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+        border-radius: 8px;
+    }
+
+    .sidebar-links a {
+        font-size: 1.05rem;
+        padding: 19px 10px;
+    }
+
+    .sidebar-footer {
+        margin-top: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 75vh;
+        min-height: 75svh;
+        padding: 75px 18px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .welcome {
+        font-size: .75rem;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem,9vw,3.5rem);
+        gap: 9px;
+        line-height: 1.3;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-top: 12px;
+    }
+
+    .fixed-name {
+        font-size: 1rem;
+    }
+
+    .hero p {
+        font-size: .95rem;
+        line-height: 2;
+        padding: 0 5px;
+        margin-bottom: 25px;
+    }
+
+    .main-btn {
+        padding: 12px 25px;
+        font-size: .95rem;
+    }
+
+    /* SECTIONS */
+
+    section {
+        padding: 65px 18px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.6;
+    }
+
+    .section-description {
+        font-size: .92rem;
+        line-height: 2;
+        margin-bottom: 40px;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+        width: 100%;
+    }
+
+    .timeline-progress {
+        right: 19px;
+    }
+
+    .lesson {
+        margin-right: 47px;
+        margin-bottom: 25px;
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    .lesson-number {
+        right: -47px;
+        top: 18px;
+        width: 38px;
+        height: 38px;
+        font-size: .8rem;
+    }
+
+    .lesson h3 {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .lesson p {
+        font-size: .88rem;
+        line-height: 2;
+    }
+
+    .tech-icon {
+        font-size: 43px;
+        margin-bottom: 10px;
+    }
+
+    .ma-icon {
+        font-size: 1.9rem;
+    }
+
+    /* SERVICES / DEVELOPER */
+
+    .services-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .services-image {
+        width: 100%;
+        min-height: 190px;
+        max-height: 240px;
+        border-radius: 15px;
+    }
+
+    .services h2 {
+        font-size: 1.45rem;
+        line-height: 1.7;
+    }
+
+    .services p {
+        font-size: .93rem;
+        line-height: 2;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 40px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+
+    footer p {
+        font-size: .9rem;
+    }
+
+    .social-links {
         gap: 12px;
+        margin: 25px 0;
+    }
+
+    .social {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+
+    .copyright {
+        font-size: .78rem;
+    }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+    .topbar {
+        padding: 9px 8px;
+        gap: 5px;
+    }
+
+    .logo {
+        font-size: .85rem;
+        gap: 5px;
+    }
+
+    .ma-static {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .header-controls {
+        gap: 4px;
+    }
+
+    .header-controls select {
+        max-width: 91px;
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
         font-size: 13px;
     }
 
-    .container {
-        padding: 55px 5%;
+    .hero-title {
+        font-size: 2rem;
+        gap: 7px;
     }
 
-    .tools {
-        flex-direction: column;
+    .hero h2 {
+        font-size: 1.05rem;
     }
 
-    .section-title h2 {
-        font-size: 28px;
+    .lesson {
+        margin-right: 43px;
+        padding: 14px;
     }
+
+    .lesson-number {
+        right: -43px;
+        width: 35px;
+        height: 35px;
+    }
+
 }
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+
+/* ================= HTML LEARNING PAGE ================= */
+.html-learning { max-width: 1120px; margin: auto; }
+.html-intro { max-width: 850px; margin: 0 auto 35px; text-align: center; }
+.html-intro .html-badge { display:inline-flex; align-items:center; gap:9px; color:var(--primary); background:rgba(0,140,255,.1); border:1px solid rgba(0,140,255,.28); border-radius:30px; padding:9px 16px; font-weight:800; margin-bottom:18px; }
+.html-intro h2 { font-size:clamp(1.8rem,5vw,2.7rem); font-weight:900; margin-bottom:14px; }
+.html-intro h2 span { color:var(--primary); }
+.html-intro p { color:var(--muted); line-height:2; }
+.html-search-wrap { max-width:720px; margin:30px auto 42px; position:relative; }
+.html-search-wrap i { position:absolute; right:20px; top:50%; transform:translateY(-50%); color:var(--primary); }
+html[dir="ltr"] .html-search-wrap i { right:auto; left:20px; }
+.html-search { width:100%; padding:17px 52px 17px 18px; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:15px; outline:none; font:inherit; box-shadow:var(--shadow); }
+html[dir="ltr"] .html-search { padding:17px 18px 17px 52px; }
+.html-search:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(0,140,255,.12); }
+.html-lessons-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.html-topic { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:25px; box-shadow:var(--shadow); transition:.3s; min-width:0; }
+.html-topic:hover { transform:translateY(-5px); border-color:rgba(0,140,255,.65); }
+.html-topic-head { display:flex; align-items:center; gap:13px; margin-bottom:15px; }
+.html-topic-num { width:42px; height:42px; flex:0 0 42px; display:grid; place-items:center; border-radius:12px; color:#fff; font-weight:900; background:linear-gradient(135deg,#0077ee,#00b4ff); }
+.html-topic h3 { font-size:1.15rem; font-weight:900; }
+.html-topic p,.html-topic li { color:var(--muted); line-height:2; font-size:.96rem; }
+.html-topic ul { padding-inline-start:22px; margin:10px 0 15px; }
+.code-box { direction:ltr; text-align:left; position:relative; margin-top:17px; background:#080d16; border:1px solid rgba(0,140,255,.22); border-radius:13px; overflow:hidden; }
+.code-top { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 13px; color:#aab8cc; background:#111b2a; font:600 .78rem 'Inter',sans-serif; }
+.copy-code { border:1px solid rgba(0,180,255,.35); border-radius:8px; padding:7px 10px; color:#7dd3fc; background:rgba(0,140,255,.12); cursor:pointer; font:700 .78rem 'Inter',sans-serif; transition:.2s; }
+.copy-code:hover { background:#0077ee; color:white; }
+.code-box pre { margin:0; padding:17px; overflow-x:auto; color:#e2e8f0; font: .88rem/1.85 'Inter',monospace; white-space:pre; }
+.code-box code { font-family:inherit; }
+.html-tip { margin-top:15px; padding:13px 15px; border-right:3px solid var(--primary); background:rgba(0,140,255,.08); border-radius:8px; color:var(--muted); line-height:1.9; font-size:.9rem; }
+html[dir="ltr"] .html-tip { border-right:0; border-left:3px solid var(--primary); }
+.html-no-results { display:none; text-align:center; color:var(--muted); padding:35px; background:var(--card); border:1px solid var(--border); border-radius:15px; margin-top:20px; }
+.html-project { margin-top:35px; background:linear-gradient(135deg,rgba(0,119,238,.14),rgba(0,180,255,.06)); border:1px solid rgba(0,140,255,.28); border-radius:18px; padding:27px; }
+.html-project h3 { font-size:1.3rem; margin-bottom:12px; }
+.html-project p { color:var(--muted); line-height:2; }
+@media(max-width:700px) { .html-lessons-grid { grid-template-columns:1fr; gap:16px; } .html-topic { padding:19px; } .html-topic h3 { font-size:1.05rem; } .html-topic p,.html-topic li { font-size:.9rem; } .code-box pre { font-size:.78rem; padding:13px; } }
+
 </style>
 </head>
-
 <body>
-
-<!-- NAVBAR -->
-
-<header class="navbar">
-
-    <a href="#" class="logo"><img src="images/اكادمية.png" alt="logo" width="150px"></a>
-
-    <nav>
-        <a href="indexxx.html">الرئيسية</a>
-        <a href="#lessons">دروس JavaScript</a>
-    </nav>
-
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- HEADER -->
+<header class="topbar">
+<a class="logo" href="index.html">
+<img alt="logo" src="images/logogdd.png" width="200px"/>
+</a>
+<div class="header-controls">
+<select aria-label="Language" id="languageSelect">
+<option value="ar">🇩🇿 العربية</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+</select>
+<button aria-label="Change theme" class="theme-btn" id="themeBtn">
+<i class="fa-solid fa-moon"></i>
+</button>
+<button aria-label="Open menu" class="menu-btn" id="menuBtn">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
 </header>
-
+<!-- SIDEBAR -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-top">
+<div class="sidebar-logo"><img alt="logo" src="images/logogdd.png" width="300px"/></div>
+<button aria-label="Close menu" class="close-menu" id="closeMenu">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="sidebar-links">
+<a data-i18n="navHome" href="index.html">ACCUEIL</a>
+<a data-i18n="navHTML" href="html.html">HTML</a>
+<a data-i18n="navCSS" href="css.html">CSS</a>
+<a class="active" data-i18n="navJS" href="js.html">JAVASCRIPT</a>
+<a data-i18n="navPython" href="py.html">PYTHON</a>
+<a data-i18n="navDeveloper" href="#developer">DEVELOPER</a>
+<a data-i18n="navContact" href="#contact">CONTACT ME</a>
+</div>
+<div class="sidebar-footer">
+        © MA Academy
+    </div>
+</nav>
+<main>
 <!-- HERO -->
-
 <section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <span class="tag">
-            MA ACADEMY • WEB DEVELOPMENT
-        </span>
-
-        <h1>
-            اكتشف عالم
-            <span>JavaScript</span>
-        </h1>
-
-        <p>
-            تعلم البرمجة التفاعلية واكتشف كيفية التحكم في عناصر
-            صفحات الويب وإنشاء وظائف وتطبيقات باستخدام JavaScript.
-        </p>
-
-        <a href="#lessons" class="main-btn">
-            ابدأ التعلم
-        </a>
-
-    </div>
-
-    <div class="hero-code">
-
-        <div class="dots">
-            <i></i><i></i><i></i>
+<div class="hero-content">
+<div class="welcome" data-i18n="welcome">
+            WELCOME TO
         </div>
-
-        <pre><code>const academy = "MA Academy";
-
-function welcome() {
-  console.log("Hello World");
-}
-
-welcome();</code></pre>
-
-    </div>
-
-</section>
-
-<!-- LESSONS -->
-
-<main class="container" id="lessons">
-
-    <div class="section-title">
-
-        <span>JAVASCRIPT COURSE</span>
-
-        <h2>أهم مفاهيم JavaScript</h2>
-
-        <p>
-            اكتشف أهم أوامر ومفاهيم JavaScript مع شرح ومثال لكل مفهوم.
+<h1 class="hero-title">
+<img alt="logo" src="images/logogdd.png" width="400px"/>
+</h1>
+<h2>
+<span data-i18n="academy">أكاديمية</span>
+<span class="fixed-name">Mouattassim Bellah</span>
+</h2>
+<p data-i18n="heroDescription">
+            تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.
         </p>
-
-    </div>
-
-    <div class="tools">
-
-        <input
-            type="search"
-            id="searchInput"
-            placeholder="ابحث عن أمر JavaScript..."
-        >
-
-        <select id="categoryFilter">
-            <option value="all">جميع التصنيفات</option>
-            <option value="variables">المتغيرات</option>
-            <option value="data">أنواع البيانات</option>
-            <option value="conditions">الشروط</option>
-            <option value="loops">الحلقات</option>
-            <option value="functions">الدوال</option>
-            <option value="arrays">المصفوفات</option>
-            <option value="objects">الكائنات</option>
-            <option value="dom">DOM والأحداث</option>
-            <option value="other">أوامر أخرى</option>
-        </select>
-
-    </div>
-
-    <div class="lessons-grid" id="lessonsGrid"></div>
-
-</main>
-
-<!-- FOOTER -->
-
-<footer>
-
-    <h2>MA <span>Academy</span></h2>
-
-    <p>Learn. Build. Create.</p>
-
-    <small>
-        © 2026 MA Academy - All Rights Reserved
-    </small>
-
-</footer>
-
-<script>
-
-/* JAVASCRIPT LESSONS */
-
-const lessons = [
-
-/* VARIABLES */
-
-{
-tag: "let",
-category: "variables",
-title: "متغير قابل للتغيير",
-description: "يُستخدم لتعريف متغير يمكن تغيير قيمته لاحقاً.",
-code: "let name = 'Ahmed';\nname = 'Ali';"
-},{
-tag: "const",
-category: "variables",
-title: "متغير ثابت",
-description: "يُستخدم لتعريف متغير لا يمكن إعادة إسناد قيمة جديدة إليه.",
-code: "const country = 'Algeria';"
-},
-
-{
-tag: "var",
-category: "variables",
-title: "تعريف متغير",
-description: "طريقة قديمة لتعريف المتغيرات في JavaScript.",
-code: "var age = 20;"
-},
-
-/* DATA TYPES */
-
-{
-tag: "String",
-category: "data",
-title: "النصوص",
-description: "نوع بيانات يُستخدم لتخزين النصوص والكلمات.",
-code: "let name = 'MA Academy';"
-},
-
-{
-tag: "Number",
-category: "data",
-title: "الأرقام",
-description: "نوع بيانات يُستخدم لتخزين الأعداد الصحيحة والعشرية.",
-code: "let age = 18;\nlet price = 19.5;"
-},
-
-{
-tag: "Boolean",
-category: "data",
-title: "القيم المنطقية",
-description: "يحتوي على قيمتين فقط: true أو false.",
-code: "let isStudent = true;"
-},
-
-{
-tag: "typeof",
-category: "data",
-title: "معرفة نوع البيانات",
-description: "يُستخدم لمعرفة نوع القيمة أو المتغير.",
-code: "let age = 20;\nconsole.log(typeof age);"
-},
-
-{
-tag: "null",
-category: "data",
-title: "قيمة فارغة مقصودة",
-description: "تمثل غياب قيمة بشكل مقصود.",
-code: "let user = null;"
-},
-
-{
-tag: "undefined",
-category: "data",
-title: "قيمة غير محددة",
-description: "تظهر عادة عندما يكون المتغير معرّفاً دون إسناد قيمة.",
-code: "let result;\nconsole.log(result);"
-},
-
-/* CONDITIONS */
-
-{
-tag: "if",
-category: "conditions",
-title: "الشرط",
-description: "ينفذ كوداً معيناً عندما يتحقق الشرط.",
-code: "if (age >= 18) {\n  console.log('Adult');\n}"
-},
-
-{
-tag: "else",
-category: "conditions",
-title: "الشرط البديل",
-description: "ينفذ عندما لا يتحقق شرط if.",
-code: "if (age >= 18) {\n  console.log('Adult');\n} else {\n  console.log('Minor');\n}"
-},
-
-{
-tag: "else if",
-category: "conditions",
-title: "شرط إضافي",
-description: "يسمح باختبار شرط آخر عند عدم تحقق الشرط السابق.",
-code: "if (score >= 90) {\n  console.log('Excellent');\n} else if (score >= 50) {\n  console.log('Pass');\n}"
-},
-
-{
-tag: "switch",
-category: "conditions",
-title: "اختيار متعدد",
-description: "يسمح بتنفيذ حالة مختلفة حسب قيمة متغير.",
-code: "switch (day) {\n  case 1:\n    console.log('Sunday');\n    break;\n  default:\n    console.log('Other');\n}"
-},
-
-{
-tag: "ternary",
-category: "conditions",
-title: "الشرط المختصر",
-description: "طريقة مختصرة لكتابة شرط if و else.",
-code: "let result = age >= 18 ? 'Adult' : 'Minor';"
-},
-
-/* LOOPS */
-
-{
-tag: "for",
-category: "loops",
-title: "حلقة for",
-description: "تُستخدم لتكرار تنفيذ مجموعة من التعليمات عدد مرات محدد.",
-code: "for (let i = 0; i < 5; i++) {\n  console.log(i);\n}"
-},
-
-{
-tag: "while",
-category: "loops",
-title: "حلقة while",
-description: "تكرر تنفيذ التعليمات ما دام الشرط صحيحاً.",
-code: "let i = 0;\nwhile (i < 5) {\n  console.log(i);\n  i++;\n}"
-},
-
-{
-tag: "do while",
-category: "loops",
-title: "حلقة do while",
-description: "تنفذ الكود مرة واحدة على الأقل قبل اختبار الشرط.",
-code: "let i = 0;\ndo {\n  console.log(i);\n  i++;\n} while (i < 5);"
-},
-
-{
-tag: "for...of",
-category: "loops",
-title: "التكرار على القيم",
-description: "يُستخدم للمرور على قيم المصفوفات والعناصر القابلة للتكرار.",
-code: "const names = ['Ali', 'Sara'];\nfor (const name of names) {\n  console.log(name);\n}"
-},
-
-{
-tag: "forEach",
-category: "loops",
-title: "التكرار باستخدام forEach",
-description: "تنفذ دالة مرة لكل عنصر داخل المصفوفة.",
-code: "const numbers = [1, 2, 3];\nnumbers.forEach(number => {\n  console.log(number);\n});"
-},
-
-{
-tag: "break",
-category: "loops",
-title: "إيقاف الحلقة",
-description: "يوقف تنفيذ الحلقة مباشرة.",
-code: "for (let i = 0; i < 10; i++) {\n  if (i === 5) break;\n}"
-},
-
-{
-tag: "continue",
-category: "loops",
-title: "تجاوز دورة",
-description: "يتجاوز الدورة الحالية وينتقل إلى الدورة التالية.",
-code: "for (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}"
-},
-
-/* FUNCTIONS */
-
-{
-tag: "function",
-category: "functions",
-title: "الدوال",
-description: "تجمع مجموعة من التعليمات داخل وظيفة يمكن استدعاؤها.",
-code: "function welcome() {\n  console.log('Welcome');\n}\n\nwelcome();"
-},{
-tag: "return",
-category: "functions",
-title: "إرجاع قيمة",
-description: "تعيد نتيجة من الدالة إلى المكان الذي استدعاها.",
-code: "function sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3));"
-},
-
-{
-tag: "arrow function",
-category: "functions",
-title: "الدالة السهمية",
-description: "طريقة مختصرة لكتابة الدوال في JavaScript.",
-code: "const greet = () => {\n  console.log('Hello');\n};\n\ngreet();"
-},
-
-{
-tag: "parameters",
-category: "functions",
-title: "المعاملات",
-description: "قيم تستقبلها الدالة لتستخدمها أثناء تنفيذها.",
-code: "function greet(name) {\n  console.log('Hello ' + name);\n}\n\ngreet('Ali');"
-},
-
-/* ARRAYS */
-
-{
-tag: "Array",
-category: "arrays",
-title: "المصفوفات",
-description: "تسمح بتخزين مجموعة من القيم داخل متغير واحد.",
-code: "const fruits = ['Apple', 'Banana', 'Orange'];"
-},
-
-{
-tag: "push",
-category: "arrays",
-title: "إضافة عنصر",
-description: "تضيف عنصراً جديداً إلى نهاية المصفوفة.",
-code: "let fruits = ['Apple', 'Banana'];\nfruits.push('Orange');"
-},
-
-{
-tag: "pop",
-category: "arrays",
-title: "حذف آخر عنصر",
-description: "تحذف آخر عنصر من المصفوفة.",
-code: "let fruits = ['Apple', 'Banana'];\nfruits.pop();"
-},
-
-{
-tag: "shift",
-category: "arrays",
-title: "حذف أول عنصر",
-description: "تحذف أول عنصر من المصفوفة.",
-code: "let numbers = [1, 2, 3];\nnumbers.shift();"
-},
-
-{
-tag: "unshift",
-category: "arrays",
-title: "إضافة عنصر في البداية",
-description: "تضيف عنصراً جديداً في بداية المصفوفة.",
-code: "let numbers = [2, 3];\nnumbers.unshift(1);"
-},
-
-{
-tag: "map",
-category: "arrays",
-title: "إنشاء مصفوفة جديدة",
-description: "تنشئ مصفوفة جديدة من نتائج تطبيق دالة على كل عنصر.",
-code: "const numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);"
-},
-
-{
-tag: "filter",
-category: "arrays",
-title: "تصفية العناصر",
-description: "تنشئ مصفوفة جديدة تحتوي على العناصر التي تحقق شرطاً.",
-code: "const numbers = [1, 2, 3, 4];\nconst even = numbers.filter(n => n % 2 === 0);"
-},
-
-{
-tag: "find",
-category: "arrays",
-title: "البحث عن عنصر",
-description: "تعيد أول عنصر يحقق الشرط المحدد.",
-code: "const numbers = [10, 20, 30];\nconst result = numbers.find(n => n > 15);"
-},
-
-{
-tag: "includes",
-category: "arrays",
-title: "التحقق من وجود عنصر",
-description: "تتحقق مما إذا كانت المصفوفة تحتوي على قيمة معينة.",
-code: "const fruits = ['Apple', 'Banana'];\nconsole.log(fruits.includes('Apple'));"
-},
-
-/* OBJECTS */
-
-{
-tag: "Object",
-category: "objects",
-title: "الكائنات",
-description: "تسمح بتجميع البيانات على شكل خصائص وقيم.",
-code: "const user = {\n  name: 'Ali',\n  age: 20\n};"
-},
-
-{
-tag: "Object.keys",
-category: "objects",
-title: "مفاتيح الكائن",
-description: "تعيد مصفوفة تحتوي على أسماء خصائص الكائن.",
-code: "const user = { name: 'Ali', age: 20 };\nconsole.log(Object.keys(user));"
-},
-
-{
-tag: "Object.values",
-category: "objects",
-title: "قيم الكائن",
-description: "تعيد مصفوفة تحتوي على قيم خصائص الكائن.",
-code: "const user = { name: 'Ali', age: 20 };\nconsole.log(Object.values(user));"
-},
-
-/* DOM AND EVENTS */
-
-{
-tag: "getElementById",
-category: "dom",
-title: "اختيار عنصر بالمعرف",
-description: "يختار عنصراً من HTML اعتماداً على قيمة id.",
-code: "const title = document.getElementById('title');"
-},
-
-{
-tag: "querySelector",
-category: "dom",
-title: "اختيار عنصر CSS",
-description: "يختار أول عنصر يطابق محدد CSS معيناً.",
-code: "const box = document.querySelector('.box');"
-},
-
-{
-tag: "innerHTML",
-category: "dom",
-title: "تغيير محتوى HTML",
-description: "تسمح بقراءة أو تغيير محتوى HTML داخل العنصر.",
-code: "document.querySelector('#title').innerHTML = 'Hello';"
-},
-
-{
-tag: "textContent",
-category: "dom",
-title: "تغيير النص",
-description: "تقرأ أو تغير النص الموجود داخل عنصر دون تفسيره كـ HTML.",
-code: "document.querySelector('#title').textContent = 'Hello';"
-},
-
-{
-tag: "addEventListener",
-category: "dom",
-title: "مستمع الأحداث",
-description: "يربط حدثاً مثل النقر أو الكتابة بدالة تنفذ عند وقوعه.",
-code: "button.addEventListener('click', () => {\n  console.log('Clicked');\n});"
-},{
-tag: "classList",
-category: "dom",
-title: "التحكم في الأصناف",
-description: "تسمح بإضافة أو حذف أو تبديل أصناف CSS لعنصر.",
-code: "element.classList.add('active');\nelement.classList.remove('active');"
-},
-
-{
-tag: "createElement",
-category: "dom",
-title: "إنشاء عنصر",
-description: "تنشئ عنصراً جديداً من عناصر HTML باستخدام JavaScript.",
-code: "const div = document.createElement('div');"
-},
-
-{
-tag: "appendChild",
-category: "dom",
-title: "إضافة عنصر",
-description: "تضيف عنصراً داخل عنصر أب في نهاية محتواه.",
-code: "const p = document.createElement('p');\ndocument.body.appendChild(p);"
-},
-
-/* OTHER */
-
-{
-tag: "console.log",
-category: "other",
-title: "عرض النتائج",
-description: "تُستخدم لعرض القيم والرسائل في وحدة التحكم Console.",
-code: "console.log('Hello World');"
-},
-
-{
-tag: "alert",
-category: "other",
-title: "نافذة تنبيه",
-description: "تعرض رسالة تنبيه للمستخدم في نافذة منبثقة.",
-code: "alert('Welcome to MA Academy');"
-},
-
-{
-tag: "prompt",
-category: "other",
-title: "إدخال البيانات",
-description: "تعرض نافذة تطلب من المستخدم إدخال قيمة.",
-code: "const name = prompt('Enter your name');"
-},
-
-{
-tag: "parseInt",
-category: "other",
-title: "تحويل إلى عدد صحيح",
-description: "تحول النص إلى عدد صحيح عند إمكانية التحويل.",
-code: "const number = parseInt('25');"
-},
-
-{
-tag: "setTimeout",
-category: "other",
-title: "تنفيذ بعد مدة",
-description: "تنفذ دالة مرة واحدة بعد مرور مدة زمنية محددة.",
-code: "setTimeout(() => {\n  console.log('Hello');\n}, 2000);"
-},
-
-{
-tag: "setInterval",
-category: "other",
-title: "التنفيذ المتكرر",
-description: "تنفذ دالة بشكل متكرر وفق فترة زمنية محددة.",
-code: "setInterval(() => {\n  console.log('Hello');\n}, 1000);"
-},
-
-{
-tag: "JSON.stringify",
-category: "other",
-title: "تحويل إلى JSON",
-description: "تحول كائن JavaScript إلى نص بصيغة JSON.",
-code: "const user = { name: 'Ali' };\nconst text = JSON.stringify(user);"
-},
-
-{
-tag: "JSON.parse",
-category: "other",
-title: "تحويل JSON إلى كائن",
-description: "تحول نص JSON صالحاً إلى قيمة JavaScript.",
-code: "const text = '{\"name\":\"Ali\"}';\nconst user = JSON.parse(text);"
+<a class="main-btn" data-i18n="start" href="#courses">
+            ابدأ الآن
+        </a>
+</div>
+</section>
+<!-- HTML COURSE: FROM ZERO -->
+<section id="courses">
+<div class="html-learning" id="html-lessons">
+<div class="html-intro">
+<div class="html-badge"><i class="fa-brands fa-js"></i> JAVASCRIPT • COMPLETE COURSE</div>
+<h2>تعلم <span>JavaScript</span> من الصفر</h2>
+<p>تعلم JavaScript خطوة بخطوة، من المتغيرات والشروط والحلقات إلى الدوال والمصفوفات وDOM والأحداث والبرمجة غير المتزامنة وبناء المشاريع.</p>
+</div>
+<div class="html-search-wrap">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="ابحث في دروس JavaScript" class="html-search" id="lessonSearch" placeholder="ابحث عن درس... مثل: المتغيرات، الشروط، الدوال، DOM، Events" type="search"/>
+</div>
+<div class="html-lessons-grid" id="htmlLessonsGrid"><article class="html-topic" data-search="ما هي JavaScript؟ JavaScript JS برمجة ما هي javascript؟"><div class="html-topic-head"><span class="html-topic-num">01</span><h3>ما هي JavaScript؟</h3></div><p>JavaScript لغة برمجة تضيف التفاعل والسلوك إلى صفحات الويب. يمكنك بها الاستجابة للنقرات، وتغيير المحتوى، والتحقق من النماذج، والتعامل مع البيانات.</p><div class="html-tip">HTML تبني الهيكل، وCSS تنسّق المظهر، وJavaScript تضيف السلوك والتفاعل.</div></article><article class="html-topic" data-search="كيف تعمل JavaScript في المتصفح؟ JavaScript JS برمجة كيف تعمل javascript في المتصفح؟"><div class="html-topic-head"><span class="html-topic-num">02</span><h3>كيف تعمل JavaScript في المتصفح؟</h3></div><p>ينفذ المتصفح كود JavaScript عبر محرك JavaScript. يمكن للكود التعامل مع الصفحة من خلال DOM والاستجابة لأحداث المستخدم.</p><div class="html-tip">يمكن تشغيل JavaScript داخل المتصفح أو خارج المتصفح باستخدام بيئات مثل Node.js.</div></article><article class="html-topic" data-search="إضافة JavaScript إلى HTML JavaScript JS برمجة إضافة javascript إلى html"><div class="html-topic-head"><span class="html-topic-num">03</span><h3>إضافة JavaScript إلى HTML</h3></div><p>يمكن كتابة JavaScript داخل وسم script أو ربط ملف خارجي باستخدام src. غالبًا الأفضل وضع الملف الخارجي مع defer.</p><div class="code-box"><div class="code-top"><span>index.html</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;ar&quot; dir=&quot;rtl&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;JavaScript&lt;/title&gt;
+  &lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;مرحباً&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div><div class="html-tip">defer يجعل المتصفح ينفذ الملف بعد تحليل HTML.</div></article><article class="html-topic" data-search="أول أمر: console.log JavaScript JS برمجة أول أمر: console.log"><div class="html-topic-head"><span class="html-topic-num">04</span><h3>أول أمر: console.log</h3></div><p>تستخدم console.log() لعرض القيم والرسائل في وحدة التحكم، وهي أداة أساسية لفهم ما يحدث أثناء تنفيذ البرنامج.</p><div class="code-box"><div class="code-top"><span>script.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>console.log(&quot;Hello JavaScript!&quot;);
+console.log(10 + 5);
+console.log(&quot;MA Academy&quot;);</code></pre></div><div class="html-tip">افتح أدوات المطور في المتصفح ثم Console لرؤية النتيجة.</div></article><article class="html-topic" data-search="التعليقات Comments JavaScript JS برمجة التعليقات comments"><div class="html-topic-head"><span class="html-topic-num">05</span><h3>التعليقات Comments</h3></div><p>التعليقات نصوص لا ينفذها JavaScript. استخدم // للتعليق في سطر واحد و/* */ للتعليق متعدد الأسطر.</p><div class="code-box"><div class="code-top"><span>comments.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>// تعليق في سطر واحد
+
+/*
+  تعليق متعدد الأسطر
+*/
+
+console.log(&quot;Start learning&quot;);</code></pre></div><div class="html-tip">اكتب تعليقات تشرح السبب أو الفكرة، لا ما يظهر بوضوح من الكود.</div></article><article class="html-topic" data-search="المتغيرات: let وconst JavaScript JS برمجة المتغيرات: let وconst"><div class="html-topic-head"><span class="html-topic-num">06</span><h3>المتغيرات: let وconst</h3></div><p>تستخدم let لتعريف متغير يمكن إعادة إسناد قيمته، بينما const لتعريف مرجع لا يمكن إعادة إسناده. تجنب var في الشيفرات الحديثة غالبًا.</p><div class="code-box"><div class="code-top"><span>variables.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const academy = &quot;MA Academy&quot;;
+let score = 10;
+
+score = 15;
+
+console.log(academy);
+console.log(score);</code></pre></div><div class="html-tip">استخدم const افتراضيًا، وانتقل إلى let عندما تحتاج إلى إعادة الإسناد.</div></article><article class="html-topic" data-search="قواعد تسمية المتغيرات JavaScript JS برمجة قواعد تسمية المتغيرات"><div class="html-topic-head"><span class="html-topic-num">07</span><h3>قواعد تسمية المتغيرات</h3></div><p>يمكن أن تحتوي أسماء المتغيرات على حروف وأرقام و_ و$، لكن لا تبدأ برقم ولا تستخدم الكلمات المحجوزة. JavaScript حساسة لحالة الأحرف.</p><div class="code-box"><div class="code-top"><span>names.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>let studentName = &quot;Ali&quot;;
+let studentAge = 19;
+let isLearning = true;
+
+console.log(studentName, studentAge, isLearning);</code></pre></div><div class="html-tip">اختر أسماء واضحة مثل studentName بدل x عندما يكون ذلك ممكنًا.</div></article><article class="html-topic" data-search="أنواع البيانات Data Types JavaScript JS برمجة أنواع البيانات data types"><div class="html-topic-head"><span class="html-topic-num">08</span><h3>أنواع البيانات Data Types</h3></div><p>تشمل الأنواع الأساسية String وNumber وBoolean وUndefined وNull وBigInt وSymbol، كما أن Object يشمل الكائنات والمصفوفات والدوال.</p><div class="code-box"><div class="code-top"><span>types.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>let name = &quot;Sara&quot;;       // string
+let age = 20;             // number
+let active = true;        // boolean
+let result;               // undefined
+let selected = null;       // null
+
+console.log(typeof name);
+console.log(typeof age);
+console.log(typeof active);</code></pre></div><div class="html-tip">استخدم typeof لفحص نوع قيمة في حالات كثيرة.</div></article><article class="html-topic" data-search="الأرقام والعمليات الحسابية JavaScript JS برمجة الأرقام والعمليات الحسابية"><div class="html-topic-head"><span class="html-topic-num">09</span><h3>الأرقام والعمليات الحسابية</h3></div><p>تدعم JavaScript الجمع والطرح والضرب والقسمة وباقي القسمة والأس، باستخدام + و- و* و/ و% و**.</p><div class="code-box"><div class="code-top"><span>math.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>let a = 12;
+let b = 5;
+
+console.log(a + b);
+console.log(a - b);
+console.log(a * b);
+console.log(a / b);
+console.log(a % b);
+console.log(a ** 2);</code></pre></div><div class="html-tip">عامل + يمكن أن يجمع الأرقام أو يدمج النصوص حسب نوع القيم.</div></article><article class="html-topic" data-search="النصوص Strings JavaScript JS برمجة النصوص strings"><div class="html-topic-head"><span class="html-topic-num">10</span><h3>النصوص Strings</h3></div><p>يمكن كتابة النصوص بين علامات اقتباس مفردة أو مزدوجة أو backticks. النصوص تدعم خصائص ودوال كثيرة لمعالجتها.</p><div class="code-box"><div class="code-top"><span>strings.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const name = &quot;Mouattassim&quot;;
+const course = &quot;JavaScript&quot;;
+
+console.log(`Welcome ${name}`);
+console.log(course.length);
+console.log(course.toUpperCase());
+console.log(course.toLowerCase());</code></pre></div><div class="html-tip">استخدم template literals لإدراج المتغيرات داخل النص بسهولة.</div></article><article class="html-topic" data-search="دمج النصوص وTemplate Literals JavaScript JS برمجة دمج النصوص وtemplate literals"><div class="html-topic-head"><span class="html-topic-num">11</span><h3>دمج النصوص وTemplate Literals</h3></div><p>يمكن دمج النصوص باستخدام + أو كتابة تعبيرات داخل ${} بين علامتي backtick. الطريقة الثانية أوضح عند بناء جمل مركبة.</p><div class="code-box"><div class="code-top"><span>template.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const firstName = &quot;Ali&quot;;
+const age = 18;
+
+const message = `My name is ${firstName} and I am ${age}.`;
+console.log(message);</code></pre></div><div class="html-tip">تسمى الصيغة التي تستخدم backticks بالقوالب النصية Template Literals.</div></article><article class="html-topic" data-search="تحويل أنواع البيانات JavaScript JS برمجة تحويل أنواع البيانات"><div class="html-topic-head"><span class="html-topic-num">12</span><h3>تحويل أنواع البيانات</h3></div><p>تستطيع تحويل النص إلى رقم باستخدام Number() أو parseInt() أو parseFloat()، وتحويل القيم إلى نص باستخدام String().</p><div class="code-box"><div class="code-top"><span>conversion.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const textNumber = &quot;25&quot;;
+
+const number = Number(textNumber);
+const message = String(number);
+
+console.log(number + 5);
+console.log(message);
+console.log(Number(&quot;hello&quot;)); // NaN</code></pre></div><div class="html-tip">تحقق من نتيجة التحويل، فقد تحصل على NaN إذا تعذر تحويل النص إلى رقم.</div></article><article class="html-topic" data-search="المقارنات Comparison JavaScript JS برمجة المقارنات comparison"><div class="html-topic-head"><span class="html-topic-num">13</span><h3>المقارنات Comparison</h3></div><p>تنتج المقارنات قيمة Boolean مثل أكبر من وأصغر من والمساواة. يفضّل استخدام === و!== للمقارنة الصارمة دون تحويل نوع تلقائي.</p><div class="code-box"><div class="code-top"><span>comparison.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>console.log(10 &gt; 5);
+console.log(10 === &quot;10&quot;); // false
+console.log(10 == &quot;10&quot;);  // true
+console.log(7 !== 3);</code></pre></div><div class="html-tip">الفرق الأساسي: == تسمح بتحويل الأنواع، أما === فتقارن القيمة والنوع.</div></article><article class="html-topic" data-search="العوامل المنطقية JavaScript JS برمجة العوامل المنطقية"><div class="html-topic-head"><span class="html-topic-num">14</span><h3>العوامل المنطقية</h3></div><p>تستخدم &amp;&amp; بمعنى AND و|| بمعنى OR و! بمعنى NOT لدمج الشروط أو عكس قيمتها المنطقية.</p><div class="code-box"><div class="code-top"><span>logical.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const age = 20;
+const hasCard = true;
+
+console.log(age &gt;= 18 &amp;&amp; hasCard);
+console.log(age &lt; 18 || hasCard);
+console.log(!hasCard);</code></pre></div><div class="html-tip">تستخدم هذه العوامل كثيرًا داخل if وعند التحقق من أكثر من شرط.</div></article><article class="html-topic" data-search="الشروط if وelse JavaScript JS برمجة الشروط if وelse"><div class="html-topic-head"><span class="html-topic-num">15</span><h3>الشروط if وelse</h3></div><p>تسمح if بتنفيذ كود عند تحقق شرط، ويمكن إضافة else لتنفيذ مسار بديل وelse if لاختبار شروط إضافية.</p><div class="code-box"><div class="code-top"><span>conditions.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const grade = 14;
+
+if (grade &gt;= 16) {
+  console.log(&quot;Excellent&quot;);
+} else if (grade &gt;= 10) {
+  console.log(&quot;Passed&quot;);
+} else {
+  console.log(&quot;Try again&quot;);
+}</code></pre></div><div class="html-tip">رتّب الشروط من الأكثر تحديدًا إلى الأكثر عمومية عند الحاجة.</div></article><article class="html-topic" data-search="Switch وCase JavaScript JS برمجة switch وcase"><div class="html-topic-head"><span class="html-topic-num">16</span><h3>Switch وCase</h3></div><p>تستخدم switch لمقارنة قيمة واحدة بعدة حالات. أضف break لمنع الانتقال إلى الحالة التالية، ويمكن استخدام default للحالة الافتراضية.</p><div class="code-box"><div class="code-top"><span>switch.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const day = 2;
+
+switch (day) {
+  case 1:
+    console.log(&quot;Sunday&quot;);
+    break;
+  case 2:
+    console.log(&quot;Monday&quot;);
+    break;
+  default:
+    console.log(&quot;Unknown day&quot;);
+}</code></pre></div><div class="html-tip">يمكن جمع أكثر من case لتنفيذ نفس التعليمات.</div></article><article class="html-topic" data-search="العامل Ternary JavaScript JS برمجة العامل ternary"><div class="html-topic-head"><span class="html-topic-num">17</span><h3>العامل Ternary</h3></div><p>العامل الشرطي المختصر يكتب بالشكل condition ? value1 : value2، ويكون مفيدًا للتعبيرات البسيطة.</p><div class="code-box"><div class="code-top"><span>ternary.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const age = 19;
+
+const status = age &gt;= 18
+  ? &quot;Adult&quot;
+  : &quot;Minor&quot;;
+
+console.log(status);</code></pre></div><div class="html-tip">لا تستخدمه عندما يجعل الشروط المعقدة صعبة القراءة.</div></article><article class="html-topic" data-search="حلقة for JavaScript JS برمجة حلقة for"><div class="html-topic-head"><span class="html-topic-num">18</span><h3>حلقة for</h3></div><p>تكرر for تنفيذ كتلة من التعليمات، وتتكون عادة من بداية العداد والشرط والتحديث.</p><div class="code-box"><div class="code-top"><span>for.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>for (let i = 1; i &lt;= 5; i++) {
+  console.log(i);
+}</code></pre></div><div class="html-tip">انتبه إلى تحديث العداد حتى لا تنشئ حلقة لا نهائية.</div></article><article class="html-topic" data-search="حلقة while JavaScript JS برمجة حلقة while"><div class="html-topic-head"><span class="html-topic-num">19</span><h3>حلقة while</h3></div><p>تستمر while في التكرار ما دام الشرط صحيحًا. يجب تغيير الحالة داخل الحلقة حتى لا تستمر إلى ما لا نهاية.</p><div class="code-box"><div class="code-top"><span>while.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>let count = 1;
+
+while (count &lt;= 5) {
+  console.log(count);
+  count++;
+}</code></pre></div><div class="html-tip">استخدمها عندما لا تعرف مسبقًا عدد مرات التكرار.</div></article><article class="html-topic" data-search="حلقة do...while JavaScript JS برمجة حلقة do...while"><div class="html-topic-head"><span class="html-topic-num">20</span><h3>حلقة do...while</h3></div><p>تنفذ do...while الكتلة مرة واحدة على الأقل، ثم تتحقق من الشرط لتقرر تكرارها.</p><div class="code-box"><div class="code-top"><span>do-while.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>let number = 1;
+
+do {
+  console.log(number);
+  number++;
+} while (number &lt;= 3);</code></pre></div><div class="html-tip">تختلف عن while في أن فحص الشرط يأتي بعد التنفيذ الأول.</div></article><article class="html-topic" data-search="break وcontinue JavaScript JS برمجة break وcontinue"><div class="html-topic-head"><span class="html-topic-num">21</span><h3>break وcontinue</h3></div><p>توقف break الحلقة أو switch، بينما تتجاوز continue الدورة الحالية وتنتقل إلى الدورة التالية.</p><div class="code-box"><div class="code-top"><span>break-continue.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>for (let i = 1; i &lt;= 6; i++) {
+  if (i === 3) continue;
+  if (i === 5) break;
+
+  console.log(i);
+}</code></pre></div><div class="html-tip">استخدمهما عندما يجعلان منطق الحلقة أوضح.</div></article><article class="html-topic" data-search="الدوال Functions JavaScript JS برمجة الدوال functions"><div class="html-topic-head"><span class="html-topic-num">22</span><h3>الدوال Functions</h3></div><p>الدالة كتلة قابلة لإعادة الاستخدام، تنفذ عند استدعائها. يمكنها استقبال معاملات وإرجاع نتيجة باستخدام return.</p><div class="code-box"><div class="code-top"><span>functions.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>function greet(name) {
+  return `Hello ${name}`;
 }
 
+const message = greet(&quot;Ali&quot;);
+console.log(message);</code></pre></div><div class="html-tip">قسّم البرنامج إلى دوال صغيرة لكل منها مسؤولية واضحة.</div></article><article class="html-topic" data-search="Function Expression JavaScript JS برمجة function expression"><div class="html-topic-head"><span class="html-topic-num">23</span><h3>Function Expression</h3></div><p>يمكن تخزين دالة داخل متغير، وتسمى هذه الطريقة Function Expression. يمكن أن تكون الدالة مجهولة الاسم.</p><div class="code-box"><div class="code-top"><span>expression.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const add = function(a, b) {
+  return a + b;
+};
+
+console.log(add(4, 6));</code></pre></div><div class="html-tip">الدوال المعرفة بهذه الطريقة لا تتصرف مثل function declarations في الرفع Hoisting.</div></article><article class="html-topic" data-search="Arrow Functions JavaScript JS برمجة arrow functions"><div class="html-topic-head"><span class="html-topic-num">24</span><h3>Arrow Functions</h3></div><p>توفر Arrow Functions صياغة مختصرة للدوال باستخدام السهم =&gt;. وهي شائعة في callbacks ومعالجة المصفوفات.</p><div class="code-box"><div class="code-top"><span>arrow.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const multiply = (a, b) =&gt; {
+  return a * b;
+};
+
+const square = n =&gt; n * n;
+
+console.log(multiply(3, 4));
+console.log(square(5));</code></pre></div><div class="html-tip">لها سلوك مختلف عن الدوال العادية في this.</div></article><article class="html-topic" data-search="المعاملات والقيم الافتراضية JavaScript JS برمجة المعاملات والقيم الافتراضية"><div class="html-topic-head"><span class="html-topic-num">25</span><h3>المعاملات والقيم الافتراضية</h3></div><p>يمكن للدالة استقبال عدة معاملات، ويمكن وضع قيمة افتراضية للمعامل إذا لم يرسل المستدعي قيمة له.</p><div class="code-box"><div class="code-top"><span>parameters.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>function welcome(name = &quot;Guest&quot;) {
+  return `Welcome ${name}`;
+}
+
+console.log(welcome(&quot;Sara&quot;));
+console.log(welcome());</code></pre></div><div class="html-tip">تُستخدم القيم الافتراضية لتجنب التعامل مع undefined في كثير من الحالات.</div></article><article class="html-topic" data-search="النطاق Scope JavaScript JS برمجة النطاق scope"><div class="html-topic-head"><span class="html-topic-num">26</span><h3>النطاق Scope</h3></div><p>يحدد Scope المكان الذي يمكن منه الوصول إلى المتغير. من أنواعه Global Scope وFunction Scope وBlock Scope.</p><div class="code-box"><div class="code-top"><span>scope.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const globalName = &quot;MA&quot;;
+
+function showName() {
+  const localName = &quot;Academy&quot;;
+  console.log(globalName, localName);
+}
+
+showName();
+// localName غير متاح هنا</code></pre></div><div class="html-tip">let وconst لهما نطاق كتلي، بينما var له نطاق الدالة أو النطاق العام.</div></article><article class="html-topic" data-search="Hoisting JavaScript JS برمجة hoisting"><div class="html-topic-head"><span class="html-topic-num">27</span><h3>Hoisting</h3></div><p>Hoisting هو سلوك في JavaScript يتعلق بكيفية معالجة تعريفات المتغيرات والدوال قبل تنفيذ الكود. تختلف التفاصيل بين var وlet وconst والدوال.</p><div class="code-box"><div class="code-top"><span>hoisting.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>sayHello();
+
+function sayHello() {
+  console.log(&quot;Hello!&quot;);
+}
+
+// let وconst لا يمكن استعمالهما
+// قبل سطر التعريف بسبب TDZ</code></pre></div><div class="html-tip">لا تعتمد على Hoisting لتكتب كودًا مربكًا؛ عرّف المتغيرات قبل استخدامها.</div></article><article class="html-topic" data-search="المصفوفات Arrays JavaScript JS برمجة المصفوفات arrays"><div class="html-topic-head"><span class="html-topic-num">28</span><h3>المصفوفات Arrays</h3></div><p>المصفوفة تخزن مجموعة قيم مرتبة داخل متغير واحد. يبدأ الفهرس من 0، ويمكن الوصول إلى العنصر باستخدام index.</p><div class="code-box"><div class="code-top"><span>arrays.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const fruits = [&quot;Apple&quot;, &quot;Orange&quot;, &quot;Banana&quot;];
+
+console.log(fruits[0]);
+console.log(fruits[2]);
+console.log(fruits.length);</code></pre></div><div class="html-tip">استخدم length لمعرفة عدد العناصر.</div></article><article class="html-topic" data-search="إضافة وحذف عناصر المصفوفة JavaScript JS برمجة إضافة وحذف عناصر المصفوفة"><div class="html-topic-head"><span class="html-topic-num">29</span><h3>إضافة وحذف عناصر المصفوفة</h3></div><p>تسمح push وpop بالتعديل في نهاية المصفوفة، بينما unshift وshift تعدلان بدايتها.</p><div class="code-box"><div class="code-top"><span>array-methods.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const numbers = [10, 20];
+
+numbers.push(30);
+numbers.unshift(5);
+
+numbers.pop();
+numbers.shift();
+
+console.log(numbers);</code></pre></div><div class="html-tip">هذه الدوال تعدّل المصفوفة الأصلية.</div></article><article class="html-topic" data-search="slice وsplice JavaScript JS برمجة slice وsplice"><div class="html-topic-head"><span class="html-topic-num">30</span><h3>slice وsplice</h3></div><p>تعيد slice جزءًا من المصفوفة دون تعديل الأصل، بينما splice يمكنها حذف أو إضافة عناصر داخل المصفوفة الأصلية.</p><div class="code-box"><div class="code-top"><span>slice-splice.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const items = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];
+
+const part = items.slice(1, 3);
+items.splice(1, 1, &quot;new&quot;);
+
+console.log(part);
+console.log(items);</code></pre></div><div class="html-tip">تذكر: slice لا تعدّل الأصل، وsplice تعدّله.</div></article><article class="html-topic" data-search="for...of وforEach JavaScript JS برمجة for...of وforeach"><div class="html-topic-head"><span class="html-topic-num">31</span><h3>for...of وforEach</h3></div><p>تستخدم for...of للتكرار على قيم العناصر القابلة للتكرار، بينما forEach تنفذ دالة لكل عنصر في المصفوفة.</p><div class="code-box"><div class="code-top"><span>iteration.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const names = [&quot;Ali&quot;, &quot;Sara&quot;, &quot;Lina&quot;];
+
+for (const name of names) {
+  console.log(name);
+}
+
+names.forEach((name, index) =&gt; {
+  console.log(index, name);
+});</code></pre></div><div class="html-tip">for...of تدعم break وcontinue، أما forEach فلا تستخدم معها break بالطريقة نفسها.</div></article><article class="html-topic" data-search="map وfilter وreduce JavaScript JS برمجة map وfilter وreduce"><div class="html-topic-head"><span class="html-topic-num">32</span><h3>map وfilter وreduce</h3></div><p>map تنشئ مصفوفة جديدة من نتائج تحويل العناصر، وfilter تختار العناصر المطابقة لشرط، وreduce تجمع القيم في نتيجة واحدة.</p><div class="code-box"><div class="code-top"><span>array-functional.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const numbers = [1, 2, 3, 4];
+
+const doubled = numbers.map(n =&gt; n * 2);
+const even = numbers.filter(n =&gt; n % 2 === 0);
+const total = numbers.reduce((sum, n) =&gt; sum + n, 0);
+
+console.log(doubled, even, total);</code></pre></div><div class="html-tip">هذه الدوال لا تعدّل المصفوفة الأصلية بحد ذاتها.</div></article><article class="html-topic" data-search="الكائنات Objects JavaScript JS برمجة الكائنات objects"><div class="html-topic-head"><span class="html-topic-num">33</span><h3>الكائنات Objects</h3></div><p>الكائن يخزن البيانات على شكل خصائص وقيم، ويمكن الوصول إلى الخاصية باستخدام النقطة أو الأقواس.</p><div class="code-box"><div class="code-top"><span>objects.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const student = {
+  name: &quot;Ali&quot;,
+  age: 20,
+  course: &quot;JavaScript&quot;
+};
+
+console.log(student.name);
+console.log(student[&quot;age&quot;]);</code></pre></div><div class="html-tip">تسمى البيانات داخل الكائن properties، والدوال داخله methods.</div></article><article class="html-topic" data-search="إضافة وتعديل وحذف خصائص JavaScript JS برمجة إضافة وتعديل وحذف خصائص"><div class="html-topic-head"><span class="html-topic-num">34</span><h3>إضافة وتعديل وحذف خصائص</h3></div><p>يمكن إنشاء خاصية جديدة أو تعديل قيمة موجودة أو حذف خاصية باستخدام delete.</p><div class="code-box"><div class="code-top"><span>object-properties.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const user = { name: &quot;Sara&quot; };
+
+user.age = 19;
+user.name = &quot;Lina&quot;;
+delete user.age;
+
+console.log(user);</code></pre></div><div class="html-tip">يمكن الوصول إلى الخاصية ديناميكيًا باستخدام الأقواس المربعة.</div></article><article class="html-topic" data-search="Destructuring JavaScript JS برمجة destructuring"><div class="html-topic-head"><span class="html-topic-num">35</span><h3>Destructuring</h3></div><p>يسمح Destructuring باستخراج قيم من المصفوفات أو خصائص من الكائنات إلى متغيرات بطريقة مختصرة.</p><div class="code-box"><div class="code-top"><span>destructuring.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const user = {
+  name: &quot;Ali&quot;,
+  age: 21
+};
+
+const { name, age } = user;
+
+const colors = [&quot;red&quot;, &quot;blue&quot;];
+const [first, second] = colors;
+
+console.log(name, age, first, second);</code></pre></div><div class="html-tip">يمكن استخدام قيم افتراضية عند غياب الخاصية أو العنصر.</div></article><article class="html-topic" data-search="Spread وRest JavaScript JS برمجة spread وrest"><div class="html-topic-head"><span class="html-topic-num">36</span><h3>Spread وRest</h3></div><p>يستخدم Spread operator (...) لفرد عناصر مصفوفة أو خصائص كائن، بينما Rest يجمع عدة قيم في مصفوفة أو كائن.</p><div class="code-box"><div class="code-top"><span>spread-rest.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const first = [1, 2];
+const all = [...first, 3, 4];
+
+function sum(...numbers) {
+  return numbers.reduce((a, b) =&gt; a + b, 0);
+}
+
+console.log(all);
+console.log(sum(1, 2, 3));</code></pre></div><div class="html-tip">تتحدد وظيفة ... من موضع استخدامها.</div></article><article class="html-topic" data-search="Set وMap JavaScript JS برمجة set وmap"><div class="html-topic-head"><span class="html-topic-num">37</span><h3>Set وMap</h3></div><p>Set مجموعة تحفظ قيمًا فريدة، بينما Map تخزن أزواجًا من المفاتيح والقيم ويمكن أن تكون المفاتيح من أنواع مختلفة.</p><div class="code-box"><div class="code-top"><span>set-map.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const unique = new Set([1, 2, 2, 3]);
+unique.add(4);
+
+const scores = new Map();
+scores.set(&quot;Ali&quot;, 18);
+scores.set(&quot;Sara&quot;, 20);
+
+console.log([...unique]);
+console.log(scores.get(&quot;Sara&quot;));</code></pre></div><div class="html-tip">استخدم Set لإزالة التكرار، وMap عندما تحتاج إلى خريطة مفاتيح وقيم مرنة.</div></article><article class="html-topic" data-search="DOM: الوصول إلى العناصر JavaScript JS برمجة dom: الوصول إلى العناصر"><div class="html-topic-head"><span class="html-topic-num">38</span><h3>DOM: الوصول إلى العناصر</h3></div><p>DOM هو تمثيل الصفحة كعقد يمكن لـ JavaScript قراءتها وتعديلها. استخدم getElementById أو querySelector للوصول إلى العناصر.</p><div class="code-box"><div class="code-top"><span>dom.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const title = document.getElementById(&quot;title&quot;);
+const firstButton = document.querySelector(&quot;.btn&quot;);
+const allCards = document.querySelectorAll(&quot;.card&quot;);
+
+console.log(title, firstButton, allCards);</code></pre></div><div class="html-tip">querySelector يعيد أول عنصر يطابق المحدد، وquerySelectorAll يعيد مجموعة عناصر.</div></article><article class="html-topic" data-search="تغيير النص والمحتوى JavaScript JS برمجة تغيير النص والمحتوى"><div class="html-topic-head"><span class="html-topic-num">39</span><h3>تغيير النص والمحتوى</h3></div><p>يمكن تغيير النص باستخدام textContent، وتغيير HTML الداخلي باستخدام innerHTML. استخدم textContent للنصوص غير الموثوقة.</p><div class="code-box"><div class="code-top"><span>dom-content.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const title = document.querySelector(&quot;h1&quot;);
+
+title.textContent = &quot;Welcome to MA Academy&quot;;
+
+// استخدم innerHTML فقط مع HTML موثوق
+// title.innerHTML = &quot;&lt;strong&gt;Welcome&lt;/strong&gt;&quot;;</code></pre></div><div class="html-tip">إدخال بيانات غير موثوقة عبر innerHTML قد يسبب ثغرات XSS.</div></article><article class="html-topic" data-search="تغيير CSS وClasses عبر JavaScript JavaScript JS برمجة تغيير css وclasses عبر javascript"><div class="html-topic-head"><span class="html-topic-num">40</span><h3>تغيير CSS وClasses عبر JavaScript</h3></div><p>يمكن تغيير style مباشرة أو استخدام classList لإضافة وإزالة وتبديل classes. يفضّل غالبًا إدارة المظهر عبر CSS classes.</p><div class="code-box"><div class="code-top"><span>dom-style.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const card = document.querySelector(&quot;.card&quot;);
+
+card.classList.add(&quot;active&quot;);
+card.classList.remove(&quot;hidden&quot;);
+card.classList.toggle(&quot;selected&quot;);
+
+// تعديل مباشر عند الحاجة
+card.style.borderRadius = &quot;12px&quot;;</code></pre></div><div class="html-tip">classList.add وremove وtoggle أدوات مهمة للتفاعل مع التصميم.</div></article><article class="html-topic" data-search="إنشاء وإزالة عناصر DOM JavaScript JS برمجة إنشاء وإزالة عناصر dom"><div class="html-topic-head"><span class="html-topic-num">41</span><h3>إنشاء وإزالة عناصر DOM</h3></div><p>يمكن إنشاء عنصر باستخدام createElement، ثم إضافة محتوى إليه وإلحاقه بالصفحة باستخدام append أو appendChild.</p><div class="code-box"><div class="code-top"><span>create-elements.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const item = document.createElement(&quot;li&quot;);
+item.textContent = &quot;New lesson&quot;;
+
+document.querySelector(&quot;ul&quot;).append(item);
+
+// لاحقًا:
+item.remove();</code></pre></div><div class="html-tip">استخدم remove لحذف العنصر من الصفحة.</div></article><article class="html-topic" data-search="الأحداث Events JavaScript JS برمجة الأحداث events"><div class="html-topic-head"><span class="html-topic-num">42</span><h3>الأحداث Events</h3></div><p>الأحداث تمثل تفاعلات المستخدم أو المتصفح مثل click وinput وsubmit وkeydown. اربط الحدث باستخدام addEventListener.</p><div class="code-box"><div class="code-top"><span>events.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const button = document.querySelector(&quot;button&quot;);
+
+button.addEventListener(&quot;click&quot;, () =&gt; {
+  console.log(&quot;Button clicked!&quot;);
+});</code></pre></div><div class="html-tip">ضع اسم الحدث دون كلمة on، مثل click وليس onclick.</div></article><article class="html-topic" data-search="Event Object وpreventDefault JavaScript JS برمجة event object وpreventdefault"><div class="html-topic-head"><span class="html-topic-num">43</span><h3>Event Object وpreventDefault</h3></div><p>تستقبل دالة الحدث كائنًا يحتوي معلومات عن الحدث والعنصر المستهدف. preventDefault يمنع السلوك الافتراضي عند الحاجة.</p><div class="code-box"><div class="code-top"><span>event-object.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>document.querySelector(&quot;form&quot;)
+  .addEventListener(&quot;submit&quot;, event =&gt; {
+    event.preventDefault();
+    console.log(event.target);
+  });</code></pre></div><div class="html-tip">في إرسال النماذج، يمنع preventDefault إعادة تحميل الصفحة تلقائيًا.</div></article><article class="html-topic" data-search="النماذج وقراءة المدخلات JavaScript JS برمجة النماذج وقراءة المدخلات"><div class="html-topic-head"><span class="html-topic-num">44</span><h3>النماذج وقراءة المدخلات</h3></div><p>يمكن قراءة قيمة input عبر value، ثم التحقق منها قبل استخدامها. تعامل مع المدخلات باعتبارها بيانات تحتاج إلى تحقق.</p><div class="code-box"><div class="code-top"><span>forms.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const input = document.querySelector(&quot;#name&quot;);
+const button = document.querySelector(&quot;#send&quot;);
+
+button.addEventListener(&quot;click&quot;, () =&gt; {
+  const name = input.value.trim();
+  console.log(name);
+});</code></pre></div><div class="html-tip">تحقق من البيانات في الواجهة والخادم؛ تحقق المتصفح وحده لا يكفي للأمان.</div></article><article class="html-topic" data-search="JSON JavaScript JS برمجة json"><div class="html-topic-head"><span class="html-topic-num">45</span><h3>JSON</h3></div><p>JSON صيغة نصية لتبادل البيانات. تستخدم JSON.stringify لتحويل قيمة JavaScript إلى نص JSON، وJSON.parse لتحويل النص إلى قيمة.</p><div class="code-box"><div class="code-top"><span>json.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const user = {
+  name: &quot;Sara&quot;,
+  age: 20
+};
+
+const text = JSON.stringify(user);
+const object = JSON.parse(text);
+
+console.log(text);
+console.log(object.name);</code></pre></div><div class="html-tip">النص غير الصحيح في JSON.parse يؤدي إلى خطأ؛ يمكن استخدام try...catch.</div></article><article class="html-topic" data-search="التعامل مع الأخطاء try...catch JavaScript JS برمجة التعامل مع الأخطاء try...catch"><div class="html-topic-head"><span class="html-topic-num">46</span><h3>التعامل مع الأخطاء try...catch</h3></div><p>يسمح try...catch بالتعامل مع الأخطاء أثناء التنفيذ بدل توقف المسار دون معالجة. يمكن استخدام finally لتنفيذ تعليمات في النهاية.</p><div class="code-box"><div class="code-top"><span>errors.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>try {
+  const data = JSON.parse(&quot;{bad json}&quot;);
+  console.log(data);
+} catch (error) {
+  console.error(&quot;حدث خطأ:&quot;, error.message);
+} finally {
+  console.log(&quot;انتهت العملية&quot;);
+}</code></pre></div><div class="html-tip">استخدم catch لمعالجة الخطأ أو إظهار رسالة مفيدة، ولا تبتلع الأخطاء بصمت.</div></article><article class="html-topic" data-search="البرمجة غير المتزامنة JavaScript JS برمجة البرمجة غير المتزامنة"><div class="html-topic-head"><span class="html-topic-num">47</span><h3>البرمجة غير المتزامنة</h3></div><p>بعض العمليات تستغرق وقتًا مثل طلب البيانات أو المؤقتات. JavaScript توفر callbacks وPromises وasync/await للتعامل معها.</p><div class="code-box"><div class="code-top"><span>async.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>console.log(&quot;First&quot;);
+
+setTimeout(() =&gt; {
+  console.log(&quot;After 1 second&quot;);
+}, 1000);
+
+console.log(&quot;Last&quot;);</code></pre></div><div class="html-tip">فهم الفرق بين المتزامن وغير المتزامن أساس مهم عند بناء التطبيقات.</div></article><article class="html-topic" data-search="setTimeout وsetInterval JavaScript JS برمجة settimeout وsetinterval"><div class="html-topic-head"><span class="html-topic-num">48</span><h3>setTimeout وsetInterval</h3></div><p>ينفذ setTimeout دالة مرة واحدة بعد مدة، بينما setInterval يكرر تنفيذها بفاصل زمني. يمكن إيقافهما باستخدام clearTimeout وclearInterval.</p><div class="code-box"><div class="code-top"><span>timers.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const timeoutId = setTimeout(() =&gt; {
+  console.log(&quot;Hello&quot;);
+}, 1000);
+
+const intervalId = setInterval(() =&gt; {
+  console.log(&quot;Tick&quot;);
+}, 2000);
+
+// إيقاف التكرار:
+// clearInterval(intervalId);</code></pre></div><div class="html-tip">المدة تقاس بالميلي ثانية، و1000 ميلي ثانية تساوي ثانية واحدة.</div></article><article class="html-topic" data-search="Promises JavaScript JS برمجة promises"><div class="html-topic-head"><span class="html-topic-num">49</span><h3>Promises</h3></div><p>Promise تمثل نتيجة عملية غير متزامنة قد تكون pending أو fulfilled أو rejected. يمكن التعامل معها عبر then وcatch وfinally.</p><div class="code-box"><div class="code-top"><span>promises.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const task = new Promise((resolve, reject) =&gt; {
+  resolve(&quot;Done!&quot;);
+});
+
+task
+  .then(result =&gt; console.log(result))
+  .catch(error =&gt; console.error(error))
+  .finally(() =&gt; console.log(&quot;Finished&quot;));</code></pre></div><div class="html-tip">تساعد Promises على تنظيم العمليات غير المتزامنة وتجنب تداخل callbacks.</div></article><article class="html-topic" data-search="async وawait JavaScript JS برمجة async وawait"><div class="html-topic-head"><span class="html-topic-num">50</span><h3>async وawait</h3></div><p>تسمح async وawait بكتابة الشيفرات المعتمدة على Promises بأسلوب أقرب إلى التنفيذ المتسلسل. الدالة async تعيد Promise دائمًا.</p><div class="code-box"><div class="code-top"><span>async-await.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>function getMessage() {
+  return Promise.resolve(&quot;Hello!&quot;);
+}
+
+async function showMessage() {
+  try {
+    const message = await getMessage();
+    console.log(message);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+showMessage();</code></pre></div><div class="html-tip">استخدم try...catch لمعالجة الأخطاء عند await.</div></article><article class="html-topic" data-search="Fetch API JavaScript JS برمجة fetch api"><div class="html-topic-head"><span class="html-topic-num">51</span><h3>Fetch API</h3></div><p>تستخدم fetch لإرسال طلبات HTTP والحصول على Response. غالبًا نقرأ البيانات بصيغة JSON باستخدام response.json().</p><div class="code-box"><div class="code-top"><span>fetch.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>async function loadUsers() {
+  const response = await fetch(
+    &quot;https://jsonplaceholder.typicode.com/users&quot;
+  );
+
+  if (!response.ok) {
+    throw new Error(&quot;Request failed&quot;);
+  }
+
+  const users = await response.json();
+  console.log(users);
+}
+
+loadUsers().catch(console.error);</code></pre></div><div class="html-tip">تحقق من response.ok لأن fetch لا ترفض Promise تلقائيًا عند كل حالات HTTP مثل 404.</div></article><article class="html-topic" data-search="Modules: import وexport JavaScript JS برمجة modules: import وexport"><div class="html-topic-head"><span class="html-topic-num">52</span><h3>Modules: import وexport</h3></div><p>تسمح Modules بتقسيم البرنامج إلى ملفات مستقلة. استخدم export لإتاحة قيم من ملف وimport لاستيرادها في ملف آخر.</p><div class="code-box"><div class="code-top"><span>math.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>// math.js
+export function add(a, b) {
+  return a + b;
+}
+
+// main.js
+import { add } from &quot;./math.js&quot;;
+console.log(add(2, 3));</code></pre></div><div class="html-tip">في HTML استخدم script type=&quot;module&quot; لتشغيل ملف JavaScript كوحدة.</div></article><article class="html-topic" data-search="التخزين المحلي localStorage JavaScript JS برمجة التخزين المحلي localstorage"><div class="html-topic-head"><span class="html-topic-num">53</span><h3>التخزين المحلي localStorage</h3></div><p>يتيح localStorage حفظ بيانات نصية في المتصفح لتبقى بعد إغلاق الصفحة. استخدم setItem وgetItem وremoveItem.</p><div class="code-box"><div class="code-top"><span>storage.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>localStorage.setItem(&quot;theme&quot;, &quot;dark&quot;);
+
+const theme = localStorage.getItem(&quot;theme&quot;);
+console.log(theme);
+
+// حذف قيمة:
+// localStorage.removeItem(&quot;theme&quot;);</code></pre></div><div class="html-tip">للتعامل مع كائنات ومصفوفات، حوّلها إلى JSON قبل التخزين.</div></article><article class="html-topic" data-search="التعامل مع التاريخ والوقت JavaScript JS برمجة التعامل مع التاريخ والوقت"><div class="html-topic-head"><span class="html-topic-num">54</span><h3>التعامل مع التاريخ والوقت</h3></div><p>يوفر كائن Date أدوات لإنشاء التواريخ وقراءة اليوم والشهر والسنة والوقت. انتبه إلى أن getMonth يبدأ من 0.</p><div class="code-box"><div class="code-top"><span>date.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const now = new Date();
+
+console.log(now.getFullYear());
+console.log(now.getMonth() + 1);
+console.log(now.getDate());
+
+console.log(
+  new Intl.DateTimeFormat(&quot;ar&quot;).format(now)
+);</code></pre></div><div class="html-tip">يمكن استخدام Intl.DateTimeFormat لعرض التاريخ وفق اللغة والمنطقة.</div></article><article class="html-topic" data-search="الأرقام وMath JavaScript JS برمجة الأرقام وmath"><div class="html-topic-head"><span class="html-topic-num">55</span><h3>الأرقام وMath</h3></div><p>يوفر Math دوالًا مثل round وfloor وceil وrandom وmax وmin وsqrt لتنفيذ عمليات رياضية.</p><div class="code-box"><div class="code-top"><span>math-object.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>console.log(Math.round(4.6));
+console.log(Math.floor(4.9));
+console.log(Math.ceil(4.1));
+console.log(Math.max(3, 9, 5));
+console.log(Math.sqrt(81));
+
+const random = Math.random();
+console.log(random);</code></pre></div><div class="html-tip">Math.random تعطي قيمة عشوائية أكبر من أو تساوي 0 وأقل من 1.</div></article><article class="html-topic" data-search="مقدمة إلى OOP والكلاسات JavaScript JS برمجة مقدمة إلى oop والكلاسات"><div class="html-topic-head"><span class="html-topic-num">56</span><h3>مقدمة إلى OOP والكلاسات</h3></div><p>البرمجة كائنية التوجه تنظم الكود حول الكائنات. تتيح class تعريف قالب لإنشاء كائنات ذات خصائص ودوال.</p><div class="code-box"><div class="code-top"><span>class.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>class Student {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  introduce() {
+    console.log(`I am ${this.name}`);
+  }
+}
+
+const student = new Student(&quot;Ali&quot;, 20);
+student.introduce();</code></pre></div><div class="html-tip">الكلاسات في JavaScript مبنية على نموذج prototype.</div></article><article class="html-topic" data-search="الوراثة Inheritance JavaScript JS برمجة الوراثة inheritance"><div class="html-topic-head"><span class="html-topic-num">57</span><h3>الوراثة Inheritance</h3></div><p>تسمح extends بإنشاء class يرث من class آخر، ويستخدم super لاستدعاء constructor الأب أو دواله.</p><div class="code-box"><div class="code-top"><span>inheritance.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class Student extends Person {
+  constructor(name, course) {
+    super(name);
+    this.course = course;
+  }
+}
+
+const s = new Student(&quot;Sara&quot;, &quot;JS&quot;);
+console.log(s.name, s.course);</code></pre></div><div class="html-tip">استخدم الوراثة عندما توجد علاقة واضحة بين النوع العام والنوع المتخصص.</div></article><article class="html-topic" data-search="this وطرق الكائن JavaScript JS برمجة this وطرق الكائن"><div class="html-topic-head"><span class="html-topic-num">58</span><h3>this وطرق الكائن</h3></div><p>تشير this إلى سياق الاستدعاء في الدوال العادية، وقد يختلف معناها حسب طريقة استدعاء الدالة. Arrow functions لا تنشئ this خاصة بها.</p><div class="code-box"><div class="code-top"><span>this.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const user = {
+  name: &quot;Ali&quot;,
+  sayName() {
+    console.log(this.name);
+  }
+};
+
+user.sayName();</code></pre></div><div class="html-tip">لا تفترض أن this تشير دائمًا إلى الكائن الذي كُتبت الدالة داخله.</div></article><article class="html-topic" data-search="التعبيرات النمطية RegExp JavaScript JS برمجة التعبيرات النمطية regexp"><div class="html-topic-head"><span class="html-topic-num">59</span><h3>التعبيرات النمطية RegExp</h3></div><p>تستخدم Regular Expressions للبحث عن أنماط داخل النصوص والتحقق من صيغ معينة. يمكن إنشاؤها بين / / أو باستخدام RegExp.</p><div class="code-box"><div class="code-top"><span>regex.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const email = &quot;student@example.com&quot;;
+const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+console.log(pattern.test(email));</code></pre></div><div class="html-tip">التعبير النمطي أداة مساعدة للتحقق، لكنه لا يغني عن التحقق الكامل من البيانات.</div></article><article class="html-topic" data-search="التعامل مع الأخطاء في Console وDebugging JavaScript JS برمجة التعامل مع الأخطاء في console وdebugging"><div class="html-topic-head"><span class="html-topic-num">60</span><h3>التعامل مع الأخطاء في Console وDebugging</h3></div><p>استخدم console.log وconsole.table وconsole.error ونقاط التوقف Breakpoints لفهم القيم ومسار التنفيذ.</p><div class="code-box"><div class="code-top"><span>debugging.js</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>const students = [
+  { name: &quot;Ali&quot;, grade: 15 },
+  { name: &quot;Sara&quot;, grade: 18 }
 ];
 
+console.table(students);
+console.log(&quot;Debugging&quot;);
+console.error(&quot;Example error&quot;);
 
-/* SELECT ELEMENTS */
+// ضع نقطة توقف من DevTools
+// أو استخدم debugger;</code></pre></div><div class="html-tip">تعلم استخدام debugger وأدوات المطور يوفر وقتًا كبيرًا عند اكتشاف الأخطاء.</div></article><article class="html-topic" data-search="أفضل الممارسات وتنظيم المشاريع JavaScript JS برمجة أفضل الممارسات وتنظيم المشاريع"><div class="html-topic-head"><span class="html-topic-num">61</span><h3>أفضل الممارسات وتنظيم المشاريع</h3></div><p>استخدم أسماء واضحة، ودوال صغيرة، وتعليقات مفيدة، وملفات منظمة. افصل HTML وCSS وJavaScript، ولا تكرر الكود بلا داعٍ.</p><div class="code-box"><div class="code-top"><span>project-structure.txt</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>my-project/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── main.js
+│   └── helpers.js
+└── images/</code></pre></div><div class="html-tip">اختبر الحالات المختلفة، وتعامل مع الأخطاء، ولا تثق بمدخلات المستخدم.</div></article><article class="html-topic" data-search="مشروع تطبيقي: قائمة مهام JavaScript JS برمجة مشروع تطبيقي: قائمة مهام"><div class="html-topic-head"><span class="html-topic-num">62</span><h3>مشروع تطبيقي: قائمة مهام</h3></div><p>طبّق DOM والأحداث والمصفوفات لإنشاء قائمة مهام. أدخل مهمة، أضفها إلى القائمة، واسمح بحذفها عند الضغط عليها.</p><div class="code-box"><div class="code-top"><span>todo.html</span><button class="copy-code" type="button"><i class="fa-regular fa-copy"></i> نسخ الكود</button></div><pre><code>&lt;!-- HTML --&gt;
+&lt;input id=&quot;taskInput&quot; placeholder=&quot;مهمة جديدة&quot;&gt;
+&lt;button id=&quot;addTask&quot;&gt;إضافة&lt;/button&gt;
+&lt;ul id=&quot;tasks&quot;&gt;&lt;/ul&gt;
 
-const grid = document.getElementById("lessonsGrid");
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
+&lt;script&gt;
+const input = document.querySelector(&quot;#taskInput&quot;);
+const button = document.querySelector(&quot;#addTask&quot;);
+const list = document.querySelector(&quot;#tasks&quot;);
 
+button.addEventListener(&quot;click&quot;, () =&gt; {
+  const value = input.value.trim();
+  if (!value) return;
 
-/* DISPLAY LESSONS */
+  const item = document.createElement(&quot;li&quot;);
+  item.textContent = value;
+  item.addEventListener(&quot;click&quot;, () =&gt; item.remove());
 
-function renderLessons() {
+  list.append(item);
+  input.value = &quot;&quot;;
+});
+&lt;/script&gt;</code></pre></div><div class="html-tip">ابدأ بهذا المثال ثم أضف حفظ المهام في localStorage.</div></article></div>
+<div class="html-no-results" id="noLessons">لا توجد دروس مطابقة لبحثك.</div>
+<div class="html-project">
+<h3><i class="fa-solid fa-laptop-code"></i> مشروعك الأول</h3>
+<p>بعد إنهاء الدروس، جرّب إنشاء صفحة تعريفية بسيطة تحتوي على عنوان رئيسي، وفقرة عنك، وصورة، ورابط، وقائمة بالمهارات التي تتعلمها. لا تنتقل إلى CSS قبل أن تفهم هيكل HTML جيدًا.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+<div class="footer-logo"><img alt="logo" src="images/logogdd.png" width="250px"/></div>
+<p data-i18n="footerDescription">
+        طريقك نحو التميز في عالم البرمجة.
+    </p>
+<div class="social-links">
+<a aria-label="Instagram" class="social instagram" href="https://www.instagram.com/el__mouattassim?hvrq=NnNyMHE4N3Nydnl" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-instagram"></i>
+</a>
+<a aria-label="GitHub" class="social github" href="https://github.com/Mouattassim" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+<a aria-label="WhatsApp" class="social whatsapp" href="https://wa.me/+213553613038" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+<a aria-label="Gmail" class="social gmail" href="mailto:lazregassoumi12@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+</a>
+</div>
+<p class="copyright">
+        © <span id="year"></span> MA Academy.
+        <span data-i18n="rights">جميع الحقوق محفوظة.</span>
+</p>
+</footer>
+<script>
 
-    const search = searchInput.value.toLowerCase().trim();
-    const category = categoryFilter.value;
+/* ================= TRANSLATIONS ================= */
 
-    const filtered = lessons.filter(lesson => {
+const translations = {
 
-        const matchesSearch =
-            lesson.tag.toLowerCase().includes(search) ||
-            lesson.title.toLowerCase().includes(search) ||
-            lesson.description.toLowerCase().includes(search);
+ar: {
 
-        const matchesCategory =
-            category === "all" || lesson.category === category;
+welcome: "WELCOME TO",
+academy: "أكاديمية",
+heroDescription: "تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.",
+start: "ابدأ الآن",
 
-        return matchesSearch && matchesCategory;
+navHome: "الرئيسية",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "المطور",
+navContact: "تواصل معي",
+
+coursesTitle: "رحلتك في عالم البرمجة",
+coursesDescription: "تعلم أساسيات تطوير الويب والبرمجة خطوة بخطوة، وابدأ ببناء مشاريعك الخاصة.",
+
+lesson1Title: "لماذا MA Academy؟",
+lesson1Description: "هدفنا هو مساعدتك على تعلم البرمجة بطريقة سهلة ومنظمة. ستتعلم المهارات الأساسية وتنتقل تدريجيًا إلى إنشاء مشاريع حقيقية.",
+
+lesson2Title: "تعلم HTML",
+lesson2Description: "HTML هي لغة بناء صفحات الويب. ستتعلم كيفية إضافة العناوين والفقرات والصور والروابط وتنظيم محتوى الصفحة.",
+
+lesson3Title: "تعلم CSS",
+lesson3Description: "CSS تمنح موقعك مظهره الجميل. ستتعلم الألوان والخطوط والتنسيقات والتصميم المتجاوب مع مختلف الشاشات.",
+
+lesson4Title: "تعلم JavaScript",
+lesson4Description: "JavaScript تضيف التفاعل إلى موقعك. ستتعلم التعامل مع الأزرار والقوائم والأحداث وإنشاء تجارب تفاعلية للمستخدم.",
+
+lesson5Title: "تعلم Python",
+lesson5Description: "تعلم أساسيات Python والمتغيرات والشروط والحلقات والدوال، وابدأ بكتابة برامجك الخاصة.",
+
+servicesTitle: "ماذا نقدم لك؟",
+servicesIntro: "نوفر لك بداية منظمة في عالم تطوير الويب.",
+servicesHeading: "تعلم وابدأ مشروعك",
+servicesDescription: "اكتسب المعرفة خطوة بخطوة، وطبق ما تتعلمه في مشاريع عملية تساعدك على تطوير مهاراتك في تصميم وبرمجة المواقع.",
+contact: "تواصل معنا",
+
+footerDescription: "طريقك نحو التميز في عالم البرمجة.",
+rights: "جميع الحقوق محفوظة."
+
+},
+
+en: {
+
+welcome: "WELCOME TO MA",
+academy: "Academy",
+heroDescription: "Learn web development and start your coding journey from beginner to advanced.",
+start: "Get Started",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DEVELOPER",
+navContact: "CONTACT ME",
+
+coursesTitle: "Your Coding Journey",
+coursesDescription: "Learn the fundamentals of web development step by step and start building your own projects.",
+
+lesson1Title: "Why MA Academy?",
+lesson1Description: "Our goal is to help you learn programming in a simple and organized way. You will learn essential skills and gradually build real projects.",
+
+lesson2Title: "Learn HTML",
+lesson2Description: "HTML is the language used to structure web pages. Learn how to add headings, paragraphs, images, links and organize page content.",
+
+lesson3Title: "Learn CSS",
+lesson3Description: "CSS gives your website its appearance. Learn colors, fonts, layouts and responsive design for different screens.",
+
+lesson4Title: "Learn JavaScript",
+lesson4Description: "JavaScript adds interaction to your website. Learn buttons, menus, events and how to create interactive user experiences.",
+
+lesson5Title: "Learn Python",
+lesson5Description: "Learn Python basics, variables, conditions, loops and functions, and start writing your own programs.",
+
+servicesTitle: "What Do We Offer?",
+servicesIntro: "We provide an organized starting point in web development.",
+servicesHeading: "Learn and Build Your Project",
+servicesDescription: "Gain knowledge step by step and apply what you learn through practical projects that help develop your web design and programming skills.",
+contact: "Contact Us",
+
+footerDescription: "Your path to excellence in programming.",
+rights: "All rights reserved."
+
+},
+
+fr: {
+
+welcome: "WELCOME TO MA",
+academy: "Académie",
+heroDescription: "Apprenez le développement web et commencez votre parcours dans la programmation, du débutant au niveau avancé.",
+start: "Commencer",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DÉVELOPPEUR",
+navContact: "CONTACTEZ-MOI",
+
+coursesTitle: "Votre parcours en programmation",
+coursesDescription: "Apprenez les bases du développement web étape par étape et commencez à créer vos propres projets.",
+
+lesson1Title: "Pourquoi MA Academy ?",
+lesson1Description: "Notre objectif est de vous aider à apprendre la programmation de manière simple et organisée. Vous apprendrez les compétences essentielles et créerez progressivement de vrais projets.",
+
+lesson2Title: "Apprendre HTML",
+lesson2Description: "HTML est le langage utilisé pour structurer les pages web. Apprenez à ajouter des titres, des paragraphes, des images, des liens et à organiser le contenu.",
+
+lesson3Title: "Apprendre CSS",
+lesson3Description: "CSS donne à votre site son apparence. Apprenez les couleurs, les polices, les mises en page et le design adaptatif.",
+
+lesson4Title: "Apprendre JavaScript",
+lesson4Description: "JavaScript ajoute de l'interactivité à votre site. Apprenez à utiliser les boutons, les menus et les événements.",
+
+lesson5Title: "Apprendre Python",
+lesson5Description: "Apprenez les bases de Python, les variables, les conditions, les boucles et les fonctions pour créer vos propres programmes.",
+
+servicesTitle: "Que proposons-nous ?",
+servicesIntro: "Nous vous proposons un début organisé dans le développement web.",
+servicesHeading: "Apprenez et créez votre projet",
+servicesDescription: "Acquérez des connaissances étape par étape et appliquez-les dans des projets pratiques pour développer vos compétences en conception et programmation web.",
+contact: "Contactez-nous",
+
+footerDescription: "Votre chemin vers l'excellence en programmation.",
+rights: "Tous droits réservés."
+
+}
+
+};
+
+/* ================= LANGUAGE ================= */
+
+const languageSelect = document.getElementById("languageSelect");
+
+function setLanguage(language) {
+
+    const selected = translations[language] ? language : "ar";
+
+    document.documentElement.lang = selected;
+
+    document.documentElement.dir =
+        selected === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+
+        const key = element.dataset.i18n;
+
+        if (translations[selected][key] !== undefined) {
+            element.textContent = translations[selected][key];
+        }
 
     });
 
-    grid.innerHTML = "";
+    languageSelect.value = selected;
 
-    if (filtered.length === 0) {
+    try {
+        localStorage.setItem("ma-language",selected);
+    } catch(error) {}
 
-        const message = document.createElement("p");
-        message.className = "no-results";
-        message.textContent = "لم يتم العثور على نتائج.";
+}
 
-        grid.appendChild(message);
-        return;
-    }
+languageSelect.addEventListener("change",event => {
+    setLanguage(event.target.value);
+});
 
-    filtered.forEach(lesson => {
+/* ================= THEME ================= */
 
-        const card = document.createElement("article");
-        card.className = "lesson-card";
+const themeBtn = document.getElementById("themeBtn");
 
-        const image = document.createElement("div");
-        image.className = "lesson-image";
+function setTheme(isLight) {
 
-        const dots = document.createElement("div");
-        dots.className = "dots";
-        dots.innerHTML = "<i></i><i></i><i></i>";
+    document.body.classList.toggle("light-mode",isLight);
 
-        const pre = document.createElement("pre");
-        pre.textContent = lesson.code;
+    themeBtn.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
 
-        image.append(dots, pre);
+    themeBtn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+    );
 
-        const info = document.createElement("div");
-        info.className = "lesson-info";
+    try {
+        localStorage.setItem(
+            "ma-theme",
+            isLight ? "light" : "dark"
+        );
+    } catch(error) {}
 
-        const title = document.createElement("h3");
-        title.textContent = lesson.tag;
+}
 
-        const description = document.createElement("p");
-        description.textContent = lesson.description;
+themeBtn.addEventListener("click",() => {
 
-        const button = document.createElement("button");
-        button.className = "copy-btn";
-        button.textContent = "نسخ الكود";button.addEventListener("click", async () => {
+    const isLight =
+        document.body.classList.contains("light-mode");
 
-            try {
+    setTheme(!isLight);
 
-                await navigator.clipboard.writeText(lesson.code);
+});
 
-                button.textContent = "تم النسخ ✓";
+/* ================= SIDEBAR MENU ================= */
 
-                setTimeout(() => {
-                    button.textContent = "نسخ الكود";
-                }, 1500);
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sidebar = document.getElementById("sidebar");
+const menuOverlay = document.getElementById("menuOverlay");
 
-            } catch {
+const menuLinks = document.querySelectorAll(".sidebar-links a");
 
-                button.textContent = "تعذر النسخ";
+function openSidebar() {
 
-            }
+    sidebar.classList.add("open");
+    menuOverlay.classList.add("show");
 
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeSidebar() {
+
+    sidebar.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
+
+menuBtn.addEventListener("click",openSidebar);
+
+closeMenu.addEventListener("click",closeSidebar);
+
+menuOverlay.addEventListener("click",closeSidebar);
+
+/* ACTIVE MENU LINK */
+
+menuLinks.forEach(link => {
+
+    link.addEventListener("click",() => {
+
+        menuLinks.forEach(item => {
+            item.classList.remove("active");
         });
 
-        info.append(title, description, button);
+        link.classList.add("active");
 
-        card.append(image, info);
+        closeSidebar();
 
-        grid.appendChild(card);
+    });
+
+});
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown",event => {
+
+    if(event.key === "Escape") {
+        closeSidebar();
+    }
+
+});
+
+/* ================= SCROLL PROGRESS ================= */
+
+const scrollProgress = document.getElementById("scrollProgress");
+
+const timeline = document.getElementById("timeline");
+
+const timelineProgress = document.getElementById("timelineProgress");
+
+const lessons = document.querySelectorAll(".lesson");
+
+function updateScroll() {
+
+    const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const pageProgress = scrollable > 0
+        ? (window.scrollY / scrollable) * 100
+        : 0;
+
+    scrollProgress.style.width = pageProgress + "%";
+
+    if (timeline && timelineProgress) {
+        const timelineRect = timeline.getBoundingClientRect();
+        const timelineTop = window.scrollY + timelineRect.top;
+        const timelineHeight = timeline.offsetHeight;
+        const current = window.scrollY + window.innerHeight * 0.65;
+        const progress = Math.max(0, Math.min(100,
+            ((current - timelineTop) / timelineHeight) * 100
+        ));
+        timelineProgress.style.setProperty("--timeline-progress", progress + "%");
+    }
+
+    lessons.forEach(lesson => {
+
+        const rect = lesson.getBoundingClientRect();
+
+        if (
+            rect.top < window.innerHeight * 0.75 &&
+            rect.bottom > window.innerHeight * 0.2
+        ) {
+            lesson.classList.add("active");
+        } else {
+            lesson.classList.remove("active");
+        }
 
     });
 
 }
 
+window.addEventListener("scroll",updateScroll,{
+    passive: true
+});
 
-/* SEARCH AND FILTER */
+window.addEventListener("resize",updateScroll);
 
-searchInput.addEventListener("input", renderLessons);
+updateScroll();
 
-categoryFilter.addEventListener("change", renderLessons);
+/* ================= COLORFUL CURSOR ================= */
 
+const colors = [
+    "#008cff",
+    "#00b4ff",
+    "#38bdf8",
+    "#06b6d4",
+    "#22c55e",
+    "#f97316",
+    "#eab308"
+];
 
-/* INITIAL DISPLAY */
+let lastSquareTime = 0;
 
-// استقبال كلمة البحث من الصفحة الرئيسية
-const params = new URLSearchParams(window.location.search);
-const searchQuery = params.get("search");
+function createSquare(x,y) {
 
-// وضع الكلمة داخل خانة البحث
-if (searchQuery) {
-    searchInput.value = searchQuery;
+    const now = performance.now();
+
+    if(now - lastSquareTime < 35) return;
+
+    lastSquareTime = now;
+
+    const square = document.createElement("span");
+
+    square.className = "cursor-square";
+
+    square.style.left = x + "px";
+    square.style.top = y + "px";
+
+    square.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(square);
+
+    square.addEventListener("animationend",() => {
+        square.remove();
+    },{once:true});
+
 }
 
-// عرض الدروس حسب البحث
-renderLessons();
-</script>
+/* MOUSE */
 
+window.addEventListener("mousemove",event => {
+
+    createSquare(event.clientX,event.clientY);
+
+},{passive:true});
+
+/* TOUCH */
+
+window.addEventListener("touchmove",event => {
+
+    const touch = event.touches[0];
+
+    if(touch) {
+        createSquare(touch.clientX,touch.clientY);
+    }
+
+},{passive:true});
+
+/* ================= HTML COURSE SEARCH ================= */
+const lessonSearch = document.getElementById("lessonSearch");
+const lessonCards = [...document.querySelectorAll(".html-topic")];
+const noLessons = document.getElementById("noLessons");
+if (lessonSearch) {
+    lessonSearch.addEventListener("input", () => {
+        const query = lessonSearch.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        lessonCards.forEach(card => {
+            const content = (card.innerText + " " + (card.dataset.search || "")).toLocaleLowerCase();
+            const match = content.includes(query);
+            card.style.display = match ? "" : "none";
+            if (match) visible++;
+        });
+        noLessons.style.display = visible ? "none" : "block";
+    });
+}
+
+document.querySelectorAll(".copy-code").forEach(button => {
+    button.addEventListener("click", async () => {
+        const code = button.closest(".code-box").querySelector("code").innerText;
+        const original = button.innerHTML;
+        try {
+            await navigator.clipboard.writeText(code);
+            button.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ';
+        } catch (error) {
+            const area = document.createElement("textarea");
+            area.value = code;
+            area.style.position = "fixed";
+            area.style.opacity = "0";
+            document.body.appendChild(area);
+            area.select();
+            const copied = document.execCommand("copy");
+            area.remove();
+            button.innerHTML = copied ? '<i class="fa-solid fa-check"></i> تم النسخ' : 'انسخ يدويًا';
+        }
+        setTimeout(() => button.innerHTML = original, 1600);
+    });
+});
+
+/* ================= INITIAL SETTINGS ================= */
+
+let savedLanguage = "ar";
+let savedTheme = "dark";
+
+try {
+
+    savedLanguage =
+        localStorage.getItem("ma-language") || "ar";
+
+    savedTheme =
+        localStorage.getItem("ma-theme") || "dark";
+
+} catch(error) {}
+
+setLanguage(savedLanguage);
+
+setTheme(savedTheme === "light");
+
+/* FOOTER YEAR */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+</script>
 </body>
 </html>
