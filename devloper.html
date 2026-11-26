@@ -1,0 +1,1825 @@
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<link rel="icon" href="images/logogdd.png" type="image/png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="تعلم تطوير الويب والبرمجة مع أكاديمية MA" name="description"/>
+<title data-i18n="documentTitle">MA Academy | Our Services</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+<style>
+
+/* ================= COLORS ================= */
+
+:root {
+    color-scheme: dark;
+    --bg: #050505;
+    --card: #101010;
+    --card2: #171717;
+    --text: #ffffff;
+    --muted: #a1a1aa;
+    --primary: #008cff;
+    --secondary: #00b4ff;
+    --border: rgba(255,255,255,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.3);
+}
+
+body.light-mode {
+    color-scheme: light;
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --card2: #eeeeF5;
+    --text: #171717;
+    --muted: #626273;
+    --border: rgba(0,0,0,.1);
+    --shadow: 0 15px 50px rgba(0,0,0,.08);
+}
+
+/* ================= GLOBAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    transition: background .3s, color .3s;
+    overflow-x: hidden;
+}
+
+html[lang="ar"] body {
+    font-family: 'Cairo', sans-serif;
+}
+
+html[lang="en"] body,
+html[lang="fr"] body {
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, select {
+    font: inherit;
+}
+
+/* ================= PAGE PROGRESS ================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    z-index: 9999;
+    box-shadow: 0 0 12px #008cff;
+}
+
+/* ================= HEADER ================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-static {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 900;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-controls select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* HEADER BUTTONS */
+
+.theme-btn,
+.menu-btn {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,rgba(0,140,255,.18),rgba(0,180,255,.18));
+    color: var(--primary);
+    border: 1px solid rgba(0,140,255,.35);
+    border-radius: 14px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .35s;
+}
+
+.theme-btn:hover,
+.menu-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.35);
+}
+
+/* ================= SIDEBAR ================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(440px,88%);
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 2001;
+    padding: 45px 35px;
+    overflow-y: auto;
+    transform: translateX(105%);
+    transition: transform .4s ease;
+    border-left: 1px solid var(--border);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 55px;
+    gap: 15px;
+}
+
+.sidebar-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.close-menu {
+    width: 55px;
+    height: 55px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.close-menu:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    transition: .3s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+    color: var(--primary);
+    padding-right: 22px;
+}
+
+.sidebar-links a.active {
+    border-bottom-color: rgba(0,140,255,.5);
+}
+
+.sidebar-footer {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: .85rem;
+    text-align: center;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 88vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #008cff;
+    filter: blur(180px);
+    opacity: .22;
+    top: 10%;
+    left: 10%;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 850px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome {
+    color: var(--primary);
+    font-family: 'Poppins',sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-family: 'Poppins',sans-serif;
+    font-size: clamp(2.5rem,8vw,5.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.hero-title > span:last-child {
+    background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ma-motion {
+    display: inline-block;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: maMove 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes maMove {
+    from { transform: translateX(-15px); }
+    to { transform: translateX(15px); }
+}
+
+.hero h2 {
+    font-size: clamp(1.3rem,4vw,2rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.fixed-name {
+    display: inline-block;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+    line-height: 2;
+    font-weight: 500;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 13px 30px;
+    background: linear-gradient(90deg,#0077ee,#00b4ff);
+    color: white;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: transform .3s,box-shadow .3s;
+}
+
+.main-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,140,255,.35);
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 90px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(1.8rem,5vw,2.6rem);
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    text-align: center;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 650px;
+    margin: 0 auto 55px;
+    font-weight: 500;
+}
+
+/* ================= TIMELINE ================= */
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+}
+
+.timeline-progress {
+    position: absolute;
+    right: 27px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timeline-progress::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--timeline-progress,0%);
+    background: linear-gradient(to bottom,#008cff,#00b4ff,#38bdf8);
+    transition: height .15s;
+}
+
+.lesson {
+    position: relative;
+    margin-bottom: 35px;
+    margin-right: 65px;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    opacity: .55;
+    transform: translateY(25px);
+    transition: .5s ease;
+}
+
+.lesson.active {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: var(--primary);
+}
+
+.lesson-number {
+    position: absolute;
+    right: -65px;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card2);
+    border: 2px solid var(--border);
+    font-family: 'Poppins',sans-serif;
+    font-weight: 800;
+    transition: .3s;
+}
+
+.lesson.active .lesson-number {
+    background: linear-gradient(135deg,#0077ee,#00b4ff);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,140,255,.4);
+}
+
+.lesson h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.lesson p {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 2;
+}
+
+.tech-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: .35s ease;
+}
+
+.lesson:hover .tech-icon {
+    transform: translateY(-6px) scale(1.1);
+}
+
+.html-icon { color: #e34f26; }
+.css-icon { color: #1572b6; }
+.js-icon { color: #f7df1e; }
+.python-icon { color: #3776ab; }
+
+.ma-icon {
+    font-family: 'Poppins',sans-serif;
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg,#008cff,#00b4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+html[lang="en"] .timeline .lesson h3,
+html[lang="fr"] .timeline .lesson h3,
+html[lang="en"] .timeline .lesson p,
+html[lang="fr"] .timeline .lesson p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= DEVELOPER ================= */
+
+.services {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.services-content {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.services-image {
+    width: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.services h2 {
+    font-family: 'Poppins','Cairo',sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.services p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+html[lang="en"] .services p,
+html[lang="fr"] .services p {
+    font-family: 'Inter',sans-serif;
+    line-height: 1.9;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 45px 20px;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+footer p {
+    color: var(--muted);
+    line-height: 2;
+    font-weight: 500;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 30px 0;
+}
+
+.social {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    font-size: 23px;
+    transition: .35s ease;
+}
+
+.social.instagram { color: #e1306c; }
+.social.github { color: var(--text); }
+.social.whatsapp { color: #25d366; }
+.social.gmail { color: #ea4335; }
+
+.social:hover {
+    transform: translateY(-7px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,140,255,.2);
+    border-color: var(--primary);
+    background: var(--card);
+}
+
+.copyright {
+    font-size: .85rem;
+    margin-top: 20px;
+}
+
+/* ================= CURSOR SQUARES ================= */
+
+.cursor-square {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: squareFade .7s ease-out forwards;
+}
+
+@keyframes squareFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0) rotate(180deg);
+    }
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 13px 4%;
+    }
+
+    section {
+        padding: 75px 5%;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem,9vw,4.5rem);
+    }
+
+    .services-content {
+        gap: 25px;
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    html {
+        scroll-padding-top: 75px;
+    }
+
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* HEADER */
+
+    .topbar {
+        width: 100%;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1rem;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .ma-static {
+        width: 35px;
+        height: 35px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+    .header-controls {
+        gap: 6px;
+    }
+
+    .header-controls select {
+        max-width: 112px;
+        padding: 8px 5px;
+        font-size: 12px;
+        border-radius: 9px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: min(88%,390px);
+        padding: 25px 22px;
+    }
+
+    .sidebar-top {
+        margin-bottom: 35px;
+    }
+
+    .sidebar-logo {
+        font-size: 1.2rem;
+    }
+
+    .close-menu {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+        border-radius: 8px;
+    }
+
+    .sidebar-links a {
+        font-size: 1.05rem;
+        padding: 19px 10px;
+    }
+
+    .sidebar-footer {
+        margin-top: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 75vh;
+        min-height: 75svh;
+        padding: 75px 18px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .welcome {
+        font-size: .75rem;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem,9vw,3.5rem);
+        gap: 9px;
+        line-height: 1.3;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-top: 12px;
+    }
+
+    .fixed-name {
+        font-size: 1rem;
+    }
+
+    .hero p {
+        font-size: .95rem;
+        line-height: 2;
+        padding: 0 5px;
+        margin-bottom: 25px;
+    }
+
+    .main-btn {
+        padding: 12px 25px;
+        font-size: .95rem;
+    }
+
+    /* SECTIONS */
+
+    section {
+        padding: 65px 18px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.6;
+    }
+
+    .section-description {
+        font-size: .92rem;
+        line-height: 2;
+        margin-bottom: 40px;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+        width: 100%;
+    }
+
+    .timeline-progress {
+        right: 19px;
+    }
+
+    .lesson {
+        margin-right: 47px;
+        margin-bottom: 25px;
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    .lesson-number {
+        right: -47px;
+        top: 18px;
+        width: 38px;
+        height: 38px;
+        font-size: .8rem;
+    }
+
+    .lesson h3 {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .lesson p {
+        font-size: .88rem;
+        line-height: 2;
+    }
+
+    .tech-icon {
+        font-size: 43px;
+        margin-bottom: 10px;
+    }
+
+    .ma-icon {
+        font-size: 1.9rem;
+    }
+
+    /* SERVICES / DEVELOPER */
+
+    .services-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .services-image {
+        width: 100%;
+        min-height: 190px;
+        max-height: 240px;
+        border-radius: 15px;
+    }
+
+    .services h2 {
+        font-size: 1.45rem;
+        line-height: 1.7;
+    }
+
+    .services p {
+        font-size: .93rem;
+        line-height: 2;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 40px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+
+    footer p {
+        font-size: .9rem;
+    }
+
+    .social-links {
+        gap: 12px;
+        margin: 25px 0;
+    }
+
+    .social {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+
+    .copyright {
+        font-size: .78rem;
+    }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+    .topbar {
+        padding: 9px 8px;
+        gap: 5px;
+    }
+
+    .logo {
+        font-size: .85rem;
+        gap: 5px;
+    }
+
+    .ma-static {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .header-controls {
+        gap: 4px;
+    }
+
+    .header-controls select {
+        max-width: 91px;
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
+        font-size: 13px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        gap: 7px;
+    }
+
+    .hero h2 {
+        font-size: 1.05rem;
+    }
+
+    .lesson {
+        margin-right: 43px;
+        padding: 14px;
+    }
+
+    .lesson-number {
+        right: -43px;
+        width: 35px;
+        height: 35px;
+    }
+
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+
+/* ================= HTML LEARNING PAGE ================= */
+.html-learning { max-width: 1120px; margin: auto; }
+.html-intro { max-width: 850px; margin: 0 auto 35px; text-align: center; }
+.html-intro .html-badge { display:inline-flex; align-items:center; gap:9px; color:var(--primary); background:rgba(0,140,255,.1); border:1px solid rgba(0,140,255,.28); border-radius:30px; padding:9px 16px; font-weight:800; margin-bottom:18px; }
+.html-intro h2 { font-size:clamp(1.8rem,5vw,2.7rem); font-weight:900; margin-bottom:14px; }
+.html-intro h2 span { color:var(--primary); }
+.html-intro p { color:var(--muted); line-height:2; }
+.html-search-wrap { max-width:720px; margin:30px auto 42px; position:relative; }
+.html-search-wrap i { position:absolute; right:20px; top:50%; transform:translateY(-50%); color:var(--primary); }
+html[dir="ltr"] .html-search-wrap i { right:auto; left:20px; }
+.html-search { width:100%; padding:17px 52px 17px 18px; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:15px; outline:none; font:inherit; box-shadow:var(--shadow); }
+html[dir="ltr"] .html-search { padding:17px 18px 17px 52px; }
+.html-search:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(0,140,255,.12); }
+.html-lessons-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.html-topic { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:25px; box-shadow:var(--shadow); transition:.3s; min-width:0; }
+.html-topic:hover { transform:translateY(-5px); border-color:rgba(0,140,255,.65); }
+.html-topic-head { display:flex; align-items:center; gap:13px; margin-bottom:15px; }
+.html-topic-num { width:42px; height:42px; flex:0 0 42px; display:grid; place-items:center; border-radius:12px; color:#fff; font-weight:900; background:linear-gradient(135deg,#0077ee,#00b4ff); }
+.html-topic h3 { font-size:1.15rem; font-weight:900; }
+.html-topic p,.html-topic li { color:var(--muted); line-height:2; font-size:.96rem; }
+.html-topic ul { padding-inline-start:22px; margin:10px 0 15px; }
+.code-box { direction:ltr; text-align:left; position:relative; margin-top:17px; background:#080d16; border:1px solid rgba(0,140,255,.22); border-radius:13px; overflow:hidden; }
+.code-top { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 13px; color:#aab8cc; background:#111b2a; font:600 .78rem 'Inter',sans-serif; }
+.copy-code { border:1px solid rgba(0,180,255,.35); border-radius:8px; padding:7px 10px; color:#7dd3fc; background:rgba(0,140,255,.12); cursor:pointer; font:700 .78rem 'Inter',sans-serif; transition:.2s; }
+.copy-code:hover { background:#0077ee; color:white; }
+.code-box pre { margin:0; padding:17px; overflow-x:auto; color:#e2e8f0; font: .88rem/1.85 'Inter',monospace; white-space:pre; }
+.code-box code { font-family:inherit; }
+.html-tip { margin-top:15px; padding:13px 15px; border-right:3px solid var(--primary); background:rgba(0,140,255,.08); border-radius:8px; color:var(--muted); line-height:1.9; font-size:.9rem; }
+html[dir="ltr"] .html-tip { border-right:0; border-left:3px solid var(--primary); }
+.html-no-results { display:none; text-align:center; color:var(--muted); padding:35px; background:var(--card); border:1px solid var(--border); border-radius:15px; margin-top:20px; }
+.html-project { margin-top:35px; background:linear-gradient(135deg,rgba(0,119,238,.14),rgba(0,180,255,.06)); border:1px solid rgba(0,140,255,.28); border-radius:18px; padding:27px; }
+.html-project h3 { font-size:1.3rem; margin-bottom:12px; }
+.html-project p { color:var(--muted); line-height:2; }
+@media(max-width:700px) { .html-lessons-grid { grid-template-columns:1fr; gap:16px; } .html-topic { padding:19px; } .html-topic h3 { font-size:1.05rem; } .html-topic p,.html-topic li { font-size:.9rem; } .code-box pre { font-size:.78rem; padding:13px; } }
+
+
+
+/* ================= OUR SERVICES PAGE ================= */
+.our-services-page { max-width: 1240px; margin: auto; }
+.services-page-intro { max-width: 820px; margin: 15px auto 55px; text-align: center; }
+.services-page-badge { display: inline-flex; align-items: center; gap: 9px; color: var(--primary); background: rgba(0,140,255,.1); border: 1px solid rgba(0,140,255,.28); border-radius: 30px; padding: 9px 16px; font: 800 .82rem 'Poppins',sans-serif; letter-spacing: 1px; margin-bottom: 22px; }
+.services-page-intro h1 { font: 900 clamp(2.6rem,7vw,5rem)/1.2 'Poppins',sans-serif; margin-bottom: 20px; }
+.services-page-intro h1 span { background: linear-gradient(90deg,#008cff,#00b4ff,#38bdf8); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.services-page-intro p { max-width: 720px; margin: auto; color: var(--muted); font-size: 1.08rem; line-height: 2; }
+.web-services-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; }
+.web-service-card { min-width: 0; padding: 28px 25px; background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); transition: transform .3s,border-color .3s,background .3s; }
+.web-service-card:hover { transform: translateY(-7px); border-color: var(--primary); }
+.web-service-icon { width: 58px; height: 58px; display: grid; place-items: center; margin-bottom: 22px; border-radius: 16px; color: white; font-size: 1.45rem; background: linear-gradient(135deg,#0077ee,#00b4ff); box-shadow: 0 8px 24px rgba(0,140,255,.2); }
+.web-service-card h2 { font: 800 1.18rem 'Poppins','Inter',sans-serif; margin-bottom: 12px; }
+.web-service-card p { min-height: 105px; color: var(--muted); line-height: 1.9; font-size: .94rem; }
+.web-service-card > span { display: inline-block; margin-top: 17px; padding: 7px 11px; border-radius: 8px; color: var(--primary); background: rgba(0,140,255,.09); font: 700 .73rem 'Inter',sans-serif; }
+.start-project-panel { position: relative; overflow: hidden; max-width: 900px; margin: 65px auto 5px; padding: 48px 28px; text-align: center; border: 1px solid rgba(0,140,255,.3); border-radius: 22px; background: linear-gradient(135deg,rgba(0,119,238,.16),rgba(0,180,255,.06)); }
+.start-project-panel::before { content: ''; position: absolute; width: 230px; height: 230px; left: -80px; top: -120px; border-radius: 50%; background: #008cff; filter: blur(110px); opacity: .2; pointer-events: none; }
+.start-project-mark { width: 62px; height: 62px; display: grid; place-items: center; margin: 0 auto 18px; border-radius: 18px; color: white; font-size: 1.5rem; background: linear-gradient(135deg,#0077ee,#00b4ff); }
+.start-project-panel h2 { font: 900 clamp(1.5rem,4vw,2.1rem) 'Poppins','Inter',sans-serif; margin-bottom: 12px; }
+.start-project-panel p { max-width: 620px; margin: 0 auto 25px; color: var(--muted); line-height: 2; }
+.start-project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 11px; }
+.start-project-btn i:first-child { font-size: 1.15rem; }
+@media(max-width:900px) { .web-services-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .web-service-card p { min-height: auto; } }
+@media(max-width:600px) { .our-services-page { padding-inline: 18px; } .services-page-intro { margin: 0 auto 38px; } .services-page-intro p { font-size: .95rem; } .web-services-grid { grid-template-columns: 1fr; gap: 15px; } .web-service-card { padding: 22px; } .web-service-card h2 { font-size: 1.08rem; } .web-service-card p { font-size: .9rem; } .start-project-panel { margin-top: 42px; padding: 35px 20px; } .start-project-panel p { font-size: .92rem; } }
+
+</style>
+</head>
+<body>
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- HEADER -->
+<header class="topbar">
+<a class="logo" href="#home">
+<img alt="logo" src="images/logogdd.png" width="200px"/>
+</a>
+<div class="header-controls">
+<select aria-label="Language" id="languageSelect">
+<option value="ar">🇩🇿 العربية</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+</select>
+<button aria-label="Change theme" class="theme-btn" id="themeBtn">
+<i class="fa-solid fa-moon"></i>
+</button>
+<button aria-label="Open menu" class="menu-btn" id="menuBtn">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
+</header>
+<!-- SIDEBAR -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-top">
+<div class="sidebar-logo"><img alt="logo" src="images/logogdd.png" width="300px"/></div>
+<button aria-label="Close menu" class="close-menu" id="closeMenu">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="sidebar-links">
+<a data-i18n="navHome" href="#home">ACCUEIL</a>
+<a data-i18n="navHTML" href="html.html">HTML</a>
+<a data-i18n="navCSS" href="css.html">CSS</a>
+<a data-i18n="navJS" href="js.html">JAVASCRIPT</a>
+<a class="active" data-i18n="navPython" href="py.html">PYTHON</a>
+<a data-i18n="navDeveloper" href="devloper.html">DEVELOPER</a>
+<a data-i18n="navContact" href="#contact">CONTACT ME</a>
+</div>
+<div class="sidebar-footer">
+        © MA Academy
+    </div>
+</nav>
+<main>
+<!-- OUR SERVICES -->
+<section class="our-services-page" id="home">
+    <div class="services-page-intro">
+        <span class="services-page-badge"><i class="fa-solid fa-code"></i> <span data-i18n="pageBadge">MA ACADEMY • WEB DEVELOPMENT</span></span>
+        <h1><span data-i18n="pageTitleFirst">OUR</span> <span data-i18n="pageTitleSecond">SERVICES</span></h1>
+        <p data-i18n="pageIntro">We create modern, professional and responsive websites tailored to your needs. From a simple landing page to a complete online platform, we turn your ideas into reality.</p>
+    </div>
+
+    <div class="web-services-grid">
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-building"></i></div>
+            <h2 data-i18n="service1Title">Business Websites</h2>
+            <p data-i18n="service1Desc">Professional websites that introduce your company, showcase your services and help customers connect with your business.</p>
+            <span data-i18n="service1Tags">Corporate • Company • Agency</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            <h2 data-i18n="service2Title">E-commerce Websites</h2>
+            <p data-i18n="service2Desc">Online stores designed to present your products, organize your catalog and make it easier for customers to place orders.</p>
+            <span data-i18n="service2Tags">Online Store • Product Catalog</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-user-tie"></i></div>
+            <h2 data-i18n="service3Title">Personal &amp; Portfolio</h2>
+            <p data-i18n="service3Desc">Showcase your work, skills, experience and achievements with a personal website that reflects your identity.</p>
+            <span data-i18n="service3Tags">Portfolio • CV • Personal Brand</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h2 data-i18n="service4Title">Educational Websites</h2>
+            <p data-i18n="service4Desc">Share lessons, courses and learning resources through a clear and organized educational platform.</p>
+            <span data-i18n="service4Tags">Academy • Courses • E-learning</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-newspaper"></i></div>
+            <h2 data-i18n="service5Title">Blogs &amp; News Websites</h2>
+            <p data-i18n="service5Desc">Publish articles, news and updates in a readable layout that makes your content easy to explore.</p>
+            <span data-i18n="service5Tags">Blog • Magazine • News</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h2 data-i18n="service6Title">Landing Pages</h2>
+            <p data-i18n="service6Desc">Focused, attractive pages for presenting a product, promoting a service or supporting a marketing campaign.</p>
+            <span data-i18n="service6Tags">Product • Campaign • Event</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <h2 data-i18n="service7Title">Booking &amp; Services</h2>
+            <p data-i18n="service7Desc">Websites that help visitors explore your services, understand your offer and send appointment or booking requests.</p>
+            <span data-i18n="service7Tags">Appointments • Reservations</span>
+        </article>
+        <article class="web-service-card">
+            <div class="web-service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <h2 data-i18n="service8Title">Custom Websites</h2>
+            <p data-i18n="service8Desc">Have a unique idea? We can plan a custom website around your goals, features and preferred user experience.</p>
+            <span data-i18n="service8Tags">Custom Design • Web Solutions</span>
+        </article>
+    </div>
+
+    <div class="start-project-panel">
+        <div class="start-project-mark"><i class="fa-solid fa-rocket"></i></div>
+        <h2 data-i18n="projectTitle">Have a project in mind?</h2>
+        <p data-i18n="projectDesc">Let's discuss your idea and build a website that works for you. Tell us what you need and let's take the first step.</p>
+        <a class="main-btn start-project-btn" href="https://wa.me/213553613038?text=Hello%20MA%20Academy%2C%20I%20would%20like%20to%20start%20a%20website%20project." target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="projectButton">Start Your Project</span> <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+</main>
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+<div class="footer-logo"><img alt="logo" src="images/logogdd.png" width="250px"/></div>
+<p data-i18n="footerDescription">
+        طريقك نحو التميز في عالم البرمجة.
+    </p>
+<div class="social-links">
+<a aria-label="Instagram" class="social instagram" href="https://www.instagram.com/el__mouattassim?hvrq=NnNyMHE4N3Nydnl" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-instagram"></i>
+</a>
+<a aria-label="GitHub" class="social github" href="https://github.com/Mouattassim" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+<a aria-label="WhatsApp" class="social whatsapp" href="https://wa.me/+213553613038" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+<a aria-label="Gmail" class="social gmail" href="mailto:lazregassoumi12@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+</a>
+</div>
+<p class="copyright">
+        © <span id="year"></span> MA Academy.
+        <span data-i18n="rights">جميع الحقوق محفوظة.</span>
+</p>
+</footer>
+<script>
+
+/* ================= TRANSLATIONS ================= */
+
+const translations = {
+
+ar: {
+
+welcome: "WELCOME TO",
+academy: "أكاديمية",
+heroDescription: "تعلم تطوير الويب وابدأ رحلتك في عالم البرمجة من الصفر إلى الاحتراف.",
+start: "ابدأ الآن",
+
+navHome: "الرئيسية",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "المطور",
+navContact: "تواصل معي",
+
+coursesTitle: "رحلتك في عالم البرمجة",
+coursesDescription: "تعلم أساسيات تطوير الويب والبرمجة خطوة بخطوة، وابدأ ببناء مشاريعك الخاصة.",
+
+lesson1Title: "لماذا MA Academy؟",
+lesson1Description: "هدفنا هو مساعدتك على تعلم البرمجة بطريقة سهلة ومنظمة. ستتعلم المهارات الأساسية وتنتقل تدريجيًا إلى إنشاء مشاريع حقيقية.",
+
+lesson2Title: "تعلم HTML",
+lesson2Description: "HTML هي لغة بناء صفحات الويب. ستتعلم كيفية إضافة العناوين والفقرات والصور والروابط وتنظيم محتوى الصفحة.",
+
+lesson3Title: "تعلم CSS",
+lesson3Description: "CSS تمنح موقعك مظهره الجميل. ستتعلم الألوان والخطوط والتنسيقات والتصميم المتجاوب مع مختلف الشاشات.",
+
+lesson4Title: "تعلم JavaScript",
+lesson4Description: "JavaScript تضيف التفاعل إلى موقعك. ستتعلم التعامل مع الأزرار والقوائم والأحداث وإنشاء تجارب تفاعلية للمستخدم.",
+
+lesson5Title: "تعلم Python",
+lesson5Description: "تعلم أساسيات Python والمتغيرات والشروط والحلقات والدوال، وابدأ بكتابة برامجك الخاصة.",
+
+servicesTitle: "ماذا نقدم لك؟",
+servicesIntro: "نوفر لك بداية منظمة في عالم تطوير الويب.",
+servicesHeading: "تعلم وابدأ مشروعك",
+servicesDescription: "اكتسب المعرفة خطوة بخطوة، وطبق ما تتعلمه في مشاريع عملية تساعدك على تطوير مهاراتك في تصميم وبرمجة المواقع.",
+contact: "تواصل معنا",
+
+documentTitle: "MA Academy | خدماتنا",
+pageBadge: "MA ACADEMY • تطوير المواقع",
+pageTitleFirst: "كل",
+pageTitleSecond: "خدماتنا",
+pageIntro: "نصمم ونطوّر جميع أنواع المواقع الإلكترونية الحديثة والاحترافية والمتجاوبة مع مختلف الشاشات، وفق احتياجاتك. من صفحة بسيطة إلى منصة إلكترونية متكاملة، نحول فكرتك إلى واقع.",
+service1Title: "مواقع الشركات والأعمال",
+service1Desc: "مواقع احترافية للتعريف بشركتك، وعرض خدماتك، ومساعدة العملاء على التواصل مع نشاطك التجاري.",
+service1Tags: "شركات • مؤسسات • وكالات",
+service2Title: "المتاجر الإلكترونية",
+service2Desc: "متاجر إلكترونية لعرض منتجاتك وتنظيمها، وتسهيل تصفحها وإرسال طلبات الشراء من طرف العملاء.",
+service2Tags: "متجر إلكتروني • كتالوج المنتجات",
+service3Title: "المواقع الشخصية ومعارض الأعمال",
+service3Desc: "اعرض أعمالك ومهاراتك وخبراتك وإنجازاتك من خلال موقع شخصي يعكس هويتك.",
+service3Tags: "معرض أعمال • سيرة ذاتية • علامة شخصية",
+service4Title: "المواقع التعليمية",
+service4Desc: "شارك الدروس والدورات والموارد التعليمية من خلال منصة تعليمية واضحة ومنظمة.",
+service4Tags: "أكاديمية • دورات • تعليم إلكتروني",
+service5Title: "المدونات والمواقع الإخبارية",
+service5Desc: "انشر المقالات والأخبار والتحديثات ضمن تصميم مريح يجعل المحتوى سهل القراءة والتصفح.",
+service5Tags: "مدونة • مجلة • أخبار",
+service6Title: "الصفحات التسويقية",
+service6Desc: "صفحات جذابة ومركزة للتعريف بمنتج أو الترويج لخدمة أو دعم حملة تسويقية.",
+service6Tags: "منتج • حملة • فعالية",
+service7Title: "مواقع الحجز والخدمات",
+service7Desc: "مواقع تتيح للزوار استكشاف خدماتك والتعرف على عروضك وإرسال طلبات المواعيد والحجز.",
+service7Tags: "مواعيد • حجوزات",
+service8Title: "مواقع مخصصة حسب الطلب",
+service8Desc: "لديك فكرة مختلفة؟ نخطط ونصمم موقعًا مخصصًا وفق أهدافك والخصائص التي تحتاجها وتجربة المستخدم التي تفضلها.",
+service8Tags: "تصميم مخصص • حلول ويب",
+projectTitle: "هل لديك مشروع في ذهنك؟",
+projectDesc: "دعنا نتحدث عن فكرتك وننشئ موقعًا إلكترونيًا يناسب احتياجاتك. أخبرنا بما تحتاج إليه ولنبدأ الخطوة الأولى.",
+projectButton: "ابدأ مشروعك الآن",
+navHome: "الرئيسية",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "المطور",
+navContact: "تواصل معنا",
+footerDescription: "طريقك نحو التميز في عالم البرمجة.",
+rights: "جميع الحقوق محفوظة.",
+footerDescription: "طريقك نحو التميز في عالم البرمجة.",
+rights: "جميع الحقوق محفوظة."
+
+},
+
+en: {
+
+welcome: "WELCOME TO MA",
+academy: "Academy",
+heroDescription: "Learn web development and start your coding journey from beginner to advanced.",
+start: "Get Started",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DEVELOPER",
+navContact: "CONTACT ME",
+
+coursesTitle: "Your Coding Journey",
+coursesDescription: "Learn the fundamentals of web development step by step and start building your own projects.",
+
+lesson1Title: "Why MA Academy?",
+lesson1Description: "Our goal is to help you learn programming in a simple and organized way. You will learn essential skills and gradually build real projects.",
+
+lesson2Title: "Learn HTML",
+lesson2Description: "HTML is the language used to structure web pages. Learn how to add headings, paragraphs, images, links and organize page content.",
+
+lesson3Title: "Learn CSS",
+lesson3Description: "CSS gives your website its appearance. Learn colors, fonts, layouts and responsive design for different screens.",
+
+lesson4Title: "Learn JavaScript",
+lesson4Description: "JavaScript adds interaction to your website. Learn buttons, menus, events and how to create interactive user experiences.",
+
+lesson5Title: "Learn Python",
+lesson5Description: "Learn Python basics, variables, conditions, loops and functions, and start writing your own programs.",
+
+servicesTitle: "What Do We Offer?",
+servicesIntro: "We provide an organized starting point in web development.",
+servicesHeading: "Learn and Build Your Project",
+servicesDescription: "Gain knowledge step by step and apply what you learn through practical projects that help develop your web design and programming skills.",
+contact: "Contact Us",
+
+documentTitle: "MA Academy | Our Services",
+pageBadge: "MA ACADEMY • WEB DEVELOPMENT",
+pageTitleFirst: "OUR",
+pageTitleSecond: "SERVICES",
+pageIntro: "We create modern, professional and responsive websites tailored to your needs. From a simple landing page to a complete online platform, we turn your ideas into reality.",
+service1Title: "Business Websites",
+service1Desc: "Professional websites that introduce your company, showcase your services and help customers connect with your business.",
+service1Tags: "Corporate • Company • Agency",
+service2Title: "E-commerce Websites",
+service2Desc: "Online stores designed to present your products, organize your catalog and make it easier for customers to place orders.",
+service2Tags: "Online Store • Product Catalog",
+service3Title: "Personal & Portfolio",
+service3Desc: "Showcase your work, skills, experience and achievements with a personal website that reflects your identity.",
+service3Tags: "Portfolio • CV • Personal Brand",
+service4Title: "Educational Websites",
+service4Desc: "Share lessons, courses and learning resources through a clear and organized educational platform.",
+service4Tags: "Academy • Courses • E-learning",
+service5Title: "Blogs & News Websites",
+service5Desc: "Publish articles, news and updates in a readable layout that makes your content easy to explore.",
+service5Tags: "Blog • Magazine • News",
+service6Title: "Landing Pages",
+service6Desc: "Focused, attractive pages for presenting a product, promoting a service or supporting a marketing campaign.",
+service6Tags: "Product • Campaign • Event",
+service7Title: "Booking & Services",
+service7Desc: "Websites that help visitors explore your services, understand your offer and send appointment or booking requests.",
+service7Tags: "Appointments • Reservations",
+service8Title: "Custom Websites",
+service8Desc: "Have a unique idea? We can plan a custom website around your goals, features and preferred user experience.",
+service8Tags: "Custom Design • Web Solutions",
+projectTitle: "Have a project in mind?",
+projectDesc: "Let's discuss your idea and build a website that works for you. Tell us what you need and let's take the first step.",
+projectButton: "Start Your Project",
+navHome: "HOME",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DEVELOPER",
+navContact: "CONTACT",
+footerDescription: "Your path to excellence in programming.",
+rights: "All rights reserved.",
+footerDescription: "Your path to excellence in programming.",
+rights: "All rights reserved."
+
+},
+
+fr: {
+
+welcome: "WELCOME TO MA",
+academy: "Académie",
+heroDescription: "Apprenez le développement web et commencez votre parcours dans la programmation, du débutant au niveau avancé.",
+start: "Commencer",
+
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DÉVELOPPEUR",
+navContact: "CONTACTEZ-MOI",
+
+coursesTitle: "Votre parcours en programmation",
+coursesDescription: "Apprenez les bases du développement web étape par étape et commencez à créer vos propres projets.",
+
+lesson1Title: "Pourquoi MA Academy ?",
+lesson1Description: "Notre objectif est de vous aider à apprendre la programmation de manière simple et organisée. Vous apprendrez les compétences essentielles et créerez progressivement de vrais projets.",
+
+lesson2Title: "Apprendre HTML",
+lesson2Description: "HTML est le langage utilisé pour structurer les pages web. Apprenez à ajouter des titres, des paragraphes, des images, des liens et à organiser le contenu.",
+
+lesson3Title: "Apprendre CSS",
+lesson3Description: "CSS donne à votre site son apparence. Apprenez les couleurs, les polices, les mises en page et le design adaptatif.",
+
+lesson4Title: "Apprendre JavaScript",
+lesson4Description: "JavaScript ajoute de l'interactivité à votre site. Apprenez à utiliser les boutons, les menus et les événements.",
+
+lesson5Title: "Apprendre Python",
+lesson5Description: "Apprenez les bases de Python, les variables, les conditions, les boucles et les fonctions pour créer vos propres programmes.",
+
+servicesTitle: "Que proposons-nous ?",
+servicesIntro: "Nous vous proposons un début organisé dans le développement web.",
+servicesHeading: "Apprenez et créez votre projet",
+servicesDescription: "Acquérez des connaissances étape par étape et appliquez-les dans des projets pratiques pour développer vos compétences en conception et programmation web.",
+contact: "Contactez-nous",
+
+documentTitle: "MA Academy | Nos services",
+pageBadge: "MA ACADEMY • DÉVELOPPEMENT WEB",
+pageTitleFirst: "NOS",
+pageTitleSecond: "SERVICES",
+pageIntro: "Nous créons des sites web modernes, professionnels et adaptatifs, conçus selon vos besoins. D’une simple page d’accueil à une plateforme complète, nous transformons vos idées en réalité.",
+service1Title: "Sites web d’entreprise",
+service1Desc: "Des sites professionnels pour présenter votre entreprise, mettre en valeur vos services et faciliter le contact avec vos clients.",
+service1Tags: "Entreprises • Sociétés • Agences",
+service2Title: "Boutiques en ligne",
+service2Desc: "Des boutiques en ligne pour présenter vos produits, organiser votre catalogue et faciliter les commandes de vos clients.",
+service2Tags: "Boutique en ligne • Catalogue produits",
+service3Title: "Sites personnels et portfolios",
+service3Desc: "Présentez vos réalisations, compétences, expériences et réussites grâce à un site personnel qui reflète votre identité.",
+service3Tags: "Portfolio • CV • Marque personnelle",
+service4Title: "Sites web éducatifs",
+service4Desc: "Partagez des leçons, des cours et des ressources pédagogiques sur une plateforme éducative claire et organisée.",
+service4Tags: "Académie • Cours • E-learning",
+service5Title: "Blogs et sites d’actualités",
+service5Desc: "Publiez des articles, des actualités et des mises à jour dans une mise en page agréable et facile à consulter.",
+service5Tags: "Blog • Magazine • Actualités",
+service6Title: "Pages de présentation",
+service6Desc: "Des pages attrayantes et ciblées pour présenter un produit, promouvoir un service ou soutenir une campagne marketing.",
+service6Tags: "Produit • Campagne • Événement",
+service7Title: "Sites de réservation et de services",
+service7Desc: "Des sites permettant aux visiteurs de découvrir vos services et d’envoyer des demandes de rendez-vous ou de réservation.",
+service7Tags: "Rendez-vous • Réservations",
+service8Title: "Sites web sur mesure",
+service8Desc: "Vous avez une idée originale ? Nous concevons un site adapté à vos objectifs, aux fonctionnalités souhaitées et à l’expérience utilisateur recherchée.",
+service8Tags: "Design personnalisé • Solutions web",
+projectTitle: "Vous avez un projet en tête ?",
+projectDesc: "Discutons de votre idée et créons un site web adapté à vos besoins. Expliquez-nous votre projet et faisons le premier pas.",
+projectButton: "Démarrer votre projet",
+navHome: "ACCUEIL",
+navHTML: "HTML",
+navCSS: "CSS",
+navJS: "JAVASCRIPT",
+navPython: "PYTHON",
+navDeveloper: "DÉVELOPPEUR",
+navContact: "CONTACT",
+footerDescription: "Votre chemin vers l’excellence dans la programmation.",
+rights: "Tous droits réservés.",
+footerDescription: "Votre chemin vers l'excellence en programmation.",
+rights: "Tous droits réservés."
+
+}
+
+};
+
+/* ================= LANGUAGE ================= */
+
+const languageSelect = document.getElementById("languageSelect");
+
+function setLanguage(language) {
+
+    const selected = translations[language] ? language : "ar";
+
+    document.documentElement.lang = selected;
+
+    document.documentElement.dir =
+        selected === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+
+        const key = element.dataset.i18n;
+
+        if (translations[selected][key] !== undefined) {
+            element.textContent = translations[selected][key];
+        }
+
+    });
+
+    document.title = translations[selected].documentTitle;
+
+    const projectButton = document.querySelector(".start-project-btn");
+    const whatsappMessages = {
+        ar: "مرحباً MA Academy، أود بدء مشروع تصميم موقع إلكتروني.",
+        en: "Hello MA Academy, I would like to start a website project.",
+        fr: "Bonjour MA Academy, je souhaite démarrer un projet de site web."
+    };
+    if (projectButton) {
+        projectButton.href = "https://wa.me/213553613038?text=" + encodeURIComponent(whatsappMessages[selected]);
+    }
+
+    const labels = {
+        ar: { language: "اختر اللغة", theme: "تغيير المظهر", open: "فتح القائمة", close: "إغلاق القائمة" },
+        en: { language: "Select language", theme: "Change theme", open: "Open menu", close: "Close menu" },
+        fr: { language: "Choisir la langue", theme: "Changer le thème", open: "Ouvrir le menu", close: "Fermer le menu" }
+    };
+    languageSelect.setAttribute("aria-label", labels[selected].language);
+    document.getElementById("themeBtn").setAttribute("aria-label", labels[selected].theme);
+    document.getElementById("menuBtn").setAttribute("aria-label", labels[selected].open);
+    document.getElementById("closeMenu").setAttribute("aria-label", labels[selected].close);
+
+    languageSelect.value = selected;
+
+    try {
+        localStorage.setItem("ma-language",selected);
+    } catch(error) {}
+
+}
+
+languageSelect.addEventListener("change",event => {
+    setLanguage(event.target.value);
+});
+
+/* ================= THEME ================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+function setTheme(isLight) {
+
+    document.body.classList.toggle("light-mode",isLight);
+
+    themeBtn.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+
+    themeBtn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+    );
+
+    try {
+        localStorage.setItem(
+            "ma-theme",
+            isLight ? "light" : "dark"
+        );
+    } catch(error) {}
+
+}
+
+themeBtn.addEventListener("click",() => {
+
+    const isLight =
+        document.body.classList.contains("light-mode");
+
+    setTheme(!isLight);
+
+});
+
+/* ================= SIDEBAR MENU ================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sidebar = document.getElementById("sidebar");
+const menuOverlay = document.getElementById("menuOverlay");
+
+const menuLinks = document.querySelectorAll(".sidebar-links a");
+
+function openSidebar() {
+
+    sidebar.classList.add("open");
+    menuOverlay.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeSidebar() {
+
+    sidebar.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
+
+menuBtn.addEventListener("click",openSidebar);
+
+closeMenu.addEventListener("click",closeSidebar);
+
+menuOverlay.addEventListener("click",closeSidebar);
+
+/* ACTIVE MENU LINK */
+
+menuLinks.forEach(link => {
+
+    link.addEventListener("click",() => {
+
+        menuLinks.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        link.classList.add("active");
+
+        closeSidebar();
+
+    });
+
+});
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown",event => {
+
+    if(event.key === "Escape") {
+        closeSidebar();
+    }
+
+});
+
+/* ================= SCROLL PROGRESS ================= */
+
+const scrollProgress = document.getElementById("scrollProgress");
+
+const timeline = document.getElementById("timeline");
+
+const timelineProgress = document.getElementById("timelineProgress");
+
+const lessons = document.querySelectorAll(".lesson");
+
+function updateScroll() {
+
+    const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const pageProgress = scrollable > 0
+        ? (window.scrollY / scrollable) * 100
+        : 0;
+
+    scrollProgress.style.width = pageProgress + "%";
+
+    if (timeline && timelineProgress) {
+        const timelineRect = timeline.getBoundingClientRect();
+        const timelineTop = window.scrollY + timelineRect.top;
+        const timelineHeight = timeline.offsetHeight;
+        const current = window.scrollY + window.innerHeight * 0.65;
+        const progress = Math.max(0, Math.min(100,
+            ((current - timelineTop) / timelineHeight) * 100
+        ));
+        timelineProgress.style.setProperty("--timeline-progress", progress + "%");
+    }
+
+    lessons.forEach(lesson => {
+
+        const rect = lesson.getBoundingClientRect();
+
+        if (
+            rect.top < window.innerHeight * 0.75 &&
+            rect.bottom > window.innerHeight * 0.2
+        ) {
+            lesson.classList.add("active");
+        } else {
+            lesson.classList.remove("active");
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll",updateScroll,{
+    passive: true
+});
+
+window.addEventListener("resize",updateScroll);
+
+updateScroll();
+
+/* ================= COLORFUL CURSOR ================= */
+
+const colors = [
+    "#008cff",
+    "#00b4ff",
+    "#38bdf8",
+    "#06b6d4",
+    "#22c55e",
+    "#f97316",
+    "#eab308"
+];
+
+let lastSquareTime = 0;
+
+function createSquare(x,y) {
+
+    const now = performance.now();
+
+    if(now - lastSquareTime < 35) return;
+
+    lastSquareTime = now;
+
+    const square = document.createElement("span");
+
+    square.className = "cursor-square";
+
+    square.style.left = x + "px";
+    square.style.top = y + "px";
+
+    square.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(square);
+
+    square.addEventListener("animationend",() => {
+        square.remove();
+    },{once:true});
+
+}
+
+/* MOUSE */
+
+window.addEventListener("mousemove",event => {
+
+    createSquare(event.clientX,event.clientY);
+
+},{passive:true});
+
+/* TOUCH */
+
+window.addEventListener("touchmove",event => {
+
+    const touch = event.touches[0];
+
+    if(touch) {
+        createSquare(touch.clientX,touch.clientY);
+    }
+
+},{passive:true});
+
+/* ================= HTML COURSE SEARCH ================= */
+const lessonSearch = document.getElementById("lessonSearch");
+const lessonCards = [...document.querySelectorAll(".html-topic")];
+const noLessons = document.getElementById("noLessons");
+if (lessonSearch) {
+    lessonSearch.addEventListener("input", () => {
+        const query = lessonSearch.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        lessonCards.forEach(card => {
+            const content = (card.innerText + " " + (card.dataset.search || "")).toLocaleLowerCase();
+            const match = content.includes(query);
+            card.style.display = match ? "" : "none";
+            if (match) visible++;
+        });
+        noLessons.style.display = visible ? "none" : "block";
+    });
+}
+
+document.querySelectorAll(".copy-code").forEach(button => {
+    button.addEventListener("click", async () => {
+        const code = button.closest(".code-box").querySelector("code").innerText;
+        const original = button.innerHTML;
+        try {
+            await navigator.clipboard.writeText(code);
+            button.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ';
+        } catch (error) {
+            const area = document.createElement("textarea");
+            area.value = code;
+            area.style.position = "fixed";
+            area.style.opacity = "0";
+            document.body.appendChild(area);
+            area.select();
+            const copied = document.execCommand("copy");
+            area.remove();
+            button.innerHTML = copied ? '<i class="fa-solid fa-check"></i> تم النسخ' : 'انسخ يدويًا';
+        }
+        setTimeout(() => button.innerHTML = original, 1600);
+    });
+});
+
+/* ================= INITIAL SETTINGS ================= */
+
+let savedLanguage = "ar";
+let savedTheme = "dark";
+
+try {
+
+    savedLanguage =
+        localStorage.getItem("ma-language") || "ar";
+
+    savedTheme =
+        localStorage.getItem("ma-theme") || "dark";
+
+} catch(error) {}
+
+setLanguage(savedLanguage);
+
+setTheme(savedTheme === "light");
+
+/* FOOTER YEAR */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+</script>
+</body>
+</html>
